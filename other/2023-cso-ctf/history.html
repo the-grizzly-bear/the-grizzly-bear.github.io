@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>history · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/2023-cso-ctf/history.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/2023-cso-ctf.html">2023-CSO-CTF</a></div>
+  <h1 id="history">history</h1>
+<p><em>[attachment: history.txt]</em></p>
+<pre><code class="language-bash">sudo mount -t efs fs-0f51cab4c723x6676.efs.us-east-1.amazonaws.com:// /mnt/efs -o tls,iam
+cat /root/.kube/config
+kubectl get pods —namespace=dmh
+kuebctl list-clusters
+kubectl get services vault-6dc5bd4f95-tk5gm --namespace=dmh
+kubectl get services -n ingress-nginx
+unhide
+ssdeep
+rkhunter
+lynis audit system
+linpeas
+find . type -f -name newermt &quot;2000-01-01&quot; ! newermt &quot;2001-01-01&quot;
+find . -type f -mtime 7
+hashcat -m 7400 hash /usr/share/wordlists/rockyou.txt
+exec -it vault —namespace=dmh — /bin/bash
+</code></pre>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

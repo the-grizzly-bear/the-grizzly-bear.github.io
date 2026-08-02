@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2024-10-19 Stack It (Reverse Engineering) · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2024/2024-10-19-stack-it-reverse-engineering.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/huntress/index.html">Huntress CTF</a> &rsaquo; <a href="/huntress/2024/index.html">2024</a></div>
+  <h1 id="2024-10-19-stack-it-reverse-engineering">2024-10-19 Stack It (Reverse Engineering)</h1>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><strong>Load and run the binary</strong> in GDB.<br />
+<strong>Set a breakpoint</strong> at the entry point using <code>b *0x8049000</code>.<br />
+<strong>Step through</strong> the program using <code>stepi</code> to watch the execution.<br />
+We can see the flag{ get constructed</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>The program begins by constructing <code>"flag{"</code> and then proceeds with an XOR operation between two strings stored in <code>esi</code> and <code>edi</code><br />
+The results of the XOR are stored starting at memory address <code>0x804a055</code>.<br />
+Continue stepping through using <code>stepi 5</code> to speed up the process.<br />
+<strong>Check memory</strong> at <code>0x804a055</code> to see the flag being built by using <code>x/s 0x804a055</code>.</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>We stepped through the program this way to:<br />
+<strong>Understand the flag-building process</strong>: The binary was incrementally constructing the flag using XOR operations between values in <code>esi</code> and <code>edi</code>.<br />
+<strong>Observe the exact memory writes</strong>: By stepping through each instruction, we could watch how the program placed each XOR result into memory, allowing us to confirm the flag was being built correctly.<br />
+<strong>Ensure no missed steps</strong>: Stepping through ensured we captured every byte written, starting with <code>"flag{"</code> and completing the flag with the XORed results.<br />
+<strong>Reveal hidden computations</strong>: The XOR operation was crucial, and stepping through allowed us to observe how it manipulated the data to generate the full flag.</p>
+<pre><code class="language-python">flag{b4234f4bba4685dc84d6ee9a48e9c106}
+</code></pre>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

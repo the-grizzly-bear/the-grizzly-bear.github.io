@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2024-10-08 Ran Somewhere (OSINT) · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2024/2024-10-08-ran-somewhere-osint.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/huntress/index.html">Huntress CTF</a> &rsaquo; <a href="/huntress/2024/index.html">2024</a></div>
+  <h1 id="2024-10-08-ran-somewhere-osint">2024-10-08 Ran Somewhere (OSINT)</h1>
+<p>I captured no screenshots through this one so these were retroactive… and the flag, shesh, that was poor they did the flag input that way.</p>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-python">Bel Air Armory
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Post flag screenshots.</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Decoded the base64 values from the email</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>We also see some other covert files to export, with the X-Attached</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Script to export the other files</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Extracted the files.</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>1 text and 2 images extracted. You could see from xxd one was an adobe jiff and one was a greenshot screenshot image, and the last hex encoded text.</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Then I actually had to do more OSINT to search for small castles, none of the AI images returned a valid result. but the key word Frederick from the right side placard on this image got you started. The final piece was just using the right word, I disagree I don't think it should have accepted the uncommon name for this place, rather than the more historical names.</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2024-10-21 Strive Marish Leadman TypeCDR (Cryptography) · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2024/2024-10-21-strive-marish-leadman-typecdr-cryptography.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/huntress/index.html">Huntress CTF</a> &rsaquo; <a href="/huntress/2024/index.html">2024</a></div>
+  <h1 id="2024-10-21-strive-marish-leadman-typecdr-cryptography">2024-10-21 Strive Marish Leadman TypeCDR (Cryptography)</h1>
+<p><span class="img-missing">image unavailable</span></p>
+<p><a href="https://www.ntietz.com/blog/rsa-deceptively-simple/">RSA is deceptively simple (and fun) | nicole@web</a></p>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-powershell">nc challenge.ctf.games 31130 -vv
+DNS fwd/rev mismatch: challenge.ctf.games != 143.148.193.35.bc.googleusercontent.com
+challenge.ctf.games [35.193.148.143] 31130 (?) open
+p: 0xe09cb5a80eafab2019838142da91dcea0ba059769274f477828f720992ae527ed4c5c05145e2f1455d3e082cf498c173ca530bfd4d438974d61db254f08fda2b
+q: 0xcc6f6a8ffff4292b77c75b410da2f2c128a4b33e146204c556e3d78eb00d560ecaf73568b0582959b6b93a363f2580cd4f3745a473624b132cb4403dd2b8508b
+d: 0x72523c7b6e9961bf08449c21cc1be096774e322fc0956f8d27ffa8143ac65860081a85dedd037d9a081b3c19c879afdb8c51f769695ddc294b19d4659b44f93485ac1b2a60c27d9908f57a5367e70a9392ef354ec49b55baaf27d1bca1c0b659225c17aac2164b7525b4a1a6cdc2452a5e9f40ed20545dff7820b9c4881c0ae9
+e: 0x10001
+n: 0xb35ea233eae5bbec7f8ce750d0daf31524ca03b070cd3dfa621d64ea87a88c8f6ab7d3bbea190bc9f456a99a3766af185b60a001c515e3a17700f0d579f1321cceb2c5e86e6d19ed7e6e5e05b122b8cfe68325eb5e7efa738937156798497de231899ce9bd8ee4e7b9421cd083050a3446ea6747f606ca32774b03e6a730e559
+
+0x8891d81e261a1e1eb3bd158da174b637154226b5da2e90e79e36b327d75a5de53a05c90d70b2b0197278cca354fae1acde56926c55fdc57e7c9e1ff675f677ba8a61e05028f3efc9491ccd96da8357c5873a916e54c905885bda9d851b2e3f4c1ca4f2b62ae94eb913584b03aefa9e2fc761b46ad4fc9f3566a42929edd5911a
+ sent 0, rcvd 1063
+</code></pre>
+<pre><code class="language-powershell">#Import crypto
+from Crypto.Util.number import long_to_bytes
+
+# Given values
+p = 0xe09cb5a80eafab2019838142da91dcea0ba059769274f477828f720992ae527ed4c5c05145e2f1455d3e082cf498c173ca530bfd4d438974d61db254f08fda2b
+q = 0xcc6f6a8ffff4292b77c75b410da2f2c128a4b33e146204c556e3d78eb00d560ecaf73568b0582959b6b93a363f2580cd4f3745a473624b132cb4403dd2b8508b
+d = 0x72523c7b6e9961bf08449c21cc1be096774e322fc0956f8d27ffa8143ac65860081a85dedd037d9a081b3c19c879afdb8c51f769695ddc294b19d4659b44f93485ac1b2a60c27d9908f57a5367e70a9392ef354ec49b55baaf27d1bca1c0b659225c17aac2164b7525b4a1a6cdc2452a5e9f40ed20545dff7820b9c4881c0ae9
+e = 0x10001
+n = 0xb35ea233eae5bbec7f8ce750d0daf31524ca03b070cd3dfa621d64ea87a88c8f6ab7d3bbea190bc9f456a99a3766af185b60a001c515e3a17700f0d579f1321cceb2c5e86e6d19ed7e6e5e05b122b8cfe68325eb5e7efa738937156798497de231899ce9bd8ee4e7b9421cd083050a3446ea6747f606ca32774b03e6a730e559
+
+# Ciphertext to decode (as hex)
+c = 0x8891d81e261a1e1eb3bd158da174b637154226b5da2e90e79e36b327d75a5de53a05c90d70b2b0197278cca354fae1acde56926c55fdc57e7c9e1ff675f677ba8a61e05028f3efc9491ccd96da8357c5873a916e54c905885bda9d851b2e3f4c1ca4f2b62ae94eb913584b03aefa9e2fc761b46ad4fc9f3566a42929edd5911a
+
+# Decryption formula: m = c^d % n
+m = pow(c, d, n)
+
+# Convert to readable format (string)
+message = long_to_bytes(m)
+print(message)
+</code></pre>
+<pre><code class="language-python">flag{cf614b15ac1dd461a2e48afdfe21b8e8}
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

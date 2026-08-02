@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2024-10-08 Base-p- (Miscellaneous) · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2024/2024-10-08-base-p-miscellaneous.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/huntress/index.html">Huntress CTF</a> &rsaquo; <a href="/huntress/2024/index.html">2024</a></div>
+  <h1 id="2024-10-08-base-p-miscellaneous">2024-10-08 Base-p- (Miscellaneous)</h1>
+<p>Based.txt file</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Where else is -p- used, but as syntax to scan all ports in nmap (i.e. base65536)</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Get rid of the white background<br />
+trim to the transparent background<br />
+slice in 1pixel increments to obtain the web/hex color codes with the next command:</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Filter through uniq, and the entries between the 00000000s are (as they appear from left to right) the color codes of each block:</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-python">flag{586cf8c849c9730ea7b2112fff39ff6a}
+</code></pre>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

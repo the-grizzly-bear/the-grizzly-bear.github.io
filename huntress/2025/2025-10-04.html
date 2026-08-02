@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2025-10-04 · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2025/2025-10-04.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/huntress/index.html">Huntress CTF</a> &rsaquo; <a href="/huntress/2025/index.html">2025</a></div>
+  <h1 id="2025-10-04">2025-10-04</h1>
+<h1 id="arika"><strong>🌐 ARIKA</strong></h1>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+```plain text<br />
+The vulnerability is a command injection flaw in the app.py file. This allows an attacker to execute arbitrary commands on the server and read the flag file located at /app/flag.txt.</p>
+<p>Vulnerability Analysis<br />
+The core of the vulnerability lies in how the application validates user-supplied commands.</p>
+<p>The Allowlist Check: The app.py script uses a regular expression to check if a command is in the ALLOWLIST. The specific line is:</p>
+<p>Python</p>
+<p>if not any([ re.match(r"^%s$" % allowed, command, len(ALLOWLIST)) for allowed in ALLOWLIST]):<br />
+    return jsonify(ok=False, stdout="", stderr="error: Run 'help' to see valid commands.\n", code=2)<br />
+Misused Regex Flag: The re.match function is called with a third argument, len(ALLOWLIST). The ALLOWLIST contains 8 commands, so this value is 8. In Python's re module, the flag value 8 corresponds to re.MULTILINE.</p>
+<p>Multiline Mode Behavior: The re.MULTILINE flag changes the behavior of the ^ (start of string) and $ (end of string) anchors. Instead of matching only the absolute start and end of the entire string, they also match the start and end of each line (separated by a newline character, \n).</p>
+<p>Bypassing the Check: The check uses the pattern ^<command>$. With the multiline flag, this pattern will match if an allowed command appears on its own line anywhere in the input. An attacker can provide a multiline string where the first line is an allowed command (e.g., help) and the second line is a malicious command (e.g., cat /app/flag.txt). The regex will match help on the first line, and the check will pass.</p>
+<p>Command Execution: After passing the check, the entire multiline string is passed to the run function, which executes it using /bin/sh -c. The shell interprets the newline character as a command separator, executing both the allowed command and the injected malicious command.</p>
+<p>Exploitation<br />
+To exploit this vulnerability and retrieve the flag, you can use a payload that combines an allowed command with the command needed to read the flag file.</p>
+<p>Locate the Flag: The Dockerfile shows that flag.txt is copied to /app/flag.txt and that the guest user, which the application runs as, has read permissions for it.</p>
+<p>Construct the Payload: A simple payload is to use the help command, followed by a newline, and then the cat command to display the flag's contents.</p>
+<p>Payload: help\ncat /app/flag.txt</p>
+<p>Execution Flow:</p>
+<p>The web application receives the command help\ncat /app/flag.txt.</p>
+<p>The validation check re.match(r"^help$", "help\ncat /app/flag.txt", 8) succeeds because ^help$ matches the first line.</p>
+<p>The full command is passed to the shell: /bin/sh -c "help\ncat /app/flag.txt".</p>
+<p>The shell executes help, prints its output, and then executes cat /app/flag.txt, printing the flag's contents to the output.</p>
+<pre><code>```plain text
+flag{eaec346846596f7976da7e1adb1f326d}
+</code></pre>
+<h1 id="snooze">👶Snooze</h1>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span><br />
+<code>plain text
+flag{c1c07c90efa59876a97c44c2b175903e}</code></p>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

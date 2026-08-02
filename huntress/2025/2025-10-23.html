@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2025-10-23 · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2025/2025-10-23.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/huntress/index.html">Huntress CTF</a> &rsaquo; <a href="/huntress/2025/index.html">2025</a></div>
+  <h1 id="2025-10-23">2025-10-23</h1>
+<h1 id="rust-tickler"><strong>⚙️ Rust Tickler</strong></h1>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>```plain text<br />
+Main XOR Function: FUN_140001940 (Address: 0x140001940)<br />
+This is the core encryption/decryption function that:<br />
+Takes an input buffer, key buffer, and their sizes<br />
+Performs byte-by-byte XOR operations<br />
+Uses a cyclic key pattern: output[i] = input[i] ^ key[i % key_length]</p>
+<p>Encrypted Flag String<br />
+Location: 0x14000a000<br />
+Content: "7=06*gagg30d03gf2f5g5dba3c0hhcd2c4b,"</p>
+<p>Key Value 51 (0x33)</p>
+<p>Key storage: 0x14000a0e0<br />
+The value 51 likely represents the key length or size parameter<br />
+It's used in modulo calculations to cycle through the key bytes</p>
+<pre><code>
+```plain text
+main function
+</code></pre>
+<p>```plain text</p>
+<p>ulonglong *<br />
+FUN_140001940(ulonglong <em>param_1,void </em>param_2,ulonglong param_3,longlong param_4,ulonglong param_5)</p>
+<p>{<br />
+  byte <em>pbVar1;<br />
+  void </em>_Dst;<br />
+  ulonglong uVar2;<br />
+  ulonglong uVar3;</p>
+<p>if (-1 &lt; (longlong)param_3) {<br />
+    if (param_3 == 0) {<br />
+<em>param_1 = 0;<br />
+      param_1[1] = 1;<br />
+      param_1[2] = 0;<br />
+      return param_1;<br />
+    }<br />
+    _Dst = (void </em>)thunk_FUN_140002390(param_3,1);<br />
+    if (_Dst != (void <em>)0x0) {<br />
+      memcpy(_Dst,param_2,param_3);<br />
+</em>param_1 = param_3;<br />
+      param_1[1] = (ulonglong)_Dst;<br />
+      param_1[2] = param_3;<br />
+      if (param_5 != 0) {<br />
+        if (param_3 == 1) {<br />
+          uVar2 = 0;<br />
+        }<br />
+        else {<br />
+          uVar2 = 0;<br />
+          do {<br />
+            if ((uVar2 | param_5) &gt;&gt; 0x20 == 0) {<br />
+              uVar3 = (uVar2 &amp; 0xffffffff) % (param_5 &amp; 0xffffffff);<br />
+            }<br />
+            else {<br />
+              uVar3 = uVar2 % param_5;<br />
+            }<br />
+<em>(byte </em>)((longlong)_Dst + uVar2) =<br />
+<em>(byte </em>)((longlong)_Dst + uVar2) ^ <em>(byte </em>)(param_4 + uVar3);<br />
+            uVar3 = uVar2 + 1;<br />
+            if ((uVar3 | param_5) &gt;&gt; 0x20 == 0) {<br />
+              uVar3 = (uVar3 &amp; 0xffffffff) % (param_5 &amp; 0xffffffff);<br />
+            }<br />
+            else {<br />
+              uVar3 = uVar3 % param_5;<br />
+            }<br />
+            pbVar1 = (byte <em>)((longlong)_Dst + uVar2 + 1);<br />
+</em>pbVar1 = <em>pbVar1 ^ </em>(byte <em>)(param_4 + uVar3);<br />
+            uVar2 = uVar2 + 2;<br />
+          } while ((param_3 &amp; 0x7ffffffffffffffe) != uVar2);<br />
+        }<br />
+        if ((param_3 &amp; 1) == 0) {<br />
+          return param_1;<br />
+        }<br />
+        if ((uVar2 | param_5) &gt;&gt; 0x20 == 0) {<br />
+          uVar3 = (uVar2 &amp; 0xffffffff) % (param_5 &amp; 0xffffffff);<br />
+        }<br />
+        else {<br />
+          uVar3 = uVar2 % param_5;<br />
+        }<br />
+</em>(byte <em>)((longlong)_Dst + uVar2) =<br />
+</em>(byte <em>)((longlong)_Dst + uVar2) ^ </em>(byte *)(param_4 + uVar3);<br />
+        return param_1;<br />
+      }<br />
+      goto LAB_140001aa9;<br />
+    }<br />
+  }<br />
+  FUN_140006700();<br />
+LAB_140001aa9:<br />
+  do {<br />
+    invalidInstructionException();<br />
+  } while( true );<br />
+}</p>
+<pre><code>
+```plain text
+flag string
+</code></pre>
+<p><code>``plain text
+       1400095ff 00              ??         00h
+                             //
+                             // .data
+                             // ram:14000a000-ram:14000a1ff
+                             //
+                             s_2</code>f5g5dba3c0hhcd2c<code>4b,_14000a010              XREF[4,8]:   140000254(*), 14000161e(R),
+                             s_cd2c</code>4b,_14000a01e                                         140001747(R), 140001751(W),<br />
+                             s_2c<code>4b,_14000a020                                           140001606(R), 140001612(R),
+                             s_b,_14000a024                                               140001758(R), 14000175f(W),
+                             s_,_14000a025                                                140001766(R), 140001774(W),
+                             s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000                 14000177c(RW), 140001783(RW)<br />
+       14000a000 37 3d 30        ds         "7=06*gagg30d03gf2<code>f5g5dba3c0hhcd2c</code>4b,"<br />
+                 36 2a 67<br />
+                 61 67 67</p>
+<pre><code>
+```plain text
+XOR key 0x51, or 'Q', loaded in here at DAT_140007330
+7=06*gagg30d03gf2f5g5dba3c0hhcd2c4b,
+</code></pre>
+<p>```plain text</p>
+<p>undefined8 UndefinedFunction_140001740(void)</p>
+<p>{<br />
+  uint uVar1;<br />
+  uint uVar2;<br />
+  uint uVar3;<br />
+  uint uVar4;</p>
+<p>uVar1 = s_7=06<em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000._0_4_ ^ 0x51515151;
+  uVar2 = s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000.<em>4_4</em> ^ 0x51515151;<br />
+  uVar3 = s_7=06</em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000._8_4_ ^ 0x51515151;
+  uVar4 = s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000.<em>12_4</em> ^ 0x51515151;<br />
+  s_7=06<em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000[0] = (char)uVar1;
+  s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000[1] = (char)(uVar1 &gt;&gt; 8);<br />
+  s_7=06</em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000[2] = (char)(uVar1 &gt;&gt; 0x10);
+  s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000[3] = (char)(uVar1 &gt;&gt; 0x18);<br />
+  s_7=06<em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000[4] = (char)uVar2;
+  s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000[5] = (char)(uVar2 &gt;&gt; 8);<br />
+  s_7=06</em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000[6] = (char)(uVar2 &gt;&gt; 0x10);
+  s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000[7] = (char)(uVar2 &gt;&gt; 0x18);<br />
+  s_7=06<em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000[8] = (char)uVar3;
+  s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000[9] = (char)(uVar3 &gt;&gt; 8);<br />
+  s_7=06</em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000[10] = (char)(uVar3 &gt;&gt; 0x10);
+  s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000[11] = (char)(uVar3 &gt;&gt; 0x18);<br />
+  s_7=06<em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000[12] = (char)uVar4;
+  s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000[13] = (char)(uVar4 &gt;&gt; 8);<br />
+  s_7=06</em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000[14] = (char)(uVar4 &gt;&gt; 0x10);
+  s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000[15] = (char)(uVar4 &gt;&gt; 0x18);<br />
+  uVar1 = s_7=06<em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000._16_4_ ^ 0x51515151;
+  uVar2 = s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000.<em>20_4</em> ^ 0x51515151;<br />
+  uVar3 = s_7=06</em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000._24_4_ ^ 0x51515151;
+  uVar4 = s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000.<em>28_4</em> ^ 0x51515151;<br />
+  s_7=06<em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000[16] = (char)uVar1;
+  s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000[17] = (char)(uVar1 &gt;&gt; 8);<br />
+  s_7=06</em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000[18] = (char)(uVar1 &gt;&gt; 0x10);
+  s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000[19] = (char)(uVar1 &gt;&gt; 0x18);<br />
+  s_7=06<em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000[20] = (char)uVar2;
+  s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000[21] = (char)(uVar2 &gt;&gt; 8);<br />
+  s_7=06</em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000[22] = (char)(uVar2 &gt;&gt; 0x10);
+  s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000[23] = (char)(uVar2 &gt;&gt; 0x18);<br />
+  s_7=06<em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000[24] = (char)uVar3;
+  s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000[25] = (char)(uVar3 &gt;&gt; 8);<br />
+  s_7=06</em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000[26] = (char)(uVar3 &gt;&gt; 0x10);
+  s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000[27] = (char)(uVar3 &gt;&gt; 0x18);<br />
+  s_7=06<em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000[28] = (char)uVar4;
+  s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000[29] = (char)(uVar4 &gt;&gt; 8);<br />
+  s_7=06</em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000[30] = (char)(uVar4 &gt;&gt; 0x10);
+  s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000[31] = (char)(uVar4 &gt;&gt; 0x18);<br />
+  uVar1 = s_7=06<em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000._32_4_ ^ 0x51515151;
+  s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000[32] = (char)uVar1;<br />
+  s_7=06</em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000[33] = (char)(uVar1 &gt;&gt; 8);
+  s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000[34] = (char)(uVar1 &gt;&gt; 0x10);<br />
+  s_7=06<em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000[35] = (char)(uVar1 &gt;&gt; 0x18);
+  s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000[36] =<br />
+       s_7=06</em>gagg30d03gf2<code>f5g5dba3c0hhcd_14000a000[36] ^ 0x51;
+  s_7=06*gagg30d03gf2</code>f5g5dba3c0hhcd_14000a000[37] =<br />
+       s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[37] ^ 0x51;<br />
+  return 0;<br />
+}</p>
+<pre><code>&lt;span class=&quot;img-missing&quot;&gt;image unavailable&lt;/span&gt;
+
+```plain text
+flag{6066ba5ab67c17d6d530b2a9925c21e3}
+</code></pre>
+<h1 id="netsupport"><strong>🐞 NetSupport</strong></h1>
+<p><span class="img-missing">image unavailable</span></p>
+<p>```plain text<br />
+1. The netsupport file contained a PowerShell script with an embedded byte array starting with [Byte[]]$xϞzzghϞ = @(80,75,3,4,...)<br />
+2. The bytes 80,75,3,4 are ZIP magic bytes ("PK\x03\x04")<br />
+3. Extracted the byte array and converted it to extracted.zip (3.1 MB)<br />
+4. The ZIP contained NetSupport Manager remote administration tool files<br />
+5. Found the flag in download/CLIENT32.ini as a Base64-encoded string</p>
+<pre><code>
+&lt;span class=&quot;img-missing&quot;&gt;image unavailable&lt;/span&gt;
+
+```plain text
+extract the bytes
+</code></pre>
+<pre><code class="language-python">
+cat extract_zip.py
+#!/usr/bin/env python3
+import re
+
+# Read the netsupport file
+with open('netsupport', 'r', encoding='utf-8-sig') as f:
+    content = f.read()
+
+# Find the byte array
+match = re.search(r'\[Byte\[\]\]\$\w+\s*=\s*@\(([\d,\s]+)\)', content)
+
+if match:
+    # Extract the bytes
+    byte_str = match.group(1)
+    bytes_list = [int(x.strip()) for x in byte_str.split(',') if x.strip()]
+
+    # Convert to bytes and write to file
+    byte_data = bytes(bytes_list)
+
+    with open('extracted.zip', 'wb') as f:
+        f.write(byte_data)
+
+    print(f&quot;Extracted {len(byte_data)} bytes to extracted.zip&quot;)
+    print(f&quot;First bytes: {byte_data[:20].hex()}&quot;)
+else:
+    print(&quot;No byte array found&quot;)
+
+</code></pre>
+<p>```plain text<br />
+Extract and unzip</p>
+<pre><code>&lt;span class=&quot;img-missing&quot;&gt;image unavailable&lt;/span&gt;
+
+```plain text
+Files from the zip
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<p>```plain text<br />
+Look through and find the flag in the client32.ini file</p>
+<pre><code>
+&lt;span class=&quot;img-missing&quot;&gt;image unavailable&lt;/span&gt;
+
+&lt;span class=&quot;img-missing&quot;&gt;image unavailable&lt;/span&gt;
+
+```plain text
+flag{b6e54d0a0a5f2292589c3852f1930891}
+</code></pre>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

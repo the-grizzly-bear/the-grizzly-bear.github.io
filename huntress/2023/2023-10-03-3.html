@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2023-10-03 · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2023/2023-10-03-3.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/huntress/index.html">Huntress CTF</a> &rsaquo; <a href="/huntress/2023/index.html">2023</a></div>
+  <h1 id="2023-10-03">2023-10-03</h1>
+<p>Human Two</p>
+<pre><code class="language-shell">666c6167-7b36-6365-3666-366131356464&quot;+&quot;64623065-6262-3333-3262-666166326230&quot;+&quot;62383564-317d-0000-0000-000000000000
+cc53495bb42e4f6563b68cdbdd5e4c2a9119b498b488f53c0f281d751a368f19
+</code></pre>
+<p><code>find /home/user/Downloads/hunt/* -type f | xargs -I {} sh -c 'for f in /home/user/Downloads/hunt/*; do diff "$f" "{}"; done'</code></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>flag{6ce6f6a15dddb0ebb332bfaf2b0b85d1}</p>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

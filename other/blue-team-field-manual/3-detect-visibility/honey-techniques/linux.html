@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LINUX · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/3-detect-visibility/honey-techniques/linux.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/blue-team-field-manual.html">Blue Team Field Manual</a> &rsaquo; <a href="/other/blue-team-field-manual/3-detect-visibility.html">3 DETECT (Visibility)</a> &rsaquo; <a href="/other/blue-team-field-manual/3-detect-visibility/honey-techniques.html">HONEY TECHNIQUES</a></div>
+  <h1 id="linux">LINUX</h1>
+<p>Honey Ports Linux:<br />
+Ref. <a href="http://securityweekly.com/wp%C2%ADcontent/uploads/2013/06/howtogetabetterpentest.pdf">http://securityweekly.com/wp­content/uploads/2013/06/howtogetabetterpentest.pdf</a><br />
+Step 1: Run a while loop to create TCP Firewall<br>rules to block any hosts connecting on port 2222</p>
+<pre><code class="language-bash">while [ 1 ] ; echo &quot;started&quot; ; do IP='nc -v -l -p
+2222 2&gt;&amp;1 l&gt; /dev/null I grep from I cut -d[ -f 3 I
+cut -d] -f 1'; iptables -A INPUT -p tcp -s ${IP} -j
+DROP ; done
+</code></pre>
+<p>Linux Honey Ports Python Script:<br />
+Ref.<a href="https://github.com/gchetrick/honeyports/blob/master/honeyports-0.5.py">https://github.com/gchetrick/honeyports/blob/master/honeyports-0.5.py</a><br />
+Step 1: Download Python Script</p>
+<pre><code class="language-bash">wget https://github.com/gchetrick/honeyports/blob/master/honeyports-0.5.py
+</code></pre>
+<p>Step 2: Run Python Script</p>
+<pre><code class="language-bash">python honeyports-0.5.py -p &lt;CHOOSE AN OPEN PORT&gt;
+-h &lt;HOST IP ADDRESS&gt;
+</code></pre>
+<p>Detect rogue scanning with Labrea Tarpit:</p>
+<pre><code class="language-bash">apt-get install labrea
+labrea -z -s -o -b -v -i eth0 2&gt;&amp;11 tee -a log.txt
+</code></pre>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

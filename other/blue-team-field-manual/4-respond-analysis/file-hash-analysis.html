@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FILE HASH ANALYSIS · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/4-respond-analysis/file-hash-analysis.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/blue-team-field-manual.html">Blue Team Field Manual</a> &rsaquo; <a href="/other/blue-team-field-manual/4-respond-analysis.html">4 RESPOND (Analysis)</a></div>
+  <h1 id="file-hash-analysis">FILE HASH ANALYSIS</h1>
+<h2 id="hash-query">HASH QUERY</h2>
+<p>VirusTotal online API query:<br />
+Ref. <a href="https://www.virustotal.com/en/documentation/public-api/">https://www.virustotal.com/en/documentation/public-api/</a> (Prerequisite: Need a VT API Key)<br />
+Send a suspicious hash to VirtusTotal using cURL:</p>
+<pre><code class="language-shell">curl -v --request POST --url
+'https://www.virustotal.com/vtapi/v2/file/report' -d
+apikey=&lt;VT API KEY&gt; -d 'resource=&lt;SUSPICIOUS FILE
+HASH&gt;'
+</code></pre>
+<p>Send a suspicious file to VirusTotal using cURL:</p>
+<pre><code class="language-shell">curl -v -F 'file=/&lt;PATH TO FILE&gt;/&lt;SUSPICIOUS FILE
+NAME&gt;' -F apikey=&lt;VT API KEY&gt;
+https://www.virustotal.com/vtapi/v2/file/scan
+</code></pre>
+<p>Team Cymru API:<br />
+Ref. <a href="https://hash.cymru.com/">https://hash.cymru.com</a>, <a href="http://totalhash.com/">http://totalhash.com</a><br />
+Team Cymru malware hash lookup using whois: (Note: Output is timestamp of last seen and detection rate)</p>
+<pre><code class="language-shell">whois -h hash,cymru.com &lt;SUSPICIOUS FILE HASH&gt;
+</code></pre>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

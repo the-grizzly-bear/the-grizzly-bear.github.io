@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BabyEncryption (Crypto Challenge) · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/challenges/babyencryption.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/htb/index.html">HackTheBox</a> &rsaquo; <a href="/htb/challenges/index.html">Completed Challenges</a></div>
+  <h1 id="babyencryption-crypto-challenge">BabyEncryption (Crypto Challenge)</h1>
+<p><span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span></p>
+<pre><code class="language-python">#import string
+#from secret import MSG
+'''
+def encryption(msg):
+    ct = []
+    for char in msg:
+        ct.append((123 * char +18) % 256)
+    return bytes(ct)
+
+ct = encryption(MSG)
+f = open('./msg.enc','w')
+f.write(ct.hex())
+f.close()
+'''
+def decrypt(msg):
+    dt = []
+    for byte in msg:
+        for char in range(256):
+            encrypted_char = ((123 * char + 18) % 256)
+            if encrypted_char == byte:
+                dt.append(chr(char))
+    return ''.join(dt)
+ct = open('./msg.enc', 'r')
+ctBytes = bytes.fromhex(ct.read())
+print(decrypt(ctBytes))
+</code></pre>
+<pre><code class="language-bash">Th3 nucl34r w1ll 4rr1v3 0n fr1d4y.
+
+HTB{l00k_47_y0u_r3v3rs1ng_3qu4710n5_c0ngr475}
+</code></pre>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

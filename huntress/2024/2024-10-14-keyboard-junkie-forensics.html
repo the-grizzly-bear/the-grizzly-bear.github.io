@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2024-10-14 Keyboard Junkie (Forensics) · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2024/2024-10-14-keyboard-junkie-forensics.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/huntress/index.html">Huntress CTF</a> &rsaquo; <a href="/huntress/2024/index.html">2024</a></div>
+  <h1 id="2024-10-14-keyboard-junkie-forensics">2024-10-14 Keyboard Junkie (Forensics)</h1>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>We see the keyboard input with HID standard values.</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Get the hex values from Wireshark, and decode.</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-powershell"># Let's decode the provided hex values using the USB HID keycode mapping.
+# We'll map the keycodes to their corresponding characters based on the HID standard.
+
+# USB HID Keycode Mapping for basic characters
+usb_hid_map = {
+    0x04: 'a', 0x05: 'b', 0x06: 'c', 0x07: 'd', 0x08: 'e', 0x09: 'f', 0x0A: 'g', 0x0B: 'h',
+    0x0C: 'i', 0x0D: 'j', 0x0E: 'k', 0x0F: 'l', 0x10: 'm', 0x11: 'n', 0x12: 'o', 0x13: 'p',
+    0x14: 'q', 0x15: 'r', 0x16: 's', 0x17: 't', 0x18: 'u', 0x19: 'v', 0x1A: 'w', 0x1B: 'x',
+    0x1C: 'y', 0x1D: 'z', 0x1E: '1', 0x1F: '2', 0x20: '3', 0x21: '4', 0x22: '5', 0x23: '6',
+    0x24: '7', 0x25: '8', 0x26: '9', 0x27: '0', 0x28: 'ENTER', 0x29: 'ESC', 0x2C: ' ', 0x2D: '-',
+    0x2E: '=', 0x2F: '[', 0x30: ']', 0x31: '\\', 0x33: ';', 0x34: '\'', 0x36: ',', 0x37: '.',
+    0x38: '/'
+}
+
+# Provided hex values
+hex_values = [
+&quot;0000160000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000120000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;00002c0000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000170000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;00000b0000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000080000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;00002c0000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000040000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000110000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000160000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;00001a0000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000080000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000150000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;00002c0000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;00000c0000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000160000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;00002c0000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000090000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;00000f0000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000040000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;00000a0000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0200000000000000&quot;,
+&quot;02002f0000000000&quot;,
+&quot;0200000000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000090000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000240000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000240000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000200000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000200000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000080000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000270000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000270000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000260000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000200000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000050000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000240000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000070000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;00001f0000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000250000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;00001e0000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000070000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000070000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000270000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000040000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000200000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000270000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000090000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000060000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000090000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000200000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000210000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000040000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000260000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000230000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000200000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000210000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0200000000000000&quot;,
+&quot;0200300000000000&quot;,
+&quot;0200000000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;00002c0000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;00000b0000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000040000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;00000b0000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000040000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;00000b0000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000040000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;00000b0000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;00002c0000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;00000f0000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000120000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;00000f0000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0000280000000000&quot;,
+&quot;0000000000000000&quot;,
+&quot;0100000000000000&quot;,
+&quot;0100060000000000&quot;
+]
+
+# Function to decode the keycodes
+def decode_usb_keystrokes(hex_values):
+    flag = []
+    for hex_value in hex_values:
+        keycode_hex = hex_value[4:6]  # Extract the relevant two hex digits
+        keycode = int(keycode_hex, 16)
+        if keycode in usb_hid_map:
+            flag.append(usb_hid_map[keycode])
+    return ''.join(flag)
+
+# Decoding the flag
+decoded_flag = decode_usb_keystrokes(hex_values)
+print(decoded_flag)
+</code></pre>
+<pre><code class="language-python">flag[f7733e0093b7d281dd0a30fcf34a9634]
+</code></pre>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

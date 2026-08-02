@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IDENTIFICATION TASKS · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/7-incident-management-checklist/identification-tasks.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/blue-team-field-manual.html">Blue Team Field Manual</a> &rsaquo; <a href="/other/blue-team-field-manual/7-incident-management-checklist.html">7 INCIDENT MANAGEMENT (Checklist)</a></div>
+  <h1 id="identification-tasks">IDENTIFICATION TASKS</h1>
+<p>Priority: H/M/L | Effort: H/M/L | Open/Closed</p>
+<ul>
+<li>Acquire a copy of Malicious file(s) for analysis?</li>
+<li>Malicious effects on systems list. Acquire an itemized list of all known changes on computer systems, files, settings, registry, services add/modified/deleted or stop/started.</li>
+<li>Which A/V or malware tools can detect and remove malicious threat?</li>
+<li>Where does malware/attacker exit the network?</li>
+<li>Malicious internal/external sites/connections still active?</li>
+<li>Malware listening on any ports?</li>
+<li>Malware method of original infection, and/or weakness?</li>
+<li>Packet capture of Malware trying to infect others?</li>
+<li>Any packet capture of malware trying to communicate out of network and ID method of ports, IPs, DNS, etc?</li>
+<li>Malware pose threat to any sensitive data (Files, credentials, Intellectual Property, PII, etc?</li>
+<li>What are the DNS entries on an infected system?</li>
+<li>Is it possible to detect the first infected system(s)?</li>
+<li>Has the first systems hard drive been preserved?</li>
+<li>Do any scripts need to be ran on live infected systems?</li>
+<li>Does client have desktop management tool? If so, what reports are available to inventory all systems and statuses?</li>
+<li>List of all infected systems?</li>
+<li>Identify any patching missing with current and/or previous vulnerability scan.</li>
+<li>Look for systems that have stopped reporting into Malware servers for updates, or which ones have stopped going to AV vendors for updates.</li>
+<li>Look for systems that have stopped going to Update server or directly to Microsoft for updates.</li>
+</ul>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

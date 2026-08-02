@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Types of Hunts · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="notes/cyber-threat-hunting/types-of-hunts.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/notes/index.html">Cyber Security Notes</a> &rsaquo; <a href="/notes/cyber-threat-hunting.html">Cyber Threat Hunting</a></div>
+  <h1 id="types-of-hunts">Types of Hunts</h1>
+<h3 id="classifications-of-hunts">Classifications of Hunts</h3>
+<h3 id="1-data-triggered-by-data-observation">1. Data (Triggered by Data Observation)</h3>
+<ul>
+<li><strong>Baseline Activity</strong></li>
+<li><strong>Tech Stack</strong></li>
+<li><strong>Web Scanning Activity</strong></li>
+</ul>
+<h3 id="2-entity-high-riskhigh-value-assets-or-crown-jewels">2. Entity (High-Risk/High-Value Assets or "Crown Jewels")</h3>
+<ul>
+<li><strong>Business Vertical/Sector</strong><ul>
+<li>Examples: Water utilities, Finance, Banking POS systems, Industrial ICS</li>
+</ul>
+</li>
+<li><strong>Geopolitical Factors</strong></li>
+</ul>
+<h3 id="3-ttps-tactics-techniques-and-procedures">3. TTPs (Tactics, Techniques, and Procedures)</h3>
+<ul>
+<li><strong>Tactics</strong><ul>
+<li>How the attack operates</li>
+<li>Infrastructure used</li>
+<li>Compromised targets</li>
+<li>Entry points</li>
+</ul>
+</li>
+<li><strong>Techniques</strong><ul>
+<li>Approaches used in the attack</li>
+<li>Tools or malware utilized</li>
+<li>Types of attacks (e.g., phishing, exploits)</li>
+</ul>
+</li>
+<li><strong>Procedures</strong><ul>
+<li>Sequence of actions or steps during the attack cycle</li>
+</ul>
+</li>
+<li><strong>Known TTPs</strong></li>
+<li><strong>New TTPs</strong></li>
+<li><strong>MITRE TTPs</strong></li>
+<li><strong>Honeypot Data</strong></li>
+<li><strong>Malware Analysis/Network Breakdown</strong><ul>
+<li><strong>Signatures</strong>: YARA rules, Sigma, STIX</li>
+<li><strong>Strings</strong> (code or text within malware)</li>
+<li><strong>PE Format</strong> (Portable Executable format analysis)</li>
+<li><strong>File Entropy</strong> (randomness in the file)</li>
+<li><strong>Behavior</strong> (malware actions)</li>
+<li><strong>Origin</strong> (source of the malware)</li>
+<li><strong>Metadata</strong> (file properties and attributes)</li>
+</ul>
+</li>
+<li><strong>Proofs of Concept (POCs)</strong><ul>
+<li><strong>Attack Target</strong></li>
+<li><strong>Disclosed CVEs</strong> (Common Vulnerabilities and Exposures) or Zero-Day Vulnerabilities</li>
+<li><strong>Kill Chain Section</strong> (stage of the attack), <strong>Data Sources</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="4-hybridblend">4. Hybrid/Blend</h3>
+<ul>
+<li><strong>Emulating Threats</strong><ul>
+<li>Atomic Red Team, CALDERA, custom scripts</li>
+</ul>
+</li>
+<li><strong>Focusing on a Kill Chain Section</strong></li>
+<li><strong>Penetration Test Reviews</strong></li>
+<li><strong>CTF (Capture The Flag) Write-Ups</strong></li>
+<li><strong>Red Team/Offensive Security Pairing with Detections</strong></li>
+<li><strong>GitHub/Tool Analysis</strong></li>
+</ul>
+<h3 id="5-intel-triggered-by-intelligence-information">5. Intel (Triggered by Intelligence Information)</h3>
+<ul>
+<li><strong>Recent Threats</strong></li>
+<li><strong>Outsourced Intelligence</strong><ul>
+<li>More reactive due to potential lag</li>
+<li>Can be proactive depending on the tier of intelligence</li>
+</ul>
+</li>
+<li><strong>Internally Sourced Intelligence</strong><ul>
+<li>More targeted and proactive</li>
+<li>Likely to be novel</li>
+</ul>
+</li>
+<li><strong>Intelligence Hierarchy</strong><ul>
+<li><strong>Tier 1, 2, or 3</strong></li>
+</ul>
+</li>
+<li><strong>Proactive vs. Reactive Intelligence</strong><ul>
+<li><strong>Proactive Intelligence</strong>: Anticipating threats before they occur</li>
+<li><strong>Reactive Intelligence</strong>: Responding to threats after they have been identified</li>
+</ul>
+</li>
+</ul>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

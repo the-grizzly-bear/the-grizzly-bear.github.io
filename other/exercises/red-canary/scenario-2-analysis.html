@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scenario #2 Analysis · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/exercises/red-canary/scenario-2-analysis.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/exercises.html">Exercises</a> &rsaquo; <a href="/other/exercises/red-canary.html">Red Canary</a></div>
+  <h1 id="scenario-2-analysis">Scenario #2 Analysis</h1>
+<pre><code class="language-text">#Uncommon file name and path in system32, tm1jg\tpminit.exe,  tpminit.exe, normally lives above in the system32 folder
+Parent Process: c:\windows\system32\tm1jg\tpminit.exe
+
+#https://www.virustotal.com/gui/file/521a8013c45d99a20f341e1ae9910de797696e79bc6719bb5aa92be967203f3c
+Parent MD5: f0d6fa1110efffd3a773757a2db0c950
+
+
+#parent commandline process for tpminit.exe
+Parent CLI: C:\Windows\system32\Tm1jg\TpmInit.exe
+
+#Suspicious path and name for the DLL, potentially indicating persistence or malware
+Parent File Write: c:\users\acme123\appdata\roaming\microsoft\3ztbfrz\version.dll 
+
+#No matches for this hash
+File MD5: a4b0ad1bb7cfbd3cbc40860197613340
+
+
+
+#Legitimate Windows utility, but its use here raises concern due to the nature of the task being created
+Process: c:\windows\system32\schtasks.exe
+
+#https://www.virustotal.com/gui/file/fb024503622e00466f3c18fc69737f2c217fa39ef075718b25619b93ce3a1c62
+Process MD5: 2e9e198247bf0e9bd94b42286798a5ac
+
+#Creates a scheduled task named &quot;Jzijbnrsxnvm&quot; that runs every 60 minutes under the user &quot;acme123,&quot; executing UI0Detect.exe from the suspicious directory C:\Users\acme123\AppData\Roaming\Microsoft\3ztBfrz. This suggests persistence and potentially malicious activity.
+Process CLI: schtasks.exe /Create /F /TN “Jzijbnrsxnvm” /TR C:\Users\acme123\AppData\Roaming\Microsoft\3ztBfrz\UI0Detect.exe /SC minute /MO 60 /RU “acme123”
+
+#New payload activity or modificaiton count
+File modification count: 1
+</code></pre>
+<p><a href="https://redcanary.com/blog/threat-intelligence/grief-ransomware/">https://redcanary.com/blog/threat-intelligence/grief-ransomware/</a></p>
+<p>Overview</p>
+<p>This activity indicates potential malicious activity within a Windows environment, characterized by the creation and execution of uncommon files and the misuse of legitimate system utilities for persistence. Key indicators include:</p>
+<ul>
+<li><strong>Unusual Executable Locations and Names</strong>: Presence of <code>tpminit.exe</code> in a non-standard directory.</li>
+<li><strong>Suspicious DLL Deployment</strong>: Dropping of <code>version.dll</code> in the user’s <code>AppData\Roaming</code> directory.</li>
+<li><strong>Abuse of <code>schtasks.exe</code></strong>: Creation of a concealed scheduled task to maintain persistence.</li>
+</ul>
+<p>Findings</p>
+<ul>
+<li>The <code>System32</code> directory typically contains legitimate Windows system files. The presence of a subdirectory named <code>tm1jg</code> is unusual and does not correspond to standard Windows folder structures.</li>
+<li><strong><code>tpminit.exe</code></strong> run from a non standard windows location likely to side load or search order hijack the malicious <code>version.dll</code> into memory.</li>
+<li>VirusTotal analysis for the parent process hash (<code>f0d6fa1110efffd3a773757a2db0c950</code>) yields no matches, indicating it might be either a new or customized malware variant.</li>
+<li>Both the child process (<code>tpminit.exe</code>) and parent hash (<code>f0d6fa1110efffd3a773757a2db0c950</code>) return no hash matches, further suggesting potential novel activity or obfuscation to evade detection.</li>
+<li>Legitimate DLLs are rarely dropped into user-specific <code>AppData\Roaming</code> directories, especially within obfuscated or randomly named folders like <code>3ztbfrz</code></li>
+<li>Establishing a scheduled task that runs at regular intervals ensures the persistence of the malicious payload (<code>UI0Detect.exe</code>), allowing it to survive reboots and potentially evade one-time detection methods.</li>
+<li>The use of randomized folder (<code>3ztBfrz</code>) and executable names (<code>UI0Detect.exe</code>) is indicative of attempts to obscure the malicious components.</li>
+</ul>
+<p>Summary</p>
+<p>The detection of <code>tpminit.exe</code> within an atypical directory and the subsequent misuse of <code>schtasks.exe</code> to establish a persistent scheduled task strongly indicate malicious activity aimed at maintaining persistence and potentially executing further harmful actions on the system. The absence of known hash matches suggests either a novel malware variant or evasion techniques employed to avoid detection.</p>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

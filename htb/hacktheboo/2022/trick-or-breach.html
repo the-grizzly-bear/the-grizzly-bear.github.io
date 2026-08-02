@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trick or Breach · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/hacktheboo/2022/trick-or-breach.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/htb/index.html">HackTheBox</a> &rsaquo; <a href="/htb/hacktheboo/index.html">Hack The Boo</a> &rsaquo; <a href="/htb/hacktheboo/2022/index.html">2022 Hack The Boo</a></div>
+  <h1 id="trick-or-breach">Trick or Breach</h1>
+<pre><code>504b0304140008080800a52c47550000000000000000000000
+0018000000786c2f64726177696e67732f64726177696e6731
+2e786d6c9dd05d6ec2300c07f013ec0e55de695a181343145e
+d04e300ee0256e1b918fca0ea3dc7ed14a36697b011e6dcb3f
+f9efcd6e74b6f84462137c23eab212057a15b4f15d230eef6f
+b395283882d76083c7465c90c56efbb41935adcfbca722ed7b
+</code></pre>
+<p>Reversed</p>
+<pre><code>00000000000000000000005574c25a0080808000414030b405
+1376e69677162746f23776e69677162746f2c6870000008100
+e541343181a596ed55e0ce310f70c0032ce6d50dd9c6d687e2
+f3bcd6e110b79663a41de7cd3ae0acf819b1e6520ee003e40d
+f6fee032d51f4b51a750212bae32c73126448f6b47e6dcfe9f
+b7de227acbfcda53914bbfe65c09c5647c38067d288382593b
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code>xl/drawings/drawing1.xml
+xl/drawings/drawing2.xml
+xl/worksheets/sheet1.xml
+xl/worksheets/_rels/sheet1.xml.rels
+xl/worksheets/sheet2.xml
+xl/worksheets/_rels/sheet2.xml.rels
+xl/sharedStrings.xml
+xl/styles.xml
+xl/workbook.xml
+xl/_rels/workbook.xml.rels
+_rels/.rels
+[Content_Types].xml
+</code></pre>
+<p>.heets/sheet1.xml</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>HTB{M4g1c_c4nn0t_pr3v3nt_d4t4_br34ch}</p>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

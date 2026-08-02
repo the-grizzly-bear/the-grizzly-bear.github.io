@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2024-10-07 System Code (Miscellaneous) · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2024/2024-10-07-system-code-miscellaneous.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/huntress/index.html">Huntress CTF</a> &rsaquo; <a href="/huntress/2024/index.html">2024</a></div>
+  <h1 id="2024-10-07-system-code-miscellaneous">2024-10-07 System Code (Miscellaneous)</h1>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>git clone the credited matrix<br />
+use 'find' to create a wordlist</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Then scanned with the wordlist</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Download all the files from the ctf url using the wordlist for the original fork</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Directory downloaded</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Tried another download cause I was wondering in circles</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>I figured out just check the hash against all, vs line for line which obv was different.</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Tried a match against all matrix hashes, as soon as I didn't that I saw the different file excluding the 404s I didn't exclude in downloading</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Analyzing the differences, we circle back to this field…</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Used itertools.permutations to create a list of those values.</p>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-shell">import itertools
+
+# Define the matrix of characters
+matrix = ['a', 'b', 'c', 'd', 'e', 'f']
+
+# Generate all possible permutations of the matrix
+permutations = itertools.permutations(matrix)
+
+# Convert each permutation tuple to a string
+wordlist = [''.join(permutation) for permutation in permutations]
+
+# Save the wordlist to a file
+with open('wordlist.txt', 'w') as file:
+    for word in wordlist:
+        file.write(word + '\n')
+
+print(&quot;Wordlist saved to 'wordlist.txt'&quot;)
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Used ffuf with the wordlist and find a status 200 okay page, different from the size and code from the otehrs</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>There's the flag</p>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-python">Correct! Here is your flag: flag{dc9edf4624504202eec5d3fab10bbccd}
+</code></pre>
+<h6 id="_1"></h6>
+<h6 id="_2"></h6>
+<h6 id="_3"></h6>
+<h6 id="_4"></h6>
+<h6 id="_5"></h6>
+<p>Other notes, not really relevant, just the other rabbit holes I was digging into</p>
+<p><a href="https://www.aperisolve.com/a0a7ef2c2767c7e04befb5f12592321a">https://www.aperisolve.com/a0a7ef2c2767c7e04befb5f12592321a</a><br />
+<a href="https://www.aperisolve.com/0201dfbecbf8d096fc6c156aad9b5438">https://www.aperisolve.com/0201dfbecbf8d096fc6c156aad9b5438</a></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

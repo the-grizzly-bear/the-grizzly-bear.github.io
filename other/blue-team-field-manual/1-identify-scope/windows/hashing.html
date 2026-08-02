@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HASHING · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/1-identify-scope/windows/hashing.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/blue-team-field-manual.html">Blue Team Field Manual</a> &rsaquo; <a href="/other/blue-team-field-manual/1-identify-scope.html">1 IDENTIFY (Scope)</a> &rsaquo; <a href="/other/blue-team-field-manual/1-identify-scope/windows.html">WINDOWS</a></div>
+  <h1 id="hashing">HASHING</h1>
+<p>File Checksum Integrity Verifier (FCIV):<br>Ref. <a href="http://support2.microsoft.com/kb/841290">http://support2.microsoft.com/kb/841290</a><br>Hash a file:</p>
+<pre><code class="language-bash">C:\&gt; fciv.exe &lt;FILE TO HASH&gt;
+</code></pre>
+<p>Hash all files on C:\ into a database file:<br></p>
+<pre><code class="language-bash">C:\&gt; fciv.exe c:\ -r -mdS -xml &lt;FILE NAME&gt;.xml
+</code></pre>
+<p>List all hashed files:<br></p>
+<pre><code class="language-bash">C:\&gt; fciv.exe -list -shal -xml &lt;FILE NAME&gt;.xml
+</code></pre>
+<p>Verify previous hashes in db with file system:<br></p>
+<pre><code class="language-bash">C:\&gt; fciv.exe -v -shal -xml &lt;FILE NAME&gt;.xml
+</code></pre>
+<p>Note: May be possible to create a master db and<br>compare to all systems from a cmd line. Fast<br>baseline and difference.<br>Ref. <a href="https://technet.microsoft.com/en%C2%AD">https://technet.microsoft.com/en­</a><br>us/library/dn520872.aspx</p>
+<pre><code class="language-bash">PS C:\&gt; Get-FileHash &lt;FILE TO HASH&gt; | Format-List
+PS C:\&gt; Get-FileHash -algorithm md5 &lt;FILE TO HASH&gt;
+C:\&gt; certutil -hashfile &lt;FILE TO HASH&gt; SHAl
+C:\&gt; certutil -hashfile &lt;FILE TO HASH&gt; MD5
+</code></pre>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

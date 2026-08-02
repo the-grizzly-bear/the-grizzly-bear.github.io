@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TSHARK · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/3-detect-visibility/network-monitoring/tshark.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/blue-team-field-manual.html">Blue Team Field Manual</a> &rsaquo; <a href="/other/blue-team-field-manual/3-detect-visibility.html">3 DETECT (Visibility)</a> &rsaquo; <a href="/other/blue-team-field-manual/3-detect-visibility/network-monitoring.html">NETWORK MONITORING</a></div>
+  <h1 id="tshark">TSHARK</h1>
+<p>Get list of network interfaces:</p>
+<pre><code class="language-bash">&gt; tshark -D
+</code></pre>
+<p>Listen on multiple network interfaces:</p>
+<pre><code class="language-bash">&gt; tshark -i ethl -i eth2 -i eth3
+</code></pre>
+<p>Save to pcap and disable name resolution:</p>
+<pre><code class="language-bash">&gt; tshark -nn -w &lt;FILE NAME&gt;,pcap
+</code></pre>
+<p>Get absolute date and time stamp:</p>
+<pre><code class="language-bash">&gt; tshark -t a
+</code></pre>
+<p>Get arp or icmp traffic:</p>
+<pre><code class="language-bash">&gt; tshark arp or icmp
+</code></pre>
+<p>Capture traffic between to [hosts] and/or [nets]:</p>
+<pre><code class="language-bash">&gt; tshark &quot;host &lt;HOST l&gt; &amp;&amp; host &lt;HOST 2&gt;&quot;
+&gt; tshark -n &quot;net &lt;NET 1&gt; &amp;&amp; net &lt;NET 2&gt;&quot;
+</code></pre>
+<p>Filter just host and IPs (or not your IP):</p>
+<pre><code class="language-bash">&gt; tshark -r &lt;FILE NAME&gt;,pcap -q -z hosts,ipv4
+&gt; tshark not host &lt;YOUR IP ADDRESS&gt;
+</code></pre>
+<p>Not ARP and not UDP:</p>
+<pre><code class="language-bash">&gt; tshark not arp and not (udp.port -- 53)
+</code></pre>
+<p>Replay a pcap file:</p>
+<pre><code class="language-bash">&gt; tshark -r &lt;FILE NAME&gt;.pcap
+</code></pre>
+<p>Replay a pcap and just grab hosts and IPs:</p>
+<pre><code class="language-bash">&gt; tshark -r &lt;FILE NAME&gt;.pcap -q -z hosts
+</code></pre>
+<p>Setup a capture session(duration=60sec):</p>
+<pre><code class="language-bash">&gt; tshark -n -a files:10 -a filesize:100 -a
+duration:60 -w &lt;FILE NAME&gt;,pcap
+</code></pre>
+<p>Grab src/dst IPs only:</p>
+<pre><code class="language-bash">&gt; tshark -n -e ip.src -e ip.dst -T fields -E
+separator=, -Rip
+</code></pre>
+<p>Grab IP of src DNS and DNS query:</p>
+<pre><code class="language-bash">&gt; tshark -n -e ip.src -e dns,qry.name -E
+separator=';' -T fields port 53
+</code></pre>
+<p>Grab HTTP URL host and request:</p>
+<pre><code class="language-bash">&gt; tshark -Rhttp.request -T fields -E separator=';'
+-e http.host -e http.request.uri
+</code></pre>
+<p>Grab just HTTP host requests:</p>
+<pre><code class="language-bash">&gt; tshark -n -Rhttp.request -T fields -e http.host
+</code></pre>
+<p>Grab top talkers by IP dst:</p>
+<pre><code class="language-bash">&gt; tshark -n -c 150 I awk '{print $4}' I sort -n I
+uniq -c I sort -nr
+</code></pre>
+<p>Grab top stats of protocols:</p>
+<pre><code class="language-bash">&gt; tshark -q -z io,phs -r &lt;FILE NAME&gt;.pcap
+&gt; tshark -r &lt;PCAP FILE&gt;,cap -Rhttp.request -T
+fields -e http.host -e http.request.uri lsed -e
+'sf?,$//' I sed -e 's#&quot;(,)t(,*)$#http://l2#' I
+sort I uniq -c I sort -rn I head
+&gt; tshark -n -c 100 -e ip.src -R&quot;dns.flags.response
+eq 1&quot; -T fields port 53
+&gt; tshark -n -e http.request.uri -Rhttp.request -T
+fields I grep exe
+&gt; tshark -n -c 1000 -e http.host -Rhttp.request -T
+fields port 80 I sort I uniq -c I sort -r
+</code></pre>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

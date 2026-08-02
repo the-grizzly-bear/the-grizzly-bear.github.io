@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IPSEC · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/2-protect-defend/windows/ipsec.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/blue-team-field-manual.html">Blue Team Field Manual</a> &rsaquo; <a href="/other/blue-team-field-manual/2-protect-defend.html">2 PROTECT (Defend)</a> &rsaquo; <a href="/other/blue-team-field-manual/2-protect-defend/windows.html">WINDOWS</a></div>
+  <h1 id="ipsec">IPSEC</h1>
+<p>Create a IPSEC Local Security Policy, applied to any connection, any protocol, and using a preshared key:</p>
+<pre><code class="language-bash">C:\&gt; netsh ipsec static add filter
+filterlist=MyIPsecFilter srcaddr=Any dstaddr=Any
+protocol=ANY
+C:\&gt; netsh ipsec static add filteraction
+name=MyIPsecAction action=negotiate
+C:\&gt; netsh ipsec static add policy
+name=MyIPsecPolicy assign=yes
+C:\&gt; netsh ipsec static add rule name=MyIPsecRule
+policy=MyIPsecPolicy filterlist=MyIPsecFilter
+filteraction=MyIPsecAction conntype=all activate=yes
+psk=&lt;PASSWORD&gt;
+</code></pre>
+<p>Add rule to allow web browsing port 80(HTTP) and<br>443(HTTPS) over IPSEC:</p>
+<pre><code class="language-bash">C:\&gt; netsh ipsec static add filteraction name=Allow action=permit
+C:\&gt; netsh ipsec static add filter
+filterlist=WebFilter srcaddr=Any dstaddr=Any protocol=TCP dstport=80
+C:\&gt; netsh ipsec static add filter
+filterlist=WebFilter srcaddr=Any dstaddr=Any protocol=TCP dstport=443
+C:\&gt; netsh ipsec static add rule name=WebAllow policy=MyIPsecPolicy filterlist=WebFilter filteraction=Allow conntype=all activate=yes psk=&lt;PASSWORD&gt;
+</code></pre>
+<p>Shows the IPSEC Local Security Policy with name "MyIPsecPolicy":</p>
+<pre><code class="language-bash">C:\&gt; netsh ipsec static show policy
+name=MyIPsecPolicy
+</code></pre>
+<p>Stop or Unassign a IPSEC Policy:</p>
+<pre><code class="language-bash">C:\&gt; netsh ipsec static set policy
+name=MyIPsecPolicy
+</code></pre>
+<p>Create a IPSEC Advance Firewall Rule and Policy and preshared key from and to any connections:</p>
+<pre><code class="language-bash">C:\&gt; netsh advfirewall consec add rule name= u IPSEC&quot; endpointl=any endpoint2=any action=requireinrequireout qmsecmethods=default
+</code></pre>
+<p>Require IPSEC preshared key on all outgoing requests:</p>
+<pre><code class="language-bash">C:\&gt; netsh advfirewall firewall add rule
+name= u IPSEC_Out&quot; dir=out action=allow enable=yes profile=any localip=any remoteip=any protocol=any interfacetype=any security=authenticate
+</code></pre>
+<p>Create a rule for web browsing:</p>
+<pre><code class="language-bash">C:\&gt; netsh advfirewall firewall add rule name=&quot;Allow Outbound Port 80 11 dir=out localport=80 protocol=TCP action=allow
+</code></pre>
+<p>Create a rule for DNS:</p>
+<pre><code class="language-bash">C:\&gt; netsh advfirewall firewall add rule name=&quot;Allow Outbound Port 53 11 dir=out localport=53 protocol=UDP action=allow
+</code></pre>
+<p>Delete ISPEC Rule:</p>
+<pre><code class="language-bash">C:\&gt; netsh advfirewall firewall delete rule name=&quot;IPSEC_RULE&quot;
+</code></pre>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

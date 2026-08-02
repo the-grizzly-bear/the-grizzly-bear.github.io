@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Result Matrix · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="notes/cyber-threat-hunting/result-matrix.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/notes/index.html">Cyber Security Notes</a> &rsaquo; <a href="/notes/cyber-threat-hunting.html">Cyber Threat Hunting</a></div>
+  <h1 id="result-matrix">Result Matrix</h1>
+<table>
+<thead>
+<tr>
+<th><strong>True Negative</strong></th>
+<th><strong>False Positive</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Predicted Negative</td>
+<td>Predicted Positive</td>
+</tr>
+<tr>
+<td>Actual Negative</td>
+<td>Actual Negative</td>
+</tr>
+<tr>
+<td><strong>False Negative</strong></td>
+<td><strong>True Positive</strong></td>
+</tr>
+<tr>
+<td>Predicted Negative</td>
+<td>Predicted Positive</td>
+</tr>
+<tr>
+<td>Actual Positive</td>
+<td>Actual Positive</td>
+</tr>
+</tbody>
+</table>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

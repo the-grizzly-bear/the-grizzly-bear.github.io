@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2023-10-26 · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2023/2023-10-26.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/huntress/index.html">Huntress CTF</a> &rsaquo; <a href="/huntress/2023/index.html">2023</a></div>
+  <h1 id="2023-10-26">2023-10-26</h1>
+<p><a href="https://www.virustotal.com/gui/file/2948e822ce3a670c6c0a7441886966bfacf5543dec4348a616f5774b47a23d4d/behavior">https://www.virustotal.com/gui/file/2948e822ce3a670c6c0a7441886966bfacf5543dec4348a616f5774b47a23d4d/behavior</a></p>
+<p><a href="https://securityscorecard.com/research/deep-dive-into-alphv-blackcat-ransomware/">https://securityscorecard.com/research/deep-dive-into-alphv-blackcat-ransomware/</a></p>
+<p><a href="https://www.netskope.com/blog/blackcat-ransomware-tactics-and-techniques-from-a-targeted-attack">https://www.netskope.com/blog/blackcat-ransomware-tactics-and-techniques-from-a-targeted-attack</a></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>C:\Windows\system32\badbd0b277ca0fbd599dc474d7b7f2010d1cc5952c18bf55572795a3921130e8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA<br />
+badbd0b277ca0fbd599dc474d7b7f2010d1cc5952c18bf55572795a3921130e8</p>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-python">flag{092744b55420033c5eb9d609eac5e823}
+</code></pre>
+<pre><code class="language-python">import binascii
+
+# Function to perform XOR operation on two bytes-like objects
+def xor_bytes(b1, b2):
+    return bytes(x ^ y for x, y in zip(b1, b2))
+
+# Read the encrypted and decrypted files
+with open('Bliss_Windows_XP.png.encry', 'rb') as encrypted_file, \
+     open('bliss.png', 'rb') as decrypted_file:
+
+    encrypted_data = encrypted_file.read()
+    decrypted_data = decrypted_file.read()
+
+# Assuming decrypted_data is the known plaintext version of the file
+# XOR the encrypted data with the known plaintext to obtain the key
+key = xor_bytes(encrypted_data, decrypted_data)
+
+# Specify the number of bytes you want in your shorter key
+short_key_length = 16  # Change this to your desired length
+
+# Get the shorter key by slicing the original key
+short_key = key[:short_key_length]
+
+# Convert the short key to hexadecimal
+short_key_hex = short_key.hex()
+
+# Convert the hexadecimal short key back to ASCII
+short_key_ascii = binascii.unhexlify(short_key_hex)
+
+# Now you can use the ASCII short key for decryption
+# Print the ASCII short key
+print(f&quot;Decryption Key (ASCII): {short_key_ascii.decode('utf-8')}&quot;)
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

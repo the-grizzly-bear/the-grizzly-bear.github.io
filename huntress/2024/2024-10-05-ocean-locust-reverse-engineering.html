@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2024-10-05 Ocean-Locust (Reverse Engineering) · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2024/2024-10-05-ocean-locust-reverse-engineering.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/huntress/index.html">Huntress CTF</a> &rsaquo; <a href="/huntress/2024/index.html">2024</a></div>
+  <h1 id="2024-10-05-ocean-locust-reverse-engineering">2024-10-05 Ocean-Locust (Reverse Engineering)</h1>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-python">flag{fec87c690b8ec8d65b8b10ee7bb65d0}
+</code></pre>
+<p>Basically removing alot ofother testing, messed around with the png and saw the biTx values changed, and using the program, created a 1x1.png to see the changes, took the encoding program, ran through png-challenge.exe 1x1.png flag{aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa} changing each value, when you had a match moved on to the next biT value pair.</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Analyzing the file with 7 or 14 a's</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>My scripts were working, though poorly. I would get the values for A, B, etc and move to the next chunk</p>
+<pre><code class="language-shell"> flag{fec87c690b8ec8d65b8bb10eeaaaaaaa}
+
+# Define the correct known biTx values as arrays of byte pairs (now all uppercase)
+$knownValues = @{
+    'bita' = @('04', '05', '35', '06', '19')
+    'bitb' = @('04', '0C', '37', '5A', '55')
+    'bitc' = @('01', '5F', '6D', '53', '00')
+    'bitd' = @('5A', '0C', '37', '5C', '06')
+    'bite' = @('54', '5C', '36', '5D', '00')
+    'bitf' = @('00', '58', '64', '03', '07') 
+    'bitg' = @('55', '0B', '36', '51', '57')
+    'bith' = @('06', '59', '29', 'C2', 'C8')
+}
+
+# Define the initial flag starting from the matched part for bitc
+$flag = &quot;flag{fec87c690b8ec8d65b8baaaaaaaaaaaa}&quot;
+
+function Extract-PngChunks {
+    param (
+        [string]$filePath
+    )
+
+    $data = [System.IO.File]::ReadAllBytes($filePath)
+    $pointer = 8  # Skip the PNG signature
+    $chunks = @()
+
+    while ($pointer -lt $data.Length) {
+        $chunkLengthBytes = $data[$pointer..($pointer + 3)]
+        [Array]::Reverse($chunkLengthBytes)
+        $chunkLength = [BitConverter]::ToUInt32($chunkLengthBytes, 0)
+        $chunkType = [System.Text.Encoding]::ASCII.GetString($data[($pointer + 4)..($pointer + 7)])
+        $chunkData = $data[($pointer + 8)..($pointer + 7 + $chunkLength)]
+        $chunkCRC = $data[($pointer + 8 + $chunkLength)..($pointer + 11 + $chunkLength)]
+        $chunks += [PSCustomObject]@{
+            Type = $chunkType
+            Length = $chunkLength
+            Data = $chunkData
+            CRC = $chunkCRC
+        }
+        $pointer += $chunkLength + 12
+    }
+
+    return $chunks
+}
+
+function Check-BiTChunk {
+    param (
+        [array]$chunks,
+        [string]$targetType,
+        [array]$expectedPairs,  # Known values as an array of byte pairs
+        [int]$charPosition  # Position to match in byte pair sequence
+    )
+
+    foreach ($chunk in $chunks) {
+        if ($chunk.Type -eq $targetType) {
+            # Extract bytes from the chunk data
+            $extractedBytes = @()
+            for ($i = 0; $i -lt $chunk.Data.Length; $i++) {
+                $byte = &quot;{0:X2}&quot; -f $chunk.Data[$i]
+                $extractedBytes += $byte
+            }
+
+            # Print extracted and expected values for debugging
+            Write-Host &quot;Chunk Type: $($chunk.Type)&quot;
+            Write-Host &quot;Found $targetType values: $($extractedBytes -join ' ')&quot;
+            Write-Host &quot;Expected $targetType values: $($expectedPairs -join ' ')&quot; 
+
+            # Calculate the correct index based on the current character's position in the flag
+            $index = ($charPosition - 25)  # Adjust index for the bitf chunk starting position
+
+            if ($index -ge 0 -and $index -lt $expectedPairs.Length) {
+                $extractedByte = $extractedBytes[$index].ToLower()
+                $expectedByte = $expectedPairs[$index].ToLower()
+
+                # Print details of the current byte comparison
+                Write-Host (&quot;Comparing extracted byte '{0}' with expected byte '{1}' at position {2}&quot; -f $extractedByte, $expectedByte, $charPosition)
+
+                if ($extractedByte -eq $expectedByte) {
+                    Write-Host &quot;Match found for position $charPosition!&quot;
+                    return $true
+                } else {
+                    Write-Host &quot;No match at position $charPosition.&quot;
+                }
+            } else {
+                Write-Host &quot;Position $charPosition is out of bounds for the extracted bytes or expected pairs.&quot;
+                return $false
+            }
+        }
+    }
+    return $false
+}
+
+# Main loop to test flags by updating byte pairs
+$characters = @('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9')  # Possible characters for the flag
+
+$position = 25  # Start at position 30 for the bitf chunk
+
+while ($position -lt $flag.Length - 1) {
+    $matchFound = $false
+    foreach ($nextChar in $characters) {
+        # Create the current flag by substituting the character at the current position
+        $currentFlag = $flag.Substring(0, $position) + $nextChar + $flag.Substring($position + 1)
+
+        Write-Host &quot;`nTesting flag with $nextChar`: $currentFlag&quot;
+        &amp; .\png-challenge.exe 1x1.png $currentFlag | Out-Null
+        $chunks = Extract-PngChunks -filePath &quot;encoded 1x1.png&quot;
+
+        # Check the current position for bitf
+        $result = Check-BiTChunk -chunks $chunks -targetType &quot;bitf&quot; -expectedPairs $knownValues['bitf'] -charPosition $position
+
+        if ($result) {
+            Write-Host &quot;Match found: $currentFlag&quot;
+            $flag = $currentFlag
+            $matchFound = $true
+            break
+        }
+    }
+
+    if ($matchFound) {
+        $position += 1  # Increment by 1 to move to the next character position in the flag
+    } else {
+        Write-Host &quot;No match found for position $position in chunk type bitf.&quot;
+        break
+    }
+}
+
+Write-Host &quot;`nFinal flag: $flag&quot;
+</code></pre>
+<pre><code class="language-shell">run to get flag{fec87c690baaaaagaaaaaaaaaaaaaaaa}
+
+# (iteration focusing on biTc chunk — near-identical brute-force script,
+#  $flag = &quot;flag{fec87aaaaaaaaaaaaaaaaaaaaaaaaaaa}&quot;, $position = 10,
+#  targetType &quot;bitc&quot;, index = $charPosition - 10)
+</code></pre>
+<pre><code class="language-shell">Final flag: flag{fec87c690b8ec8daaaaaaaaaaaaaaaaa}
+
+# (iteration focusing on bitd chunk — near-identical brute-force script,
+#  $flag = &quot;flag{fec87c690baaaaaaaaaaaaaaaaaaaaaa}&quot;, $position = 15,
+#  targetType &quot;bitd&quot;, index = $charPosition - 15)
+</code></pre>
+<pre><code class="language-shell">Final flag: flag{fec87c690b8ec8d65b8baaaaaaaaaaaa}
+
+# (iteration focusing on bite chunk — near-identical brute-force script,
+#  $flag = &quot;flag{fec87c690b8ec8daaaaaaaaaaaaaaaaa}&quot;, $position = 20,
+#  targetType &quot;bite&quot;, index = $charPosition - 20)
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-shell"># Consolidated version iterating every chunk type in one pass
+$knownValues = @{
+    'bitb' = @('04', '0C', '37', '5A', '55')  # Start with bitb chunk
+    'bitc' = @('01', '5F', '6D', '53', '00')  # Move to bitc chunk next
+    'bitd' = @('5A', '0C', '37', '5C', '06')  # Next chunk after bitc
+    'bite' = @('54', '5C', '36', '5D', '00')  # bite chunk
+    'bitf' = @('00', '58', '64', '03', '07')  # bitf chunk
+    'bitg' = @('55', '0B', '36', '51', '57')  # bitg chunk
+    'bith' = @('06', '59', '29', 'C2', 'C8')  # bith chunk
+}
+
+$flag = &quot;flag{aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}&quot;
+
+# Extract-PngChunks and Check-BiTChunk as above, with an added $chunkStartPos param;
+# index = $charPosition - $chunkStartPos
+
+$chunkTypeMap = @{
+    'bitb' = 5
+    'bitc' = 10
+    'bitd' = 15
+    'bite' = 20
+    'bitf' = 25
+    'bitg' = 30
+    'bith' = 35
+}
+
+foreach ($chunkType in $chunkTypeMap.Keys) {
+    $chunkStartPos = $chunkTypeMap[$chunkType]
+    $expectedPairs = $knownValues[$chunkType]
+    $position = $chunkStartPos
+    while ($position -lt $chunkStartPos + 5) {
+        # brute-force each character with png-challenge.exe as above
+    }
+}
+
+Write-Host &quot;`nFinal flag: $flag&quot;
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-shell"># Same consolidated loop, resetting $position = $chunkStartPos at the top of each chunk
+</code></pre>
+<p>The flag</p>
+<pre><code class="language-python">flag{fec87c690b8ec8d65b8b10ee7bb65d0}
+</code></pre>
+<p>After I was chatting with some others on their solutions, I saved their scripts here for my reference.</p>
+<pre><code class="language-shell">def extract_custom_chunks_from_png(png_file_path):
+    with open(png_file_path, 'rb') as file:
+        byte_data = file.read()
+
+    custom_chunks = []
+    i = 8  # Start after PNG header (8 bytes)
+
+    while i &lt; len(byte_data):
+        if i + 4 &gt; len(byte_data):
+            break
+
+        # Read chunk length
+        length = int.from_bytes(byte_data[i:i + 4], 'big')
+        i += 4
+
+        if i + 4 &gt; len(byte_data):
+            break
+
+        # Read chunk type
+        chunk_type = byte_data[i:i + 4]
+        i += 4
+
+        # Read the chunk data if it's a custom chunk
+        if chunk_type.startswith(b'biT'):
+            chunk_data = byte_data[i:i + length]
+            custom_chunks.append((chunk_type.decode('utf-8'), chunk_data))
+
+        # Move past this chunk's data and CRC
+        i += length + 4  # Skip chunk data and 4-byte CRC
+
+    return custom_chunks
+
+
+# Main execution
+if __name__ == &quot;__main__&quot;:
+    png_file_path = &quot;encoded 1x1.png&quot;
+    #png_file_path = &quot;inconspicuous.png&quot;
+    custom_chunks = extract_custom_chunks_from_png(png_file_path)
+
+    if not custom_chunks:
+        print(&quot;No custom chunks found.&quot;)
+    else:
+        custom_chunks.sort(key=lambda x : x[0])
+        z = ''.join([i[1].hex() for i in custom_chunks])
+        print(z)
+        #for chunk_type, chunk_data in custom_chunks:
+        #    print(f&quot;Custom Chunk Type: {chunk_type}, Data (hex): {chunk_data.hex()}&quot;)
+</code></pre>
+<pre><code class="language-shell">from pwn import *
+import subprocess
+import string
+
+# Known part of the flag
+KNOWN_FLAG = 'flag{'
+# Expected byte sequence in hexadecimal
+e = &quot;0405350619040c375a55015f6d53005a0c375c06545c365d000058640307550b365157065929c2c8&quot;
+# Convert expected hex string into a list of two-character segments
+EXPECTED = [e[i:i+2] for i in range(0, len(e), 2)]
+
+while True:
+    for c in string.digits + string.ascii_lowercase + '}':
+        # Create the current attempt by appending characters
+        attempt = KNOWN_FLAG + c
+        while len(attempt) &lt; 38:
+            attempt += 'a'
+
+        # Run the command using subprocess
+        subprocess.run([&quot;png-challenge-debug.exe&quot;, &quot;1x1.png&quot;, attempt], check=True)
+
+        # Start the Python script to process the PNG file
+        p = subprocess.Popen(['python', 'data.py'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = p.communicate()
+
+        # Decode and strip the output
+        s = stdout.decode('utf-8').strip()
+        num = len(KNOWN_FLAG)
+        # Create a list of bytes from the output string
+        byte_list = [s[i:i+2] for i in range(0, len(s), 2)]
+
+        # Check if the current character matches the expected one
+        if byte_list[num] == EXPECTED[num]:
+            KNOWN_FLAG += c
+            print(KNOWN_FLAG)
+            break
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-shell">$values=&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;,&quot;f&quot;,&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;,&quot;8&quot;,&quot;9&quot;,&quot;}&quot;,&quot;l&quot;,&quot;{&quot;,&quot;g&quot;
+$final = &quot;04&quot;,&quot;05&quot; ,&quot;35&quot; ,&quot;06&quot;, &quot;19&quot;,&quot;04&quot;, &quot;0c&quot;, &quot;37&quot;, &quot;5a&quot;, &quot;55&quot;, &quot;01&quot;, &quot;5f&quot;, &quot;6d&quot;, &quot;53&quot;, &quot;00&quot;, &quot;5a&quot;, &quot;0c&quot;, &quot;37&quot;, &quot;5c&quot;, &quot;06&quot;, &quot;54&quot;, &quot;5c&quot;, &quot;36&quot;, &quot;5d&quot;, &quot;00&quot;, &quot;00&quot;, &quot;58&quot;, &quot;64&quot;, &quot;03&quot;, &quot;07&quot;, &quot;55&quot;, &quot;0b&quot;, &quot;36&quot;, &quot;51&quot;, &quot;57&quot;, &quot;06&quot;, &quot;59&quot;, &quot;29&quot;, &quot;c2&quot;, &quot;c8&quot;
+
+for ($r = 0; $r -lt 8 ; $r++) {
+foreach($value in $values){
+$position = $r+61
+$pattern = &quot;62-69-54-$position(?&lt;MatchedCodes&gt;(?:-[0-9A-Za-z]{2}){5})&quot;
+$before = &quot;a&quot;*(5*$r)
+$after = &quot;a&quot;*(5*(7-$r))
+$flag = &quot;small.png $before$value$value$value$value$value$after&quot;
+Start-Process -FilePath .\png-challenge-debug.exe -ArgumentList $flag
+start-sleep -Milliseconds 200
+(Get-Content '.\encoded small.png' -Raw -Encoding Byte| % { [System.BitConverter]::ToString($_) } )-match $pattern |out-null
+$currentvar= $matches['MatchedCodes'].trimstart('-').split('-')
+
+for ($i = ($r*5); $i -le (($r*5)+5); $i++) {
+    # Use modulus to get the correct index in comparison array
+    $modIndex = $i % 5
+
+    # Check the element in cyclic comparison slots
+    if ($currentvar[$modIndex] -ieq $final[$i]) {
+        # If they match, replace with the specified value
+        $final[$i] = $value
+    }
+}
+}
+
+}
+$final -join ''
+</code></pre>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

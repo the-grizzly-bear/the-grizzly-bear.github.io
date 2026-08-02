@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CONTAINMENT TASKS · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/7-incident-management-checklist/containment-tasks.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/blue-team-field-manual.html">Blue Team Field Manual</a> &rsaquo; <a href="/other/blue-team-field-manual/7-incident-management-checklist.html">7 INCIDENT MANAGEMENT (Checklist)</a></div>
+  <h1 id="containment-tasks">CONTAINMENT TASKS</h1>
+<p>Priority: H/M/L | Effort: H/M/L | Open/Closed</p>
+<ul>
+<li>How many systems are stilt unknown, clear, suspicious, or infected?</li>
+<li>Networking device(s) changes. (Switches, Routers, Firewalls, IPS, NAC, Wi-Fi, etc.)</li>
+<li>Active Directory OU isolation of suspected systems.</li>
+<li>Active Directory - User account restrictions and resets.</li>
+<li>Active Directory policies to prohibit threats from running and/or access.</li>
+<li>Firewall blocks.</li>
+<li>DNS blocks (null route matware site(s).</li>
+<li>Web filtering blocks.</li>
+</ul>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

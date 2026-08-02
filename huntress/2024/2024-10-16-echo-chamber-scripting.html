@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2024-10-16 Echo Chamber (Scripting) · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2024/2024-10-16-echo-chamber-scripting.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/huntress/index.html">Huntress CTF</a> &rsaquo; <a href="/huntress/2024/index.html">2024</a></div>
+  <h1 id="2024-10-16-echo-chamber-scripting">2024-10-16 Echo Chamber (Scripting)</h1>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Okay ping echos in the pcap file</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Extract the data values from the pcap file</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Script in ss above.</p>
+<pre><code class="language-python">from scapy.all import *
+
+def extract_icmp_data(packet):
+    &quot;&quot;&quot;
+    Extracts data from ICMP echo request packets.
+    &quot;&quot;&quot;
+    if packet.haslayer(ICMP):
+        icmp_layer = packet.getlayer(ICMP)
+        if icmp_layer.type == 8:  # Echo Request (ping)
+            return bytes(icmp_layer.payload).hex()
+    return None
+
+def analyze_pcap(file_name):
+    &quot;&quot;&quot;
+    Loads and analyzes the provided PCAP file for ICMP echo requests.
+    &quot;&quot;&quot;
+    print(f&quot;Analyzing {file_name}...&quot;)
+    packets = rdpcap(file_name)
+
+    icmp_data = []
+
+    for packet in packets:
+        data = extract_icmp_data(packet)
+        if data:
+            icmp_data.append(data)
+
+    print(f&quot;Extracted {len(icmp_data)} ICMP Echo Request packets.&quot;)
+    return icmp_data
+
+def export_icmp_data(data, output_file):
+    &quot;&quot;&quot;
+    Exports all extracted ICMP echo data to a text file.
+    &quot;&quot;&quot;
+    with open(output_file, 'w') as file:
+        for i, packet_data in enumerate(data):
+            file.write(f&quot;Packet {i + 1}:\n{packet_data}\n\n&quot;)
+    print(f&quot;Exported ICMP data to {output_file}&quot;)
+
+if __name__ == &quot;__main__&quot;:
+    pcap_file = &quot;echo_chamber.pcap&quot;  # Replace with the path to your pcap file
+    output_file = &quot;icmp_data_output.txt&quot;  # The file to export the ICMP data to
+
+    # Analyze the PCAP file
+    icmp_data = analyze_pcap(pcap_file)
+
+    # Export all ICMP echo request data to a text file
+    if icmp_data:
+        export_icmp_data(icmp_data, output_file)
+    else:
+        print(&quot;No ICMP echo requests found in the pcap file.&quot;)
+</code></pre>
+<p>This script outputs the data chunks we're looking for</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>We can see the PNG and IHDR in the decoded text from the output of this script, se we know for sure it's a file being tunneled.</p>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-python">def hex_to_ascii(hex_data):
+    &quot;&quot;&quot;
+    Converts hex string to ASCII. Non-printable characters will be represented by a dot ('.').
+    &quot;&quot;&quot;
+    bytes_object = bytes.fromhex(hex_data)
+    ascii_string = &quot;&quot;
+
+    for byte in bytes_object:
+        if 32 &lt;= byte &lt;= 126:  # Printable ASCII range
+            ascii_string += chr(byte)
+        else:
+            ascii_string += &quot;.&quot;  # Non-printable characters are replaced with '.'
+
+    return ascii_string
+
+def convert_icmp_data(input_file, output_file):
+    &quot;&quot;&quot;
+    Reads the ICMP data from the input file, converts hex to ASCII, and writes the results to an output file.
+    &quot;&quot;&quot;
+    with open(input_file, 'r') as infile, open(output_file, 'w') as outfile:
+        for line in infile:
+            if line.startswith(&quot;Packet&quot;):  # Keep the packet number lines
+                outfile.write(line)
+            else:
+                hex_data = line.strip()  # Get the hex data
+                ascii_output = hex_to_ascii(hex_data)
+                outfile.write(f&quot;ASCII: {ascii_output}\n&quot;)  # Write the ASCII conversion
+
+if __name__ == &quot;__main__&quot;:
+    input_file = &quot;icmp_data_output.txt&quot;  # File where the ICMP data is stored
+    output_file = &quot;icmp_data_ascii_output.txt&quot;  # File to store the converted ASCII data
+
+    convert_icmp_data(input_file, output_file)
+    print(f&quot;Converted ICMP data has been saved to {output_file}&quot;)
+</code></pre>
+<p>The PNG values seen</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Extracting the last byte and reconstructing image since we don't need the full data chunk 40 values</p>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-python">import binascii
+
+def extract_last_byte(hex_data):
+    &quot;&quot;&quot;
+    Extracts the last byte from the hex data.
+    &quot;&quot;&quot;
+    return hex_data[-2:]  # The last byte is represented by the last two characters in hex
+
+def hex_to_bytes(hex_data):
+    &quot;&quot;&quot;
+    Converts hex string to raw bytes.
+    &quot;&quot;&quot;
+    return binascii.unhexlify(hex_data)
+
+def assemble_image(input_file, output_image):
+    &quot;&quot;&quot;
+    Reads the ICMP data from the input file, extracts the last byte of hex data from each packet,
+    converts it to bytes, and writes the assembled bytes into a PNG image file.
+    &quot;&quot;&quot;
+    assembled_data = b''  # Empty byte stream to append to
+
+    with open(input_file, 'r') as infile:
+        for line in infile:
+            if not line.startswith(&quot;Packet&quot;) and line.strip():  # Skip &quot;Packet&quot; lines and empty lines
+                hex_data = line.strip()
+                last_byte = extract_last_byte(hex_data)  # Extract the last byte of the hex data
+                assembled_data += hex_to_bytes(last_byte)  # Convert hex to bytes and append
+
+    # Write the assembled byte stream to the output image file
+    with open(output_image, 'wb') as img_file:
+        img_file.write(assembled_data)
+
+    print(f&quot;Image saved as {output_image}&quot;)
+
+if __name__ == &quot;__main__&quot;:
+    input_file = &quot;icmp_data_output.txt&quot;  # File where the ICMP data is stored
+    output_image = &quot;extracted_image.png&quot;  # The file to save the assembled image
+
+    assemble_image(input_file, output_image)
+    print(f&quot;Assembled image bytes and saved as {output_image}&quot;)
+</code></pre>
+<p>Open the flag in the png</p>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-python">flag{6b38aa917a754d8bf384dc73fde633ad}
+</code></pre>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

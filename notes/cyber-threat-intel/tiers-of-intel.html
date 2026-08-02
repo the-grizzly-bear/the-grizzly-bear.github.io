@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tiers of Intel · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="notes/cyber-threat-intel/tiers-of-intel.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/notes/index.html">Cyber Security Notes</a> &rsaquo; <a href="/notes/cyber-threat-intel.html">Cyber Threat Intel</a></div>
+  <h1 id="tiers-of-intel">Tiers of Intel</h1>
+<h3 id="prioritization-in-threat-hunting">Prioritization in Threat Hunting</h3>
+<p>Items are prioritized in a tiered system. Items within each tier are not listed in a specific order. The focus is on addressing higher-tier items first; as resources become available and higher-tier items are resolved, attention can shift to lower-tier items.</p>
+<h3 id="tier-3-highest-priority">Tier 3 (Highest Priority)</h3>
+<ul>
+<li><strong>Critical CVEs</strong><ul>
+<li>Urgent Common Vulnerabilities and Exposures requiring immediate action.</li>
+<li>Publicly available POCs increasing risk.</li>
+</ul>
+</li>
+<li><strong>TLB:AMBER or Specific Advisories</strong><ul>
+<li>Trusted advisories labeled as TLP:AMBER, indicating sensitive information for limited distribution.</li>
+</ul>
+</li>
+<li><strong>Zero-Day/Non-Disclosed Vulnerabilities</strong><ul>
+<li>Newly discovered vulnerabilities not yet publicly disclosed or patched.</li>
+</ul>
+</li>
+<li><strong>Impending Doom</strong><ul>
+<li>Indicators of imminent and severe threats to critical systems.</li>
+</ul>
+</li>
+<li><strong>High-Fidelity IOCs/IOAs/Threats</strong><ul>
+<li>Highly reliable Indicators of Compromise (IOCs), Indicators of Attack (IOAs), or specific threats that necessitate swift response.</li>
+</ul>
+</li>
+</ul>
+<h3 id="tier-2-medium-priority">Tier 2 (Medium Priority)</h3>
+<ul>
+<li><strong>Higher Business Impact Items</strong><ul>
+<li>Advisories from organizations like CISA (Cybersecurity and Infrastructure Security Agency).</li>
+<li>Impacts on Industrial Control Systems (ICS).</li>
+</ul>
+</li>
+<li><strong>Solid or Newer TTPs</strong><ul>
+<li>Recently identified or well-established Tactics, Techniques, and Procedures.</li>
+</ul>
+</li>
+<li><strong>Emerging Threats</strong><ul>
+<li>New threats that are starting to surface and may affect operations.</li>
+</ul>
+</li>
+<li><strong>Higher-Tier Threat Intelligence</strong><ul>
+<li><strong>Curated Intelligence</strong><ul>
+<li>Carefully selected and analyzed intel reports.</li>
+</ul>
+</li>
+<li><strong>Penetration Test Reviews</strong><ul>
+<li>Assessments of vulnerabilities identified during penetration testing.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Tech Stacks Across Customers</strong><ul>
+<li>Common technology platforms used by multiple clients that could be targeted.</li>
+</ul>
+</li>
+<li><strong>Industry Vertical Threats</strong><ul>
+<li>Threats specific to certain industries or sectors.</li>
+</ul>
+</li>
+<li><strong>Customer Matches Files and Dumps</strong><ul>
+<li>Discovery of customer data in leaked files or data dumps.</li>
+</ul>
+</li>
+<li><strong>Reviewing Increases in Brute Force or New Activity</strong><ul>
+<li>Monitoring spikes in attack attempts or unusual behaviors.</li>
+</ul>
+</li>
+</ul>
+<h3 id="tier-1-lowest-priority">Tier 1 (Lowest Priority)</h3>
+<ul>
+<li><strong>Pulse/IOC Reviews</strong><ul>
+<li>Regular examination of threat feeds and indicators.</li>
+</ul>
+</li>
+<li><strong>Low-Tier/Blog/Open-Source Intelligence (OSINT) Hunts</strong><ul>
+<li>Investigations based on blogs, forums, and publicly available information.</li>
+</ul>
+</li>
+<li><strong>Reviewing Older Malware</strong><ul>
+<li>Analysis of outdated malware that might still pose risks.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<p><strong>Note:</strong><br />
+- <strong>Increased Data Fidelity with CSINT:</strong> As organizations move from Open-Source Intelligence (OSINT) to Closed-Source Intelligence (CSINT), the data obtained has higher fidelity and accuracy.<br />
+    - <strong>Challenges for Threat Actors:</strong> This shift from OSINT to CSINT largely makes it more difficult for threat actors to access or adapt to known security measures, enhancing the organization's defense against potential threats.<br />
+- <strong>Tier Levels:</strong><br />
+    - <strong>Tier 3</strong>: Represents the most critical threats that require immediate attention and resources.<br />
+    - <strong>Tier 2</strong>: Includes significant threats that are important but less urgent than Tier 3.<br />
+    - <strong>Tier 1</strong>: Consists of routine or lower-priority items that can be addressed as resources permit.</p>
+<p><strong>Understanding the Logic:</strong><br />
+- <strong>Resource Allocation:</strong><br />
+    - Higher-tier items consume more resources due to their urgency and impact.<br />
+    - Once higher-tier items are managed, resources can be reallocated to address lower-tier items.</p>
+<p><span class="img-missing">image unavailable</span></p>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

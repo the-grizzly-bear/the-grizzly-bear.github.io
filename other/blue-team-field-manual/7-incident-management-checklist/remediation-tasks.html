@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>REMEDIATION TASKS · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/7-incident-management-checklist/remediation-tasks.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/blue-team-field-manual.html">Blue Team Field Manual</a> &rsaquo; <a href="/other/blue-team-field-manual/7-incident-management-checklist.html">7 INCIDENT MANAGEMENT (Checklist)</a></div>
+  <h1 id="remediation-tasks">REMEDIATION TASKS</h1>
+<p>Priority: H/M/L | Effort: H/M/L | Open/Closed</p>
+<ul>
+<li>Administrative AD Password Changes.</li>
+<li>Local Administrative Password Changes.</li>
+<li>User AD Password Changes.</li>
+<li>Local User Password Changes.</li>
+<li>Service Account Password Changes.</li>
+<li>Push Antivirus updates for detected malware.</li>
+<li>Try multiple antivirus tools.</li>
+<li>What Active Directory GPO polices are set (Logs, Restrictions, etc.)?</li>
+<li>What is the network architecture and how would Malware traverse?</li>
+<li>Are there additional IDS/IPS segments that need coverage to prevent/detect outbreak?</li>
+<li>3rd Party Applications missing patches (Adobe, Java, etc.)?</li>
+<li>Monitor client email for vendor or other business continuity items of interest.</li>
+<li>Monitor RDP sessions on external accessible RDP client system.</li>
+<li>Are there any applications in use that are facilitating the attack? If so, are there alternatives?</li>
+<li>Is there a baseline system to review for changes?</li>
+<li>Monitor user name variations.</li>
+<li>Managing and monitoring tasks.</li>
+<li>Review border router logs.</li>
+<li>Review VPN (remote access) logs.</li>
+<li>Citrix / VMWare or similar logs.</li>
+<li>Review accounting server(s) logs and trends of users.</li>
+<li>AD server logs.</li>
+<li>Review Anti-Virus (Malicious Code Services) logs.</li>
+<li>Review email abuse notifications and logs.</li>
+<li>Review DNS logs.</li>
+<li>Review account and policy abuse logs.</li>
+<li>Review host firewall logs.</li>
+</ul>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

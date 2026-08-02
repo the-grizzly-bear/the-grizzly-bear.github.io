@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOST SYSTEM FIREWALLS · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/2-protect-defend/linux/host-system-firewalls.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/blue-team-field-manual.html">Blue Team Field Manual</a> &rsaquo; <a href="/other/blue-team-field-manual/2-protect-defend.html">2 PROTECT (Defend)</a> &rsaquo; <a href="/other/blue-team-field-manual/2-protect-defend/linux.html">LINUX</a></div>
+  <h1 id="host-system-firewalls">HOST SYSTEM FIREWALLS</h1>
+<p>Export existing iptables firewall rules:</p>
+<pre><code class="language-bash">iptables-save &gt; firewall.out
+</code></pre>
+<p>Edit firewall rules and chains in firewall.out and<br>save the file:</p>
+<pre><code class="language-bash">vi firewall.out
+</code></pre>
+<p>Apply iptables:</p>
+<pre><code class="language-bash">iptables-restore &lt; firewall.out
+</code></pre>
+<p>Example iptables commands (IP, IP Range, Port Blocks):</p>
+<pre><code class="language-bash">iptables -A INPUT -s 10.10.10.10 -j DROP
+iptables -A INPUT -s 10,10.10.0/24 -j DROP
+iptables -A INPUT -p tcp --dport ssh -s
+10.10.10.10 -j DROP
+iptables -A INPUT -p tcp --dport ssh -j DROP
+</code></pre>
+<p>Block all connections:</p>
+<pre><code class="language-bash">iptables-policy INPUT DROP
+iptables-policy OUTPUT DROP
+iptables-policy FORWARD DROP
+</code></pre>
+<p>Log all denied iptables rules:</p>
+<pre><code class="language-bash">iptables -I INPUT 5 -m limit --limit 5/min -j LOG
+--log-prefix &quot;iptables denied: &quot; --log-level 7
+</code></pre>
+<p>Save all current iptables rules:<br>Ubuntu:</p>
+<pre><code class="language-bash">/etc/init.d/iptables save
+/sbin/service iptables save
+</code></pre>
+<p>RedHat / CentOS:</p>
+<pre><code class="language-bash">/etc/init.d/iptables save
+/sbin/iptables-save
+</code></pre>
+<p>List all current iptables rules:</p>
+<pre><code class="language-bash">iptables -L
+</code></pre>
+<p>Flush all current iptables rules:</p>
+<pre><code class="language-bash">iptables -F
+</code></pre>
+<p>Start/Stop iptables service:</p>
+<pre><code class="language-bash">service iptables start
+service iptables stop
+</code></pre>
+<p>Start/Stop ufw service:</p>
+<pre><code class="language-bash">ufw enable
+ufw disable
+</code></pre>
+<p>Start/Stop ufw logging:</p>
+<pre><code class="language-bash">ufw logging on
+ufw logging off
+</code></pre>
+<p>Backup all current ufw rules:</p>
+<pre><code class="language-bash">cp /lib/ufw/{user.rules,user6.rules} /&lt;BACKUP
+LOCATION&gt;
+cp /lib/ufw/{user.rules,user6.rules} ./
+</code></pre>
+<p>Example uncomplicated firewall (ufw) Commands (IP, IP range, Port blocks):</p>
+<pre><code class="language-bash">ufw status verbose
+ufw delete &lt;RULE#&gt;
+ufw allow for &lt;IP ADDRESS&gt;
+ufw allow all 80/tcp
+ufw allow all ssh
+ufw deny from &lt;BAD IP ADDRESS&gt; proto udp to any
+port 443
+</code></pre>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

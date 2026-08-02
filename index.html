@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="index.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  
+  <h1 id="will-seligman">🏴 Will Seligman</h1>
+<p>Cybersecurity notes, CTF writeups, and reference material — an archive of hands-on work across capture-the-flag competitions, HackTheBox labs, reverse-engineering challenges, and blue-team fundamentals.</p>
+<h2 id="sections">Sections</h2>
+<ul>
+<li><strong><a href="/huntress/index.html">Huntress CTF</a></strong> — yearly Huntress CTF writeups (2023–2025), organised by day and challenge.</li>
+<li><strong><a href="/htb/index.html">HackTheBox</a></strong> — completed machines, standalone challenges, and the Hack The Boo seasonal events.</li>
+<li><strong><a href="/flareon/index.html">Flare-on Challenges</a></strong> — reverse-engineering writeups from the annual Flare-on contest.</li>
+<li><strong><a href="/other/index.html">Other</a></strong> — the Blue Team Field Manual, CSO CTFs, TryHackMe, SANS Holiday Hack, and lab exercises.</li>
+<li><strong><a href="/notes/index.html">Cyber Security Notes</a></strong> — curated links, threat intel, threat hunting, and incident-response reference notes.</li>
+</ul>
+<blockquote>
+<p>Note: writeups from before 2024 are often just screenshots rather than detailed notes.</p>
+</blockquote>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

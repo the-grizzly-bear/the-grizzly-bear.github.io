@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simple Encryptor (rev challenge) · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/challenges/simple-encryptor.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/htb/index.html">HackTheBox</a> &rsaquo; <a href="/htb/challenges/index.html">Completed Challenges</a></div>
+  <h1 id="simple-encryptor-rev-challenge">Simple Encryptor (rev challenge)</h1>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-text">┌──(kali㉿kali)-[/mnt/tmp/HTB]
+└─$ python decode.py  
+HTB{vRy_s1MplE_F1LE3nCryp0r}
+
+┌──(kali㉿kali)-[/mnt/tmp/HTB]
+└─$ cat decode.py    
+def get_rand_sequence(seed, num_rands):
+    MOD = 2147483647
+    STATE_SIZE = 344 + num_rands
+    r = [0] * STATE_SIZE
+    r[0] = seed
+    for i in range(1, 31):
+        r[i] = (16807 * r[i-1]) % MOD
+    for i in range(31, 34):
+        r[i] = r[i-31]
+    for i in range(34, STATE_SIZE):
+        r[i] = (r[i-31] + r[i-3]) &amp; 0xffffffff
+    rands = []
+    for i in range(344, 344 + num_rands):
+        rand_val = (r[i] &gt;&gt; 1) &amp; 0x7fffffff
+        rands.append(rand_val)
+    return rands
+
+seed = 1655780698
+rands = get_rand_sequence(seed, 56)
+enc_hex = &quot;00f53e12c0bd8d16f0fd7599faef399a4b9621a14316237165fb274b&quot;
+enc_bytes = [int(enc_hex[j:j+2],16) for j in range(0,len(enc_hex),2)]
+plain = []
+k = 0
+for b in enc_bytes:
+    rand_xor = rands[k] &amp; 0xff
+    k += 1
+    rand_shift = rands[k] &amp; 7
+    k += 1
+    rotated = ((b &gt;&gt; rand_shift) | (b &lt;&lt; (8 - rand_shift))) &amp; 0xff
+    decrypted = rotated ^ rand_xor
+    plain.append(chr(decrypted))
+flag = ''.join(plain)
+print(flag)
+
+</code></pre>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

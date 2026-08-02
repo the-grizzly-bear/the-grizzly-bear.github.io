@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TCPDUMP · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/3-detect-visibility/network-monitoring/tcpdump.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/blue-team-field-manual.html">Blue Team Field Manual</a> &rsaquo; <a href="/other/blue-team-field-manual/3-detect-visibility.html">3 DETECT (Visibility)</a> &rsaquo; <a href="/other/blue-team-field-manual/3-detect-visibility/network-monitoring.html">NETWORK MONITORING</a></div>
+  <h1 id="tcpdump">TCPDUMP</h1>
+<p>View ASCII (-A) or HEX (-X) traffic:</p>
+<pre><code class="language-bash">tcpdump -A
+tcpdump -X
+</code></pre>
+<p>View traffic with timestamps and don't convert<br>addresses and be verbose:</p>
+<pre><code class="language-bash">tcpdump -tttt -n -vv
+</code></pre>
+<p>Find top talkers after 1000 packets (Potential<br>DDoS):</p>
+<pre><code class="language-bash">tcpdump -nn -c 1000 |awk '{print $3}' | cut -d. -f1-4 | sort -n | uniq -c | sort -nr
+</code></pre>
+<p>Capture traffic on any interface from a target host<br>and specific port and output to a file:</p>
+<pre><code class="language-bash">tcpdump -w &lt;FILENAME&gt;,pcap -i any dst &lt;TARGET IP
+ADDRESS&gt; and port 80
+</code></pre>
+<p>View traffic only between two hosts:</p>
+<pre><code class="language-bash">tcpdump host 10.0.0.1 &amp;&amp; host 10.0.0.2
+</code></pre>
+<p>View all traffic except from a net or a host:</p>
+<pre><code class="language-bash">tcpdump not net 10.10 &amp;&amp; not host 192.168.1,2
+</code></pre>
+<p>View host and either of two other hosts:</p>
+<pre><code class="language-bash">tcpdump host 10,10,10.10 &amp;&amp; \(10,10.10.20 or 10,10,10,30\)
+</code></pre>
+<p>Save pcap file on rotating size:</p>
+<pre><code class="language-bash">tcpdump -n -s65535 -C 1000 -w '%host_%Y-%m­%d_%H:%M:%S.pcap'
+</code></pre>
+<p>Save pcap file to a remote host:</p>
+<pre><code class="language-bash">tcpdump -w - | ssh &lt;REMOTE HOST ADDRESS&gt; -p 50005
+&quot;cat - &gt; /tmp/remotecapture.pcap&quot;
+</code></pre>
+<p>Grab traffic that contains the word pass:</p>
+<pre><code class="language-bash">tcpdump -n -A -s0 | grep pass
+</code></pre>
+<p>Grab many clear text protocol passwords:</p>
+<pre><code class="language-bash">tcpdump -n -A -s0 port http or port ftp or port
+smtp or port imap or port pop3 | egrep -i
+'pass=|pwd=|log=|login=|user=|username=|pw=|passw=|P
+asswd=|password=|pass:|user:|username:| password:| log
+in:| pass |user ' --color=auto --line-buffered -B20
+</code></pre>
+<p>Get throughput:</p>
+<pre><code class="language-bash">tcpdump -w - |pv -bert &gt;/dev/null
+</code></pre>
+<p>Filter out ipv6 traffic:</p>
+<pre><code class="language-bash">tcpdump not ip6
+</code></pre>
+<p>Filer out ipv4 traffic:</p>
+<pre><code class="language-bash">tcpdump ip6
+</code></pre>
+<p>Script to capture multiple interface tcpdumps to files rotating every hour:</p>
+<pre><code class="language-bash">#!/bin/bash
+tcpdump -pni any -s65535 -G 3600 -w any%Y-%m­
+%d_%H:%M:%S.pcap
+Script to move multiple tcpdump files to alternate
+location:
+#!/bin/bash
+while true; do
+sleep 1;
+rsync -azvr -progress &lt;USER NAME&gt;@&lt;IP
+ADDRESS&gt;:&lt;TRAFFIC DIRECTORY&gt;/, &lt;DESTINATION DIRECTORY/.
+done
+</code></pre>
+<p>Look for suspicious and self-signed SSL certificates:</p>
+<pre><code class="language-bash">tcpdump -s 1500 -A '(tcp[((tcp[12:1] &amp; 0xf0) &gt;&gt;
+2)+5:1] = 0x01) and (tcp[((tcp[12:1] &amp; 0xf0) &gt;&gt;
+2) :1] : 0x16)
+</code></pre>
+<p>Get SSL Certificate:</p>
+<pre><code class="language-bash">openssl s_client -connect &lt;URL&gt;:443
+openssl s_client -connect &lt;SITE&gt;:443 &lt;/dev/null
+2&gt;/dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END
+CERTIFICATE-Ip' &gt; &lt;CERT&gt;.pem
+</code></pre>
+<p>Examine and verify the certificate and check for Self-Signed:</p>
+<pre><code class="language-bash">openssl x509 -text -in &lt;CERT&gt;.pem
+openssl x509 -in &lt;CERT&gt;,pem -noout -issuer -subject -startdate -enddate -fingerprint
+openssl verify &lt;CERT&gt;.pem
+</code></pre>
+<p>Extract Certificate Server Name:</p>
+<pre><code class="language-bash">tshark -nr &lt;PCAP FILE NAME&gt; -Y
+&quot;ssl. handshake. ciphersuites&quot; -Vx | grep &quot;Server
+Name:&quot; | sort | uniq -c | sort -r
+</code></pre>
+<p>Extract Certificate info for analysis:</p>
+<pre><code class="language-bash">ssldump -Nr &lt;FILE NAME&gt;.pcap | awk 'BEGIN {c=0;}
+{ if ($0 ~/^[ ]+Certificate$/) {c=l; print
+&quot;========================================&quot;;} if
+($0 !~ /^ +/) {c=0;} if (c==l) print $0; }'
+</code></pre>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

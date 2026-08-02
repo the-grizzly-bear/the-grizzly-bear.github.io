@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Intergalactic Recovery (Forensic Challenge) · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/challenges/intergalactic-recovery.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/htb/index.html">HackTheBox</a> &rsaquo; <a href="/htb/challenges/index.html">Completed Challenges</a></div>
+  <h1 id="intergalactic-recovery-forensic-challenge">Intergalactic Recovery (Forensic Challenge)</h1>
+<p><span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span></p>
+<pre><code class="language-bash">python2 vol.py -f ../../../Downloads/inter/forensics_intergalactic_recovery/0c584923.img imageinfo
+
+┌─[us-dedicated-100-dhcp]─[10.10.14.3]─[user@parrot]─[~/hack/tools/volatility]
+└──╼ [★]$ python2 vol.py -f ../../../Downloads/inter/forensics_intergalactic_recovery/0c584923.img imageinfo
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<p>raid 5 1 drive failure</p>
+<p>xor recovery</p>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-bash">from pwn import *
+disk1 = read('disk1.img')
+disk2 = read('disk2.img')
+disk3 = xor(disk1, disk2)
+write('disk3.img', disk3)
+
+pip install pwntools
+pip install -U simplejson
+</code></pre>
+<p>strings on disk3</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span></p>
+<pre><code class="language-bash">No tldr entry for mdadm
+┌─[us-dedicated-100-dhcp]─[10.10.14.3]─[user@parrot]─[~/Downloads/inter/forensics_intergalactic_recovery]
+└──╼ [★]$ mdadm --create --level=5 --raid-devices=3 /dev/md0 dev/loop1 dev/loop2 dev/loop3
+mdadm: must be super-user to perform this action
+┌─[us-dedicated-100-dhcp]─[10.10.14.3]─[user@parrot]─[~/Downloads/inter/forensics_intergalactic_recovery]
+└──╼ [★]$ sudo mdadm --create --level=5 --raid-devices=3 /dev/md0 dev/loop1 dev/loop2 dev/loop3
+mdadm: cannot open dev/loop1: No such file or directory
+┌─[us-dedicated-100-dhcp]─[10.10.14.3]─[user@parrot]─[~/Downloads/inter/forensics_intergalactic_recovery]
+└──╼ [★]$ sudo mdadm --create --level=5 --raid-devices=3 /dev/md0 /dev/loop1 /dev/loop2 /dev/loop3
+mdadm: Defaulting to version 1.2 metadata
+mdadm: array /dev/md0 started.
+┌─[us-dedicated-100-dhcp]─[10.10.14.3]─[user@parrot]─[~/Downloads/inter/forensics_intergalactic_recovery]
+└──╼ [★]$ sudo mount /dev/md0 /mnt/raid
+mount: /mnt/raid: mount point does not exist.
+┌─[us-dedicated-100-dhcp]─[10.10.14.3]─[user@parrot]─[~/Downloads/inter/forensics_intergalactic_recovery]
+└──╼ [★]$ sudo mkdir /mnt/raid
+┌─[us-dedicated-100-dhcp]─[10.10.14.3]─[user@parrot]─[~/Downloads/inter/forensics_intergalactic_recovery]
+└──╼ [★]$ sudo mount /dev/md0 /mnt/raid
+┌─[us-dedicated-100-dhcp]─[10.10.14.3]─[user@parrot]─[~/Downloads/inter/forensics_intergalactic_recovery]
+└──╼ [★]$ ls /mnt/
+raid  shared
+┌─[us-dedicated-100-dhcp]─[10.10.14.3]─[user@parrot]─[~/Downloads/inter/forensics_intergalactic_recovery]
+└──╼ [★]$ ls /mnt/raid/
+imw_1337.pdf
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-bash">sudo losetup /dev/loop1 disk1.img
+sudo losetup /dev/loop2 disk2.img
+sudo losetup /dev/loop3 disk3.img
+
+sudo mdadm --create --level=5 --raid-devices=3 /dev/md0 /dev/loop1 /dev/loop2 /dev/loop3
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-bash">HTB{f33ls_g00d_t0_b3_1nterg4l4ct1c_m0st_w4nt3d}
+</code></pre>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

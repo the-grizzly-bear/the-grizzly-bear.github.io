@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NMAP · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/1-identify-scope/scanning-and-vulnerabilities/nmap.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/blue-team-field-manual.html">Blue Team Field Manual</a> &rsaquo; <a href="/other/blue-team-field-manual/1-identify-scope.html">1 IDENTIFY (Scope)</a> &rsaquo; <a href="/other/blue-team-field-manual/1-identify-scope/scanning-and-vulnerabilities.html">SCANNING AND VULNERABILITIES</a></div>
+  <h1 id="nmap">NMAP</h1>
+<p>Ping sweep for network:</p>
+<pre><code class="language-bash">nmap -sn -PE &lt;IP ADDRESS OR RANGE&gt;
+</code></pre>
+<p>Scan and show open ports:</p>
+<pre><code class="language-bash">nmap --open &lt;IP ADDRESS OR RANGE&gt;
+</code></pre>
+<p>Determine open services:</p>
+<pre><code class="language-bash">nmap -sV &lt;IP ADDRESS&gt;
+</code></pre>
+<p>Scan two common TCP ports, HTTP and HTTPS:</p>
+<pre><code class="language-bash">nmap -p 80,443 &lt;IP ADDRESS OR RANGE&gt;
+</code></pre>
+<p>Scan common UDP port, DNS:</p>
+<pre><code class="language-bash">nmap -sU -p 53 &lt;IP ADDRESS OR RANGE&gt;
+</code></pre>
+<p>Scan UDP and TCP together, be verbose on a single<br>host and include optional skip ping:</p>
+<pre><code class="language-bash">nmap -v -Pn -SU -ST -p U:53,111,137,T:2125,80,139,8080 &lt;IP ADDRESS&gt;
+</code></pre>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

