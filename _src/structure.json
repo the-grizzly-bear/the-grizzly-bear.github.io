@@ -834,7 +834,14 @@
               "title": "photobomb",
               "src": "htb/machines/photobomb.md",
               "out": "htb/machines/photobomb.html",
-              "children": []
+              "children": [
+                {
+                  "title": "INCOMPLETE Red Failure (Forensic Challenge)",
+                  "src": "htb/machines/photobomb/incomplete-red-failureforensic-challenge.md",
+                  "out": "htb/machines/photobomb/incomplete-red-failureforensic-challenge.html",
+                  "children": []
+                }
+              ]
             },
             {
               "title": "Unified",
