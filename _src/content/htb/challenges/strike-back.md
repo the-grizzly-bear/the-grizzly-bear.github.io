@@ -1,0 +1,109 @@
+# Strike Back (Forensic Challenge)
+
+A fleet of steam blimps waits the final signal from their commander in order to attack gogglestown kingdom. A recent cyber attack had us thinking if the enemy managed to discover our plans and prepare a counter-attack. Will the fleet get ambused???
+*[image unavailable]*
+*[image unavailable]*
+*[image unavailable]*
+*[image unavailable]*
+/submit.php?id=1909272864
+
+*[image unavailable]*
+*[image unavailable]*
+*[image unavailable]*
+*[image unavailable]*
+[http://192.168.1.9/submit.php?id=1909272864](http://192.168.1.9/submit.php?id=1909272864)
+
+*[image unavailable]*
+*[image unavailable]*
+*[image unavailable]*
+*[image unavailable]*
+*[image unavailable]*
+*[image unavailable]*
+*[image unavailable]*
+[https://blog.didierstevens.com/2021/04/26/quickpost-decrypting-cobalt-strike-traffic/](https://blog.didierstevens.com/2021/04/26/quickpost-decrypting-cobalt-strike-traffic/)
+
+[https://github.com/avast/ioc/tree/master/CobaltStrike/payload_tools](https://github.com/avast/ioc/tree/master/CobaltStrike/payload_tools)
+*[image unavailable]*
+*[image unavailable]*
+*[image unavailable]*
+*[image unavailable]*
+*[image unavailable]*
+
+```bash
+> pip install pycryptodome
+Requirement already satisfied: pycryptodome in /home/user/.local/lib/python3.9/site-packages (3.4.3)
+-> ./cs-extract-key.py file.dmp
+Crypto.Cipher.AES module required: pip install pycryptodome
+```
+```bash
+080027593862080027c12caa080045000187d668400080069fa7c0a80107c0a80109c26e00506ff967ea8620f12f5018040011770000504f5354202f7375626d69742e7068703f69643d3139303932373238363420485454502f312e310d0a4163636570743a202a2f2a0d0a436f6e74656e742d547970653a206170706c69636174696f6e2f6f637465742d73747265616d0d0a557365722d4167656e743a204d6f7a696c6c612f342e302028636f6d70617469626c653b204d53494520382e303b2057696e646f7773204e5420352e313b2054726964656e742f342e303b20496e666f506174682e323b202e4e4554342e3043290d0a486f73743a203139322e3136382e312e390d0a436f6e74656e742d4c656e6774683a2036380d0a436f6e6e656374696f6e3a204b6565702d416c6976650d0a43616368652d436f6e74726f6c3a206e6f2d63616368650d0a0d0a00000040317639faf73648274ba8a66d11182283f7fa26fe44b3982a36d80f6ffba4949e5ec759fffb372775d2ac002425547a11ddf2e05c2cb914e09ac033f01db0b60c
+```
+```bash
+0000   08 00 27 59 38 62 08 00 27 c1 2c aa 08 00 45 00   ..'Y8b..'.,...E.
+0010   01 87 d6 68 40 00 80 06 9f a7 c0 a8 01 07 c0 a8   ...h@...........
+0020   01 09 c2 6e 00 50 6f f9 67 ea 86 20 f1 2f 50 18   ...n.Po.g.. ./P.
+0030   04 00 11 77 00 00 50 4f 53 54 20 2f 73 75 62 6d   ...w..POST /subm
+0040   69 74 2e 70 68 70 3f 69 64 3d 31 39 30 39 32 37   it.php?id=190927
+0050   32 38 36 34 20 48 54 54 50 2f 31 2e 31 0d 0a 41   2864 HTTP/1.1..A
+0060   63 63 65 70 74 3a 20 2a 2f 2a 0d 0a 43 6f 6e 74   ccept: /..Cont
+0070   65 6e 74 2d 54 79 70 65 3a 20 61 70 70 6c 69 63   ent-Type: applic
+0080   61 74 69 6f 6e 2f 6f 63 74 65 74 2d 73 74 72 65   ation/octet-stre
+0090   61 6d 0d 0a 55 73 65 72 2d 41 67 65 6e 74 3a 20   am..User-Agent:
+00a0   4d 6f 7a 69 6c 6c 61 2f 34 2e 30 20 28 63 6f 6d   Mozilla/4.0 (com
+00b0   70 61 74 69 62 6c 65 3b 20 4d 53 49 45 20 38 2e   patible; MSIE 8.
+00c0   30 3b 20 57 69 6e 64 6f 77 73 20 4e 54 20 35 2e   0; Windows NT 5.
+00d0   31 3b 20 54 72 69 64 65 6e 74 2f 34 2e 30 3b 20   1; Trident/4.0;
+00e0   49 6e 66 6f 50 61 74 68 2e 32 3b 20 2e 4e 45 54   InfoPath.2; .NET
+00f0   34 2e 30 43 29 0d 0a 48 6f 73 74 3a 20 31 39 32   4.0C)..Host: 192
+0100   2e 31 36 38 2e 31 2e 39 0d 0a 43 6f 6e 74 65 6e   .168.1.9..Conten
+0110   74 2d 4c 65 6e 67 74 68 3a 20 36 38 0d 0a 43 6f   t-Length: 68..Co
+0120   6e 6e 65 63 74 69 6f 6e 3a 20 4b 65 65 70 2d 41   nnection: Keep-A
+0130   6c 69 76 65 0d 0a 43 61 63 68 65 2d 43 6f 6e 74   live..Cache-Cont
+0140   72 6f 6c 3a 20 6e 6f 2d 63 61 63 68 65 0d 0a 0d   rol: no-cache...
+0150   0a 00 00 00 40 31 76 39 fa f7 36 48 27 4b a8 a6   ....@1v9..6H'K..
+0160   6d 11 18 22 83 f7 fa 26 fe 44 b3 98 2a 36 d8 0f   m.."...&.D..*6..
+0170   6f fb a4 94 9e 5e c7 59 ff fb 37 27 75 d2 ac 00   o....^.Y..7'u...
+0180   24 25 54 7a 11 dd f2 e0 5c 2c b9 14 e0 9a c0 33   $%Tz....\,.....3
+0190   f0 1d b0 b6 0c                                    .....
+```
+```bash
+00 00 00 40 31 76 39 fa f7 36 48 27 4b a8 a6 6d 11 18 22 83 f7 fa 26 fe 44 b3 98 2a 36 d8 0f 6f fb a4 94 9e 5e c7 59 ff fb 37 27 75 d2 ac 00 24 25 54 7a 11 dd f2 e0 5c 2c b9 14 e0 9a c0 33 f0 1d b0 b6 0c
+```
+```bash
+00000040317639faf73648274ba8a66d11182283f7fa26fe44b3982a36d80f6ffba4949e5ec759fffb372775d2ac002425547a11ddf2e05c2cb914e09ac033f01db0b60c
+```
+*[image unavailable]*
+```bash
+
+```
+```bash
+python extract.py -c 00000040317639faf73648274ba8a66d11182283f7fa26fe44b3982a36d80f6ffba4949e5ec759fffb372775d2ac002425547a11ddf2e05c2cb914e09ac033f01db0b60c freesteam.dmp                              1 ⨯
+File: freesteam.dmp
+Searching for AES and HMAC keys
+Searching after sha256\x00 string (0x4048a)
+AES key position: 0x00447f81
+AES Key:  3ae7f995a2392c86e3fa8b6fbc3d953a
+HMAC key position: 0x0044b2a1
+HMAC Key: bf2d35c0e9b64bc46e6d513c1d0f6ffe
+SHA256 raw key: bf2d35c0e9b64bc46e6d513c1d0f6ffe:3ae7f995a2392c86e3fa8b6fbc3d953a
+Searching for raw key
+Searching after sha256\x00 string (0x441a49)
+AES key position: 0x00447f81
+AES Key:  3ae7f995a2392c86e3fa8b6fbc3d953a
+HMAC key position: 0x0044b2a1
+HMAC Key: bf2d35c0e9b64bc46e6d513c1d0f6ffe
+Searching for raw key
+```
+*[image unavailable]*
+*[image unavailable]*
+*[image unavailable]*
+*[image unavailable]*
+*[image unavailable]*
+*[image unavailable]*
+*[image unavailable]*
+*[image unavailable]*
+*[image unavailable]*
+*[image unavailable]*
+HTB\{Th4nk_g0d_y0u_f0und_1t_0n_T1m3!!!!\}
+*[image unavailable]*
+*[image unavailable]*

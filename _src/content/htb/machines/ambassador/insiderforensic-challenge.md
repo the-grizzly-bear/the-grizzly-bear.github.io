@@ -1,0 +1,27 @@
+# Insider(Forensic Challenge)
+
+*[image unavailable]*
+
+*[image unavailable]*
+
+*[image unavailable]*
+
+*[image unavailable]*
+
+*[image unavailable]*
+
+*[image unavailable]*
+
+*[image unavailable]*
+
+*[image unavailable]*
+
+MDIEEPgAAAAAAAAAAAAAAAAAAAEwFAYIKoZIhvcNAwcECF+d3kuwB9ZWBAj5QRmuUB+gqg==
+
+MEIEEPgAAAAAAAAAAAAAAAAAAAEwFAYIKoZIhvcNAwcECBqsTKru3+k8BBgCXKb5CRSS4SF6O3Dh4jUKFRBtxfiabQk=
+
+*[image unavailable]*
+
+\{"nextId":2,"logins":\[\{"id":1,"hostname":"[http://acc01:8080](http://acc01:8080/)","httpRealm":"Tomcat Manager Application","formSubmitURL":null,"usernameField":"","passwordField":"","encryptedUsername":"MDIEEPgAAAAAAAAAAAAAAAAAAAEwFAYIKoZIhvcNAwcECF+d3kuwB9ZWBAj5QRmuUB+gqg==","encryptedPassword":"MEIEEPgAAAAAAAAAAAAAAAAAAAEwFAYIKoZIhvcNAwcECBqsTKru3+k8BBgCXKb5CRSS4SF6O3Dh4jUKFRBtxfiabQk=","guid":"\{69f06e46-1ffa-42a0-9166-0ca4b8fac057\}","encType":1,"timeCreated":1604509320314,"timeLastUsed":1604509320314,"timePasswordChanged":1604509320314,"timesUsed":1\}\],"potentiallyVulnerablePasswords":\[\],"dismissedBreachAlertsByLoginGUID":\{\},"version":3\}
+
+*[image unavailable]*

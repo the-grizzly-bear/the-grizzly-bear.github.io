@@ -1,0 +1,11 @@
+# 2024-10-08 Mystery (Warmups)
+
+```shell
+https://gchq.github.io/CyberChef/#recipe=Enigma('3-rotor','LEYJVCNIXWPBQMDRTAKZGFUHOS','A','A','JPGVOUMFYQBENHZRDKASXLICTW%3CAN','A','A','EKMFLGDQVZNTOWYHXUSPAIBRCJ%3CR','A','Q','BDFHJLCPRTXVZNYEIWGAKMUSQO%3CW','A','L','AY%20BR%20CU%20DH%20EQ%20FS%20GL%20IP%20JX%20KN%20MO%20TZ%20VW','BQ%20CR%20DI%20EJ%20KW%20MT%20OS%20PX%20UZ%20GH',false)&input=cmtlbnIgd296ZWMgZ3RyZmwgb2JidXIgYmZnbWEgZmtneXEgY3RrdnEgemV1Y3ogaGx2d3ggeXl6YXQgemJ2bnMga2d5eWQgc3RobWkgdnNpZmMgb3ZleGwgenpkcXYgc2x5aXIgbndxb2ogaWd4dXUga2RxZ3IgZmRiYmQgbmpwcGMgbXVqeXkgd3djb3k
+```
+
+*[image unavailable]*
+
+```python
+flag{FDFEA BCACB EBFBA DAEFB ECCAA DDDBA FE}
+```
