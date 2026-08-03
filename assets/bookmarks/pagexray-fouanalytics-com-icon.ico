@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link
+            rel="stylesheet"
+            href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
+        />
+        <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css" />
+        <link
+            rel="stylesheet"
+            href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css"
+        />
+        <!-- <script src="https://www.google.com/recaptcha/api.js" async defer></script>  -->
+
+        <style>
+            body {
+                background: #f3f3f3;
+            }
+
+            .header {
+                background: #9e9e9e;
+                color: lightgrey;
+            }
+
+            .ad-view > img {
+                cursor: pointer;
+            }
+
+            .ad-view:not(.show-details) .ad-view-data {
+                display: none;
+            }
+        </style>
+        <base href="/" />
+        <title>PageXray by FouAnalytics</title>
+      <script type="module" crossorigin src="/assets/index-a600e7a2.js"></script>
+      <link rel="stylesheet" href="/assets/index-6516640e.css">
+    </head>
+
+    <body>
+        <div id="main"></div>
+
+        
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"427e51747c214852bb62036a5658f9ad","r":1}' crossorigin="anonymous"></script>
+</body>
+</html>

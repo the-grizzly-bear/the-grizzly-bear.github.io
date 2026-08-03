@@ -23,9 +23,17 @@ no build step on GitHub's side.
 python3 _src/generate.py ~/Downloads/ExportBlock-<id>.zip   # or an unzipped export dir
 ```
 
-The generator wipes and rewrites the top-level section folders, `index.html`,
-`404.html` and `assets/nav.json`, then reports page/attachment counts and any link
-it could not resolve. Notion export zips are `.gitignore`d — they are the source,
+The generator wipes and rewrites the top-level section folders, `index.html` and
+`404.html`, then reports page/attachment counts and any link it could not resolve.
+
+Standalone external links on the home page are rendered as Notion-style bookmark
+cards. The title/description/preview image are scraped once and cached in
+`_src/bookmarks.json`, with the images saved to `assets/bookmarks/` so the site
+stays self-contained. Re-scrape with:
+
+```bash
+python3 _src/generate.py <export> --refresh-bookmarks
+``` Notion export zips are `.gitignore`d — they are the source,
 not part of the published site.
 
 Export from Notion with **Export → Markdown & CSV**, "Include subpages" and

@@ -10,20 +10,10 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
-<div class="layout">
-<aside class="sidebar" id="sidebar">
-  <a class="brand" href="../../index.html">
-    <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
-  </a>
-  <nav class="nav" id="nav-root" data-current="htb/2025-hack-the-boo/crypto.html" data-root="../.."></nav>
-</aside>
 <main class="content">
   <article class="doc">
   <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">HackTheBox</a> &rsaquo; <a href="index.html">2025 Hack the boo</a></div>
 <h1 id="title">Crypto</h1>
-
 <pre><code>CHALLENGE NAME
 Leaking for Answers</code></pre>
 <pre><code>
@@ -398,18 +388,11 @@ Leaking for Answers</code></pre>
 <pre><code>
 Willem's path led him to a lone reed-keeper on the marsh bank. The keeper speaks only in riddles and will reveal nothing for free - yet he offers tests, one for each secret he guards. Each riddle is a vetting: answer each in turn, and the keeper will whisper what the fen keeps hidden. Fail, or linger too long answering the questions, and the marsh swallows the night. This is a sourceless riddle stand - connect, answer each of the keeper's four puzzles in sequence, and the final secret will be yours.</code></pre>
 <pre><code>gcc -O3 -o solve solve.c -lgmp -lpthread -lz</code></pre>
-<p><a href="crypto/solve.c">solve.c</a></p>
+<a class="fileblock" href="crypto/solve.c" download><span class="fb-icon">📃</span><span class="fb-name">solve.c</span><span class="fb-size">6.7KB</span></a>
 <p class="figure"><a class="img-link" href="crypto/image-3.png"><img src="crypto/image-3.png" alt="image.png" loading="lazy"></a></p>
 <pre><code>I was only moments away from this, was the correct way to get it.</code></pre>
   </article>
-  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+  <footer class="foot"><a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
-</div>
-<script src="../../assets/nav.js" defer></script>
-<script>
-document.getElementById('menu-toggle').addEventListener('click',function(){
-  document.getElementById('sidebar').classList.toggle('open');
-});
-</script>
 </body>
 </html>

@@ -10,23 +10,13 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
-<div class="layout">
-<aside class="sidebar" id="sidebar">
-  <a class="brand" href="../../index.html">
-    <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
-  </a>
-  <nav class="nav" id="nav-root" data-current="huntress/2025-huntress-ctf/2025-10-23.html" data-root="../.."></nav>
-</aside>
 <main class="content">
   <article class="doc">
   <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">Huntress CTF</a> &rsaquo; <a href="index.html">2025-Huntress-CTF</a></div>
 <h1 id="title">2025-10-23</h1>
-
 <h1 id="rust-tickler"><strong>⚙️ Rust Tickler</strong></h1>
 <p class="figure"><a class="img-link" href="2025-10-23/image.png"><img src="2025-10-23/image.png" alt="image.png" loading="lazy"></a></p>
-<p><a href="2025-10-23/rust-tickler.txt">rust_tickler</a></p>
+<a class="fileblock" href="2025-10-23/rust-tickler.txt" download><span class="fb-icon">📄</span><span class="fb-name">rust_tickler</span><span class="fb-size">34KB</span></a>
 <p class="figure"><a class="img-link" href="2025-10-23/image-1.png"><img src="2025-10-23/image-1.png" alt="image.png" loading="lazy"></a></p>
 <pre><code>Main XOR Function: FUN_140001940 (Address: 0x140001940)
 This is the core encryption/decryption function that:
@@ -200,7 +190,7 @@ undefined8 UndefinedFunction_140001740(void)
 <pre><code>flag{6066ba5ab67c17d6d530b2a9925c21e3}</code></pre>
 <h1 id="netsupport"><strong>🐞 NetSupport</strong></h1>
 <p class="figure"><a class="img-link" href="2025-10-23/image-3.png"><img src="2025-10-23/image-3.png" alt="image.png" loading="lazy"></a></p>
-<p><a href="2025-10-23/netsupport.zip">netsupport.zip</a></p>
+<a class="fileblock" href="2025-10-23/netsupport.zip" download><span class="fb-icon">🗄</span><span class="fb-name">netsupport.zip</span><span class="fb-size">3.7MB</span></a>
 <pre><code>1. The netsupport file contained a PowerShell script with an embedded byte array starting with [Byte[]]$xϞzzghϞ = @(80,75,3,4,...)
 2. The bytes 80,75,3,4 are ZIP magic bytes ("PK\x03\x04")
 3. Extracted the byte array and converted it to extracted.zip (3.1 MB)
@@ -246,14 +236,7 @@ else:
 <p class="figure"><a class="img-link" href="2025-10-23/image-8.png"><img src="2025-10-23/image-8.png" alt="image.png" loading="lazy"></a></p>
 <pre><code>flag{b6e54d0a0a5f2292589c3852f1930891}</code></pre>
   </article>
-  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+  <footer class="foot"><a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
-</div>
-<script src="../../assets/nav.js" defer></script>
-<script>
-document.getElementById('menu-toggle').addEventListener('click',function(){
-  document.getElementById('sidebar').classList.toggle('open');
-});
-</script>
 </body>
 </html>

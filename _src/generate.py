@@ -8,6 +8,7 @@ Every exported page becomes one HTML file, every exported attachment is copied
 next to the page that references it, and the sidebar/nav mirrors the Notion
 hierarchy 1:1.  Output goes to the repo root so GitHub Pages serves it as-is.
 """
+import concurrent.futures
 import html
 import json
 import os
@@ -18,6 +19,7 @@ import sys
 import tempfile
 import unicodedata
 import urllib.parse
+import urllib.request
 import zipfile
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
@@ -230,6 +232,193 @@ class LinkRenderer(mdlite.Renderer):
         return self._resolve(url)
 
 
+# ------------------------------------------------------------------ bookmarks
+# Notion renders a standalone URL as a bookmark block: title, description, site
+# favicon and a preview image.  The Markdown export flattens those to bare links,
+# so the metadata is fetched once and cached in _src/bookmarks.json.
+BOOKMARK_CACHE = pathlib.Path(__file__).resolve().parent / "bookmarks.json"
+BOOKMARK_DIR = "assets/bookmarks"
+META_RE = re.compile(
+    r'<meta[^>]+(?:property|name)=["\'](og:title|og:description|og:image|title|description)["\']'
+    r'[^>]+content=["\']([^"\']*)["\']', re.I)
+META_REV_RE = re.compile(
+    r'<meta[^>]+content=["\']([^"\']*)["\'][^>]+(?:property|name)=["\']'
+    r'(og:title|og:description|og:image|title|description)["\']', re.I)
+TITLE_RE = re.compile(r"<title[^>]*>(.*?)</title>", re.I | re.S)
+ICON_RE = re.compile(r'<link[^>]+rel=["\'][^"\']*icon[^"\']*["\'][^>]+href=["\']([^"\']+)["\']', re.I)
+UA = {"User-Agent": "Mozilla/5.0 (compatible; static-site-generator)"}
+
+
+def fetch(url, limit=600_000):
+    req = urllib.request.Request(url, headers=UA)
+    with urllib.request.urlopen(req, timeout=25) as r:
+        return r.read(limit), r.headers.get("Content-Type", ""), r.url
+
+
+def bookmark_meta(url):
+    """Scrape the OpenGraph card for one URL."""
+    body, _, final = fetch(url)
+    text = body.decode("utf-8", "replace")
+    meta = {}
+    for rx in (META_RE, META_REV_RE):
+        for a, b in rx.findall(text):
+            key, val = (a, b) if a.lower().startswith(("og:", "title", "desc")) else (b, a)
+            meta.setdefault(key.lower(), html.unescape(val.strip()))
+    title = meta.get("og:title") or meta.get("title")
+    if not title:
+        m = TITLE_RE.search(text)
+        title = html.unescape(m.group(1).strip()) if m else url
+    icon = meta.get("icon")
+    m = ICON_RE.search(text)
+    if m:
+        icon = urllib.parse.urljoin(final, m.group(1))
+    return {
+        "url": url,
+        "title": re.sub(r"\s+", " ", title)[:140],
+        "description": re.sub(r"\s+", " ", meta.get("og:description") or meta.get("description") or "")[:300],
+        "image": urllib.parse.urljoin(final, meta["og:image"]) if meta.get("og:image") else "",
+        "icon": icon or urllib.parse.urljoin(final, "/favicon.ico"),
+        "host": urllib.parse.urlparse(final).netloc.replace("www.", ""),
+    }
+
+
+def download(url, stem):
+    """Pull a preview image/favicon into the repo so the site is self-contained."""
+    try:
+        body, ctype, _ = fetch(url, limit=4_000_000)
+    except Exception:
+        return ""
+    ext = {"image/png": ".png", "image/jpeg": ".jpg", "image/webp": ".webp",
+           "image/gif": ".gif", "image/svg+xml": ".svg",
+           "image/x-icon": ".ico", "image/vnd.microsoft.icon": ".ico"}.get(ctype.split(";")[0].strip())
+    if not ext:
+        ext = os.path.splitext(urllib.parse.urlparse(url).path)[1][:5] or ".png"
+    if not body:
+        return ""
+    out = f"{BOOKMARK_DIR}/{stem}{ext}"
+    dest = ROOT / out
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_bytes(body)
+    return out
+
+
+def scrape_one(url, taken):
+    """Metadata for one bookmark; a bare record if the site can't be reached."""
+    bare = {"url": url, "title": url, "description": "", "image": "", "icon": "",
+            "image_local": "", "icon_local": "", "ok": False,
+            "host": urllib.parse.urlparse(url).netloc.replace("www.", "")}
+    try:
+        meta = bookmark_meta(url)
+    except Exception:
+        return bare
+    parts = urllib.parse.urlparse(url)
+    stem = unique(slugify(parts.netloc + "-" + parts.path, "link")[:60], taken)
+    meta["image_local"] = download(meta["image"], stem) if meta["image"] else ""
+    meta["icon_local"] = download(meta["icon"], stem + "-icon") if meta["icon"] else ""
+    meta["ok"] = bool(meta["title"] and meta["title"] != url) or bool(meta["image_local"])
+    return meta
+
+
+def load_bookmarks(urls, refresh=False):
+    """Scrape every bookmarked URL once and cache the result on disk."""
+    cache = {}
+    if BOOKMARK_CACHE.exists():
+        cache = json.loads(BOOKMARK_CACHE.read_text(encoding="utf-8"))
+    todo = [u for u in dict.fromkeys(urls) if refresh or u not in cache]
+    if todo:
+        print(f"scraping {len(todo)} bookmark(s)…")
+        taken = {os.path.splitext(os.path.basename(v.get("image_local", "")))[0]
+                 for v in cache.values() if v.get("image_local")}
+        done = 0
+        with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+            futures = {pool.submit(scrape_one, u, taken): u for u in todo}
+            for fut in concurrent.futures.as_completed(futures):
+                url = futures[fut]
+                try:
+                    cache[url] = fut.result()
+                except Exception:
+                    cache[url] = {"url": url, "title": url, "description": "", "ok": False,
+                                  "image_local": "", "icon_local": "",
+                                  "host": urllib.parse.urlparse(url).netloc.replace("www.", "")}
+                done += 1
+                if done % 50 == 0:
+                    print(f"  {done}/{len(todo)}")
+        ok = sum(1 for u in todo if cache[u].get("ok"))
+        print(f"  {ok}/{len(todo)} previews resolved")
+    BOOKMARK_CACHE.write_text(json.dumps(cache, indent=1, ensure_ascii=False), encoding="utf-8")
+    return cache
+
+
+BARE_LINK_P_RE = re.compile(
+    r'<p><a href="(https?://[^"]+)"[^>]*>(?:(?!</a>).)*</a></p>', re.S)
+
+
+def bookmark_cards(body, page, cache, always=False):
+    """Swap standalone external links for Notion-style bookmark cards.
+
+    A link whose site could not be reached stays a plain link, except on the home
+    page (`always`), where every entry was a bookmark block in Notion.
+    """
+    def card(m):
+        meta = cache.get(html.unescape(m.group(1)))
+        if not meta or (not meta.get("ok") and not always):
+            return m.group(0)
+        img = (f'<div class="bm-img"><img src="{relpath(page.out, meta["image_local"])}" alt="" '
+               f'loading="lazy"></div>') if meta.get("image_local") else ""
+        icon = (f'<img class="bm-icon" src="{relpath(page.out, meta["icon_local"])}" alt="" '
+                f'loading="lazy">') if meta.get("icon_local") else ""
+        desc = (f'<div class="bm-desc">{html.escape(meta["description"])}</div>'
+                if meta.get("description") else "")
+        return (f'<a class="bookmark" href="{html.escape(meta["url"], quote=True)}" '
+                f'target="_blank" rel="noopener">'
+                f'<div class="bm-text"><div class="bm-title">{html.escape(meta["title"])}</div>'
+                f'{desc}<div class="bm-url">{icon}{html.escape(meta["url"])}</div></div>{img}</a>')
+
+    return BARE_LINK_P_RE.sub(card, body)
+
+
+# --------------------------------------------------------------- file blocks
+# Notion shows an uploaded file as a block with an icon, name and size, and
+# renders PDFs inline.  The Markdown export flattens both to ordinary links.
+LOCAL_LINK_P_RE = re.compile(r'<p><a href="(?!https?:|mailto:|#)([^"]+)"[^>]*>(.*?)</a></p>', re.S)
+FILE_ICONS = {".pdf": "\U0001F4D5", ".zip": "\U0001F5C4", ".7z": "\U0001F5C4", ".rar": "\U0001F5C4",
+              ".csv": "\U0001F4CA", ".txt": "\U0001F4C4", ".log": "\U0001F4C4", ".json": "\U0001F4C4",
+              ".py": "\U0001F4C3", ".c": "\U0001F4C3", ".lua": "\U0001F4C3", ".au3": "\U0001F4C3",
+              ".bat": "\U0001F4C3", ".ps1": "\U0001F4C3", ".exe": "⚙", ".dll": "⚙"}
+
+
+def human_size(n):
+    for unit in ("B", "KB", "MB", "GB"):
+        if n < 1024 or unit == "GB":
+            return f"{n:.0f}{unit}" if unit == "B" or n >= 10 else f"{n:.1f}{unit}"
+        n /= 1024
+
+
+def file_blocks(body, page):
+    """Render links to uploaded files as Notion file blocks / inline PDFs."""
+    def block(m):
+        href, label = m.group(1), m.group(2)
+        target = urllib.parse.unquote(href)
+        path = (ROOT / pathlib.PurePosixPath(page.out).parent / target)
+        ext = os.path.splitext(target)[1].lower()
+        if ext in (".html", "") or not path.exists():
+            return m.group(0)
+        name = html.escape(os.path.basename(target))
+        size = human_size(path.stat().st_size)
+        if ext == ".pdf":
+            return (f'<div class="pdfblock"><object data="{href}" type="application/pdf">'
+                    f'<a class="fileblock" href="{href}"><span class="fb-icon">\U0001F4D5</span>'
+                    f'<span class="fb-name">{label or name}</span>'
+                    f'<span class="fb-size">{size}</span></a></object></div>')
+        icon = FILE_ICONS.get(ext, "\U0001F4CE")
+        return (f'<a class="fileblock" href="{href}" download>'
+                f'<span class="fb-icon">{icon}</span>'
+                f'<span class="fb-name">{label or name}</span>'
+                f'<span class="fb-size">{size}</span></a>')
+
+    return LOCAL_LINK_P_RE.sub(block, body)
+
+
 def relpath(from_out, to_out):
     frm = pathlib.PurePosixPath(from_out).parent
     return urllib.parse.quote(os.path.relpath(to_out, str(frm)).replace(os.sep, "/"))
@@ -247,29 +436,13 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
-<div class="layout">
-<aside class="sidebar" id="sidebar">
-  <a class="brand" href="{home}">
-    <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>{site_title}</strong><small>{site_sub}</small></span>
-  </a>
-  <nav class="nav" id="nav-root" data-current="{current}" data-root="{root}"></nav>
-</aside>
 <main class="content">
   <article class="doc">
 {breadcrumb}
 {body}
   </article>
-  <footer class="foot">Built from a Notion export · <a href="https://github.com/{site_title}">github.com/{site_title}</a></footer>
+  <footer class="foot"><a href="https://github.com/{site_title}">github.com/{site_title}</a></footer>
 </main>
-</div>
-<script src="{assets}/nav.js" defer></script>
-<script>
-document.getElementById('menu-toggle').addEventListener('click',function(){{
-  document.getElementById('sidebar').classList.toggle('open');
-}});
-</script>
 </body>
 </html>
 """
@@ -299,69 +472,10 @@ def child_index(page, body):
     return f'<h2 id="pages">{heading}</h2><ul class="child-index">{items}</ul>'
 
 
-HOME_SECTION_BLURB = {
-    "huntress": "Huntress CTF writeups (2023–2025), by year, day and challenge.",
-    "htb": "Completed HackTheBox machines and challenges, plus the Hack The Boo events.",
-    "flareon": "Reverse-engineering writeups from the annual Flare-on contest.",
-    "other": "Blue Team Field Manual, CSO CTFs, SANS Holiday Hack and lab exercises.",
-    "notes": "Threat intel, threat hunting and incident-response reference notes.",
-}
-
-
-def render_home(root, site):
-    """The Notion home page is a bare list of links; lay it out as cards."""
-    raw = redact(root.src.read_text(encoding="utf-8", errors="replace"))
-    rend = LinkRenderer(root, site)
-    bookmarks, sections = [], []
-    for m in mdlite.LINK_RE.finditer(raw):
-        label, url = m.group(1), m.group(2)
-        if url.startswith("http"):
-            host = urllib.parse.urlparse(url).netloc.replace("www.", "")
-            name = label if not label.startswith("http") else url.rstrip("/").split("/")[-1]
-            bookmarks.append((name, url, host))
-        else:
-            resolved = rend.link(url)
-            page = next((p for p in walk(root) if relpath(root.out, p.out) == resolved), None)
-            if page:
-                sections.append(page)
-
-    for c in root.children:
-        if c not in sections:
-            sections.append(c)
-
-    cards = "".join(
-        f'<a class="card" href="{relpath(root.out, p.out)}">'
-        f'<strong>{html.escape(p.title)}</strong>'
-        f'<span>{html.escape(HOME_SECTION_BLURB.get(pathlib.PurePosixPath(p.out).parts[0], ""))}</span>'
-        f'<em>{sum(1 for _ in walk(p)) - 1} pages</em></a>'
-        for p in sections)
-
-    links = "".join(
-        f'<li><a href="{html.escape(url, quote=True)}" target="_blank" rel="noopener">'
-        f'{html.escape(name)}<span>{html.escape(host)}</span></a></li>'
-        for name, url, host in bookmarks)
-
-    return (f'<h1 id="home">&#127988; {html.escape(SITE_TITLE)}</h1>\n'
-            f'<p class="lede">{html.escape(SITE_DESC)}</p>\n'
-            f'<h2 id="sections">Sections</h2>\n<div class="cards">{cards}</div>\n'
-            + (f'<h2 id="links">Links &amp; bookmarks</h2>\n<ul class="bookmarks">{links}</ul>\n' if links else "")
-            + '<blockquote><p>Writeups from before 2024 are often screenshots rather than '
-              'detailed notes.</p></blockquote>')
-
-
-def toc_html(toc):
-    if len(toc) < 3:
-        return ""
-    items = "".join(f'<li class="lvl{lvl}"><a href="#{aid}">{html.escape(txt)}</a></li>'
-                    for lvl, txt, aid in toc)
-    return f'<nav class="toc"><strong>On this page</strong><ul>{items}</ul></nav>'
-
-
-def nav_tree(page, root_out="index.html"):
-    return [{"title": c.title, "out": c.out, "children": nav_tree(c, root_out)} for c in page.children]
-
-
 # ---------------------------------------------------------------------- build
+REFRESH = False
+
+
 def build(export_root):
     root = build_tree(export_root)
     pages = list(walk(root))
@@ -390,18 +504,23 @@ def build(export_root):
         shutil.copy2(src, dest)
         n_assets += 1
 
+    bodies = {}
+    for page in pages:
+        raw = redact(page.src.read_text(encoding="utf-8", errors="replace"))
+        # the first H1 duplicates the page title Notion already gives us
+        raw = re.sub(r"\A\s*#\s+.*\n", "", raw, count=1)
+        bodies[page.out], _ = mdlite.convert(raw, LinkRenderer(page, site))
+
+    # every standalone external link was a bookmark block in Notion
+    urls = [html.unescape(u) for body in bodies.values() for u in BARE_LINK_P_RE.findall(body)]
+    site["bookmarks"] = load_bookmarks(urls, refresh=REFRESH)
+
     for page in pages:
         depth = len(pathlib.PurePosixPath(page.out).parts) - 1
         up = "/".join([".."] * depth) or "."
-        if page is root:
-            body, toc = render_home(root, site), []
-        else:
-            raw = redact(page.src.read_text(encoding="utf-8", errors="replace"))
-            # the first H1 duplicates the page title Notion already gives us
-            raw = re.sub(r"\A\s*#\s+.*\n", "", raw, count=1)
-            body, toc = mdlite.convert(raw, LinkRenderer(page, site))
-            body = (f'<h1 id="title">{html.escape(page.title)}</h1>\n'
-                    + toc_html(toc) + "\n" + body + child_index(page, body))
+        body = bookmark_cards(bodies[page.out], page, site["bookmarks"], always=page is root)
+        body = file_blocks(body, page)
+        body = f'<h1 id="title">{html.escape(page.title)}</h1>\n' + body + child_index(page, body)
         html_ = TEMPLATE.format(
             title=html.escape(page.title),
             site_title=html.escape(SITE_TITLE),
@@ -419,7 +538,6 @@ def build(export_root):
         dest.write_text(html_, encoding="utf-8")
 
     (ROOT / "assets").mkdir(exist_ok=True)
-    (ROOT / "assets/nav.json").write_text(json.dumps(nav_tree(root), ensure_ascii=False), encoding="utf-8")
     (ROOT / ".nojekyll").touch()
 
     # GitHub Pages serves this for any unknown path, so it needs absolute URLs.
@@ -441,7 +559,10 @@ def build(export_root):
 def main():
     if len(sys.argv) < 2:
         sys.exit(__doc__)
-    target = pathlib.Path(sys.argv[1]).expanduser().resolve()
+    global REFRESH
+    args = [a for a in sys.argv[1:] if a != "--refresh-bookmarks"]
+    REFRESH = len(args) != len(sys.argv[1:])
+    target = pathlib.Path(args[0]).expanduser().resolve()
     tmp = None
     if target.is_file() and target.suffix == ".zip":
         tmp = pathlib.Path(tempfile.mkdtemp(prefix="notion-export-"))

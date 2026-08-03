@@ -10,22 +10,12 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
-<div class="layout">
-<aside class="sidebar" id="sidebar">
-  <a class="brand" href="../../index.html">
-    <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
-  </a>
-  <nav class="nav" id="nav-root" data-current="huntress/2025-huntress-ctf/2025-10-25.html" data-root="../.."></nav>
-</aside>
 <main class="content">
   <article class="doc">
   <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">Huntress CTF</a> &rsaquo; <a href="index.html">2025-Huntress-CTF</a></div>
 <h1 id="title">2025-10-25</h1>
-
 <p class="figure"><a class="img-link" href="2025-10-25/image.png"><img src="2025-10-25/image.png" alt="image.png" loading="lazy"></a></p>
-<p><a href="2025-10-25/booking-id-verification.zip">Booking - ID Verification.zip</a></p>
+<a class="fileblock" href="2025-10-25/booking-id-verification.zip" download><span class="fb-icon">🗄</span><span class="fb-name">Booking - ID Verification.zip</span><span class="fb-size">130KB</span></a>
 <pre><code>Enter any details to download the booking exe</code></pre>
 <p class="figure"><a class="img-link" href="2025-10-25/image-1.png"><img src="2025-10-25/image-1.png" alt="image.png" loading="lazy"></a></p>
 <pre><code>https://app.any.run/tasks/6a604135-a1a7-4e07-a14e-8b58f7ff6bb9</code></pre>
@@ -38,8 +28,8 @@
 <pre><code>Exctract with the SID from the log file.
 500
 This is the Relative Identifier (RID) from the binary SID structure in the provided byte sequence (last subauthority value, decimal). In Windows, RID 500 corresponds to the built-in Administrator account—likely the "right" target ID for privilege escalation or data access in this CTF scenario. The full decoded SID is S-1-5-21-3801804562-4118715378-2025092243-500.</code></pre>
-<p><a href="2025-10-25/windows11-administrator.log">WINDOWS11-Administrator.log</a></p>
-<p><a href="2025-10-25/windows11-administrator.zip">WINDOWS11-Administrator.zip</a></p>
+<a class="fileblock" href="2025-10-25/windows11-administrator.log" download><span class="fb-icon">📄</span><span class="fb-name">WINDOWS11-Administrator.log</span><span class="fb-size">82B</span></a>
+<a class="fileblock" href="2025-10-25/windows11-administrator.zip" download><span class="fb-icon">🗄</span><span class="fb-name">WINDOWS11-Administrator.zip</span><span class="fb-size">4.7KB</span></a>
 <p class="figure"><a class="img-link" href="2025-10-25/image-5.png"><img src="2025-10-25/image-5.png" alt="image.png" loading="lazy"></a></p>
 <p class="figure"><a class="img-link" href="2025-10-25/image-6.png"><img src="2025-10-25/image-6.png" alt="image.png" loading="lazy"></a></p>
 <pre><code>extrcat the flag</code></pre>
@@ -55,8 +45,8 @@ java -jar unluac_2015_06_13.jar script_extracted_fixed.luac &gt; script.lua
 
 To decode the lua emojis
 java -jar unluac.jar script.luac</code></pre>
-<p><a href="2025-10-25/2script.decoded">2script.decoded</a></p>
-<p><a href="2025-10-25/2script.lua">2script.lua</a></p>
+<a class="fileblock" href="2025-10-25/2script.decoded" download><span class="fb-icon">📎</span><span class="fb-name">2script.decoded</span><span class="fb-size">17KB</span></a>
+<a class="fileblock" href="2025-10-25/2script.lua" download><span class="fb-icon">📃</span><span class="fb-name">2script.lua</span><span class="fb-size">145KB</span></a>
 <pre><code>--[[
   Set up package paths to look for dependencies (.lua, .dll)
   in the script's directory and a 'deps' subdirectory.
@@ -832,7 +822,7 @@ if h then
 end</code></pre>
 <p>run this to get the decoded checkes</p>
 <p class="figure"><a class="img-link" href="2025-10-25/image-8.png"><img src="2025-10-25/image-8.png" alt="image.png" loading="lazy"></a></p>
-<p><a href="2025-10-25/2script-1.decoded">2script.decoded</a></p>
+<a class="fileblock" href="2025-10-25/2script-1.decoded" download><span class="fb-icon">📎</span><span class="fb-name">2script.decoded</span><span class="fb-size">17KB</span></a>
 <pre><code>do
   local exedir = (function()
     local p = arg and arg[0] or ""
@@ -1835,14 +1825,7 @@ if h then
 end
 </code></pre>
   </article>
-  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+  <footer class="foot"><a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
-</div>
-<script src="../../assets/nav.js" defer></script>
-<script>
-document.getElementById('menu-toggle').addEventListener('click',function(){
-  document.getElementById('sidebar').classList.toggle('open');
-});
-</script>
 </body>
 </html>

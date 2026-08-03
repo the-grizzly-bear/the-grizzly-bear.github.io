@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Connecting...</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      #container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+      }
+      p {
+        font-size: 1.2em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        style="
+          margin: auto;
+          background: rgb(255, 255, 255);
+          display: block;
+          shape-rendering: auto;
+        "
+        width="100px"
+        height="100px"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="xMidYMid"
+      >
+        <path
+          d="M10 50A40 40 0 0 0 90 50A40 41.7 0 0 1 10 50"
+          fill="#0d9488"
+          stroke="none"
+        >
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            dur="0.6896551724137931s"
+            repeatCount="indefinite"
+            keyTimes="0;1"
+            values="0 50 50.85;360 50 50.85"
+          ></animateTransform>
+        </path>
+      </svg>
+    </div>
+    <script>
+      const authFailed = () => {
+        document.getElementById('container').innerHTML =
+          `<p>Failed to connect to system</p><p>No auth token found.</p>`;
+        document.title = 'Auth failure';
+      };
+      document.cookie = 'token=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+      const hash = window.location.hash.substring(1);
+      if (hash) {
+        const params = new URLSearchParams(hash);
+        const token = params.get('token');
+        params.delete('token');
+        window.localStorage.setItem(
+          'cs-heartbeat',
+          JSON.stringify(Object.fromEntries(params.entries()))
+        );
+        if (token) {
+          document.cookie = 'token=' + encodeURIComponent(token) + '; path=/';
+          const redirectParams = new URLSearchParams(window.location.search);
+          const targetPath = redirectParams.get('r');
+          if (targetPath) {
+            const path = targetPath.startsWith('/')
+              ? targetPath.substring(1)
+              : targetPath;
+            history.replaceState(null, '', '/' + path);
+          } else {
+            history.replaceState(null, '', '/');
+          }
+          window.location.reload();
+        } else {
+          authFailed();
+        }
+      } else {
+        authFailed();
+      }
+    </script>
+  </body>
+</html>

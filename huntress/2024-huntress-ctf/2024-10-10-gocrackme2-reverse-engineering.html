@@ -10,20 +10,10 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
-<div class="layout">
-<aside class="sidebar" id="sidebar">
-  <a class="brand" href="../../index.html">
-    <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
-  </a>
-  <nav class="nav" id="nav-root" data-current="huntress/2024-huntress-ctf/2024-10-10-gocrackme2-reverse-engineering.html" data-root="../.."></nav>
-</aside>
 <main class="content">
   <article class="doc">
   <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">Huntress CTF</a> &rsaquo; <a href="index.html">2024-Huntress-CTF</a></div>
 <h1 id="title">2024-10-10 GoCrackMe2 (Reverse Engineering)</h1>
-
 <p class="figure"><a class="img-link" href="2024-10-10-gocrackme2-reverse-engineering/image.png"><img src="2024-10-10-gocrackme2-reverse-engineering/image.png" alt="image.png" loading="lazy"></a></p>
 <p class="figure"><a class="img-link" href="2024-10-10-gocrackme2-reverse-engineering/image-1.png"><img src="2024-10-10-gocrackme2-reverse-engineering/image-1.png" alt="image.png" loading="lazy"></a></p>
 <pre><code class="language-python">flag{f75087857fc4d23241dc09666f390751}</code></pre>
@@ -66,7 +56,7 @@
 <p class="figure"><a class="img-link" href="2024-10-10-gocrackme2-reverse-engineering/image-12.png"><img src="2024-10-10-gocrackme2-reverse-engineering/image-12.png" alt="image.png" loading="lazy"></a></p>
 <p><a href="https://www.trellix.com/blogs/research/feeding-gophers-to-ghidra/" target="_blank" rel="noopener">https://www.trellix.com/blogs/research/feeding-gophers-to-ghidra/</a></p>
 <p>Clearing up obfuscated Go functions.</p>
-<p><a href="https://github.com/advanced-threat-research/GhidraScripts?tab=readme-ov-file" target="_blank" rel="noopener">https://github.com/advanced-threat-research/GhidraScripts?tab=readme-ov-file</a></p>
+<a class="bookmark" href="https://github.com/advanced-threat-research/GhidraScripts?tab=readme-ov-file" target="_blank" rel="noopener"><div class="bm-text"><div class="bm-title">GitHub - advanced-threat-research/GhidraScripts: Scripts to run within Ghidra, maintained by the Trellix ARC team</div><div class="bm-desc">Scripts to run within Ghidra, maintained by the Trellix ARC team - advanced-threat-research/GhidraScripts</div><div class="bm-url"><img class="bm-icon" src="../../assets/bookmarks/github-com-advanced-threat-research-ghidrascripts-icon.png" alt="" loading="lazy">https://github.com/advanced-threat-research/GhidraScripts?tab=readme-ov-file</div></div><div class="bm-img"><img src="../../assets/bookmarks/github-com-advanced-threat-research-ghidrascripts.png" alt="" loading="lazy"></div></a>
 <p class="figure"><a class="img-link" href="2024-10-10-gocrackme2-reverse-engineering/image-13.png"><img src="2024-10-10-gocrackme2-reverse-engineering/image-13.png" alt="image.png" loading="lazy"></a></p>
 <p>Building a script to reverse, xor, and shift for the strings from this function. Output was not solid flag, and we remember the input and sections seemed random, but thye were consistient.</p>
 <p class="figure"><a class="img-link" href="2024-10-10-gocrackme2-reverse-engineering/image-14.png"><img src="2024-10-10-gocrackme2-reverse-engineering/image-14.png" alt="image.png" loading="lazy"></a></p>
@@ -100,14 +90,7 @@ print("Shifted flag:", shifted_flag)</code></pre>
 <p>Substituting in the last two pieces</p>
 <p class="figure"><a class="img-link" href="2024-10-10-gocrackme2-reverse-engineering/image-16.png"><img src="2024-10-10-gocrackme2-reverse-engineering/image-16.png" alt="image.png" loading="lazy"></a></p>
   </article>
-  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+  <footer class="foot"><a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
-</div>
-<script src="../../assets/nav.js" defer></script>
-<script>
-document.getElementById('menu-toggle').addEventListener('click',function(){
-  document.getElementById('sidebar').classList.toggle('open');
-});
-</script>
 </body>
 </html>
