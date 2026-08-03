@@ -64,7 +64,6 @@ contains "GIF89a"" || "http contains
 tcpdump -tnr &lt;SAMPLE TRAFFIC FILE&gt;.pcap ARP |awk F ',' '{print $1"."$2","$3","$4}' | sort | uniq -c | sort -n | tail
 tshark -r &lt;SAMPLE TRAFFIC FILE&gt;.pcap -q -z io,phs| grep arp.duplicate-address-detected</code></pre>
   </article>
-  <footer class="foot"><a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
 </body>
 </html>

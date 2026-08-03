@@ -353,15 +353,19 @@ BARE_LINK_P_RE = re.compile(
     r'<p><a href="(https?://[^"]+)"[^>]*>(?:(?!</a>).)*</a></p>', re.S)
 
 
-def bookmark_cards(body, page, cache, always=False):
+def bookmark_cards(body, page, cache, skip_hosts=()):
     """Swap standalone external links for Notion-style bookmark cards.
 
-    A link whose site could not be reached stays a plain link, except on the home
-    page (`always`), where every entry was a bookmark block in Notion.
+    A link Notion had as a bookmark block but whose site can no longer be reached
+    (dead repo, bot-blocked, offline) has no real title/image to show, so it stays
+    a plain link rather than rendering an empty card with the bare URL twice.
+    `skip_hosts` keeps a whole group of same-host links uniform (plain) when only
+    some of them resolved, rather than a mixed row of cards and bare URLs.
     """
     def card(m):
         meta = cache.get(html.unescape(m.group(1)))
-        if not meta or (not meta.get("ok") and not always):
+        has_data = meta and (meta.get("image_local") or (meta.get("title") and meta["title"] != meta.get("url")))
+        if not has_data or (meta and meta.get("host") in skip_hosts):
             return m.group(0)
         img = (f'<div class="bm-img"><img src="{relpath(page.out, meta["image_local"])}" alt="" '
                f'loading="lazy"></div>') if meta.get("image_local") else ""
@@ -375,6 +379,20 @@ def bookmark_cards(body, page, cache, always=False):
                 f'{desc}<div class="bm-url">{icon}{html.escape(meta["url"])}</div></div>{img}</a>')
 
     return BARE_LINK_P_RE.sub(card, body)
+
+
+SPACER = '<div class="spacer"></div>'
+GAP_AFTER_BOOKMARK_RE = re.compile(r'(<a class="bookmark".*?</a>)\s*(<p><a href="https?://)', re.S)
+GAP_BEFORE_PAGE_LINKS_RE = re.compile(
+    r'(<p><a href="https?://[^"]*"[^>]*>[^<]*</a></p>)\s*(<p><a href="(?!https?://))')
+
+
+def home_spacing(body):
+    """A blank line between the bookmark, external-link and page-link groups —
+    Notion pages had one wherever the kind of block changed."""
+    body = GAP_AFTER_BOOKMARK_RE.sub(r"\1" + SPACER + r"\2", body)
+    body = GAP_BEFORE_PAGE_LINKS_RE.sub(r"\1" + SPACER + r"\2", body)
+    return body
 
 
 # --------------------------------------------------------------- file blocks
@@ -441,7 +459,6 @@ TEMPLATE = """<!DOCTYPE html>
 {breadcrumb}
 {body}
   </article>
-  <footer class="foot"><a href="https://github.com/{site_title}">github.com/{site_title}</a></footer>
 </main>
 </body>
 </html>
@@ -518,9 +535,13 @@ def build(export_root):
     for page in pages:
         depth = len(pathlib.PurePosixPath(page.out).parts) - 1
         up = "/".join([".."] * depth) or "."
-        body = bookmark_cards(bodies[page.out], page, site["bookmarks"], always=page is root)
+        body = bookmark_cards(bodies[page.out], page, site["bookmarks"],
+                              skip_hosts={"github.com"} if page is root else ())
         body = file_blocks(body, page)
-        body = f'<h1 id="title">{html.escape(page.title)}</h1>\n' + body + child_index(page, body)
+        if page is root:
+            body = home_spacing(body)
+        h1 = SITE_SUB if page is root else page.title
+        body = f'<h1 id="title">{html.escape(h1)}</h1>\n' + body + child_index(page, body)
         html_ = TEMPLATE.format(
             title=html.escape(page.title),
             site_title=html.escape(SITE_TITLE),
