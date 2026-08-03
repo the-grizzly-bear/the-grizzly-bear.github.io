@@ -3,51 +3,51 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DNS · Will Seligman</title>
-<link rel="stylesheet" href="/assets/style.css">
+<meta name="color-scheme" content="dark">
+<title>DNS · the-grizzly-bear</title>
+<meta name="description" content="DNS — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
 <div class="layout">
 <aside class="sidebar" id="sidebar">
-  <a class="brand" href="/index.html">
+  <a class="brand" href="../../../../index.html">
     <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
   </a>
-  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/1-identify-scope/windows/dns.html"></nav>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/1-identify-scope/windows/dns.html" data-root="../../../.."></nav>
 </aside>
 <main class="content">
   <article class="doc">
-  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/blue-team-field-manual.html">Blue Team Field Manual</a> &rsaquo; <a href="/other/blue-team-field-manual/1-identify-scope.html">1 IDENTIFY (Scope)</a> &rsaquo; <a href="/other/blue-team-field-manual/1-identify-scope/windows.html">WINDOWS</a></div>
-  <h1 id="dns">DNS</h1>
+  <div class="breadcrumb"><a href="../../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../../index.html">Other</a> &rsaquo; <a href="../../index.html">Blue Team Field Manual</a> &rsaquo; <a href="../index.html">1 IDENTIFY (Scope)</a> &rsaquo; <a href="index.html">WINDOWS</a></div>
+<h1 id="title">DNS</h1>
+
 <p>Default location Windows 2003:</p>
-<pre><code class="language-bash">C:\&gt; %SystemRoot%\System32\Dns
-</code></pre>
+<pre><code class="language-bash">C:\&gt; %SystemRoot%\System32\Dns</code></pre>
 <p>Default location Windows 2008:</p>
 <pre><code class="language-bash">C:\&gt; %SystemRoot%\System32\Winevt\Logs\DNS
-Server.evtx
-</code></pre>
+Server.evtx</code></pre>
 <p>Default location of enhanced DNS Windows 2012 R2:</p>
 <pre><code class="language-bash">C:\&gt; %SystemRoot%\System32\Winevt\Logs\Microsoft­
-Windows-DNSServer%4Analytical.etl
-</code></pre>
-<p>Ref. <a href="https://technet.microsoft.com/en%C2%AD">https://technet.microsoft.com/en­</a><br>us/library/cc940779.aspx<br>Enable DNS Logging:</p>
+Windows-DNSServer%4Analytical.etl</code></pre>
+<p>Ref. <a href="https://technet.microsoft.com/en%C2%AD" target="_blank" rel="noopener">https://technet.microsoft.com/en­</a><br>
+us/library/cc940779.aspx<br>
+Enable DNS Logging:</p>
 <pre><code class="language-bash">C:\&gt; DNSCmd &lt;DNS SERVER NAME&gt; /config /logLevel
-0x8100F331
-</code></pre>
+0x8100F331</code></pre>
 <p>Set log location:</p>
 <pre><code class="language-bash">C:\&gt; DNSCmd &lt;DNS SERVER NAME&gt; /config /LogFilePath
-&lt;PATH TO LOG FILE&gt;
-</code></pre>
+&lt;PATH TO LOG FILE&gt;</code></pre>
 <p>Set size of log file:</p>
 <pre><code class="language-bash">C:\&gt; DNSCmd &lt;DNS SERVER NAME&gt; /config
-/logfilemaxsize 0xffffffff
-</code></pre>
+/logfilemaxsize 0xffffffff</code></pre>
   </article>
-  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
 </div>
-<script src="/assets/nav.js" defer></script>
+<script src="../../../../assets/nav.js" defer></script>
 <script>
 document.getElementById('menu-toggle').addEventListener('click',function(){
   document.getElementById('sidebar').classList.toggle('open');

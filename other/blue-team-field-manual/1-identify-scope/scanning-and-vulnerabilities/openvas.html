@@ -3,57 +3,59 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OPENVAS · Will Seligman</title>
-<link rel="stylesheet" href="/assets/style.css">
+<meta name="color-scheme" content="dark">
+<title>OPENVAS · the-grizzly-bear</title>
+<meta name="description" content="OPENVAS — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
 <div class="layout">
 <aside class="sidebar" id="sidebar">
-  <a class="brand" href="/index.html">
+  <a class="brand" href="../../../../index.html">
     <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
   </a>
-  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/1-identify-scope/scanning-and-vulnerabilities/openvas.html"></nav>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/1-identify-scope/scanning-and-vulnerabilities/openvas.html" data-root="../../../.."></nav>
 </aside>
 <main class="content">
   <article class="doc">
-  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/blue-team-field-manual.html">Blue Team Field Manual</a> &rsaquo; <a href="/other/blue-team-field-manual/1-identify-scope.html">1 IDENTIFY (Scope)</a> &rsaquo; <a href="/other/blue-team-field-manual/1-identify-scope/scanning-and-vulnerabilities.html">SCANNING AND VULNERABILITIES</a></div>
-  <h1 id="openvas">OPENVAS</h1>
-<p>Step 1: Install the server, client and plugin<br>packages:</p>
-<pre><code class="language-bash">apt-get install openvas-server openvas-client openvas-plugins-base openvas-plugins-dfsg
-</code></pre>
+  <div class="breadcrumb"><a href="../../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../../index.html">Other</a> &rsaquo; <a href="../../index.html">Blue Team Field Manual</a> &rsaquo; <a href="../index.html">1 IDENTIFY (Scope)</a> &rsaquo; <a href="index.html">SCANNING AND VULNERABILITIES</a></div>
+<h1 id="title">OPENVAS</h1>
+
+<p>Step 1: Install the server, client and plugin<br>
+packages:</p>
+<pre><code class="language-bash">apt-get install openvas-server openvas-client openvas-plugins-base openvas-plugins-dfsg</code></pre>
 <p>Step 2: Update the vulnerability database</p>
-<pre><code class="language-bash">openvas-nvt-sync
-</code></pre>
+<pre><code class="language-bash">openvas-nvt-sync</code></pre>
 <p>Step 3: Add a user to run the client:</p>
-<pre><code class="language-bash">openvas-adduser
-</code></pre>
-<p>Step 4: Login: sysadm<br>Step 5: Authentication (pass/cert) [pass]: [HIT ENTER]<br>Step 6: Login password: \&lt;PASSWORD&gt;<br>You will then be asked to add "User rules".<br>Step 7: Allow this user to scan authorized network by typing:</p>
+<pre><code class="language-bash">openvas-adduser</code></pre>
+<p>Step 4: Login: sysadm<br>
+Step 5: Authentication (pass/cert) [pass]: [HIT ENTER]<br>
+Step 6: Login password: &lt;PASSWORD&gt;<br>
+You will then be asked to add "User rules".<br>
+Step 7: Allow this user to scan authorized network by typing:</p>
 <pre><code class="language-bash">accept &lt;YOUR IP ADDRESS OR RANGE&gt;
-default deny
-</code></pre>
-<p>Step 8: type ctrl-D to exit, and then accept.<br>Step 9: Start the server:</p>
-<pre><code class="language-bash">service openvas-server start
-</code></pre>
-<p>Step 10: Set targets to scan:<br>Create a text file with a list of hosts/networks to scan.</p>
-<pre><code class="language-bash">vi scanme.txt
-</code></pre>
+default deny</code></pre>
+<p>Step 8: type ctrl-D to exit, and then accept.<br>
+Step 9: Start the server:</p>
+<pre><code class="language-bash">service openvas-server start</code></pre>
+<p>Step 10: Set targets to scan:<br>
+Create a text file with a list of hosts/networks to scan.</p>
+<pre><code class="language-bash">vi scanme.txt</code></pre>
 <p>Step 11: Add one host, network per line:</p>
-<pre><code class="language-bash">&lt;IP ADDRESS OR RANGE&gt;
-</code></pre>
+<pre><code class="language-bash">&lt;IP ADDRESS OR RANGE&gt;</code></pre>
 <p>Step 12: Run scan:</p>
 <pre><code class="language-bash">openvas-client -q 127.0.0.1 9390 sysadm nsrc+ws
-scanme.txt openvas-output-.html -T txt -V -x
-</code></pre>
+scanme.txt openvas-output-.html -T txt -V -x</code></pre>
 <p>Step 13: (Optional)run scan with HTML format:</p>
-<pre><code class="language-bash">openvas-client -q 127.0.0.1 9390 sysadm nsrc+ws scanme.txt openvas-output.txt -T html -V -x
-</code></pre>
+<pre><code class="language-bash">openvas-client -q 127.0.0.1 9390 sysadm nsrc+ws scanme.txt openvas-output.txt -T html -V -x</code></pre>
   </article>
-  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
 </div>
-<script src="/assets/nav.js" defer></script>
+<script src="../../../../assets/nav.js" defer></script>
 <script>
 document.getElementById('menu-toggle').addEventListener('click',function(){
   document.getElementById('sidebar').classList.toggle('open');

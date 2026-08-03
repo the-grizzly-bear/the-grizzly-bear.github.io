@@ -3,44 +3,43 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ACTIVE DIRECTORY (AD) - GROUP POLICY OBJECT (GPO) · Will Seligman</title>
-<link rel="stylesheet" href="/assets/style.css">
+<meta name="color-scheme" content="dark">
+<title>ACTIVE DIRECTORY (AD) - GROUP POLICY OBJECT (GPO) · the-grizzly-bear</title>
+<meta name="description" content="ACTIVE DIRECTORY (AD) - GROUP POLICY OBJECT (GPO) — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
 <div class="layout">
 <aside class="sidebar" id="sidebar">
-  <a class="brand" href="/index.html">
+  <a class="brand" href="../../../../index.html">
     <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
   </a>
-  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/2-protect-defend/windows/active-directory-ad-group-policy-object-gpo.html"></nav>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/2-protect-defend/windows/active-directory-ad-group-policy-object-gpo.html" data-root="../../../.."></nav>
 </aside>
 <main class="content">
   <article class="doc">
-  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/blue-team-field-manual.html">Blue Team Field Manual</a> &rsaquo; <a href="/other/blue-team-field-manual/2-protect-defend.html">2 PROTECT (Defend)</a> &rsaquo; <a href="/other/blue-team-field-manual/2-protect-defend/windows.html">WINDOWS</a></div>
-  <h1 id="active-directory-ad-group-policy-object-gpo">ACTIVE DIRECTORY (AD) - GROUP POLICY OBJECT (GPO)</h1>
+  <div class="breadcrumb"><a href="../../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../../index.html">Other</a> &rsaquo; <a href="../../index.html">Blue Team Field Manual</a> &rsaquo; <a href="../index.html">2 PROTECT (Defend)</a> &rsaquo; <a href="index.html">WINDOWS</a></div>
+<h1 id="title">ACTIVE DIRECTORY (AD) - GROUP POLICY OBJECT (GPO)</h1>
+
 <p>Get and force new policies:</p>
 <pre><code class="language-bash">C:\&gt; gpupdate /force
-C:\&gt; gpupdate /sync
-</code></pre>
+C:\&gt; gpupdate /sync</code></pre>
 <p>Audit Success and Failure for user Bob:</p>
-<pre><code class="language-bash">C:\&gt; auditpol /set /user:bob /category:&quot;DetailedTracking&quot; /include /success:enable /failure:enable
-</code></pre>
+<pre><code class="language-bash">C:\&gt; auditpol /set /user:bob /category:"DetailedTracking" /include /success:enable /failure:enable</code></pre>
 <p>Create an Organization Unit to move suspected or infected users and machines:</p>
-<pre><code class="language-bash">(:\&gt; dsadd OU &lt;QUARANTINE BAD OU&gt;
-</code></pre>
+<pre><code class="language-bash">(:\&gt; dsadd OU &lt;QUARANTINE BAD OU&gt;</code></pre>
 <p>Move an active directory user object into NEW GROUP:</p>
-<pre><code class="language-bash">PS C:\&gt; Move-ADObject 'CN=&lt;USER NAME&gt;,CN=&lt;OLD USER GROUP&gt;,DC=&lt;OLD DOMAIN&gt;,DC=&lt;OLD EXTENSION&gt;' TargetPath 'OU=&lt;NEW USER GROUP&gt;,DC=&lt;OLD DOMAIN&gt;,DC=&lt;OLD EXTENSION&gt;'
-</code></pre>
+<pre><code class="language-bash">PS C:\&gt; Move-ADObject 'CN=&lt;USER NAME&gt;,CN=&lt;OLD USER GROUP&gt;,DC=&lt;OLD DOMAIN&gt;,DC=&lt;OLD EXTENSION&gt;' TargetPath 'OU=&lt;NEW USER GROUP&gt;,DC=&lt;OLD DOMAIN&gt;,DC=&lt;OLD EXTENSION&gt;'</code></pre>
 <p>Alt Option:</p>
-<pre><code class="language-bash">C:\&gt; dsmove &quot;CN=&lt;USER NAME&gt;,OU=&lt;OLD USER OU&gt;,DC=&lt;OLD DOMAIN&gt;,DC=&lt;OLD EXTENSION&gt;&quot; -newparent OU=&lt;NEW USER GROUP&gt;,DC=&lt;OLD DOMAIN&gt;,DC=&lt;OLD EXTENSION&gt;
-</code></pre>
+<pre><code class="language-bash">C:\&gt; dsmove "CN=&lt;USER NAME&gt;,OU=&lt;OLD USER OU&gt;,DC=&lt;OLD DOMAIN&gt;,DC=&lt;OLD EXTENSION&gt;" -newparent OU=&lt;NEW USER GROUP&gt;,DC=&lt;OLD DOMAIN&gt;,DC=&lt;OLD EXTENSION&gt;</code></pre>
   </article>
-  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
 </div>
-<script src="/assets/nav.js" defer></script>
+<script src="../../../../assets/nav.js" defer></script>
 <script>
 document.getElementById('menu-toggle').addEventListener('click',function(){
   document.getElementById('sidebar').classList.toggle('open');

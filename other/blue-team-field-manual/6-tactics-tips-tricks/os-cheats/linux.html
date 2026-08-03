@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>LINUX · the-grizzly-bear</title>
+<meta name="description" content="LINUX — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/6-tactics-tips-tricks/os-cheats/linux.html" data-root="../../../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../../index.html">Other</a> &rsaquo; <a href="../../index.html">Blue Team Field Manual</a> &rsaquo; <a href="../index.html">6 TACTICS (TIPS &amp; TRICKS)</a> &rsaquo; <a href="index.html">OS CHEATS</a></div>
+<h1 id="title">LINUX</h1>
+
+<p>Analyze traffic remotely over ssh:</p>
+<pre><code class="language-powershell">ssh root@&lt;REMOTE IP ADDRESS OF HOST TO SNIFF&gt;
+tcpdump -i any -U -s 0 -w - 'not port 22'</code></pre>
+<p>Manually add note/data to syslog:</p>
+<pre><code class="language-powershell">logger "something important to note in Log"
+dmesg | grep &lt;COMMENT&gt;</code></pre>
+<p>Simple read only mounting:</p>
+<pre><code class="language-powershell">mount -o ro /dev/&lt;YOUR FOLDER OR DRIVE&gt; /mnt</code></pre>
+<p>Mounting remotely over SSH:</p>
+<pre><code class="language-powershell">apt-get install sshfs
+adduser &lt;USER NAME&gt; fuse
+Log out and log back in.
+mkdir ~/&lt;WHERE TO MOUNT LOCALLY&gt;
+sshfs &lt;REMOTE USER NAME&gt;@&lt;REMOTE HOST&gt;:/&lt;REMOTEPATH&gt; ~/&lt;WHERE TO MOUNT LOCALLY&gt;</code></pre>
+<p>Creating SMB share in Linux:</p>
+<pre><code class="language-powershell">useradd -m &lt;NEW USER&gt;
+passwd &lt;NEW USER&gt;
+smbpasswd -a &lt;NEW USER&gt;
+echo [Share] &gt;&gt; /etc/samba/smb.conf
+echo /&lt;PATH OF FOLDER TO SHARE&gt; &gt;&gt; /etc/samba/smb.conf
+echo available = yes &gt;&gt; /etc/samba/smb.conf
+echo valid users = &lt;NEW USER&gt; &gt;&gt; /etc/samba/smb.conf
+echo read only = no &gt;&gt; /etc/samba/smb.conf
+echo browsable = yes &gt;&gt; /etc/samba/smb.conf
+echo public = yes &gt;&gt; /etc/samba/smb.conf
+echo writable = yes &gt;&gt; /etc/samba/smb.conf
+service smbd restart</code></pre>
+<p>Visit share from remote system:</p>
+<pre><code class="language-powershell">&gt; smb:\\&lt;IP ADDRESS OF LINUX SMB SHARE&gt;</code></pre>
+<p>Copy files to remote system:</p>
+<pre><code class="language-powershell">&gt; scp &lt;FILE NAME&gt; &lt;USER NAME&gt;@&lt;DESTINATION IP ADDRESS&gt;:/&lt;REMOTE FOLDER&gt;</code></pre>
+<p>Mount and SMB share to remote system:</p>
+<pre><code class="language-powershell">mount -t smbfs -o username=&lt;USER NAME&gt; //&lt;SERVER NAME OR IP ADDRESS&gt;/&lt;SHARE NAME&gt; /mnt/&lt;MOUNT POINT&gt;/</code></pre>
+<p>Monitor a website or file is still up/there:</p>
+<pre><code class="language-powershell">while :; do curl -sSr http://&lt;URL&gt; | head -n 1; sleep 60; done</code></pre>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

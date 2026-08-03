@@ -1,0 +1,553 @@
+--- Decode ---
+ Original: "🌊🐬"
+ Decoded:  "\\"
+--------------
+--- Decode ---
+ Original: "🐬🌺🐡🌴🐢🌋🐡🌊🐳🐳🐚🦈🐡🐢🦀🐙"
+ Decoded:  "mobdebug"
+--------------
+--- Decode ---
+ Original: "🐬🐬🐡🐚🐢🌴🐡🥥🐳🥥🐙🐬🦈🐋🦀🐙🐢🌺🐳🐢"
+ Decoded:  "lldebugger"
+--------------
+--- Decode ---
+ Original: "🐬🌋🐡🐠🐢🌋🦈🥥🐳🦈🐚🥥🦈🐢🌴🐋"
+ Decoded:  "debugger"
+--------------
+--- Decode ---
+ Original: "🌺🌈🦈🥥🐢🐋🐡🌋🐳🐠🐚🐬🌊🌊🦀🦀🐢🌺🐠🐢🦀🦈🐬🌋🐳🦀🐢🌋🥥🌊"
+ Decoded:  "vscode-debuggee"
+--------------
+--- Decode ---
+ Original: "🌺🌈🦈🥥🐢🐋🐡🌋🐳🐠🐚🐬🌊🐬🦀🦈🌈🌺🐠🌋🌴🌴🌺🐙"
+ Decoded:  "vscode.luals"
+--------------
+--- Decode ---
+ Original: "🐬🐢🐡🐳🐢🌋"
+ Decoded:  "gdb"
+--------------
+--- Decode ---
+ Original: "🐬🐬🐡🐚🐢🌴🐡🐳"
+ Decoded:  "lldb"
+--------------
+--- Decode ---
+ Original: "🐬🐳🐡🐳🐢🐢"
+ Decoded:  "ida"
+--------------
+--- Decode ---
+ Original: "🐬🐳🐡🐳🐢🐢🌊🌺🐬🐠"
+ Decoded:  "ida64"
+--------------
+--- Decode ---
+ Original: "🐬🐳🐡🐳🐢🐢🐡🐬"
+ Decoded:  "idag"
+--------------
+--- Decode ---
+ Original: "🐬🐳🐡🐳🐢🐢🐡🐬🐬🐡🌋🌺"
+ Decoded:  "idag64"
+--------------
+--- Decode ---
+ Original: "🌺🐠🌊🦈🌴🌴🐡🌊🐳🥥🐚🥥"
+ Decoded:  "x64dbg"
+--------------
+--- Decode ---
+ Original: "🌺🐠🌊🥥🌴🌋🐡🌊🐳🥥🐚🥥"
+ Decoded:  "x32dbg"
+--------------
+--- Decode ---
+ Original: "🐬🌊🐡🐚🐢🐡🦈🌴🐳🐠🐚🦈🦈🐋"
+ Decoded:  "ollydbg"
+--------------
+--- Decode ---
+ Original: "🐬🌋🐡🦀🌈🐋🦈🦈🐠🐋"
+ Decoded:  "dnspy"
+--------------
+--- Decode ---
+ Original: "🐬🐢🐡🐋🐢🌊🐡🌊🐠🥥🐚🐠"
+ Decoded:  "ghidra"
+--------------
+--- Decode ---
+ Original: "🌺🌴🐡🐬🐢🌴🐡🐡🐠🥥🐚🐬"
+ Decoded:  "radare"
+--------------
+--- Decode ---
+ Original: "🌺🌴🌊🌊"
+ Decoded:  "r2"
+--------------
+--- Decode ---
+ Original: "🐬🐠🐡🌴🌈🌈🦈🦈🐳🐳🐙🦈"
+ Decoded:  "hopper"
+--------------
+--- Decode ---
+ Original: "🌺🐢🐡🌋🐢🐠🐡🌊🐳🥥🐚🥥"
+ Decoded:  "windbg"
+--------------
+--- Decode ---
+ Original: "🐬🐳🐡🐙🐢🦈🦈🥥🐳🌴🐚🐙🐡🌈🌴🥥🐢🐬🐠🐙🌴🐬🌺🌈🐳🦀🐢🌈🥥🌊🌺🌺"
+ Decoded:  "immunitydebugger"
+--------------
+--- Decode ---
+ Original: "🐬🦀🐡🐋🐢🦀🐡🐡🐠🐠🐚🐬🦈🐬🦀🐙🐢🐚🐠🦈🌴🦈"
+ Decoded:  "cheatengine"
+--------------
+--- Decode ---
+ Original: "🐬🌈🦈🌊🐢🌊🐡🌊🐳🌺"
+ Decoded:  "frida"
+--------------
+--- Decode ---
+ Original: "🐬🌈🦈🌊🐢🌊🐡🌊🐳🌺🐋🌋🐡🐚🦀🌴🌈🐡🐳🦀🌴🦈🌺🐚"
+ Decoded:  "frida-server"
+--------------
+--- Decode ---
+ Original: "🌺🦀🦈🐳🌈🌋🐡🐡🐳🌊🐚🐬"
+ Decoded:  "strace"
+--------------
+--- Decode ---
+ Original: "🐬🐬🦈🐳🌈🌋🐡🐡🐳🌊🐚🐬"
+ Decoded:  "ltrace"
+--------------
+--- Decode ---
+ Original: "🌺🦀🦈🌋🌈🐋🐡🌊🐳🐋🐚🥥"
+ Decoded:  "sysdig"
+--------------
+--- Decode ---
+ Original: "🌺🐙🦈🌊🐢🐳🐡🐠🐳🐚🐚🌈🦈🐬"
+ Decoded:  "procmon"
+--------------
+--- Decode ---
+ Original: "🌺🐙🦈🌊🐢🐳🐡🐠🐳🐳🐙🐚🐡🌴"
+ Decoded:  "procexp"
+--------------
+--- Decode ---
+ Original: "🌺🐢🐡🌋🌈🌋🐡🥥🐠🌊🐚🐚🦈🦀🌴🐋🐢🦀"
+ Decoded:  "wireshark"
+--------------
+--- Decode ---
+ Original: "🐬🌈🐡🌋🐢🌴🐡🌊🐳🐙🐚🐬🐡🐙"
+ Decoded:  "fiddler"
+--------------
+--- Decode ---
+ Original: "🌺🌋🐡🥥🌈🌈🐡🌊🐠🐳🐚🌋🐡🌴"
+ Decoded:  "tcpdump"
+--------------
+--- Decode ---
+ Original: "🐬🌈🐡🌋🐢🐡🐡🥥🐳🐚🐚🌈🦈🐬"
+ Decoded:  "filemon"
+--------------
+--- Decode ---
+ Original: "🌺🌴🐡🐠🐢🐚🐡🌈🐳🦀🐚🐢"
+ Decoded:  "regmon"
+--------------
+--- Decode ---
+ Original: "🐬🐚🦈🌺🐢🌊🐡🌈🐳🦀🐚🐢🦈🦈🌴🦀🐢🐢🐳🐢"
+ Decoded:  "apimonitor"
+--------------
+--- Decode ---
+ Original: "🐬🐡🐡🌴🐢🦀🦈🐠🐳🌺🐚🐢🦈🌈🦀🐋🐢🐢🐳🌺"
+ Decoded:  "joesandbox"
+--------------
+--- Decode ---
+ Original: "🐬🐡🐡🌴🐢🦀🐡🐳🐳🦀🐙🐚"
+ Decoded:  "joebox"
+--------------
+--- Decode ---
+ Original: "🐬🦀🦈🐠🐢🐋🐡🐙🐳🦀🐚🌈"
+ Decoded:  "cuckoo"
+--------------
+--- Decode ---
+ Original: "🐬🦀🐡🐬🌈🌈🐡🥥"
+ Decoded:  "cape"
+--------------
+--- Decode ---
+ Original: "🐬🐚🐡🦀🌈🌊🦈🐳🐠🐳🐚🐢"
+ Decoded:  "anyrun"
+--------------
+--- Decode ---
+ Original: "🐬🐚🐡🦀🌈🌊🥥🐋🐠🥥🐙🐬🦈🐬"
+ Decoded:  "any.run"
+--------------
+--- Decode ---
+ Original: "🌺🌋🐡🐋🌈🌋🐡🥥🐳🌺🐙🌺🦈🐋🌴🐋🐢🐚🐠🐚"
+ Decoded:  "threatgrid"
+--------------
+--- Decode ---
+ Original: "🐬🌈🐡🐬🐢🐡🐡🐠🐳🦀🐚🐢🐡🐚🦀🌈🐢🌈🐠🐚🌴🐬🐬🐬🐠🐬"
+ Decoded:  "falconsandbox"
+--------------
+--- Decode ---
+ Original: "🌺🌋🦈🌊🐢🌊🐡🐡🐳🦈🐚🐬"
+ Decoded:  "triage"
+--------------
+--- Decode ---
+ Original: "🌺🌈🐡🌊🐢🐳🦈🦀🐠🌊🐚🐬🐡🐙🌴🐚🐢🐚🐠🌈🌴🦈"
+ Decoded:  "vboxservice"
+--------------
+--- Decode ---
+ Original: "🌺🌈🐡🌊🐢🐳🦈🦀🐠🐠🐙🦈🦈🦀🌴🥥"
+ Decoded:  "vboxtray"
+--------------
+--- Decode ---
+ Original: "🌺🌈🐡🐙🌈🌴🐡🌋🐳🦀🐚🐋🐡🐚🦀🦀"
+ Decoded:  "vmtoolsd"
+--------------
+--- Decode ---
+ Original: "🌺🌈🐡🐙🌈🐋🦈🐳🐠🐡🐚🐡"
+ Decoded:  "vmsrvc"
+--------------
+--- Decode ---
+ Original: "🌺🌈🐡🐡🐢🐢🦈🥥🐠🐠🐚🐚🐡🐚🦀🌴🌈🐡🐳🦀🌴🐢🐬🐙🐳🐚"
+ Decoded:  "vgauthservice"
+--------------
+--- Decode ---
+ Original: "🌺🌈🐡🐙🌈🐚🐡🐡🐠🥥🐚🐬🐡🌈🌴🐋🐢🐳🐳🐬"
+ Decoded:  "vmwaretray"
+--------------
+--- Decode ---
+ Original: "🥥🐬🐠🐳🌋🐳🐳🦈🐡🥥🦀🐬🐳🥥🐚🐠🐋🐳🐡🐚"
+ Decoded:  "LD_PRELOAD"
+--------------
+--- Decode ---
+ Original: "🥥🐬🐠🐳🌋🐳🐠🐡🐡🐳🦀🌺🐳🦈🐙🦀"
+ Decoded:  "LD_AUDIT"
+--------------
+--- Decode ---
+ Original: "🥥🐬🐠🐳🌋🐳🐠🐢🦈🐋🦀🦈🐠🐙🐚🌈🌋🐡🦈🐬🐚🐚🌊🦀🦈🐋🌋🐋🐬🌴"
+ Decoded:  "LD_LIBRARY_PATH"
+--------------
+--- Decode ---
+ Original: "🥥🌋🐳🌋🐋🐡🐠🌊🐡🦀🦀🐙🐳🐬🐙🌋🐋🌺🦈🐢🐚🐡🌊🐬🦈🐠🐋🐠🐬🐠🌊🌺🌺🐚🐡🌊🐬🌊🦀🥥🦈🌊"
+ Decoded:  "DYLD_INSERT_LIBRARIES"
+--------------
+--- Decode ---
+ Original: "🥥🌋🐳🌋🐋🐡🐠🌊🐡🦀🦀🌊🐳🌺🐙🐋🐋🦈🐡🐙🐚🐚🥥🐋🦈🐠🐋🐙🌺🥥🌊🐙🌺🥥🦈🐬🐬🦈🦀🥥🦈🌊🌊🐳🐙🦀🌋🌋🌋🌺"
+ Decoded:  "DYLD_FORCE_FLAT_NAMESPACE"
+--------------
+--- Decode ---
+ Original: "🥥🌈🐳🌊🐋🌊🐠🌊🦈🌺"
+ Decoded:  "FRIDA"
+--------------
+--- Decode ---
+ Original: "🥥🌈🐳🌊🐋🌊🐠🌊🦈🌺🌴🌈🐠🐚🐚🌋🌋🐡🐡🐬🐚🥥🌊🐢"
+ Decoded:  "FRIDA_SCRIPT"
+--------------
+--- Decode ---
+ Original: "🌊🐙🐠🌋🐋🐠🐳🌋🐡🐠🦀🌈🐳🌺🐚🦈"
+ Decoded:  "PIN_TOOL"
+--------------
+--- Decode ---
+ Original: "🥥🐬🐳🐠🐋🐢🐳🌋🦈🐠🦀🐬🐳🐙🐙🌴🐋🌊"
+ Decoded:  "LUA_DEBUG"
+--------------
+--- Decode ---
+ Original: "🌺🌈🐡🐙🌈🐚🐡🐡🐠🥥🐚🐬"
+ Decoded:  "vmware"
+--------------
+--- Decode ---
+ Original: "🌺🌈🐡🌋🌈🌋🦈🌊🐠🐳🐚🐠🦈🥥🦀🐋🐢🐢🐳🌺"
+ Decoded:  "virtualbox"
+--------------
+--- Decode ---
+ Original: "🌺🌈🐡🌊🐢🐳🦈🦀"
+ Decoded:  "vbox"
+--------------
+--- Decode ---
+ Original: "🐬🌺🐡🌋🐢🐋🦈🐳🐳🦀🐙🐡🦈🌺🦀🐚🌈🐬🐬🐋🌴🌺🐬🐬🐠🌈🌈🐚🥥🐋🌺🌺🌊🐚🐠🐳🥥🌊🐚🌋🐠🌴"
+ Decoded:  "microsoft corporation"
+--------------
+--- Decode ---
+ Original: "🌺🐚🐡🐠🐢🦈🦈🥥"
+ Decoded:  "qemu"
+--------------
+--- Decode ---
+ Original: "🐬🦈🦈🦈🐢🦈"
+ Decoded:  "kvm"
+--------------
+--- Decode ---
+ Original: "🌺🐙🐡🐬🌈🌋🐡🐡🐳🐙🐚🐋🦈🐢🦀🦈🌈🦈"
+ Decoded:  "parallels"
+--------------
+--- Decode ---
+ Original: "🌺🐠🐡🐠🐢🐠"
+ Decoded:  "xen"
+--------------
+--- Decode ---
+ Original: "🐬🐳🐡🦀🐢🐠🐡🌋🐠🐠🐚🐬🦈🐳"
+ Decoded:  "innotek"
+--------------
+--- Decode ---
+ Original: "🐬🌴🐡🌴🐢🐋🐡🦀🐠🌊"
+ Decoded:  "bochs"
+--------------
+--- Decode ---
+ Original: "🌺🌋🐡🐬🐢🌋🐡🐢🐳🐳"
+ Decoded:  "table"
+--------------
+--- Decode ---
+ Original: "🌺🌋🐡🐬🐢🌋🐡🐢🐳🐳"
+ Decoded:  "table"
+--------------
+--- Decode ---
+ Original: "🌺🌋🐡🐬🐢🌋🐡🐢🐳🐳"
+ Decoded:  "table"
+--------------
+--- Decode ---
+ Original: "🐬🐬"
+ Decoded:  "l"
+--------------
+--- Decode ---
+ Original: "🌺🌋🐡🐬🐢🌋🐡🐢🐳🐳"
+ Decoded:  "table"
+--------------
+--- Decode ---
+ Original: "🐠🌊🦈🌺🌈🌋🐡🌋🐳🌊🐋🌈🐡🐚🦀🌴🐢🌋🐠🦀🌈🐚🌺🐙🐠🐙🐢🐙🌊🥥🌺🐡🥥🦀"
+ Decoded:  "/proc/self/status"
+--------------
+--- Decode ---
+ Original: "🌺🌴"
+ Decoded:  "r"
+--------------
+--- Decode ---
+ Original: "🐠🐡🐡🐬"
+ Decoded:  "*a"
+--------------
+--- Decode ---
+ Original: "🌺🌋🐡🐬🐢🌋🐡🐢🐳🐳"
+ Decoded:  "table"
+--------------
+--- Decode ---
+ Original: "🌺🐙🦈🥥🦀🌈🐡🐡🐠🌋🐋🐳🌊🌊🦀🐠🦀🐠🐠🌈🌴🐚🐬🥥🐳🐳🌴🐬🐡🐡🐠🌴🌊🌊🌺🌺🥥🐢🐙🐳🐠🦈🌺🐡🐢🌊🌴🐢🦀🐡🌴🦈🐳🐚🦀🐢🐠🐚🦀🐢🌺🐋🦀🐚🌊🐋🌋🐚🐳🐡"
+ Decoded:  "ps ax -o comm= -o args= 2>/dev/null"
+--------------
+--- Decode ---
+ Original: "🐠🐡🐡🐬"
+ Decoded:  "*a"
+--------------
+--- Decode ---
+ Original: "🌺🦀🦈🐠🌈🐋🦈🦈🐳🐋🐚🐡🦈🦈🦀🐠🌈🌺🐳🌈🐚🐚🌺🦀🐠🌈🐢🥥🥥🐳🐬🐡🥥🦀🐠🥥🦈🐬"
+ Decoded:  "suspicious_process:"
+--------------
+--- Decode ---
+ Original: "🐠🌊🦈🥥🌈🌊🦈🐠🌺🦀🐚🐡🦈🥥🦀🌈🌈🦈🐳🌈🌈🐚🐬🐢🐳🐳🐢🐠🐡🐋🐬🌈🌊🌋🌺🌴🌊🌈🐙🐳🐠🦀🐬🌺🦀🐢🌈🌋🐢🐬🌋🐡🌺🐙🦀🌴🐠🐳🌴🌋"
+ Decoded:  "/sys/class/dmi/id/product_name"
+--------------
+--- Decode ---
+ Original: "🐠🌊🦈🥥🌈🌊🦈🐠🌺🦀🐚🐡🦈🥥🦀🌈🌈🦈🐳🌈🌈🐚🐬🐢🐳🐳🐢🐠🐡🐋🐬🌈🌊🌋🌺🌴🌊🐋🐙🌴🐳🌊🌊🌈🦀🌋🌈🌴🌈🌈🐢🐚🌺🐚🌴🐚"
+ Decoded:  "/sys/class/dmi/id/sys_vendor"
+--------------
+--- Decode ---
+ Original: "🐠🌊🦈🥥🌈🌊🦈🐠🌺🦀🐚🐡🦈🥥🦀🌈🌈🦈🐳🌈🌈🐚🐬🐢🐳🐳🐢🐠🐡🐋🐬🌈🌊🌋🌺🌴🥥🌋🐚🌋🐠🌺🌺🦈🌴🌈🐋🐠🐢🥥🐢🐙🌺🐙🦀🐢🐠🦈🦀🦀"
+ Decoded:  "/sys/class/dmi/id/board_vendor"
+--------------
+--- Decode ---
+ Original: "🐠🌊🦈🥥🌈🌊🦈🐠🌺🦀🐚🐡🦈🥥🦀🌈🌈🦈🐳🌈🌈🐚🐬🐢🐳🐳🐢🐠🐡🐋🐬🌈🌊🌋🌺🌴🥥🌋🐚🌴🐠🦀🌺🐡🐚🌺🐢🐚🌈🌺🐢🦈🌺🐡🦀🐬🐳🌈"
+ Decoded:  "/sys/class/dmi/id/bios_vendor"
+--------------
+--- Decode ---
+ Original: "🌺🌴"
+ Decoded:  "r"
+--------------
+--- Decode ---
+ Original: "🐠🐡🐡🐚"
+ Decoded:  "*l"
+--------------
+--- Decode ---
+ Original: "🌺🌴"
+ Decoded:  "r"
+--------------
+--- Decode ---
+ Original: "🐠🐡🐡🐚"
+ Decoded:  "*l"
+--------------
+--- Decode ---
+ Original: "🌺🌴"
+ Decoded:  "r"
+--------------
+--- Decode ---
+ Original: "🐠🐡🐡🐚"
+ Decoded:  "*l"
+--------------
+--- Decode ---
+ Original: "🌺🌴"
+ Decoded:  "r"
+--------------
+--- Decode ---
+ Original: "🐠🐡🐡🐚"
+ Decoded:  "*l"
+--------------
+--- Decode ---
+ Original: "🐠🌊🦈🌺🌈🌋🐡🌋🐳🌊🐋🌈🦈🐚🌴🐢🌈🌺🐠🐬🌴🐙🐬🐋🐳🦈"
+ Decoded:  "/proc/cpuinfo"
+--------------
+--- Decode ---
+ Original: "🌺🌴"
+ Decoded:  "r"
+--------------
+--- Decode ---
+ Original: "🐠🐡🐡🐬"
+ Decoded:  "*a"
+--------------
+--- Decode ---
+ Original: "🐡🐡"
+ Decoded:  "\
+"
+--------------
+--- Decode ---
+ Original: "🌺🌈🐡🐙🌋🐳🦈🌺🐳🐳🐚🐢🦈🌈🦀🐠🌈🐡🌺🌊"
+ Decoded:  "vm_vendor:"
+--------------
+--- Decode ---
+ Original: "🐬🐬🦈🥥🐢🦈🐡🌋🐳🐠🐋🐳🥥🐙🌈🐳🦀🐢🐠🐚🌴🦈🌺🐋🌺🦈🐢🌊🌊🌊🐬🦀🌊🐬"
+ Decoded:  "lsmod 2>/dev/null"
+--------------
+--- Decode ---
+ Original: "🐠🐡🐡🐬"
+ Decoded:  "*a"
+--------------
+--- Decode ---
+ Original: "🌺🌈🐡🌊🐢🐳🦈🦀🐳🦈🐙🐬🦈🐢🌴🌋🌈🐬"
+ Decoded:  "vboxguest"
+--------------
+--- Decode ---
+ Original: "🌺🌈🐡🌊🐢🐳🦈🦀🐠🌊🐚🌊"
+ Decoded:  "vboxsf"
+--------------
+--- Decode ---
+ Original: "🌺🌈🐡🌊🐢🐳🦈🦀🐠🐡🐚🐙🦈🌈🦀🌴🐢🐢"
+ Decoded:  "vboxvideo"
+--------------
+--- Decode ---
+ Original: "🌺🌈🐡🐙🌈🐚🐡🐬🐳🐡🐙🐚"
+ Decoded:  "vmwgfx"
+--------------
+--- Decode ---
+ Original: "🐬🐠🦈🦈🌋🐳🦈🌺🐳🐚🐚🦈🐡🐢🌴🌋"
+ Decoded:  "hv_vmbus"
+--------------
+--- Decode ---
+ Original: "🐬🐠🦈🦈🌋🐳🦈🥥🐠🐠🐚🐙🦈🥥🌴🌋"
+ Decoded:  "hv_utils"
+--------------
+--- Decode ---
+ Original: "🐬🦈🦈🦈🐢🦈"
+ Decoded:  "kvm"
+--------------
+--- Decode ---
+ Original: "🌺🐚🦈🐋🐢🐡"
+ Decoded:  "qxl"
+--------------
+--- Decode ---
+ Original: "🐬🌴🐡🌴🐢🐋🐡🦀🐠🌊🐚🌺🐡🐙🦀🐡"
+ Decoded:  "bochsdrm"
+--------------
+--- Decode ---
+ Original: "🌺🌈🐡🐙🌋🐳🐡🐡🐠🥥🐙🌺🦈🦈🦀🐚🐢🐳🐠🌈🦀🐡🐳🐳"
+ Decoded:  "vm_artifact:"
+--------------
+--- Decode ---
+ Original: "🌊🐋🐳🥥🐋🦀🐳🐳"
+ Decoded:  "USER"
+--------------
+--- Decode ---
+ Original: "🥥🐠🐠🌴🌋🐋🐳🌊🦈🌴🦀🐠🐳🌊🐚🌴"
+ Decoded:  "HOSTNAME"
+--------------
+--- Decode ---
+ Original: "🌺🦀🐡🐬🐢🐠🐡🌊🐳🥥🐚🌈🐡🐡"
+ Decoded:  "sandbox"
+--------------
+--- Decode ---
+ Original: "🐬🐚🐡🦀🐢🐢🐡🐢🐠🐋🐙🐡🦈🦈🌴🌋"
+ Decoded:  "analysis"
+--------------
+--- Decode ---
+ Original: "🐬🌺🐡🐬🐢🐡🦈🐬🐳🌺🐙🦈🦈🐢"
+ Decoded:  "malware"
+--------------
+--- Decode ---
+ Original: "🐬🌋🐡🐠🌈🌴🐡🌋🐳🌴🐚🐠🐡🌈🦀🥥🐢🐢🐠🦈"
+ Decoded:  "detonation"
+--------------
+--- Decode ---
+ Original: "🐬🐡🐡🌴🐢🦀"
+ Decoded:  "joe"
+--------------
+--- Decode ---
+ Original: "🐬🦀🦈🐠🐢🐋🐡🐙🐳🦀🐚🌈"
+ Decoded:  "cuckoo"
+--------------
+--- Decode ---
+ Original: "🐬🦀🐡🐬🌈🌈🐡🥥"
+ Decoded:  "cape"
+--------------
+--- Decode ---
+ Original: "🐬🐚🐡🦀🌈🌊🦈🐳🐠🐳🐚🐢"
+ Decoded:  "anyrun"
+--------------
+--- Decode ---
+ Original: "🐬🐬🐡🐬🐢🌋"
+ Decoded:  "lab"
+--------------
+--- Decode ---
+ Original: "🌺🌋🐡🐠🌈🐋🦈🌊"
+ Decoded:  "test"
+--------------
+--- Decode ---
+ Original: "🥥🥥🐳🐠🐋🦈🐳🌋🐡🐬🌴🦈🐳🌺🐚🌋🐋🌺🦈🌈🐚🌺🥥🐬🐡🌈🌋🌴"
+ Decoded:  "NUM_PROCESSORS"
+--------------
+--- Decode ---
+ Original: "🐠🌊🦈🌺🌈🌋🐡🌋🐳🌊🐋🌈🦈🌊🦀🌴🐢🐋🐠🐬🌴🐙🐬🐋🐳🦈"
+ Decoded:  "/proc/meminfo"
+--------------
+--- Decode ---
+ Original: "🌺🌴"
+ Decoded:  "r"
+--------------
+--- Decode ---
+ Original: "🐠🐡🐡🐬"
+ Decoded:  "*a"
+--------------
+--- Decode ---
+ Original: "🐠🌊🐡🐬🐢🐠🐡🐡🐳🐙🐙🐙🐡🐚🦀🥥🌈🦈🐬🐡"
+ Decoded:  "/analysis/"
+--------------
+--- Decode ---
+ Original: "🐠🌊🐡🌴🌈🌈🦈🌊🌺🦀🐚🐠🦈🐬🦀🌈🐢🌋🐳🐬🦀🌺🐬🐡🐠🐢🦀🥥"
+ Decoded:  "/opt/analysis/"
+--------------
+--- Decode ---
+ Original: "🐠🌊🐡🌴🌈🌈🦈🌊🌺🦀🐚🐡🐡🐢🦀🌋🐢🦀🐠🐡🌴🐚🐠🐬"
+ Decoded:  "/opt/cuckoo/"
+--------------
+--- Decode ---
+ Original: "🐠🌊🐡🌴🌈🌈🦈🌊🌺🦀🐚🐡🦈🦀🌴🐢🐢🌺🐬🐡"
+ Decoded:  "/opt/cape/"
+--------------
+--- Decode ---
+ Original: "🐠🌊🐡🌴🌈🌈🦈🌊🌺🦀🐚🦀🦈🌺🦀🌴🌈🦈🐠🌋🌴🐙🐬🐢🐳🌈🐢🥥🌊🌴🐠🐙"
+ Decoded:  "/opt/joesandbox/"
+--------------
+--- Decode ---
+ Original: "🌺🌴🐡🌊"
+ Decoded:  "rb"
+--------------
+--- Decode ---
+ Original: "🌺🌴🐡🌊"
+ Decoded:  "rb"
+--------------
+--- Decode ---
+ Original: "🌺🌴🐡🌊"
+ Decoded:  "rb"
+--------------
+--- Decode ---
+ Original: "🌺🌴🐡🌊"
+ Decoded:  "rb"
+--------------
+--- Decode ---
+ Original: "🌺🌴🐡🌊"
+ Decoded:  "rb"
+--------------
+--- Decode ---
+ Original: "🌺🐙🐡🌴🌈🐋🐡🌴🐠🌋"
+ Decoded:  "posix"
+--------------

@@ -3,95 +3,79 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>STAND ALONE SYSTEM - WITHOUT ACTIVE DIRECTORY (AD) · Will Seligman</title>
-<link rel="stylesheet" href="/assets/style.css">
+<meta name="color-scheme" content="dark">
+<title>STAND ALONE SYSTEM - WITHOUT ACTIVE DIRECTORY (AD) · the-grizzly-bear</title>
+<meta name="description" content="STAND ALONE SYSTEM - WITHOUT ACTIVE DIRECTORY (AD) — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
 <div class="layout">
 <aside class="sidebar" id="sidebar">
-  <a class="brand" href="/index.html">
+  <a class="brand" href="../../../../index.html">
     <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
   </a>
-  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/2-protect-defend/windows/stand-alone-system-without-active-directory-ad.html"></nav>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/2-protect-defend/windows/stand-alone-system-without-active-directory-ad.html" data-root="../../../.."></nav>
 </aside>
 <main class="content">
   <article class="doc">
-  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/blue-team-field-manual.html">Blue Team Field Manual</a> &rsaquo; <a href="/other/blue-team-field-manual/2-protect-defend.html">2 PROTECT (Defend)</a> &rsaquo; <a href="/other/blue-team-field-manual/2-protect-defend/windows.html">WINDOWS</a></div>
-  <h1 id="stand-alone-system-without-active-directory-ad">STAND ALONE SYSTEM - WITHOUT ACTIVE DIRECTORY (AD)</h1>
+  <div class="breadcrumb"><a href="../../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../../index.html">Other</a> &rsaquo; <a href="../../index.html">Blue Team Field Manual</a> &rsaquo; <a href="../index.html">2 PROTECT (Defend)</a> &rsaquo; <a href="index.html">WINDOWS</a></div>
+<h1 id="title">STAND ALONE SYSTEM - WITHOUT ACTIVE DIRECTORY (AD)</h1>
+
 <p>Disallow running a .exe file:</p>
 <pre><code class="language-bash">C:\&gt; reg add
-&quot;HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer&quot; /v DisallowRun /t REG_DWORD /d &quot;00000001&quot; /f
-C:\&gt; reg add &quot;HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun&quot; /v badfile.exe /t REG_SZ /d &lt;BAD FILE NAME&gt;.exe /f
-</code></pre>
+"HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v DisallowRun /t REG_DWORD /d "00000001" /f
+C:\&gt; reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v badfile.exe /t REG_SZ /d &lt;BAD FILE NAME&gt;.exe /f</code></pre>
 <p>Disable Remote Desktop:</p>
-<pre><code class="language-bash">C:\&gt; reg add &quot;HKLM\SYSTEM\CurrentControlSet\Control\TerminalServer&quot; /f /v fDenyTSConnections /t REG_DWORD /d 1
-</code></pre>
+<pre><code class="language-bash">C:\&gt; reg add "HKLM\SYSTEM\CurrentControlSet\Control\TerminalServer" /f /v fDenyTSConnections /t REG_DWORD /d 1</code></pre>
 <p>Send NTLMv2 response only/refuse LM and NTLM: (Windows 7 default)</p>
-<pre><code class="language-bash">C:\&gt; reg add HKLM\SYSTEM\CurrentControlSet\Control\Lsa\ /v lmcompatibilitylevel /t REG_DWORD /d 5 /f
-</code></pre>
+<pre><code class="language-bash">C:\&gt; reg add HKLM\SYSTEM\CurrentControlSet\Control\Lsa\ /v lmcompatibilitylevel /t REG_DWORD /d 5 /f</code></pre>
 <p>Restrict Anonymous Access:</p>
-<pre><code class="language-bash">C:\&gt; reg add HKLM\SYSTEM\CurrentControlSet\Control\Lsa /v restrictanonymous /t REG_DWORD /d 1 /f
-</code></pre>
-<p>Do not allow anonymous enumeration of SAM accounts<br>and shares:</p>
-<pre><code class="language-bash">C:\&gt; reg add HKLM\SYSTEM\CurrentControlSet\Control\Lsa /vrestrictanonymoussam /t REG_DWORD /d 1 /f
-</code></pre>
+<pre><code class="language-bash">C:\&gt; reg add HKLM\SYSTEM\CurrentControlSet\Control\Lsa /v restrictanonymous /t REG_DWORD /d 1 /f</code></pre>
+<p>Do not allow anonymous enumeration of SAM accounts<br>
+and shares:</p>
+<pre><code class="language-bash">C:\&gt; reg add HKLM\SYSTEM\CurrentControlSet\Control\Lsa /vrestrictanonymoussam /t REG_DWORD /d 1 /f</code></pre>
 <p>Disable IPV6:</p>
-<pre><code class="language-bash">C:\&gt; reg add HKLM\SYSTEM\CurrentControlSet\services\TCPIP6\Parameters /v DisabledComponents /t REG_DWORD /d 255 /f
-</code></pre>
+<pre><code class="language-bash">C:\&gt; reg add HKLM\SYSTEM\CurrentControlSet\services\TCPIP6\Parameters /v DisabledComponents /t REG_DWORD /d 255 /f</code></pre>
 <p>Disable sticky keys:</p>
-<pre><code class="language-bash">C:\&gt; reg add &quot;HKCU\ControlPanel\Accessibility\StickyKeys&quot; /v Flags /t REG_SZ /d 506 /f Disable Toggle Keys:
-C:\&gt; reg add &quot;HKCU\ControlPanel\Accessibility\ ToggleKeys&quot; /v Flags /t REG_SZ Id 58 /f
-</code></pre>
+<pre><code class="language-bash">C:\&gt; reg add "HKCU\ControlPanel\Accessibility\StickyKeys" /v Flags /t REG_SZ /d 506 /f Disable Toggle Keys:
+C:\&gt; reg add "HKCU\ControlPanel\Accessibility\ ToggleKeys" /v Flags /t REG_SZ Id 58 /f</code></pre>
 <p>Disable Filter Keys:</p>
-<pre><code class="language-bash">C:\&gt; reg add &quot;HKCU\ControlPanel\Accessibility\Keyboard Response&quot; /v Flags /t REG_SZ /d 122 /f
-</code></pre>
+<pre><code class="language-bash">C:\&gt; reg add "HKCU\ControlPanel\Accessibility\Keyboard Response" /v Flags /t REG_SZ /d 122 /f</code></pre>
 <p>Disable On-screen Keyboard:</p>
-<pre><code class="language-bash">C:\&gt; reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI /f /v ShowTabletKeyboard /t REG_DWORD /d 0
-</code></pre>
+<pre><code class="language-bash">C:\&gt; reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI /f /v ShowTabletKeyboard /t REG_DWORD /d 0</code></pre>
 <p>Disable Administrative Shares - Workstations:</p>
-<pre><code class="language-bash">C:\&gt; reg add HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters /f /v AutoShareWks /t REG_DWORD /d 0
-</code></pre>
+<pre><code class="language-bash">C:\&gt; reg add HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters /f /v AutoShareWks /t REG_DWORD /d 0</code></pre>
 <p>Disable Administrative Shares - Severs</p>
-<pre><code class="language-bash">C:\&gt; reg add HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters /f /v AutoShareServer /t REG_DWORD /d 0
-</code></pre>
+<pre><code class="language-bash">C:\&gt; reg add HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters /f /v AutoShareServer /t REG_DWORD /d 0</code></pre>
 <p>Remove Creation of Hashes Used to Pass the Hash Attack (Requires password reset and reboot to purge old hashes):</p>
-<pre><code class="language-bash">C:\&gt; reg add HKLM\SYSTEM\CurrentControlSet\Control\Lsa /f /v NoLMHash /t REG_DWORD /d 1
-</code></pre>
+<pre><code class="language-bash">C:\&gt; reg add HKLM\SYSTEM\CurrentControlSet\Control\Lsa /f /v NoLMHash /t REG_DWORD /d 1</code></pre>
 <p>To Disable Registry Editor: (High Risk)</p>
-<pre><code class="language-bash">C:\&gt; reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\System /v DisableRegistryTools /t REG_DWORD /d 1 /f
-</code></pre>
+<pre><code class="language-bash">C:\&gt; reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\System /v DisableRegistryTools /t REG_DWORD /d 1 /f</code></pre>
 <p>Disable IE Password Cache:</p>
-<pre><code class="language-bash">C:\&gt; reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings /v DisablePasswordCaching /t REG_DWORD/d 1 /f
-</code></pre>
+<pre><code class="language-bash">C:\&gt; reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings /v DisablePasswordCaching /t REG_DWORD/d 1 /f</code></pre>
 <p>Disable CMD prompt:</p>
-<pre><code class="language-bash">C:\&gt; reg add HKCU\Software\Policies\Microsoft\Windows\System /v DisableCMD /t REG_DWORD /d 1 /f
-</code></pre>
+<pre><code class="language-bash">C:\&gt; reg add HKCU\Software\Policies\Microsoft\Windows\System /v DisableCMD /t REG_DWORD /d 1 /f</code></pre>
 <p>Disable Admin credentials cache on host when using RDP:</p>
-<pre><code class="language-bash">C:\&gt; reg add HKLM\System\CurrentControlSet\Control\Lsa /v DisableRestrictedAdmin /t REG_DWORD /d 0 /f
-</code></pre>
+<pre><code class="language-bash">C:\&gt; reg add HKLM\System\CurrentControlSet\Control\Lsa /v DisableRestrictedAdmin /t REG_DWORD /d 0 /f</code></pre>
 <p>Do not process the run once list:</p>
 <pre><code class="language-bash">C:\&gt; reg add HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer /v DisableLocalMachineRunOnce /t REG_DWORD /d 1
-C:\&gt; reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer /v DisableLocalMachineRunOnce /t REG_DWORD /d 1
-</code></pre>
+C:\&gt; reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer /v DisableLocalMachineRunOnce /t REG_DWORD /d 1</code></pre>
 <p>Require User Access Control (UAC) Permission:</p>
-<pre><code class="language-bash">C:\&gt; reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v EnableLUA /t REG_DWORD /d 1 /f
-</code></pre>
+<pre><code class="language-bash">C:\&gt; reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v EnableLUA /t REG_DWORD /d 1 /f</code></pre>
 <p>Change password at next logon:</p>
-<pre><code class="language-bash">PS C:\&gt; Set-ADAccountPassword &lt;USER&gt; -NewPassword $newpwd -Reset -PassThru | Set-ADuser ChangePasswordAtLogon $True
-</code></pre>
+<pre><code class="language-bash">PS C:\&gt; Set-ADAccountPassword &lt;USER&gt; -NewPassword $newpwd -Reset -PassThru | Set-ADuser ChangePasswordAtLogon $True</code></pre>
 <p>Change password at next logon for OU Group:</p>
-<pre><code class="language-bash">PS C:\&gt; Get-ADuser -filter &quot;department -eq '&lt;OU GROUP&gt;' -AND enabled -eq 'True | Set-ADuser -ChangePasswordAtLogon $True
-</code></pre>
+<pre><code class="language-bash">PS C:\&gt; Get-ADuser -filter "department -eq '&lt;OU GROUP&gt;' -AND enabled -eq 'True | Set-ADuser -ChangePasswordAtLogon $True</code></pre>
 <p>Enabled Firewall logging:</p>
-<pre><code class="language-bash">C:\&gt; netsh firewall set logging droppedpackets connections = enable
-</code></pre>
+<pre><code class="language-bash">C:\&gt; netsh firewall set logging droppedpackets connections = enable</code></pre>
   </article>
-  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
 </div>
-<script src="/assets/nav.js" defer></script>
+<script src="../../../../assets/nav.js" defer></script>
 <script>
 document.getElementById('menu-toggle').addEventListener('click',function(){
   document.getElementById('sidebar').classList.toggle('open');

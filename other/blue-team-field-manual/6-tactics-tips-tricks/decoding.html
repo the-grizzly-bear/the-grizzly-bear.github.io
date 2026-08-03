@@ -3,23 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DECODING · Will Seligman</title>
-<link rel="stylesheet" href="/assets/style.css">
+<meta name="color-scheme" content="dark">
+<title>DECODING · the-grizzly-bear</title>
+<meta name="description" content="DECODING — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
 <div class="layout">
 <aside class="sidebar" id="sidebar">
-  <a class="brand" href="/index.html">
+  <a class="brand" href="../../../index.html">
     <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
   </a>
-  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/6-tactics-tips-tricks/decoding.html"></nav>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/6-tactics-tips-tricks/decoding.html" data-root="../../.."></nav>
 </aside>
 <main class="content">
   <article class="doc">
-  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/blue-team-field-manual.html">Blue Team Field Manual</a> &rsaquo; <a href="/other/blue-team-field-manual/6-tactics-tips-tricks.html">6 TACTICS (TIPS &amp; TRICKS)</a></div>
-  <h1 id="decoding">DECODING</h1>
+  <div class="breadcrumb"><a href="../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../index.html">Other</a> &rsaquo; <a href="../index.html">Blue Team Field Manual</a> &rsaquo; <a href="index.html">6 TACTICS (TIPS &amp; TRICKS)</a></div>
+<h1 id="title">DECODING</h1>
+
 <h2 id="hex-conversion">HEX CONVERSION</h2>
 <pre><code class="language-bash">C:\&gt; set /a 1+2
 3
@@ -27,34 +31,28 @@ C:\&gt; set /a 3*(9/4)
 6
 C:\&gt; set /a (2*5)/2
 5
-C:\&gt;set /a &quot;32&gt;&gt;3&quot;
-4
-</code></pre>
+C:\&gt;set /a "32&gt;&gt;3"
+4</code></pre>
 <p>Decode Base64 text in a file:</p>
-<pre><code class="language-bash">C:\&gt; certutil -decode &lt;BASE64 ENCODED FILE NAME&gt; &lt;DECODED FILE NAME&gt;
-</code></pre>
-<p>Decode XOR and search for http:<br />
-Ref, <a href="https://blog.didierstevens.com/programs/xorsearch/">https://blog.didierstevens.com/programs/xorsearch/</a></p>
-<pre><code class="language-bash">C:\&gt; xorsearch,exe -i -s &lt;INPUT FILE NAME&gt; http
-</code></pre>
+<pre><code class="language-bash">C:\&gt; certutil -decode &lt;BASE64 ENCODED FILE NAME&gt; &lt;DECODED FILE NAME&gt;</code></pre>
+<p>Decode XOR and search for http:</p>
+<p>Ref, <a href="https://blog.didierstevens.com/programs/xorsearch/" target="_blank" rel="noopener">ttps://blog.didierstevens.com/programs/xorsearch/</a></p>
+<pre><code class="language-bash">C:\&gt; xorsearch,exe -i -s &lt;INPUT FILE NAME&gt; http</code></pre>
 <p>Convert from hex to decimal in Linux:</p>
-<pre><code class="language-bash"># echo u0xff&quot;|wcalc -d
-= 255
-</code></pre>
+<pre><code class="language-bash"># echo u0xff"|wcalc -d
+= 255</code></pre>
 <p>Convert from decimal to hex in Linux:</p>
-<pre><code class="language-bash">$ echo u25s&quot;1wcalc -h
-= 0xff
-</code></pre>
+<pre><code class="language-bash">$ echo u25s"1wcalc -h
+= 0xff</code></pre>
 <p>Decode HTML Strings:</p>
-<pre><code class="language-bash">PS C:\&gt; Add-Type -AssemblyName System.Web
-PS C:\&gt; [System.Uri] ::UnescapeDataString(&quot;HTTP%3a%2f%2fHello%20World.com&quot;)
-HTTP://Hello World.com
-</code></pre>
+<pre><code class="language-bash">PS C:\&gt; Add-Type -AssemblyName [System.Web](http://system.web/)
+PS C:\&gt; [System.Uri] ::UnescapeDataString("HTTP%3a%2f%2fHello%[20World.com](http://20world.com/)")
+[HTTP://Hello](http://hello/) [World.com](http://world.com/)</code></pre>
   </article>
-  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
 </div>
-<script src="/assets/nav.js" defer></script>
+<script src="../../../assets/nav.js" defer></script>
 <script>
 document.getElementById('menu-toggle').addEventListener('click',function(){
   document.getElementById('sidebar').classList.toggle('open');

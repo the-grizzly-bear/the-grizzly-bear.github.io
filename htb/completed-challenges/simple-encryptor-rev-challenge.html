@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Simple Encryptor (rev challenge) · the-grizzly-bear</title>
+<meta name="description" content="Simple Encryptor (rev challenge) — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/completed-challenges/simple-encryptor-rev-challenge.html" data-root="../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">HackTheBox</a> &rsaquo; <a href="index.html">Completed Challenges</a></div>
+<h1 id="title">Simple Encryptor (rev challenge)</h1>
+
+<p class="figure"><a class="img-link" href="simple-encryptor-rev-challenge/image.png"><img src="simple-encryptor-rev-challenge/image.png" alt="image.png" loading="lazy"></a></p>
+<pre><code>┌──(kali㉿kali)-[/mnt/tmp/HTB]
+└─$ python decode.py  
+HTB{vRy_s1MplE_F1LE3nCryp0r}
+                                                                                                       
+┌──(kali㉿kali)-[/mnt/tmp/HTB]
+└─$ cat decode.py    
+def get_rand_sequence(seed, num_rands):
+    MOD = 2147483647
+    STATE_SIZE = 344 + num_rands
+    r = [0] * STATE_SIZE
+    r[0] = seed
+    for i in range(1, 31):
+        r[i] = (16807 * r[i-1]) % MOD
+    for i in range(31, 34):
+        r[i] = r[i-31]
+    for i in range(34, STATE_SIZE):
+        r[i] = (r[i-31] + r[i-3]) &amp; 0xffffffff
+    rands = []
+    for i in range(344, 344 + num_rands):
+        rand_val = (r[i] &gt;&gt; 1) &amp; 0x7fffffff
+        rands.append(rand_val)
+    return rands
+
+seed = 1655780698
+rands = get_rand_sequence(seed, 56)
+enc_hex = "00f53e12c0bd8d16f0fd7599faef399a4b9621a14316237165fb274b"
+enc_bytes = [int(enc_hex[j:j+2],16) for j in range(0,len(enc_hex),2)]
+plain = []
+k = 0
+for b in enc_bytes:
+    rand_xor = rands[k] &amp; 0xff
+    k += 1
+    rand_shift = rands[k] &amp; 7
+    k += 1
+    rotated = ((b &gt;&gt; rand_shift) | (b &lt;&lt; (8 - rand_shift))) &amp; 0xff
+    decrypted = rotated ^ rand_xor
+    plain.append(chr(decrypted))
+flag = ''.join(plain)
+print(flag)
+</code></pre>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>WINDOWS · the-grizzly-bear</title>
+<meta name="description" content="WINDOWS — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/5-recover-remediate/backup/windows.html" data-root="../../../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../../index.html">Other</a> &rsaquo; <a href="../../index.html">Blue Team Field Manual</a> &rsaquo; <a href="../index.html">5 RECOVER (Remediate)</a> &rsaquo; <a href="index.html">BACKUP</a></div>
+<h1 id="title">WINDOWS</h1>
+
+<p>Backup GPO Audit Policy to backup file:</p>
+<pre><code class="language-bash">C:\&gt; auditpol /backup /file:C\auditpolicy.csv</code></pre>
+<p>Restore GPO Audit Policy from backup file:</p>
+<pre><code class="language-bash">C:\&gt; auditpol /restore /file:C:\auditpolicy.csv</code></pre>
+<p>Backup All GPOs in domain and save to Path:</p>
+<pre><code class="language-bash">PS C:\&gt; Backup-Gpo -All -Path \\&lt;SERVER&gt;\&lt;PATH TO BACKUPS&gt;</code></pre>
+<p>Restore All GPOs in domain and save to Path:</p>
+<pre><code class="language-bash">PS C:\&gt; Restore-GPO -All -Domain &lt;INSERT DOMAIN NAME&gt; -Path \\Serverl\GpoBackups</code></pre>
+<p>Start Volume Shadow Service:</p>
+<pre><code class="language-bash">C:\&gt; net start VSS</code></pre>
+<p>List all shadow files and storage:</p>
+<pre><code class="language-bash">C:\&gt; vssadmin List ShadowStorage</code></pre>
+<p>List all shadow files:</p>
+<pre><code class="language-bash">C:\&gt; vssadmin List Shadows</code></pre>
+<p>Browse Shadow Copy for files/folders:</p>
+<pre><code class="language-bash">C:\&gt; mklink /d c:\&lt;CREATE FOLDER&gt;\&lt;PROVIDE FOLDER NAME BUT DO NOT CREATE&gt;
+\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopyl\</code></pre>
+<p>Revert back to a selected shadow file on Windows Server and Windows 8:</p>
+<pre><code class="language-bash">C:\&gt; vssadmin revert shadow /shadow={&lt;SHADOW COPYnID&gt;} /ForceDismount</code></pre>
+<p>List a files previous versions history using volrest.exe:<br>
+Ref. <a href="https://www.microsoft.com/en%C2%ADus/download/details.aspx?id=17657" target="_blank" rel="noopener">https://www.microsoft.com/en­us/download/details.aspx?id=17657</a></p>
+<pre><code class="language-bash">C:\&gt; "\Program Files (x86)\Windows Resource Kits\Tools\volrest.exe" "\\localhost\c$\&lt;PATH TO FILE&gt;\&lt;FILE NAME&gt;"</code></pre>
+<p>Revert back to a selected previous file version or @GMT file name for specific previous version using volrest.exe:</p>
+<pre><code class="language-bash">C:\&gt; subst Z: \\localhost\c$\$\&lt;PATH TO FILE&gt;
+C:\&gt; "\Program Files (x86)\Windows Resource Kits\Tools\volrest.exe" "\\localhost\c$\&lt;PATH TO FILE&gt;\&lt;CURRENT FILE NAME OR @GMT FILE NAME FROM LIST COMMAND ABOVE&gt;" /R:Z:\
+C:\&gt; subst Z: /0</code></pre>
+<p>Revert back a directory and subdirectory files previous version using volrest.exe:</p>
+<pre><code class="language-bash">C: \&gt; "\Program Files (x86)\Windows Resource Kits\Tools\volrest.exe" \\localhost\c$\&lt;PATH TO FOLDER\*·* /5 /r:\\localhost\c$\&lt;PATH TO FOLDER&gt;\</code></pre>
+<p>Revert back to a selected shadow file on Windows Server and Windows 7 and 10 using wmic:</p>
+<pre><code class="language-bash">C:\&gt; wmic shadowcopy call create Volume='C:\'</code></pre>
+<p>Create a shadow copy of volume C on Windows 7 and 10 using PowerShell:</p>
+<pre><code class="language-bash">PS C:\&gt; (gwmi -list win32_shadowcopy).Create('C:\', 'ClientAccessible')</code></pre>
+<p>Create a shadow copy of volume C on Windows Server 2003 and 2008:</p>
+<pre><code class="language-bash">C:\&gt; vssadmin create shadow /for=c:</code></pre>
+<p>Create restore point on Windows:</p>
+<pre><code class="language-bash">C:\&gt; wmic.exe /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "%DATE%", 100, 7</code></pre>
+<p>Start system restore points on Windows XP:</p>
+<pre><code class="language-bash">C:\&gt; sc config srservice start= disabled
+C:\&gt; reg add
+"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows
+NT\CurrentVersion\SystemRestore" /v DisableSR /t
+REG_DWORD /d 1 /f
+C:\&gt; net stop srservice</code></pre>
+<p>Stop system restore points on Windows XP:</p>
+<pre><code class="language-bash">C:\&gt; sc config srservice start= Auto
+C:\&gt; net start srservice
+C:\&gt; reg add
+"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows
+NT\CurrentVersion\SystemRestore" /v DisableSR /t REG_DWORD /d 0 /f</code></pre>
+<p>List of restore points:</p>
+<pre><code class="language-bash">PS C:\&gt; Get-ComputerRestorePoint</code></pre>
+<p>Restore from a specific restore point:</p>
+<pre><code class="language-bash">PS C:\&gt; Restore-Computer -RestorePoint &lt;RESTORE POINT NUMBER&gt; -Confirm</code></pre>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

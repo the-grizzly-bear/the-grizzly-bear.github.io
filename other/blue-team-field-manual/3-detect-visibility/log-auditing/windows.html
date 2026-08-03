@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>WINDOWS · the-grizzly-bear</title>
+<meta name="description" content="WINDOWS — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/3-detect-visibility/log-auditing/windows.html" data-root="../../../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../../index.html">Other</a> &rsaquo; <a href="../../index.html">Blue Team Field Manual</a> &rsaquo; <a href="../index.html">3 DETECT (Visibility)</a> &rsaquo; <a href="index.html">LOG AUDITING</a></div>
+<h1 id="title">WINDOWS</h1>
+
+<p>Increase Log size to support increased auditing:</p>
+<pre><code class="language-bash">C:\&gt; reg add
+HKLM\Software\Policies\Microsoft\Windows\Eventlog\Ap
+plication /v MaxSize /t REG_DWORD /d 0x19000
+C:\&gt; reg add
+HKLM\Software\Policies\Microsoft\Windows\Eventlog\Se
+curity /v MaxSize /t REG_DWORD /d 0x64000
+C:\&gt; reg add
+HKLM\Software\Policies\Microsoft\Windows\EventLog\Sy
+stem /v MaxSize /t REG_DWORD /d 0x19000</code></pre>
+<p>Check settings of Security log:</p>
+<pre><code class="language-bash">C:\&gt; wevtutil gl Security</code></pre>
+<p>Check settings of audit policies:</p>
+<pre><code class="language-bash">C:\&gt; auditpol /get /category:*</code></pre>
+<p>Set Log Auditing on for Success and/or Failure on<br>
+All Categories:</p>
+<pre><code class="language-bash">C:\&gt; auditpol /set /category:* /success:enable
+/failure:enable</code></pre>
+<p>Set Log Auditing on for Success and/or Failure on<br>
+Subcategories:</p>
+<pre><code class="language-bash">C:\&gt; auditpol /set /subcategory:"Detailed File
+Share" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"File System"
+/success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Security System
+Extension" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"System Integrity"
+/success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Security State
+Change" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Other System
+Events" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"System Integrity"
+/success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Logon"
+/success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Logoff"
+/success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Account Lockout"
+/success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Other Logon/Logoff
+Events" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Network Policy
+Server" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Registry"
+/success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"SAM"
+/success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Certification
+Services" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Application
+Generated" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Handle
+Manipulation" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"file Share"
+/success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"filtering Platform
+Packet Drop" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Filtering Platform
+Connection" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Other Object Access
+Events" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Detailed File
+Share" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Sensitive Privilege
+Use" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Non Sensitive
+Privilege Use" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Other Privilege Use
+Events" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Process
+Termination" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"DPAPI Activity"
+/success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"RPC Events"
+/success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Process Creation"
+/success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Audit Policy
+Change" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Authentication
+Policy Change" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Authorization
+Policy Change" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"MPSSVC Rule-Level
+Policy Change" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Filtering Platform
+Policy Change" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Other Policy Change
+Events" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"User Account
+Management" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Computer Account
+Management" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Security Group
+Management" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Distribution Group
+Management" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Application Group
+Management" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Other Account
+Management Events" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Directory Service
+Changes" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Directory Service
+Replication" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Detailed Directory
+Service Replication" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Directory Service
+Access" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Kerberos Service
+Ticket Operations" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Other Account Logan
+Events" /success:enable /failure:enable
+C:\&gt; auditpol /set /subcategory:"Kerberos
+Authentication Service" /success:enable
+/failure:enable
+C:\&gt; auditpol /set /subcategory:"Credential
+Validation" /success:enable /failure:enable</code></pre>
+<p>Check for list of available logs, size, retention<br>
+limit:</p>
+<pre><code class="language-bash">PS C:\&gt; Get-Eventlog -list</code></pre>
+<p>Partial list of Key Security Log Auditing events to<br>
+monitor:</p>
+<pre><code class="language-bash">PS C:\&gt; Get-Eventlog -newest 5 -logname application | Format-List</code></pre>
+<p>Show log from remote system:</p>
+<pre><code class="language-bash">PS C:\&gt; Show-Eventlog -computername &lt;SERVER NAME&gt;</code></pre>
+<p>Get a specific list of events based on Event ID:</p>
+<pre><code class="language-bash">PS C:\&gt; Get-Eventlog Security I ? { $_.Eventid -eq 4800}
+PS C:\&gt; Get-WinEvent -FilterHashtable
+@{LogName="Security"; ID=4774}</code></pre>
+<p>Account Logon - Audit Credential Validation Last 14 Days:</p>
+<pre><code class="language-bash">PS C:\&gt; Get-Eventlog Security
+4768,4771,4772,4769,4770,4649,4778,4779,4800,4801,4802,4803,5378,5632,5633 -after ((get-date).addDays(14))</code></pre>
+<p>Account - Logon/Logoff:</p>
+<pre><code class="language-bash">PS C:\&gt; Get-Eventlog Security
+4625,4634,4647,4624,4625,4648,4675,6272,6273,6274,6275,6276,6277,6278,6279,6280,4649,4778,4779,4800,4801,4802,4803,5378,5632,5633,4964 -after ((get­
+date).addDays(-1))</code></pre>
+<p>Account Management - Audit Application Group Management:</p>
+<pre><code class="language-bash">PS C:\&gt; Get-Eventlog Security
+4783,4784,4785,4786,4787,4788,4789,4790,4741,4742,4743,4744,4745,4746,4747,4748,4749,4750,4751,4752,4753,4759,4760,4761,4762,4782,4793,4727,4728,4729,4730,4731,4732,4733,4734,4735,4737,4754,4755,4756,4757,4758,4764,4720,4722,4723,4724,4725,4726,4738,4740,4765,4766,4767,4780,4781,4794,5376,5377 -after ((get­
+date).addDays(-1))</code></pre>
+<p>Detailed Tracking - Audit DPAPI Activity, Process<br>
+Termination, RPC Events:</p>
+<pre><code class="language-bash">PS C:\&gt; Get-EventLog Security
+4692,4693,4694,4695,4689,5712 -after ((get­
+date).addDays(-1))</code></pre>
+<p>Domain Service Access - Audit Directory Service Access:</p>
+<pre><code class="language-bash">PS C:\&gt; Get-EventLog Security
+4662,5136,5137,5138,5139,5141 -after ((get­
+date).addDays(-1))</code></pre>
+<p>Object Access - Audit File Share, File System, SAM,<br>
+Registry, Certifications:</p>
+<pre><code class="language-bash">PS C:\&gt; Get-EventLog Security
+4671,4691,4698,4699,4700,4701,4702,5148,5149,5888,5889,5890,4657,5039,4659,4660,4661,4663,4656,4658,4690,4874,4875,4880,4881,4882,4884,4885,4888,4890,4891,4892,4895,4896,4898,5145,5140,5142,5143,5144,5168,5140,5142,5143,5144,5168,5140,5142,5143,5144,5168,4664,4985,5152,5153,5031,5140,5150,5151,5154,5155,5156,5157,5158,5159 -after ((get-date).addDays(-1))</code></pre>
+<p>Policy Change - Audit Policy Change, Microsoft<br>
+Protection Service, Windows Filtering Platform:</p>
+<pre><code class="language-bash">PS C:\&gt; Get-EventLog Security
+4715,4719,4817,4902,4904,4905,4906,4907,4908,4912,4713,4716,4717,4718,4739,4864,4865,4866,4867,4704,4705,4706,4707,4714,4944,4945,4946,4947,4948,4949,4950,4951,4952,4953,4954,4956,4957,4958,5046,5047,5048,5449,5450,4670 -after ((get-date).addDays(-1))</code></pre>
+<p>Privilege Use - Audit Non-Sensitive/Sensitive Privilege Use:</p>
+<pre><code class="language-bash">PS C:\&gt; Get-EventLog Security 4672,4673,4674 -after((get-date),addDays(-1))</code></pre>
+<p>System - Audit Security State Change, Security<br>
+System Extension, System Integrity, System Events:</p>
+<pre><code class="language-bash">PS C:\&gt; Get-Eventlog Security
+5024,5025,5027,5028,5029,5030,5032,5033,5034,5035,5037,5058,5059,6400,6401,6402,6403,6404,6405,6406,6407,4608,4609 ,4616, 4621, 4610, 4611, 4614,4622,4697,4612,4615,4618,4816,5038,5056,5057,5060,5061,5062,6281 -after ((get-date).addDays(-1))</code></pre>
+<p>Add Microsoft IIS cmdlet:</p>
+<pre><code class="language-bash">PS C:\&gt; add-pssnapin WebAdministration
+PS C:\&gt; Import-Module WebAdministration</code></pre>
+<p>Get IIS Website info:</p>
+<pre><code class="language-bash">PS C:\&gt; Get-IISSite</code></pre>
+<p>Get IIS Log Path Location:</p>
+<pre><code class="language-bash">PS C:\&gt; (Get-WebConfigurationProperty
+'/system.applicationHost/sites/siteDefaults' -Name
+'logfile.directory').Value</code></pre>
+<p>Set variable for IIS Log Path (default path):</p>
+<pre><code class="language-bash">PS C:\&gt; $LogDirPath =
+"C:\inetpub\logs\LogFiles\W3SVCl"</code></pre>
+<p>Get IIS HTTP log file list from Last 7 days:</p>
+<pre><code class="language-bash">PS C:\&gt; Get-Child!tem -Path
+C:\inetpub\logs\LogFiles\w3svcl -recurse I Where­
+Object {$_.lastwritetime -lt (get-date).addDays(-7)}</code></pre>
+<p>View IIS Logs (Using $LogDirPath variable set above):</p>
+<pre><code class="language-bash">PS C:\&gt; Get-Content $LogDirPath\*, log |%{$_ -replace
+'#Fields: ', "} |?{$_ -notmatch ""#'} |
+ConvertFrom-Csv -Delimiter '</code></pre>
+<p>View IIS Logs:</p>
+<pre><code class="language-bash">PS C:\&gt; Get-Content &lt;!IS LOG FILE NAME&gt;,log |%{$_ replace '#Fields: ', ''} 17{$_ -notmatch 'A#'} |
+ConvertFrom-Csv -Delimiter ' '</code></pre>
+<p>Find in IIS logs IP address 192.168.<em>·</em> pattern:</p>
+<pre><code class="language-bash">PS C:\&gt; Select-String -Path $LogDirPath\*,log Pattern '192,168,*,*'</code></pre>
+<p>Find in IIS logs common SQL injection patterns:</p>
+<pre><code class="language-bash">PS C:\&gt; Select-String -Path $LogDirPath\*,log
+'(@@version) | (sqlmap) | (Connect\(\)) | (cast\() | (char\(
+) | ( bchar\() | (sys
+databases) | (\(select) | (convert\() | ( Connect\() | ( count
+\() | (sys objects)'</code></pre>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

@@ -3,92 +3,84 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ACTIVE DIRECTORY INVENTORY · Will Seligman</title>
-<link rel="stylesheet" href="/assets/style.css">
+<meta name="color-scheme" content="dark">
+<title>ACTIVE DIRECTORY INVENTORY · the-grizzly-bear</title>
+<meta name="description" content="ACTIVE DIRECTORY INVENTORY — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
 <div class="layout">
 <aside class="sidebar" id="sidebar">
-  <a class="brand" href="/index.html">
+  <a class="brand" href="../../../../index.html">
     <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
   </a>
-  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/1-identify-scope/windows/active-directory-inventory.html"></nav>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/1-identify-scope/windows/active-directory-inventory.html" data-root="../../../.."></nav>
 </aside>
 <main class="content">
   <article class="doc">
-  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/blue-team-field-manual.html">Blue Team Field Manual</a> &rsaquo; <a href="/other/blue-team-field-manual/1-identify-scope.html">1 IDENTIFY (Scope)</a> &rsaquo; <a href="/other/blue-team-field-manual/1-identify-scope/windows.html">WINDOWS</a></div>
-  <h1 id="active-directory-inventory">ACTIVE DIRECTORY INVENTORY</h1>
+  <div class="breadcrumb"><a href="../../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../../index.html">Other</a> &rsaquo; <a href="../../index.html">Blue Team Field Manual</a> &rsaquo; <a href="../index.html">1 IDENTIFY (Scope)</a> &rsaquo; <a href="index.html">WINDOWS</a></div>
+<h1 id="title">ACTIVE DIRECTORY INVENTORY</h1>
+
 <p>List all OUs:</p>
-<pre><code class="language-bash">C:\&gt; dsquery ou DC=&lt;DOMAIN&gt;,DC=&lt;DOMAIN EXTENSION&gt;
-</code></pre>
+<pre><code class="language-bash">C:\&gt; dsquery ou DC=&lt;DOMAIN&gt;,DC=&lt;DOMAIN EXTENSION&gt;</code></pre>
 <p>List of workstations in the domain:</p>
-<pre><code class="language-bash">C:\&gt; netdom query WORKSTATION
-</code></pre>
+<pre><code class="language-bash">C:\&gt; netdom query WORKSTATION</code></pre>
 <p>List of servers in the domain:</p>
-<pre><code class="language-bash">C:\&gt; netdom query SERVER
-</code></pre>
+<pre><code class="language-bash">C:\&gt; netdom query SERVER</code></pre>
 <p>List of domain controllers:</p>
-<pre><code class="language-bash">C:\&gt; netdom query DC
-</code></pre>
-<p>List of organizational units under which the<br>specified user can create a machine object:</p>
-<pre><code class="language-bash">C:\&gt; netdom query OU
-</code></pre>
+<pre><code class="language-bash">C:\&gt; netdom query DC</code></pre>
+<p>List of organizational units under which the<br>
+specified user can create a machine object:</p>
+<pre><code class="language-bash">C:\&gt; netdom query OU</code></pre>
 <p>List of primary domain controller:</p>
-<pre><code class="language-bash">C:\&gt; netdom query PDC
-</code></pre>
+<pre><code class="language-bash">C:\&gt; netdom query PDC</code></pre>
 <p>List the domain trusts:</p>
-<pre><code class="language-bash">C:\&gt; netdom query TRUST
-</code></pre>
+<pre><code class="language-bash">C:\&gt; netdom query TRUST</code></pre>
 <p>Query the domain for the current list of FSMO owners</p>
-<pre><code class="language-bash">C:\&gt; netdom query FSMO
-</code></pre>
+<pre><code class="language-bash">C:\&gt; netdom query FSMO</code></pre>
 <p>List all computers from Active Directory:</p>
-<pre><code class="language-bash">C:\&gt; dsquery COMPUTER &quot;OU=servers,DC=&lt;DOMAIN
-NAME&gt;,DC=&lt;DOMAIN EXTENSION&gt;&quot; -o rdn -limit 0 &gt;
-C:\machines.txt
-</code></pre>
+<pre><code class="language-bash">C:\&gt; dsquery COMPUTER "OU=servers,DC=&lt;DOMAIN
+NAME&gt;,DC=&lt;DOMAIN EXTENSION&gt;" -o rdn -limit 0 &gt;
+C:\machines.txt</code></pre>
 <p>List user accounts inactive longer than 3 weeks:</p>
-<pre><code class="language-bash">C:\&gt; dsquery user domainroot -inactive 3
-</code></pre>
-<p>Find anything (or user) created on date in UTC using<br>timestamp format <a href="http://yyyymmddhhmmss.sz/">YYYYMMDDHHMMSS.sZ</a>:</p>
+<pre><code class="language-bash">C:\&gt; dsquery user domainroot -inactive 3</code></pre>
+<p>Find anything (or user) created on date in UTC using<br>
+timestamp format <a href="http://yyyymmddhhmmss.sz/" target="_blank" rel="noopener">YYYYMMDDHHMMSS.sZ</a>:</p>
 <pre><code class="language-bash">C:\&gt; dsquery * -filter
-&quot;(whenCreated&gt;=20101022083730,0Z)&quot;
-</code></pre>
+"(whenCreated&gt;=20101022083730,0Z)"</code></pre>
 <pre><code class="language-bash">C:\&gt; dsquery * -filter
-&quot;((whenCreated&gt;=20101022083730.0Z)&amp;(objectClass=user
-) ) II
-</code></pre>
+"((whenCreated&gt;=20101022083730.0Z)&amp;(objectClass=user
+) ) II</code></pre>
 <p>Alt option:</p>
 <pre><code class="language-bash">C:\&gt; ldifde -d ou=&lt;OU NAME&gt;,dC=&lt;DOMAIN
 NAME&gt;,dc=&lt;DOMAIN EXTENSION&gt; -l whencreated,
-whenchanged -p onelevel -r &quot;(ObjectCategory=user)&quot; f &lt;OUTPUT FILENAME&gt;
-</code></pre>
-<p>The last logon timestamp format in UTC:<br>YYYYMMDDHHMMSS<br />
-Alt option:</p>
+whenchanged -p onelevel -r "(ObjectCategory=user)" f &lt;OUTPUT FILENAME&gt;</code></pre>
+<p>The last logon timestamp format in UTC:<br>
+YYYYMMDDHHMMSS</p>
+<p>Alt option:</p>
 <pre><code class="language-bash">C:\&gt; dsquery * dc=&lt;DOMAIN NAME&gt;,dc=&lt;DOMAIN
-EXTENSION&gt; -filter &quot;(&amp;(objectCategory=Person)
-(objectClass=User)(whenCreated&gt;=20151001000000.0Z))&quot;
-</code></pre>
+EXTENSION&gt; -filter "(&amp;(objectCategory=Person)
+(objectClass=User)(whenCreated&gt;=20151001000000.0Z))"</code></pre>
 <p>Alt option:</p>
 <pre><code class="language-bash">C:\&gt; adfind -csv -b dc=&lt;DOMAIN NAME&gt;,dc=&lt;DOMAIN
-EXTENSION&gt; -f &quot;(&amp;(objectCategory=Person)
-(objectClass=User)(whenCreated&gt;=20151001000000.0Z))&quot;
-</code></pre>
-<p>Using PowerShell, dump new Active Directory accounts<br>in last 90 Days:</p>
+EXTENSION&gt; -f "(&amp;(objectCategory=Person)
+(objectClass=User)(whenCreated&gt;=20151001000000.0Z))"</code></pre>
+<p>Using PowerShell, dump new Active Directory accounts<br>
+in last 90 Days:</p>
 <pre><code class="language-bash">PS C:\&gt; import-module activedirectory
 PS C:\&gt; Get-QADUser -CreatedAfter (Get­
 Date).AddDays(-90)
 PS C:\&gt; Get-ADUser -Filter * -Properties whenCreated
 | Where-Object {$_.whenCreated -ge ((Get­
-Date).AddDays(-90)).Date}
-</code></pre>
+Date).AddDays(-90)).Date}</code></pre>
   </article>
-  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
 </div>
-<script src="/assets/nav.js" defer></script>
+<script src="../../../../assets/nav.js" defer></script>
 <script>
 document.getElementById('menu-toggle').addEventListener('click',function(){
   document.getElementById('sidebar').classList.toggle('open');

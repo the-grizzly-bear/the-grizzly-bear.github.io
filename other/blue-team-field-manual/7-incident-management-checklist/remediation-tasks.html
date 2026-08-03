@@ -3,58 +3,62 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>REMEDIATION TASKS · Will Seligman</title>
-<link rel="stylesheet" href="/assets/style.css">
+<meta name="color-scheme" content="dark">
+<title>REMEDIATION TASKS · the-grizzly-bear</title>
+<meta name="description" content="REMEDIATION TASKS — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
 <div class="layout">
 <aside class="sidebar" id="sidebar">
-  <a class="brand" href="/index.html">
+  <a class="brand" href="../../../index.html">
     <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
   </a>
-  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/7-incident-management-checklist/remediation-tasks.html"></nav>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/7-incident-management-checklist/remediation-tasks.html" data-root="../../.."></nav>
 </aside>
 <main class="content">
   <article class="doc">
-  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/blue-team-field-manual.html">Blue Team Field Manual</a> &rsaquo; <a href="/other/blue-team-field-manual/7-incident-management-checklist.html">7 INCIDENT MANAGEMENT (Checklist)</a></div>
-  <h1 id="remediation-tasks">REMEDIATION TASKS</h1>
-<p>Priority: H/M/L | Effort: H/M/L | Open/Closed</p>
-<ul>
-<li>Administrative AD Password Changes.</li>
-<li>Local Administrative Password Changes.</li>
-<li>User AD Password Changes.</li>
-<li>Local User Password Changes.</li>
-<li>Service Account Password Changes.</li>
-<li>Push Antivirus updates for detected malware.</li>
-<li>Try multiple antivirus tools.</li>
-<li>What Active Directory GPO polices are set (Logs, Restrictions, etc.)?</li>
-<li>What is the network architecture and how would Malware traverse?</li>
-<li>Are there additional IDS/IPS segments that need coverage to prevent/detect outbreak?</li>
-<li>3rd Party Applications missing patches (Adobe, Java, etc.)?</li>
-<li>Monitor client email for vendor or other business continuity items of interest.</li>
-<li>Monitor RDP sessions on external accessible RDP client system.</li>
-<li>Are there any applications in use that are facilitating the attack? If so, are there alternatives?</li>
-<li>Is there a baseline system to review for changes?</li>
-<li>Monitor user name variations.</li>
-<li>Managing and monitoring tasks.</li>
-<li>Review border router logs.</li>
-<li>Review VPN (remote access) logs.</li>
-<li>Citrix / VMWare or similar logs.</li>
-<li>Review accounting server(s) logs and trends of users.</li>
-<li>AD server logs.</li>
-<li>Review Anti-Virus (Malicious Code Services) logs.</li>
-<li>Review email abuse notifications and logs.</li>
-<li>Review DNS logs.</li>
-<li>Review account and policy abuse logs.</li>
-<li>Review host firewall logs.</li>
-</ul>
+  <div class="breadcrumb"><a href="../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../index.html">Other</a> &rsaquo; <a href="../index.html">Blue Team Field Manual</a> &rsaquo; <a href="index.html">7 INCIDENT MANAGEMENT (Checklist)</a></div>
+<h1 id="title">REMEDIATION TASKS</h1>
+
+<p>Priority: H/M/L<br>
+Effort: H/M/L<br>
+Open/Closed</p>
+<p>Administrative AD Password Changes.</p>
+<p>Local Administrative Password Changes.</p>
+<p>User AD Password Changes.</p>
+<p>Local User Password Changes.</p>
+<p>Service Account Password Changes.</p>
+<p>Push Antivirus updates for detected malware.</p>
+<p>Try multiple antivirus tools.</p>
+<p>What Active Directory GPO polices are set (Logs, Restrictions, etc.)?</p>
+<p>What is the network architecture and how would Malware traverse?</p>
+<p>Are there additional IDS/IPS segments that need coverage to prevent/detect outbreak?</p>
+<p>3rd Party Applications missing patches (Adobe, Java, etc.)?</p>
+<p>Monitor client email for vendor or other business continuity items of interest.</p>
+<p>Monitor RDP sessions on external accessible RDP client system.</p>
+<p>Are there any applications in use that are facilitating the attack? If so, are there alternatives?</p>
+<p>Is there a baseline system to review for changes?</p>
+<p>Monitor user name variations.</p>
+<p>Managing and monitoring tasks.</p>
+<p>Review border router logs.</p>
+<p>Review VPN (remote access) logs.</p>
+<p>Citrix / VMWare or similar logs.</p>
+<p>Review accounting server(s) logs and trends of users.</p>
+<p>AD server logs.</p>
+<p>Review Anti-Virus (Malicious Code Services) logs.</p>
+<p>Review email abuse notifications and logs.</p>
+<p>Review DNS logs.</p>
+<p>Review account and policy abuse logs.</p>
+<p>Review host firewall logs.</p>
   </article>
-  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
 </div>
-<script src="/assets/nav.js" defer></script>
+<script src="../../../assets/nav.js" defer></script>
 <script>
 document.getElementById('menu-toggle').addEventListener('click',function(){
   document.getElementById('sidebar').classList.toggle('open');

@@ -3,47 +3,38 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Definitions of Findings from Threat Hunts · Will Seligman</title>
-<link rel="stylesheet" href="/assets/style.css">
+<meta name="color-scheme" content="dark">
+<title>Definitions of Findings from Threat Hunts · the-grizzly-bear</title>
+<meta name="description" content="Definitions of Findings from Threat Hunts — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
 <div class="layout">
 <aside class="sidebar" id="sidebar">
-  <a class="brand" href="/index.html">
+  <a class="brand" href="../../index.html">
     <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
   </a>
-  <nav class="nav" id="nav-root" data-current="notes/cyber-threat-hunting/definitions-of-findings-from-threat-hunts.html"></nav>
+  <nav class="nav" id="nav-root" data-current="notes/cyber-threat-hunting/definitions-of-findings-from-threat-hunts.html" data-root="../.."></nav>
 </aside>
 <main class="content">
   <article class="doc">
-  <div class="breadcrumb"><a href="/notes/index.html">Cyber Security Notes</a> &rsaquo; <a href="/notes/cyber-threat-hunting.html">Cyber Threat Hunting</a></div>
-  <h1 id="definitions-of-findings-from-threat-hunts">Definitions of Findings from Threat Hunts</h1>
-<p><strong>Findings</strong><br />
-- <strong>Activity Requiring Further Investigation</strong>: Results from a query that warrant additional analysis and verification.<br />
-- <strong>Verification Processes</strong>: Any subsequent review to validate observed activity is considered a finding, even if it ultimately results in a false positive. This includes existing investigations, penetration tests, and similar activities.<br />
-- <strong>No Guarantee of True Positives</strong>: Findings do not necessarily indicate a true positive detection.<br />
-- <strong>True Positives as Specific Findings</strong>: A true positive represents a detection, which is a more specific category of finding.<br />
-- <strong>Indicators of Potential Compromise</strong>: Signs suggesting some form of security breach or compromise.<br />
-- <strong>Risk Factors for Customer Compromise</strong>: Information that could lead to a customer's compromise, such as exposed credentials, unpatched vulnerabilities, or poor security practices.<br />
-- <strong>Suspicious Behavior</strong>: Activities that are suspicious but not strictly classified under true positive or false positive categories.<br />
-- <strong>Higher Likelihood of False Positives</strong>: Findings are more likely to be deemed false positives or legitimate activities rather than malicious.<br />
-- <strong>Customer Communication</strong>: Involves informing the customer, requesting additional information, or validating specific items.</p>
-<p><strong>No Findings</strong><br />
-- <strong>Absence of Results</strong>: No results from queries or searches based on the criteria of the hypothesis.<br />
-- <strong>Overly Broad Queries</strong>: Queries that are too expansive, which invalidates their utility for the hunt.<br />
-- <strong>Invalid False Positives</strong>: False positives arising from illegitimate or invalid Indicators of Compromise (IOCs).</p>
-<p><strong>Evaluating Information for Higher Quality Findings</strong><br />
-- <strong>Assessing Query Effectiveness</strong>: Determine whether the query is well-constructed and appropriate for the investigation. IF we run a query across a data source that doesn't exist, there would never be any findings.<br />
-- <strong>Relevance of Data Sources</strong>: Consider the age of an OSINT credential dump and the likelihood that it can be correlated effectively.<br />
-- <strong>Managing Query Scope</strong>: Recognize that a query may initially seem well-defined but could yield an excessive number of results; identify at what point a query becomes too large to be effective.<br />
-- <strong>Determining Sufficient Criteria for Pivoting</strong>: Decide what is adequate to pivot the investigation, continuing until the hypothesis is disproven or the query becomes insufficient for the hunt due to constraints.</p>
+  <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">Cyber Security Notes</a> &rsaquo; <a href="index.html">Cyber Threat Hunting</a></div>
+<h1 id="title">Definitions of Findings from Threat Hunts</h1>
+
+<p><strong>Findings</strong></p>
+<ul><li><strong>Activity Requiring Further Investigation</strong>: Results from a query that warrant additional analysis and verification.</li><li><strong>Verification Processes</strong>: Any subsequent review to validate observed activity is considered a finding, even if it ultimately results in a false positive. This includes existing investigations, penetration tests, and similar activities.</li><li><strong>No Guarantee of True Positives</strong>: Findings do not necessarily indicate a true positive detection.</li><li><strong>True Positives as Specific Findings</strong>: A true positive represents a detection, which is a more specific category of finding.</li><li><strong>Indicators of Potential Compromise</strong>: Signs suggesting some form of security breach or compromise.</li><li><strong>Risk Factors for Customer Compromise</strong>: Information that could lead to a customer's compromise, such as exposed credentials, unpatched vulnerabilities, or poor security practices.</li><li><strong>Suspicious Behavior</strong>: Activities that are suspicious but not strictly classified under true positive or false positive categories.</li><li><strong>Higher Likelihood of False Positives</strong>: Findings are more likely to be deemed false positives or legitimate activities rather than malicious.</li><li><strong>Customer Communication</strong>: Involves informing the customer, requesting additional information, or validating specific items.</li></ul>
+<p><strong>No Findings</strong></p>
+<ul><li><strong>Absence of Results</strong>: No results from queries or searches based on the criteria of the hypothesis.</li><li><strong>Overly Broad Queries</strong>: Queries that are too expansive, which invalidates their utility for the hunt.</li><li><strong>Invalid False Positives</strong>: False positives arising from illegitimate or invalid Indicators of Compromise (IOCs).</li></ul>
+<p><strong>Evaluating Information for Higher Quality Findings</strong></p>
+<ul><li><strong>Assessing Query Effectiveness</strong>: Determine whether the query is well-constructed and appropriate for the investigation. IF we run a query across a data source that doesn’t exist, there would never be any findings.</li><li><strong>Relevance of Data Sources</strong>: Consider the age of an OSINT credential dump and the likelihood that it can be correlated effectively.</li><li><strong>Managing Query Scope</strong>: Recognize that a query may initially seem well-defined but could yield an excessive number of results; identify at what point a query becomes too large to be effective.</li><li><strong>Determining Sufficient Criteria for Pivoting</strong>: Decide what is adequate to pivot the investigation, continuing until the hypothesis is disproven or the query becomes insufficient for the hunt due to constraints.</li></ul>
   </article>
-  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
 </div>
-<script src="/assets/nav.js" defer></script>
+<script src="../../assets/nav.js" defer></script>
 <script>
 document.getElementById('menu-toggle').addEventListener('click',function(){
   document.getElementById('sidebar').classList.toggle('open');

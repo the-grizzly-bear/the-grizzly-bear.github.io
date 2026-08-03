@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>USER INFORMATION · the-grizzly-bear</title>
+<meta name="description" content="USER INFORMATION — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/4-respond-analysis/live-triage-linux/user-information.html" data-root="../../../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../../index.html">Other</a> &rsaquo; <a href="../../index.html">Blue Team Field Manual</a> &rsaquo; <a href="../index.html">4 RESPOND (Analysis)</a> &rsaquo; <a href="index.html">LIVE TRIAGE - LINUX</a></div>
+<h1 id="title">USER INFORMATION</h1>
+
+<p>View logged in users:</p>
+<pre><code class="language-bash">w</code></pre>
+<p>Show if a user has ever logged in remotely:</p>
+<pre><code class="language-bash">lastlog
+last</code></pre>
+<p>View failed logins:</p>
+<pre><code class="language-bash">faillog -a</code></pre>
+<p>View local user accounts:</p>
+<pre><code class="language-bash">cat /etc/passwd
+cat /etc/shadow</code></pre>
+<p>View local groups:</p>
+<pre><code class="language-bash">cat /etc/group</code></pre>
+<p>View sudo access:</p>
+<pre><code class="language-bash">cat /etc/sudoers</code></pre>
+<p>View accounts with UID 0:</p>
+<pre><code class="language-bash">awk -F: '($3 == "0") {p rint}' /etc/passwd
+egrep ':0+' /etc/passwd</code></pre>
+<p>View root authorized SSH key authentications:</p>
+<pre><code class="language-bash">cat /root/.ssh/authorized_keys</code></pre>
+<p>List of files opened by user:</p>
+<pre><code class="language-bash">lsof -u &lt;USER NAME&gt;</code></pre>
+<p>View the root user bash history:</p>
+<pre><code class="language-bash">cat /root/.bash_history</code></pre>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

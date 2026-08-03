@@ -3,101 +3,104 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Snort Rules to detect Meterpreter traffic: · Will Seligman</title>
-<link rel="stylesheet" href="/assets/style.css">
+<meta name="color-scheme" content="dark">
+<title>Snort Rules to detect Meterpreter traffic · the-grizzly-bear</title>
+<meta name="description" content="Snort Rules to detect Meterpreter traffic — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
 <div class="layout">
 <aside class="sidebar" id="sidebar">
-  <a class="brand" href="/index.html">
+  <a class="brand" href="../../../../index.html">
     <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
   </a>
-  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/6-tactics-tips-tricks/snort/snort-rules-to-detect-meterpreter-traffic.html"></nav>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/6-tactics-tips-tricks/snort/snort-rules-to-detect-meterpreter-traffic.html" data-root="../../../.."></nav>
 </aside>
 <main class="content">
   <article class="doc">
-  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/blue-team-field-manual.html">Blue Team Field Manual</a> &rsaquo; <a href="/other/blue-team-field-manual/6-tactics-tips-tricks.html">6 TACTICS (TIPS &amp; TRICKS)</a> &rsaquo; <a href="/other/blue-team-field-manual/6-tactics-tips-tricks/snort.html">SNORT</a></div>
-  <h1 id="snort-rules-to-detect-meterpreter-traffic">Snort Rules to detect Meterpreter traffic:</h1>
-<p>Ref. <a href="https://blog.didierstevens.com/2015/06/16/metasploit-meterpreter-reverse-https-snort-rule/">https://blog.didierstevens.com/2015/06/16/metasploit-meterpreter-reverse-https-snort-rule/</a></p>
+  <div class="breadcrumb"><a href="../../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../../index.html">Other</a> &rsaquo; <a href="../../index.html">Blue Team Field Manual</a> &rsaquo; <a href="../index.html">6 TACTICS (TIPS &amp; TRICKS)</a> &rsaquo; <a href="index.html">SNORT</a></div>
+<h1 id="title">Snort Rules to detect Meterpreter traffic</h1>
+
+<p>Ref. <a href="https://blog.didierstevens.com/2015/06/16/metasploit-meterpreter-reverse-https-snort-rule/" target="_blank" rel="noopener">https://blog.didierstevens.com/2015/06/16/metasploit-meterpreter-reverse-https-snort-rule/</a></p>
 <pre><code class="language-bash">alert tcp $HOME_NET any-&gt; $EXTERNAL_NET $HTTP_PORTS
-(msg:&quot;Metasploit User Agent String&quot;;
-flow:to_server,established; content:&quot;User-Agent|3a|
+(msg:"Metasploit User Agent String";
+flow:to_server,established; content:"User-Agent|3a|
 Mozilla/4.0 (compatible\; MSIE 6.0\; Windows NT
-5.1) l0d 0a|&quot;; http_header; classtype:trojan-
+5.1) l0d 0a|"; http_header; classtype:trojan­
 activity;
-reference:url,blog,didierstevens.com/2015/03/16/quic
+reference:url,blog,[didierstevens.com/2015/03/16/quic](http://didierstevens.com/2015/03/16/quic)
 kpost-metasploit-user-agent-strings/; sid:1618000;
 rev:1;)
 alert tcp $HOME_NET any-&gt; $EXTERNAL_NET $HTTP_PORTS
-(msg:&quot;Metasploit User Agent String&quot;;
-flow:to_server,established; content:&quot;User-Agent|3a|
+(msg:"Metasploit User Agent String";
+flow:to_server,established; content:"User-Agent|3a|
 Mozilla/4.0 (compatible\; MSIE 6.1\; Windows NT) |0d
-0a|&quot;; http_header; classtype:trojan-activity;
-reference:url,blog,didierstevens.com/2015/03/16/quic
+0a|"; http_header; classtype:trojan-activity;
+reference:url,blog,[didierstevens.com/2015/03/16/quic](http://didierstevens.com/2015/03/16/quic)
 kpost-metasploit-user-agent-strings/; sid:1618001;
 rev:1;)
 alert tcp $HOME_NET any-&gt; $EXTERNAL_NET $HTTP_PORTS
-(msg:&quot;Metasploit User Agent String&quot;;
-flow:to_server,established; content:&quot;User-Agent|3a|
+(msg:"Metasploit User Agent String";
+flow:to_server,established; content:"User-Agent|3a|
 Mozilla/4.0 (compatible\; MSIE 7.0\; Windows NT
-6.0) |0d 0al|&quot;; http_header; classtype:trojan-
+6.0) |0d 0al|"; http_header; classtype:trojan­
 activity;
-reference:url,blog.didierstevens.com/2015/03/16/quic
+reference:url,[blog.didierstevens.com/2015/03/16/quic](http://blog.didierstevens.com/2015/03/16/quic)
 kpost-metasploit-user-agent-strings/; sid:1618002;
 rev:1;)
 alert tcp $HOME_NET any-&gt; $EXTERNAL_NET $HTTP_PORTS
-(msg:&quot;Metasploit User Agent String&quot;;
-flow:to_server,established; content:&quot;User-Agent|3a|
+(msg:"Metasploit User Agent String";
+flow:to_server,established; content:"User-Agent|3a|
 Mozilla/4.0 (compatible\; MSIE 7.0\; Windows NT
-6.0\; Trident/4.0\; SIMBAR={7DB0F6DE-8DE7-4841-908428FA914B0F2E}\; SLCCl\; .N|0d 0a|&quot;; http_header;
+6.0\; Trident/4.0\; SIMBAR={7DB0F6DE-8DE7-4841-908428FA914B0F2E}\; SLCCl\; .N|0d 0a|"; http_header;
 classtype:trojan-activity;
-reference:url,blog.didierstevens.com/2015/03/16/quic
+reference:url,[blog.didierstevens.com/2015/03/16/quic](http://blog.didierstevens.com/2015/03/16/quic)
 kpost-metasploit-user-agent-strings/; sid:1618003;
 rev:1;)
 alert tcp $HOME_NET any -&gt; $EXTERNAL_NET $HTTP_PORTS
-(msg:&quot;Metasploit User Agent String&quot;;
-flow:to_server,established; content:&quot;User-Agent|3|l
-Mozilla/4.0 (compatible\; Metasploit RSPEC)|0d 0a|&quot;;
+(msg:"Metasploit User Agent String";
+flow:to_server,established; content:"User-Agent|3|l
+Mozilla/4.0 (compatible\; Metasploit RSPEC)|0d 0a|";
 http_header; classtype:trojan-activity;
-reference:url,blog,didierstevens.com/2015/03/16/quic
+reference:url,blog,[didierstevens.com/2015/03/16/quic](http://didierstevens.com/2015/03/16/quic)
 kpost-metasploit-user-agent-strings/; sid:1618004;
 rev:1;)
 alert tcp $HOME_NET any -&gt; $EXTERNAL_NET $HTTP_PORTS
-(msg:&quot;Metasploit User Agent String&quot;;
-flow:to_server,established; content:&quot;User-Agent|3a|
+(msg:"Metasploit User Agent String";
+flow:to_server,established; content:"User-Agent|3a|
 Mozilla/5.0 (Windows\; U\; Windows NT 5.1\; en-US)
 AppleWebKit/525.13 (KHTML, like Gecko)
-Chrome/4.0.221.6 Safari/525.13|0d 0a|&quot;; http_header;
+Chrome/4.0.221.6 Safari/525.13|0d 0a|"; http_header;
 classtype:trojan-activity;
-reference:url,blog.didierstevens.com/2015/03/16/quic
+reference:url,[blog.didierstevens.com/2015/03/16/quic](http://blog.didierstevens.com/2015/03/16/quic)
 kpost-metasploit-user-agent-strings/; sid:1618005;
 rev:1;)
 alert tcp $HOME_NET any -&gt; $EXTERNAL_NET $HTTP_PORTS
-(msg:&quot;Metasploit User Agent String&quot;;
-flow:to_server,established; content:&quot;User-Agent|3a|
+(msg:"Metasploit User Agent String";
+flow:to_server,established; content:"User-Agent|3a|
 Mozilla/5.0 (compatible\; Googlebot/2.1\;
-+http://www.google.com/bot.html)|0d 0a|&quot;;
++http://www.google.com/bot.html)|0d 0a|";
 http_header; classtype:trojan-activity;
-reference:url,blog,didierstevens.com/2015/03/16/quic
+reference:url,blog,[didierstevens.com/2015/03/16/quic](http://didierstevens.com/2015/03/16/quic)
 kpost-metasploit-user-agent-strings/; sid:1618006;
 rev:1;)
 alert tcp $HOME_NET any -&gt; $EXTERNAL_NET $HTTP_PORTS
-(msg:&quot;Metasploit User Agent String&quot;;
-flow:to_server,established; content:&quot;User-Agentl3al
+(msg:"Metasploit User Agent String";
+flow:to_server,established; content:"User-Agentl3al
 Mozilla/5,0 (compatible\; MSIE 10.0\; Windows NT
-6.1\; Trident/6.0) |0d 0a|&quot;; http_header;
+6.1\; Trident/6.0) |0d 0a|"; http_header;
 classtype:trojan-activity;
-reference:url,blog.didierstevens.com/2015/03/16/quic
+reference:url,[blog.didierstevens.com/2015/03/16/quic](http://blog.didierstevens.com/2015/03/16/quic)
 kpost-metasploit-user-agent-strings/; sid:1618007;
-rev:1;)
-</code></pre>
+rev:1;)</code></pre>
   </article>
-  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
 </div>
-<script src="/assets/nav.js" defer></script>
+<script src="../../../../assets/nav.js" defer></script>
 <script>
 document.getElementById('menu-toggle').addEventListener('click',function(){
   document.getElementById('sidebar').classList.toggle('open');

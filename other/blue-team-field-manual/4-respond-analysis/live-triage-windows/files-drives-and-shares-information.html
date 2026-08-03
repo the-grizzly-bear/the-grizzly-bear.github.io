@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>FILES, DRIVES AND SHARES INFORMATION · the-grizzly-bear</title>
+<meta name="description" content="FILES, DRIVES AND SHARES INFORMATION — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/4-respond-analysis/live-triage-windows/files-drives-and-shares-information.html" data-root="../../../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../../index.html">Other</a> &rsaquo; <a href="../../index.html">Blue Team Field Manual</a> &rsaquo; <a href="../index.html">4 RESPOND (Analysis)</a> &rsaquo; <a href="index.html">LIVE TRIAGE - WINDOWS</a></div>
+<h1 id="title">FILES, DRIVES AND SHARES INFORMATION</h1>
+
+<pre><code class="language-bash">C:\&gt; net use \\&lt;TARGET IP ADDRESS&gt;
+C:\&gt; net share
+C:\&gt; net session
+C:\&gt; wmic volume list brief
+C:\&gt; wmic logicaldisk get description,filesystem,name,size
+C:\&gt; wmic share get name,path</code></pre>
+<p>Find multiple file types or a file:</p>
+<pre><code class="language-bash">C:\&gt; dir /A /5 /T:A *,exe *,dll *,bat *·PS1 *,zip
+C:\&gt; dir /A /5 /T:A &lt;BAD FILE NAME&gt;,exe</code></pre>
+<p>Find executable (.exe) files newer than Jan 1, 2017:</p>
+<pre><code class="language-bash">C:\&gt; forfiles /p C:\ /M *,exe /5 /0 +1/1/2017 /C
+"cmd /c echo @fdate @ftime @path"</code></pre>
+<p>Find multiple files types using loop:</p>
+<pre><code class="language-bash">C:\&gt; for %G in (.exe, .dll, .bat, .ps) do forfiles p "C:" -m *%G -s -d +1/1/2017 -c "cmd /c echo @fdate@ftime @path"</code></pre>
+<p>Search for files newer than date:</p>
+<pre><code class="language-bash">C:\&gt; forfiles /PC:\ /5 /0 +1/01/2017 /C "cmd /c
+echo @path @fdate"</code></pre>
+<p>Find large files: (example &lt;20 MB)</p>
+<pre><code class="language-bash">C:\&gt; forfiles /5 /M * /C "cmd /c if @fsize GEQ
+2097152 echo @path @fsize"</code></pre>
+<p>Find files with Alternate Data Streams:</p>
+<p>Ref. <a href="https://technet.microsoft.com/en%C2%ADus/sysinternals/streams.aspx" target="_blank" rel="noopener">https://technet.microsoft.com/en­us/sysinternals/streams.aspx</a></p>
+<pre><code class="language-bash">C:\&gt; streams -s &lt;FILE OR DIRECTORY&gt;</code></pre>
+<p>Find files with bad signature into csv:</p>
+<p>Ref. <a href="https://technet.microsoft.com/en%C2%ADus/sysinternals/bb897441.aspx" target="_blank" rel="noopener">https://technet.microsoft.com/en­us/sysinternals/bb897441.aspx</a></p>
+<pre><code class="language-bash">C:\&gt; sigcheck -c -h -s -u -nobanner &lt;FILE OR DIRECTORY&gt; &gt; &lt;OUTPUT FILENAME&gt;,csv</code></pre>
+<p>Find and show only unsigned files with bad signature in C:</p>
+<pre><code class="language-bash">C:\&gt; sigcheck -e -u -vr -s C:\</code></pre>
+<p>List loaded unsigned Dlls:</p>
+<p>Ref. <a href="https://technet.microsoft.com/en%C2%ADus/sysinternals/bb896656.aspx" target="_blank" rel="noopener">https://technet.microsoft.com/en­us/sysinternals/bb896656.aspx</a></p>
+<pre><code class="language-bash">C:\&gt; listdlls.exe -u
+C:\&gt; listdlls.exe -u &lt;PROCESS NAME OR PID&gt;</code></pre>
+<p>Run Malware scan (Windows Defender) offline:</p>
+<p>Ref. <a href="http://windows.microsoft.com/en%C2%ADus/windows/what-is-windows-defender-offline" target="_blank" rel="noopener">http://windows.microsoft.com/en­us/windows/what-is-windows-defender-offline</a></p>
+<pre><code class="language-bash">C:\&gt; MpCmdRun.exe -SignatureUpdate
+C:\&gt; MpCmdRun.exe -Scan</code></pre>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

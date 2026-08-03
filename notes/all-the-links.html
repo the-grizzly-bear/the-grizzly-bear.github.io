@@ -3,215 +3,219 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>All the Links · Will Seligman</title>
-<link rel="stylesheet" href="/assets/style.css">
+<meta name="color-scheme" content="dark">
+<title>All the Links · the-grizzly-bear</title>
+<meta name="description" content="All the Links — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
 <div class="layout">
 <aside class="sidebar" id="sidebar">
-  <a class="brand" href="/index.html">
+  <a class="brand" href="../index.html">
     <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
   </a>
-  <nav class="nav" id="nav-root" data-current="notes/all-the-links.html"></nav>
+  <nav class="nav" id="nav-root" data-current="notes/all-the-links.html" data-root=".."></nav>
 </aside>
 <main class="content">
   <article class="doc">
-  <div class="breadcrumb"><a href="/notes/index.html">Cyber Security Notes</a></div>
-  <h1 id="all-the-links">All the Links</h1>
+  <div class="breadcrumb"><a href="../index.html">the-grizzly-bear</a> &rsaquo; <a href="index.html">Cyber Security Notes</a></div>
+<h1 id="title">All the Links</h1>
+<nav class="toc"><strong>On this page</strong><ul><li class="lvl3"><a href="#government-resources">Government resources</a></li><li class="lvl3"><a href="#malware">Malware</a></li><li class="lvl3"><a href="#reversing">REversing</a></li><li class="lvl3"><a href="#malware-analysis">Malware Analysis</a></li><li class="lvl3"><a href="#malware-tracking">Malware tracking</a></li><li class="lvl3"><a href="#forensics-and-dfir">Forensics and DFIR</a></li><li class="lvl3"><a href="#mitre">MITRE</a></li><li class="lvl3"><a href="#living-off-lands">Living off lands</a></li><li class="lvl3"><a href="#triage-ips-domains-hashes">Triage IPs’, domain’s, hashes</a></li><li class="lvl3"><a href="#rules-and-detection-logic">Rules and detection logic</a></li><li class="lvl3"><a href="#ioc-lists-and-threats">IOC lists and THREATs</a></li><li class="lvl3"><a href="#phish">Phish</a></li><li class="lvl3"><a href="#cve">CVE</a></li><li class="lvl3"><a href="#microsoft">Microsoft</a></li><li class="lvl3"><a href="#tools">Tools</a></li><li class="lvl3"><a href="#red-team">Red Team</a></li><li class="lvl3"><a href="#blue-team">Blue team</a></li><li class="lvl3"><a href="#threat">Threat</a></li></ul></nav>
 <h3 id="government-resources">Government resources</h3>
-<p><a href="https://www.cisa.gov/uscert/ncas/alerts.xml">https://www.cisa.gov/uscert/ncas/alerts.xml</a><br />
-<a href="https://www.cisa.gov/uscert/ncas/current-activity.xml">https://www.cisa.gov/uscert/ncas/current-activity.xml</a><br />
-<a href="https://www.cisa.gov/uscert/ncas/analysis-reports.xml">https://www.cisa.gov/uscert/ncas/analysis-reports.xml</a><br />
-<a href="https://www.cisa.gov/uscert/ncas/bulletins.xml">https://www.cisa.gov/uscert/ncas/bulletins.xml</a></p>
+<p><a href="https://www.cisa.gov/uscert/ncas/alerts.xml" target="_blank" rel="noopener">https://www.cisa.gov/uscert/ncas/alerts.xml</a></p>
+<p><a href="https://www.cisa.gov/uscert/ncas/current-activity.xml" target="_blank" rel="noopener">https://www.cisa.gov/uscert/ncas/current-activity.xml</a></p>
+<p><a href="https://www.cisa.gov/uscert/ncas/analysis-reports.xml" target="_blank" rel="noopener">https://www.cisa.gov/uscert/ncas/analysis-reports.xml</a></p>
+<p><a href="https://www.cisa.gov/uscert/ncas/bulletins.xml" target="_blank" rel="noopener">https://www.cisa.gov/uscert/ncas/bulletins.xml</a></p>
 <h3 id="malware">Malware</h3>
-<p><a href="https://www.virustotal.com/gui/home/upload">https://www.virustotal.com/gui/home/upload</a><br />
-<a href="https://bazaar.abuse.ch/">https://bazaar.abuse.ch/</a><br />
-<a href="https://mandiant.github.io/capa/explorer/#/">https://mandiant.github.io/capa/explorer/#/</a><br />
-<a href="https://malpedia.caad.fkie.fraunhofer.de/">https://malpedia.caad.fkie.fraunhofer.de/</a></p>
+<p><a href="https://www.virustotal.com/gui/home/upload" target="_blank" rel="noopener">https://www.virustotal.com/gui/home/upload</a></p>
+<p><a href="https://bazaar.abuse.ch/" target="_blank" rel="noopener">https://bazaar.abuse.ch/</a></p>
+<p><a href="https://mandiant.github.io/capa/explorer/#/" target="_blank" rel="noopener">https://mandiant.github.io/capa/explorer/#/</a></p>
+<p><a href="https://malpedia.caad.fkie.fraunhofer.de/" target="_blank" rel="noopener">https://malpedia.caad.fkie.fraunhofer.de/</a></p>
 <h3 id="reversing">REversing</h3>
-<p><a href="https://dogbolt.org/">https://dogbolt.org/</a><br />
-<a href="https://godbolt.org/">https://godbolt.org/</a><br />
-<a href="https://github.com/dnSpy/dnSpy">https://github.com/dnSpy/dnSpy</a><br />
-<a href="https://autogdb.io/">https://autogdb.io/</a></p>
+<p><a href="https://dogbolt.org/" target="_blank" rel="noopener">https://dogbolt.org/</a></p>
+<p><a href="https://godbolt.org/" target="_blank" rel="noopener">https://godbolt.org/</a></p>
+<p><a href="https://github.com/dnSpy/dnSpy" target="_blank" rel="noopener">https://github.com/dnSpy/dnSpy</a></p>
+<p><a href="https://autogdb.io/" target="_blank" rel="noopener">https://autogdb.io/</a></p>
 <h3 id="malware-analysis">Malware Analysis</h3>
-<p><a href="https://cloud.binary.ninja/">https://cloud.binary.ninja/</a><br />
-<a href="https://github.com/ReFirmLabs/binwalk">https://github.com/ReFirmLabs/binwalk</a><br />
-<a href="https://github.com/e-m-b-a/emba">https://github.com/e-m-b-a/emba</a><br />
-<a href="https://github.com/onekey-sec/unblob">https://github.com/onekey-sec/unblob</a><br />
-<a href="https://github.com/redballoonsecurity/ofrak">https://github.com/redballoonsecurity/ofrak</a><br />
-<a href="https://github.com/avatortwo/avatar2">https://github.com/avatortwo/avatar2</a><br />
-<a href="https://github.com/radareorg/radare2">https://github.com/radareorg/radare2</a><br />
-<a href="https://github.com/renode/renode">https://github.com/renode/renode</a><br />
-<a href="https://github.com/panda-re/panda">https://github.com/panda-re/panda</a><br />
-<a href="https://github.com/hasherezade/pe-bear-releases">https://github.com/hasherezade/pe-bear-releases</a><br />
-<a href="https://archive.org/details/malwaremuseum">https://archive.org/details/malwaremuseum</a><br />
-<a href="https://github.com/Karneades/awesome-malware-persistence">https://github.com/Karneades/awesome-malware-persistence</a><br />
-<a href="http://vxvault.net/ViriList.php">http://vxvault.net/ViriList.php</a><br />
-<a href="https://tria.ge/reports/public">https://tria.ge/reports/public</a><br />
-<a href="https://github.com/katahiromz/RisohEditor">https://github.com/katahiromz/RisohEditor</a><br />
-<a href="https://github.com/topics/scgdb-data">https://github.com/topics/scgdb-data</a><br />
-<a href="https://github.com/JPCERTCC/YAMA">https://github.com/JPCERTCC/YAMA</a><br />
-<a href="https://binvis.io/">https://binvis.io</a></p>
+<p><a href="https://cloud.binary.ninja/" target="_blank" rel="noopener">https://cloud.binary.ninja/</a></p>
+<p><a href="https://github.com/ReFirmLabs/binwalk" target="_blank" rel="noopener">https://github.com/ReFirmLabs/binwalk</a></p>
+<p><a href="https://github.com/e-m-b-a/emba" target="_blank" rel="noopener">https://github.com/e-m-b-a/emba</a></p>
+<p><a href="https://github.com/onekey-sec/unblob" target="_blank" rel="noopener">https://github.com/onekey-sec/unblob</a></p>
+<p><a href="https://github.com/redballoonsecurity/ofrak" target="_blank" rel="noopener">https://github.com/redballoonsecurity/ofrak</a></p>
+<p><a href="https://github.com/avatortwo/avatar2" target="_blank" rel="noopener">https://github.com/avatortwo/avatar2</a></p>
+<p><a href="https://github.com/radareorg/radare2" target="_blank" rel="noopener">https://github.com/radareorg/radare2</a></p>
+<p><a href="https://github.com/renode/renode" target="_blank" rel="noopener">https://github.com/renode/renode</a></p>
+<p><a href="https://github.com/panda-re/panda" target="_blank" rel="noopener">https://github.com/panda-re/panda</a></p>
+<p><a href="https://github.com/hasherezade/pe-bear-releases" target="_blank" rel="noopener">https://github.com/hasherezade/pe-bear-releases</a></p>
+<p><a href="https://archive.org/details/malwaremuseum" target="_blank" rel="noopener">https://archive.org/details/malwaremuseum</a></p>
+<p><a href="https://github.com/Karneades/awesome-malware-persistence" target="_blank" rel="noopener">https://github.com/Karneades/awesome-malware-persistence</a></p>
+<p><a href="http://vxvault.net/ViriList.php" target="_blank" rel="noopener">http://vxvault.net/ViriList.php</a></p>
+<p><a href="https://tria.ge/reports/public" target="_blank" rel="noopener">https://tria.ge/reports/public</a></p>
+<p><a href="https://github.com/katahiromz/RisohEditor" target="_blank" rel="noopener">https://github.com/katahiromz/RisohEditor</a></p>
+<p><a href="https://github.com/topics/scgdb-data" target="_blank" rel="noopener">https://github.com/topics/scgdb-data</a></p>
+<p><a href="https://github.com/JPCERTCC/YAMA" target="_blank" rel="noopener">https://github.com/JPCERTCC/YAMA</a></p>
+<p><a href="https://binvis.io/" target="_blank" rel="noopener">https://binvis.io</a></p>
 <h3 id="malware-tracking">Malware tracking</h3>
-<p><a href="https://tracker.viriback.com/">https://tracker.viriback.com/</a></p>
+<p><a href="https://tracker.viriback.com/" target="_blank" rel="noopener">https://tracker.viriback.com/</a></p>
 <h3 id="forensics-and-dfir">Forensics and DFIR</h3>
-<p><a href="https://github.com/volatilityfoundation/volatility3">https://github.com/volatilityfoundation/volatility3</a><br />
-<a href="https://github.com/SigmaHQ/sigma/tree/master/rules-dfir">https://github.com/SigmaHQ/sigma/tree/master/rules-dfir</a><br />
-<a href="https://github.com/The-DFIR-Report">https://github.com/The-DFIR-Report</a><br />
-<a href="https://aboutdfir.com/research/intelligence-portals/">https://aboutdfir.com/research/intelligence-portals/</a></p>
+<p><a href="https://github.com/volatilityfoundation/volatility3" target="_blank" rel="noopener">https://github.com/volatilityfoundation/volatility3</a></p>
+<p><a href="https://github.com/SigmaHQ/sigma/tree/master/rules-dfir" target="_blank" rel="noopener">https://github.com/SigmaHQ/sigma/tree/master/rules-dfir</a></p>
+<p><a href="https://github.com/The-DFIR-Report" target="_blank" rel="noopener">https://github.com/The-DFIR-Report</a></p>
+<p><a href="https://aboutdfir.com/research/intelligence-portals/" target="_blank" rel="noopener">https://aboutdfir.com/research/intelligence-portals/</a></p>
 <h3 id="mitre">MITRE</h3>
-<p><a href="https://mitre-attack.github.io/attack-navigator/">https://mitre-attack.github.io/attack-navigator/</a><br />
-<a href="https://d3fend.mitre.org/">https://d3fend.mitre.org/</a><br />
-<a href="https://attack.mitre.org/">https://attack.mitre.org/</a><br />
-<a href="https://github.com/center-for-threat-informed-defense">https://github.com/center-for-threat-informed-defense</a><br />
-<a href="https://car.mitre.org/analytics/">https://car.mitre.org/analytics/</a><br />
-<a href="https://github.com/mitre-attack/car/commits/master/">https://github.com/mitre-attack/car/commits/master/</a><br />
-<a href="https://attack.mitre.org/docs/changelogs/v13.1-v14.0/changelog-detailed.html">https://attack.mitre.org/docs/changelogs/v13.1-v14.0/changelog-detailed.html</a></p>
+<p><a href="https://mitre-attack.github.io/attack-navigator/" target="_blank" rel="noopener">https://mitre-attack.github.io/attack-navigator/</a></p>
+<p><a href="https://d3fend.mitre.org/" target="_blank" rel="noopener">https://d3fend.mitre.org/</a></p>
+<p><a href="https://attack.mitre.org/" target="_blank" rel="noopener">https://attack.mitre.org/</a></p>
+<p><a href="https://github.com/center-for-threat-informed-defense" target="_blank" rel="noopener">https://github.com/center-for-threat-informed-defense</a></p>
+<p><a href="https://car.mitre.org/analytics/" target="_blank" rel="noopener">https://car.mitre.org/analytics/</a></p>
+<p><a href="https://github.com/mitre-attack/car/commits/master/" target="_blank" rel="noopener">https://github.com/mitre-attack/car/commits/master/</a></p>
+<p><a href="https://attack.mitre.org/docs/changelogs/v13.1-v14.0/changelog-detailed.html" target="_blank" rel="noopener">https://attack.mitre.org/docs/changelogs/v13.1-v14.0/changelog-detailed.html</a></p>
 <h3 id="living-off-lands">Living off lands</h3>
-<p><a href="https://lolol.farm/">https://lolol.farm/</a><br />
-<a href="https://lolbas-project.github.io/">https://lolbas-project.github.io/</a><br />
-<a href="https://gtfobins.github.io/">https://gtfobins.github.io/</a><br />
-<a href="https://wtfbins.wtf/">https://wtfbins.wtf/</a><br />
-<a href="https://www.loldrivers.io/">https://www.loldrivers.io/</a><br />
-<a href="https://lots-project.com/">https://lots-project.com/</a><br />
-<a href="https://filesec.io/">https://filesec.io/</a><br />
-<a href="https://lolol.farm/">https://lolol.farm/</a><br />
-<a href="https://malapi.io/">https://malapi.io/</a><br />
-<a href="https://persistence-info.github.io/">https://persistence-info.github.io/</a><br />
-<a href="https://unprotect.it/">https://unprotect.it/</a><br />
-<a href="https://wadcoms.github.io/">https://wadcoms.github.io/</a><br />
-<a href="https://hijacklibs.net/">https://hijacklibs.net/</a><br />
-<a href="https://br0k3nlab.com/LoFP/">https://br0k3nlab.com/LoFP/</a></p>
-<h3 id="triage-ips-domains-hashes">Triage IPs', domain's, hashes</h3>
-<p><a href="https://otx.alienvault.com/">https://otx.alienvault.com/</a><br />
-<a href="https://www.virustotal.com/">https://www.virustotal.com/</a><br />
-<a href="https://app.validin.com/">https://app.validin.com</a><br />
-<a href="https://urlscan.io/">https://urlscan.io/</a><br />
-<a href="https://threatfox.abuse.ch/">https://threatfox.abuse.ch/</a><br />
-<a href="https://urlhaus.abuse.ch/">https://urlhaus.abuse.ch/</a><br />
-<a href="https://en.fofa.info/">https://en.fofa.info/</a><br />
-<a href="https://gpt.censys.io/">https://gpt.censys.io/</a><br />
-<a href="https://search.censys.io/">https://search.censys.io/</a><br />
-<a href="https://www.shodan.io/">https://www.shodan.io/</a><br />
-<a href="https://otx.alienvault.com/">https://otx.alienvault.com/</a><br />
-<a href="https://crt.sh/">https://crt.sh/</a><br />
-<a href="https://www.dehashed.com/">https://www.dehashed.com/</a><br />
-<a href="https://jbxcloud.joesecurity.org/">https://jbxcloud.joesecurity.org/</a><br />
-<a href="https://mxtoolbox.com/">https://mxtoolbox.com/</a><br />
-<a href="https://exchange.xforce.ibmcloud.com/">https://exchange.xforce.ibmcloud.com/</a><br />
-<a href="https://whois.domaintools.com/">https://whois.domaintools.com/</a><br />
-<a href="https://uncoder.io/">https://uncoder.io/</a><br />
-<a href="https://www.urlvoid.com/">https://www.urlvoid.com/</a><br />
-<a href="https://www.ipvoid.com/">https://www.ipvoid.com/</a><br />
-<a href="https://www.abuseipdb.com/">https://www.abuseipdb.com/</a><br />
-<a href="https://dnsdumpster.com/">https://dnsdumpster.com/</a><br />
-<a href="https://labs.inquest.net/">https://labs.inquest.net/</a><br />
-<a href="https://threatbook.io/ip">https://threatbook.io/ip</a><br />
-<a href="https://www.binaryedge.io/">https://www.binaryedge.io/</a><br />
-<a href="https://hunter.how/">https://hunter.how/</a><br />
-<a href="https://viz.greynoise.io/trends?view=trending">https://viz.greynoise.io/</a><br />
-<a href="https://ipinfo.io/">https://ipinfo.io/</a><br />
-<a href="https://dnsdumpster.com/">https://dnsdumpster.com/</a></p>
+<p><a href="https://lolol.farm/" target="_blank" rel="noopener">https://lolol.farm/</a></p>
+<p><a href="https://lolbas-project.github.io/" target="_blank" rel="noopener">https://lolbas-project.github.io/</a></p>
+<p><a href="https://gtfobins.github.io/" target="_blank" rel="noopener">https://gtfobins.github.io/</a></p>
+<p><a href="https://wtfbins.wtf/" target="_blank" rel="noopener">https://wtfbins.wtf/</a></p>
+<p><a href="https://www.loldrivers.io/" target="_blank" rel="noopener">https://www.loldrivers.io/</a></p>
+<p><a href="https://lots-project.com/" target="_blank" rel="noopener">https://lots-project.com/</a></p>
+<p><a href="https://filesec.io/" target="_blank" rel="noopener">https://filesec.io/</a></p>
+<p><a href="https://lolol.farm/" target="_blank" rel="noopener">https://lolol.farm/</a></p>
+<p><a href="https://malapi.io/" target="_blank" rel="noopener">https://malapi.io/</a></p>
+<p><a href="https://persistence-info.github.io/" target="_blank" rel="noopener">https://persistence-info.github.io/</a></p>
+<p><a href="https://unprotect.it/" target="_blank" rel="noopener">https://unprotect.it/</a></p>
+<p><a href="https://wadcoms.github.io/" target="_blank" rel="noopener">https://wadcoms.github.io/</a></p>
+<p><a href="https://hijacklibs.net/" target="_blank" rel="noopener">https://hijacklibs.net/</a></p>
+<p><a href="https://br0k3nlab.com/LoFP/" target="_blank" rel="noopener">https://br0k3nlab.com/LoFP/</a></p>
+<h3 id="triage-ips-domains-hashes">Triage IPs’, domain’s, hashes</h3>
+<p><a href="https://otx.alienvault.com/" target="_blank" rel="noopener">https://otx.alienvault.com/</a></p>
+<p><a href="https://www.virustotal.com/" target="_blank" rel="noopener">https://www.virustotal.com/</a></p>
+<p><a href="https://app.validin.com/" target="_blank" rel="noopener">https://app.validin.com</a></p>
+<p><a href="https://urlscan.io/" target="_blank" rel="noopener">https://urlscan.io/</a></p>
+<p><a href="https://threatfox.abuse.ch/" target="_blank" rel="noopener">https://threatfox.abuse.ch/</a></p>
+<p><a href="https://urlhaus.abuse.ch/" target="_blank" rel="noopener">https://urlhaus.abuse.ch/</a></p>
+<p><a href="https://en.fofa.info/" target="_blank" rel="noopener">https://en.fofa.info/</a></p>
+<p><a href="https://gpt.censys.io/" target="_blank" rel="noopener">https://gpt.censys.io/</a></p>
+<p><a href="https://search.censys.io/" target="_blank" rel="noopener">https://search.censys.io/</a></p>
+<p><a href="https://www.shodan.io/" target="_blank" rel="noopener">https://www.shodan.io/</a></p>
+<p><a href="https://otx.alienvault.com/" target="_blank" rel="noopener">https://otx.alienvault.com/</a></p>
+<p><a href="https://crt.sh/" target="_blank" rel="noopener">https://crt.sh/</a></p>
+<p><a href="https://www.dehashed.com/" target="_blank" rel="noopener">https://www.dehashed.com/</a></p>
+<p><a href="https://jbxcloud.joesecurity.org/" target="_blank" rel="noopener">https://jbxcloud.joesecurity.org/</a></p>
+<p><a href="https://mxtoolbox.com/" target="_blank" rel="noopener">https://mxtoolbox.com/</a></p>
+<p><a href="https://exchange.xforce.ibmcloud.com/" target="_blank" rel="noopener">https://exchange.xforce.ibmcloud.com/</a></p>
+<p><a href="https://whois.domaintools.com/" target="_blank" rel="noopener">https://whois.domaintools.com/</a></p>
+<p><a href="https://uncoder.io/" target="_blank" rel="noopener">https://uncoder.io/</a></p>
+<p><a href="https://www.urlvoid.com/" target="_blank" rel="noopener">https://www.urlvoid.com/</a></p>
+<p><a href="https://www.ipvoid.com/" target="_blank" rel="noopener">https://www.ipvoid.com/</a></p>
+<p><a href="https://www.abuseipdb.com/" target="_blank" rel="noopener">https://www.abuseipdb.com/</a></p>
+<p><a href="https://dnsdumpster.com/" target="_blank" rel="noopener">https://dnsdumpster.com/</a></p>
+<p><a href="https://labs.inquest.net/" target="_blank" rel="noopener">https://labs.inquest.net/</a></p>
+<p><a href="https://threatbook.io/ip" target="_blank" rel="noopener">https://threatbook.io/ip</a></p>
+<p><a href="https://www.binaryedge.io/" target="_blank" rel="noopener">https://www.binaryedge.io/</a></p>
+<p><a href="https://hunter.how/" target="_blank" rel="noopener">https://hunter.how/</a></p>
+<p><a href="https://viz.greynoise.io/trends?view=trending" target="_blank" rel="noopener">https://viz.greynoise.io/</a></p>
+<p><a href="https://ipinfo.io/" target="_blank" rel="noopener">https://ipinfo.io/</a></p>
+<p><a href="https://dnsdumpster.com/" target="_blank" rel="noopener">https://dnsdumpster.com/</a></p>
 <h3 id="rules-and-detection-logic">Rules and detection logic</h3>
-<p><a href="https://github.com/SigmaHQ/sigma">https://github.com/SigmaHQ/sigma</a><br />
-<a href="https://github.com/SigmaHQ/sigma/commits/master">https://github.com/SigmaHQ/sigma/commits/master</a><br />
-<a href="https://github.com/Azure/Azure-Sentinel/tree/master/Solutions">https://github.com/Azure/Azure-Sentinel/tree/master/Solutions</a><br />
-<a href="https://github.com/elastic/detection-rules">https://github.com/elastic/detection-rules</a><br />
-<a href="https://github.com/redcanaryco/atomic-red-team">https://github.com/redcanaryco/atomic-red-team</a><br />
-<a href="https://github.com/rapid7/metasploit-framework">https://github.com/rapid7/metasploit-framework</a><br />
-<a href="https://github.com/joesecurity/sigma-rules">https://github.com/joesecurity/sigma-rules</a><br />
-<a href="https://github.com/Cisco-Talos/osquery_queries">https://github.com/Cisco-Talos/osquery_queries</a><br />
-<a href="https://github.com/InQuest/yara-rules-vt">https://github.com/InQuest/yara-rules-vt</a><br />
-<a href="https://research.splunk.com/">https://research.splunk.com/</a><br />
-<a href="https://research.splunk.com/categories/network">https://research.splunk.com/categories/</a><br />
-<a href="https://github.com/SumoLogic/cloud-siem-content-catalog/blob/master/rules">https://github.com/SumoLogic/cloud-siem-content-catalog/blob/master/rules</a><br />
-<a href="https://www.elastic.co/guide/en/security/current/prebuilt-rules.html">https://www.elastic.co/guide/en/security/current/prebuilt-rules.html</a><br />
-<a href="https://github.com/elastic/detection-rules/commits/main/">https://github.com/elastic/detection-rules/commits/main/</a><br />
-<a href="https://elastic.github.io/detection-rules-explorer/">https://elastic.github.io/detection-rules-explorer/</a><br />
-<a href="https://rules.emergingthreats.net/">https://rules.emergingthreats.net/</a><br />
-<a href="https://github.com/projectdiscovery/nuclei-templates">https://github.com/projectdiscovery/nuclei-templates</a><br />
-<a href="https://github.com/Neo23x0">https://github.com/Neo23x0</a></p>
+<p><a href="https://github.com/SigmaHQ/sigma" target="_blank" rel="noopener">https://github.com/SigmaHQ/sigma</a></p>
+<p><a href="https://github.com/SigmaHQ/sigma/commits/master" target="_blank" rel="noopener">https://github.com/SigmaHQ/sigma/commits/master</a></p>
+<p><a href="https://github.com/Azure/Azure-Sentinel/tree/master/Solutions" target="_blank" rel="noopener">https://github.com/Azure/Azure-Sentinel/tree/master/Solutions</a></p>
+<p><a href="https://github.com/elastic/detection-rules" target="_blank" rel="noopener">https://github.com/elastic/detection-rules</a></p>
+<p><a href="https://github.com/redcanaryco/atomic-red-team" target="_blank" rel="noopener">https://github.com/redcanaryco/atomic-red-team</a></p>
+<p><a href="https://github.com/rapid7/metasploit-framework" target="_blank" rel="noopener">https://github.com/rapid7/metasploit-framework</a></p>
+<p><a href="https://github.com/joesecurity/sigma-rules" target="_blank" rel="noopener">https://github.com/joesecurity/sigma-rules</a></p>
+<p><a href="https://github.com/Cisco-Talos/osquery_queries" target="_blank" rel="noopener">https://github.com/Cisco-Talos/osquery_queries</a></p>
+<p><a href="https://github.com/InQuest/yara-rules-vt" target="_blank" rel="noopener">https://github.com/InQuest/yara-rules-vt</a></p>
+<p><a href="https://research.splunk.com/" target="_blank" rel="noopener">https://research.splunk.com/</a></p>
+<p><a href="https://research.splunk.com/categories/network" target="_blank" rel="noopener">https://research.splunk.com/categories/</a></p>
+<p><a href="https://github.com/SumoLogic/cloud-siem-content-catalog/blob/master/rules" target="_blank" rel="noopener">https://github.com/SumoLogic/cloud-siem-content-catalog/blob/master/rules</a></p>
+<p><a href="https://www.elastic.co/guide/en/security/current/prebuilt-rules.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/security/current/prebuilt-rules.html</a></p>
+<p><a href="https://github.com/elastic/detection-rules/commits/main/" target="_blank" rel="noopener">https://github.com/elastic/detection-rules/commits/main/</a></p>
+<p><a href="https://elastic.github.io/detection-rules-explorer/" target="_blank" rel="noopener">https://elastic.github.io/detection-rules-explorer/</a></p>
+<p><a href="https://rules.emergingthreats.net/" target="_blank" rel="noopener">https://rules.emergingthreats.net/</a></p>
+<p><a href="https://github.com/projectdiscovery/nuclei-templates" target="_blank" rel="noopener">https://github.com/projectdiscovery/nuclei-templates</a></p>
+<p><a href="https://github.com/Neo23x0" target="_blank" rel="noopener">https://github.com/Neo23x0</a></p>
 <h3 id="ioc-lists-and-threats">IOC lists and THREATs</h3>
-<p><a href="https://github.com/CronUP/Malware-IOCs">https://github.com/CronUP/Malware-IOCs</a><br />
-<a href="https://github.com/executemalware/Malware-IOCs">https://github.com/executemalware/Malware-IOCs</a><br />
-<a href="https://github.com/pr0xylife">https://github.com/pr0xylife</a><br />
-<a href="https://github.com/Gi7w0rm/MalwareConfigLists">https://github.com/Gi7w0rm/MalwareConfigLists</a><br />
-<a href="https://isc.sans.edu/api/recentdomains/today?json">https://isc.sans.edu/api/recentdomains/today?json</a><br />
-<a href="https://github.com/MISP/misp-warninglists">https://github.com/MISP/misp-warninglists</a><br />
-<a href="https://twitter.com/0xToxin">https://twitter.com/0xToxin</a></p>
+<p><a href="https://github.com/CronUP/Malware-IOCs" target="_blank" rel="noopener">https://github.com/CronUP/Malware-IOCs</a></p>
+<p><a href="https://github.com/executemalware/Malware-IOCs" target="_blank" rel="noopener">https://github.com/executemalware/Malware-IOCs</a></p>
+<p><a href="https://github.com/pr0xylife" target="_blank" rel="noopener">https://github.com/pr0xylife</a></p>
+<p><a href="https://github.com/Gi7w0rm/MalwareConfigLists" target="_blank" rel="noopener">https://github.com/Gi7w0rm/MalwareConfigLists</a></p>
+<p><a href="https://isc.sans.edu/api/recentdomains/today?json" target="_blank" rel="noopener">https://isc.sans.edu/api/recentdomains/today?json</a></p>
+<p><a href="https://github.com/MISP/misp-warninglists" target="_blank" rel="noopener">https://github.com/MISP/misp-warninglists</a></p>
+<p><a href="https://twitter.com/0xToxin" target="_blank" rel="noopener">https://twitter.com/0xToxin</a></p>
 <h3 id="phish">Phish</h3>
-<p><a href="https://www.phishtank.com/phish_archive.php">https://www.phishtank.com/phish_archive.php</a><br />
-<a href="https://phishstats.info:8443/public/dashboard/3bd497a3-9d59-441a-a4e8-6b7544312257">https://phishstats.info:8443/public/dashboard/3bd497a3-9d59-441a-a4e8-6b7544312257</a><br />
-<a href="https://phishstats.info:8443/public/dashboard/096f9d39-441c-44d2-abbd-ea065e31c74a?start=2020-05-01">https://phishstats.info:8443/public/dashboard/096f9d39-441c-44d2-abbd-ea065e31c74a?start=2020-05-01</a><br />
-<a href="https://phishstats.info/analytics.html">https://phishstats.info/analytics.html</a></p>
-<p>Other<br />
-<a href="https://github.com/blackorbird">https://github.com/blackorbird</a><br />
-<a href="https://datacadamia.com/start">https://datacadamia.com/start</a><br />
-<a href="https://orkl.eu/">https://orkl.eu/</a><br />
-<a href="https://www.threatminer.org/index.php">https://www.threatminer.org/index.php</a><br />
-<a href="https://digwebinterface.com/">https://digwebinterface.com/</a><br />
-<a href="https://pagexray.fouanalytics.com/">https://pagexray.fouanalytics.com/</a><br />
-<a href="https://assets.sentinelone.com/dv/sentinel-one-dv-chea-1?xs=105462#page=1">https://assets.sentinelone.com/dv/sentinel-one-dv-chea-1?xs=105462#page=1</a><br />
-<a href="https://blog.didierstevens.com/programs/">https://blog.didierstevens.com/programs/</a><br />
-<a href="https://learn.microsoft.com/en-us/sysinternals/">https://learn.microsoft.com/en-us/sysinternals/</a><br />
-<a href="https://httpstat.us/">https://httpstat.us/</a><br />
-<a href="https://reqres.in/">https://reqres.in/</a><br />
-<a href="https://www.lockheedmartin.com/content/dam/lockheed-martin/rms/documents/cyber/LM-White-Paper-Intel-Driven-Defense.pdf">https://www.lockheedmartin.com/content/dam/lockheed-martin/rms/documents/cyber/LM-White-Paper-Intel-Driven-Defense.pdf</a><br />
-<a href="https://www.activeresponse.org/wp-content/uploads/2013/07/diamond.pdf">https://www.activeresponse.org/wp-content/uploads/2013/07/diamond.pdf</a><br />
-<a href="https://update.avlab.co/">https://update.avlab.co/</a><br />
-<a href="https://cristi075.github.io/">https://cristi075.github.io/</a> ex of writeups<br />
-<a href="https://www.ransomlook.io/recent">https://www.ransomlook.io/recent</a> ex of threat list<br />
-<a href="https://gitlab.com/exploit-database/exploitdb">https://gitlab.com/exploit-database/exploitdb</a> ExploitDB updates<br />
-<a href="https://docs.velociraptor.app/exchange/">https://docs.velociraptor.app/exchange/</a> velociraptor updates<br />
-<a href="https://medium.com/tag/cybersecurity">https://medium.com/tag/cybersecurity</a> cybersecurity articles</p>
+<p><a href="https://www.phishtank.com/phish_archive.php" target="_blank" rel="noopener">https://www.phishtank.com/phish_archive.php</a></p>
+<p><a href="https://phishstats.info:8443/public/dashboard/3bd497a3-9d59-441a-a4e8-6b7544312257" target="_blank" rel="noopener">https://phishstats.info:8443/public/dashboard/3bd497a3-9d59-441a-a4e8-6b7544312257</a></p>
+<p><a href="https://phishstats.info:8443/public/dashboard/096f9d39-441c-44d2-abbd-ea065e31c74a?start=2020-05-01" target="_blank" rel="noopener">https://phishstats.info:8443/public/dashboard/096f9d39-441c-44d2-abbd-ea065e31c74a?start=2020-05-01</a></p>
+<p><a href="https://phishstats.info/analytics.html" target="_blank" rel="noopener">https://phishstats.info/analytics.html</a></p>
+<p>Other</p>
+<p><a href="https://github.com/blackorbird" target="_blank" rel="noopener">https://github.com/blackorbird</a></p>
+<p><a href="https://datacadamia.com/start" target="_blank" rel="noopener">https://datacadamia.com/start</a></p>
+<p><a href="https://orkl.eu/" target="_blank" rel="noopener">https://orkl.eu/</a></p>
+<p><a href="https://www.threatminer.org/index.php" target="_blank" rel="noopener">https://www.threatminer.org/index.php</a></p>
+<p><a href="https://digwebinterface.com/" target="_blank" rel="noopener">https://digwebinterface.com/</a></p>
+<p><a href="https://pagexray.fouanalytics.com/" target="_blank" rel="noopener">https://pagexray.fouanalytics.com/</a></p>
+<p><a href="https://assets.sentinelone.com/dv/sentinel-one-dv-chea-1?xs=105462#page=1" target="_blank" rel="noopener">https://assets.sentinelone.com/dv/sentinel-one-dv-chea-1?xs=105462#page=1</a></p>
+<p><a href="https://blog.didierstevens.com/programs/" target="_blank" rel="noopener">https://blog.didierstevens.com/programs/</a></p>
+<p><a href="https://learn.microsoft.com/en-us/sysinternals/" target="_blank" rel="noopener">https://learn.microsoft.com/en-us/sysinternals/</a></p>
+<p><a href="https://httpstat.us/" target="_blank" rel="noopener">https://httpstat.us/</a></p>
+<p><a href="https://reqres.in/" target="_blank" rel="noopener">https://reqres.in/</a></p>
+<p><a href="https://www.lockheedmartin.com/content/dam/lockheed-martin/rms/documents/cyber/LM-White-Paper-Intel-Driven-Defense.pdf" target="_blank" rel="noopener">https://www.lockheedmartin.com/content/dam/lockheed-martin/rms/documents/cyber/LM-White-Paper-Intel-Driven-Defense.pdf</a></p>
+<p><a href="https://www.activeresponse.org/wp-content/uploads/2013/07/diamond.pdf" target="_blank" rel="noopener">https://www.activeresponse.org/wp-content/uploads/2013/07/diamond.pdf</a></p>
+<p><a href="https://update.avlab.co/" target="_blank" rel="noopener">https://update.avlab.co/</a></p>
+<p><a href="https://cristi075.github.io/" target="_blank" rel="noopener">https://cristi075.github.io/</a> ex of writeups</p>
+<p><a href="https://www.ransomlook.io/recent" target="_blank" rel="noopener">https://www.ransomlook.io/recent</a> ex of threat list</p>
+<p><a href="https://gitlab.com/exploit-database/exploitdb" target="_blank" rel="noopener">https://gitlab.com/exploit-database/exploitdb</a> ExploitDB updates</p>
+<p><a href="https://docs.velociraptor.app/exchange/" target="_blank" rel="noopener">https://docs.velociraptor.app/exchange/</a> velociraptor updates</p>
+<p><a href="https://medium.com/tag/cybersecurity" target="_blank" rel="noopener">https://medium.com/tag/cybersecurity</a> cybersecurity articles</p>
 <h3 id="cve">CVE</h3>
-<p><a href="https://attackerkb.com/activity-feed">https://attackerkb.com/activity-feed</a><br />
-<a href="https://cvetrends.com/">https://cvetrends.com/</a></p>
+<p><a href="https://attackerkb.com/activity-feed" target="_blank" rel="noopener">https://attackerkb.com/activity-feed</a></p>
+<p><a href="https://cvetrends.com/" target="_blank" rel="noopener">https://cvetrends.com/</a></p>
 <h3 id="microsoft">Microsoft</h3>
-<p><a href="https://msrc.microsoft.com/update-guide/releaseNote">https://msrc.microsoft.com/update-guide/releaseNote</a><br />
-<a href="https://msrc.microsoft.com/update-guide/vulnerability">https://msrc.microsoft.com/update-guide/vulnerability</a><br />
-<a href="https://ti.defender.microsoft.com/">https://ti.defender.microsoft.com/</a><br />
-<a href="https://msrc.microsoft.com/blog/2023/">https://msrc.microsoft.com/blog/2023/</a><br />
-<a href="https://msrc.microsoft.com/update-guide/">https://msrc.microsoft.com/update-guide/</a></p>
+<p><a href="https://msrc.microsoft.com/update-guide/releaseNote" target="_blank" rel="noopener">https://msrc.microsoft.com/update-guide/releaseNote</a></p>
+<p><a href="https://msrc.microsoft.com/update-guide/vulnerability" target="_blank" rel="noopener">https://msrc.microsoft.com/update-guide/vulnerability</a></p>
+<p><a href="https://ti.defender.microsoft.com/" target="_blank" rel="noopener">https://ti.defender.microsoft.com/</a></p>
+<p><a href="https://msrc.microsoft.com/blog/2023/" target="_blank" rel="noopener">https://msrc.microsoft.com/blog/2023/</a></p>
+<p><a href="https://msrc.microsoft.com/update-guide/" target="_blank" rel="noopener">https://msrc.microsoft.com/update-guide/</a></p>
 <h3 id="tools">Tools</h3>
-<p><a href="https://lelinhtinh.github.io/de4js/">https://lelinhtinh.github.io/de4js/</a><br />
-<a href="https://github.com/scythe-io">https://github.com/scythe-io</a><br />
-<a href="https://github.com/opencybersecurityalliance/kestrel-lang">https://github.com/opencybersecurityalliance/kestrel-lang</a><br />
-<a href="https://isvbscriptdead.com/vbs-obfuscator/">https://isvbscriptdead.com/vbs-obfuscator/</a><br />
-<a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master">https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master</a><br />
-<a href="https://github.com/mthcht/awesome-lists/tree/main/Lists">awesome-lists/Lists at main · mthcht/awesome-lists</a></p>
+<p><a href="https://lelinhtinh.github.io/de4js/" target="_blank" rel="noopener">https://lelinhtinh.github.io/de4js/</a></p>
+<p><a href="https://github.com/scythe-io" target="_blank" rel="noopener">https://github.com/scythe-io</a></p>
+<p><a href="https://github.com/opencybersecurityalliance/kestrel-lang" target="_blank" rel="noopener">https://github.com/opencybersecurityalliance/kestrel-lang</a></p>
+<p><a href="https://isvbscriptdead.com/vbs-obfuscator/" target="_blank" rel="noopener">https://isvbscriptdead.com/vbs-obfuscator/</a></p>
+<p><a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master" target="_blank" rel="noopener">https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master</a></p>
+<p><a href="https://github.com/mthcht/awesome-lists/tree/main/Lists" target="_blank" rel="noopener">https://github.com/mthcht/awesome-lists/tree/main/Lists</a></p>
 <h3 id="red-team">Red Team</h3>
-<p><a href="https://book.hacktricks.xyz/">https://book.hacktricks.xyz/</a><br />
-<a href="https://trickest.com/blog/">https://trickest.com/blog/</a><br />
-<a href="https://github.com/coreb1t/awesome-pentest-cheat-sheets">https://github.com/coreb1t/awesome-pentest-cheat-sheets</a><br />
-<a href="https://github.com/Crypto-Cat/CTF">https://github.com/Crypto-Cat/CTF</a><br />
-<a href="https://github.com/WesleyWong420/OPSEC-Tradecraft">https://github.com/WesleyWong420/OPSEC-Tradecraft</a><br />
-<a href="https://ired.team/">https://ired.team</a><br />
-<a href="https://arttoolkit.github.io/">https://arttoolkit.github.io</a><br />
-<a href="https://github.com/aliasrobotics/cai?tab=readme-ov-file">https://github.com/aliasrobotics/cai?tab=readme-ov-file</a></p>
+<p><a href="https://book.hacktricks.xyz/" target="_blank" rel="noopener">https://book.hacktricks.xyz/</a></p>
+<p><a href="https://trickest.com/blog/" target="_blank" rel="noopener">https://trickest.com/blog/</a></p>
+<p><a href="https://github.com/coreb1t/awesome-pentest-cheat-sheets" target="_blank" rel="noopener">https://github.com/coreb1t/awesome-pentest-cheat-sheets</a></p>
+<p><a href="https://github.com/Crypto-Cat/CTF" target="_blank" rel="noopener">https://github.com/Crypto-Cat/CTF</a></p>
+<p><a href="https://github.com/WesleyWong420/OPSEC-Tradecraft" target="_blank" rel="noopener">https://github.com/WesleyWong420/OPSEC-Tradecraft</a></p>
+<p><a href="https://ired.team/" target="_blank" rel="noopener">https://ired.team</a></p>
+<p><a href="https://arttoolkit.github.io/" target="_blank" rel="noopener">https://arttoolkit.github.io</a></p>
+<p><a href="https://github.com/aliasrobotics/cai?tab=readme-ov-file" target="_blank" rel="noopener">https://github.com/aliasrobotics/cai?tab=readme-ov-file</a></p>
 <h3 id="blue-team">Blue team</h3>
-<p><a href="https://github.com/ovh/debian-cis">https://github.com/ovh/debian-cis</a><br />
-<a href="https://github.com/hardenedlinux/harbian-audit">https://github.com/hardenedlinux/harbian-audit</a><br />
-<a href="https://github.com/HuntDownProject/HEDnsExtractor">https://github.com/HuntDownProject/HEDnsExtractor</a></p>
+<p><a href="https://github.com/ovh/debian-cis" target="_blank" rel="noopener">https://github.com/ovh/debian-cis</a></p>
+<p><a href="https://github.com/hardenedlinux/harbian-audit" target="_blank" rel="noopener">https://github.com/hardenedlinux/harbian-audit</a></p>
+<p><a href="https://github.com/HuntDownProject/HEDnsExtractor" target="_blank" rel="noopener">https://github.com/HuntDownProject/HEDnsExtractor</a></p>
 <h3 id="threat">Threat</h3>
-<p><a href="https://www.threathunting.net/">https://www.threathunting.net/</a><br />
-<a href="https://www.threathunting.net/sqrrl-archive">https://www.threathunting.net/sqrrl-archive</a><br />
-<a href="https://intelligence.any.run/">https://intelligence.any.run/</a><br />
-<a href="https://unprotect.it/">https://unprotect.it</a><br />
-<a href="https://insiderthreatmatrix.org/">https://insiderthreatmatrix.org</a></p>
-<p>Detection<br />
-<a href="https://attackrulemap.netlify.app/">https://attackrulemap.netlify.app/</a><br />
-<a href="https://eventlog-compendium.streamlit.app/Audit_Policy_To_Event_ID_Mapping">https://eventlog-compendium.streamlit.app/Audit_Policy_To_Event_ID_Mapping</a></p>
-<p>Hunting<br />
-<a href="https://www.splunk.com/en_us/pdfs/gated/ebooks/splunk-peak-threat-hunting-framework.pdf">https://www.splunk.com/en_us/pdfs/gated/ebooks/splunk-peak-threat-hunting-framework.pdf</a><br />
-<a href="https://research.splunk.com/playbooks/">https://research.splunk.com/playbooks/</a></p>
+<p><a href="https://www.threathunting.net/" target="_blank" rel="noopener">https://www.threathunting.net/</a></p>
+<p><a href="https://www.threathunting.net/sqrrl-archive" target="_blank" rel="noopener">https://www.threathunting.net/sqrrl-archive</a></p>
+<p><a href="https://intelligence.any.run/" target="_blank" rel="noopener">https://intelligence.any.run/</a></p>
+<p><a href="https://unprotect.it/" target="_blank" rel="noopener">https://unprotect.it</a></p>
+<p><a href="https://insiderthreatmatrix.org/" target="_blank" rel="noopener">https://insiderthreatmatrix.org</a></p>
+<p>Detection</p>
+<p><a href="https://attackrulemap.netlify.app/" target="_blank" rel="noopener">https://attackrulemap.netlify.app/</a></p>
+<p><a href="https://eventlog-compendium.streamlit.app/Audit_Policy_To_Event_ID_Mapping" target="_blank" rel="noopener">https://eventlog-compendium.streamlit.app/Audit_Policy_To_Event_ID_Mapping</a></p>
+<p>Hunting</p>
+<p><a href="https://www.splunk.com/en_us/pdfs/gated/ebooks/splunk-peak-threat-hunting-framework.pdf" target="_blank" rel="noopener">https://www.splunk.com/en_us/pdfs/gated/ebooks/splunk-peak-threat-hunting-framework.pdf</a></p>
+<p><a href="https://research.splunk.com/playbooks/" target="_blank" rel="noopener">https://research.splunk.com/playbooks/</a></p>
   </article>
-  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
 </div>
-<script src="/assets/nav.js" defer></script>
+<script src="../assets/nav.js" defer></script>
 <script>
 document.getElementById('menu-toggle').addEventListener('click',function(){
   document.getElementById('sidebar').classList.toggle('open');

@@ -3,106 +3,49 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>What to Hunt · Will Seligman</title>
-<link rel="stylesheet" href="/assets/style.css">
+<meta name="color-scheme" content="dark">
+<title>What to Hunt · the-grizzly-bear</title>
+<meta name="description" content="What to Hunt — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
 <div class="layout">
 <aside class="sidebar" id="sidebar">
-  <a class="brand" href="/index.html">
+  <a class="brand" href="../../index.html">
     <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
   </a>
-  <nav class="nav" id="nav-root" data-current="notes/cyber-threat-hunting/what-to-hunt.html"></nav>
+  <nav class="nav" id="nav-root" data-current="notes/cyber-threat-hunting/what-to-hunt.html" data-root="../.."></nav>
 </aside>
 <main class="content">
   <article class="doc">
-  <div class="breadcrumb"><a href="/notes/index.html">Cyber Security Notes</a> &rsaquo; <a href="/notes/cyber-threat-hunting.html">Cyber Threat Hunting</a></div>
-  <h1 id="what-to-hunt">What to Hunt</h1>
+  <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">Cyber Security Notes</a> &rsaquo; <a href="index.html">Cyber Threat Hunting</a></div>
+<h1 id="title">What to Hunt</h1>
+<nav class="toc"><strong>On this page</strong><ul><li class="lvl1"><a href="#understanding-the-reasons-behind-our-threat-hunting-prioritization">Understanding the Reasons Behind Our Threat Hunting Prioritization</a></li><li class="lvl2"><a href="#threat-hunting-cycle-reminder">Threat Hunting Cycle Reminder</a></li><li class="lvl2"><a href="#reasons-behind-our-threat-hunting-choices">Reasons Behind Our Threat Hunting Choices</a></li><li class="lvl2"><a href="#other-industry-reasons-less-central-to-core-focus">Other Industry Reasons (Less Central to Core Focus)</a></li><li class="lvl2"><a href="#triggers-for-initiating-a-threat-hunt">Triggers for Initiating a Threat Hunt</a></li></ul></nav>
 <h1 id="understanding-the-reasons-behind-our-threat-hunting-prioritization">Understanding the Reasons Behind Our Threat Hunting Prioritization</h1>
-<p>When deciding <strong>what to hunt</strong> in threat hunting, it's crucial to understand <strong>why</strong> we choose certain targets over others. With a wide range of potential threats and intelligence sources, determining our focus areas helps us allocate resources effectively and enhance our security posture.<br />
-If your team operates more like a <strong>Managed Security Service Provider (MSSP)</strong> than an individual corporation, this means you often have an external perspective and may not have full visibility into all internal systems. Therefore, our approach to threat hunting must be strategic and well-prioritized.</p>
-<hr />
-<h2 id="threat-hunting-cycle-reminder">Threat Hunting Cycle Reminder</h2>
-<ol>
-<li><strong>Hypothesis Formation</strong></li>
-<li><strong>Investigation via Tools</strong></li>
-<li><strong>Uncover TTPs/Behavior/Activity</strong></li>
-<li><strong>Develop New Detections</strong></li>
-<li><strong>Enrich Analysis and Automate Hunts</strong></li>
-<li><strong>Repeat the Cycle</strong></li>
-</ol>
-<hr />
-<h2 id="reasons-behind-our-threat-hunting-choices">Reasons Behind Our Threat Hunting Choices</h2>
-<ol>
-<li><strong>Business Impact</strong><ul>
-<li><strong>Financial Consequences</strong>: Preventing losses due to breaches or downtime.</li>
-<li><strong>Reputation Management</strong>: Protecting our and our clients' reputations.</li>
-<li><strong>Operational Efficiency</strong>: Maintaining smooth operations without interruptions.</li>
-<li><strong>Value Delivery</strong>: Ensuring our efforts provide tangible benefits.</li>
-</ul>
-</li>
-<li><strong>Risk Management and Business Continuity</strong><ul>
-<li><strong>Exposure Assessment</strong>: Evaluating critical assets for vulnerabilities and exploitation potential.</li>
-<li><strong>Visibility Gaps</strong>: Identifying areas where monitoring is insufficient.</li>
-<li><strong>Business Continuity</strong>: Ensuring operations can continue uninterrupted in the face of threats.</li>
-</ul>
-</li>
-<li><strong>Proactive Measures</strong><ul>
-<li><strong>Addressing Exposures</strong>: Identifying and mitigating exposed services or sensitive information.</li>
-<li><strong>Policy and Configuration Review</strong>: Ensuring security policies and configurations are effective.</li>
-<li><strong>Preventative Action</strong>: Acting before threats materialize.</li>
-</ul>
-</li>
-<li><strong>Threat Intelligence</strong><ul>
-<li><strong>Identifying New TTPs</strong>: Discovering new tactics, techniques, and procedures used by threat actors.</li>
-<li><strong>Emerging Threats</strong>: Staying ahead of new threats and campaigns.</li>
-<li><strong>Critical CVEs</strong>: Monitoring critical vulnerabilities that could be exploited.</li>
-<li><strong>Specific Targets or Campaigns</strong>: Focusing on threats relevant to our clients or industry sectors.</li>
-</ul>
-</li>
-<li><strong>Resource Optimization</strong><ul>
-<li><strong>Personnel Availability</strong>: Considering the skills and availability of our team members.</li>
-<li><strong>Tool Utilization</strong>: Leveraging tools at our disposal effectively.</li>
-<li><strong>Time Management</strong>: Prioritizing activities that offer the greatest benefit.</li>
-</ul>
-</li>
-<li><strong>Continuous Improvement and Efficiency</strong><ul>
-<li><strong>Lessons Learned</strong>: Applying insights from past activities.</li>
-<li><strong>New Detections and Tools</strong>: Implementing new technologies and detection methods.</li>
-<li><strong>Process Maturation</strong>: Refining our methodologies for better outcomes.</li>
-</ul>
-</li>
-</ol>
-<hr />
-<h2 id="other-industry-reasons-less-central-to-core-focus">Other Industry Reasons (Less Central to Core Focus)</h2>
-<ul>
-<li><strong>Compliance Requirements</strong></li>
-<li><strong>Third-Party Risk Management</strong></li>
-<li><strong>Incident Response Preparation</strong></li>
-<li><strong>Intellectual Property Protection</strong></li>
-<li><strong>Cyber Training and Awareness</strong></li>
-<li><strong>Supply Chain Security/Purple Teaming</strong></li>
-</ul>
-<hr />
-<h2 id="triggers-for-initiating-a-threat-hunt">Triggers for Initiating a Threat Hunt</h2>
-<ul>
-<li><strong>Advisories or Alerts</strong>: Receiving notifications about new threats.</li>
-<li><strong>Specific Requests</strong>: Client or stakeholder inquiries.</li>
-<li><strong>Identification of TTPs</strong>: Noticing new or evolving attacker behaviors.</li>
-<li><strong>Strategic Focus Areas</strong>: Deciding to concentrate on critical assets or high-risk areas.</li>
-<li><strong>Matching Exposure to Threats</strong>: Aligning known vulnerabilities with emerging threats.</li>
-<li><strong>Observed Activity</strong>: Detecting unusual patterns or indicators in logs.</li>
-<li><strong>New Internal Research:</strong> Uncovering novel techniques and previously unknown behaviors.</li>
-</ul>
-<hr />
+<p>When deciding <strong>what to hunt</strong> in threat hunting, it's crucial to understand <strong>why</strong> we choose certain targets over others. With a wide range of potential threats and intelligence sources, determining our focus areas helps us allocate resources effectively and enhance our security posture.</p>
+<p>If your team operates more like a <strong>Managed Security Service Provider (MSSP)</strong> than an individual corporation, this means you often have an external perspective and may not have full visibility into all internal systems. Therefore, our approach to threat hunting must be strategic and well-prioritized.</p>
+<hr>
+<h2 id="threat-hunting-cycle-reminder"><strong>Threat Hunting Cycle Reminder</strong></h2>
+<ol><li><strong>Hypothesis Formation</strong></li><li><strong>Investigation via Tools</strong></li><li><strong>Uncover TTPs/Behavior/Activity</strong></li><li><strong>Develop New Detections</strong></li><li><strong>Enrich Analysis and Automate Hunts</strong></li><li><strong>Repeat the Cycle</strong></li></ol>
+<hr>
+<h2 id="reasons-behind-our-threat-hunting-choices"><strong>Reasons Behind Our Threat Hunting Choices</strong></h2>
+<ol><li><strong>Business Impact</strong><ul><li><strong>Financial Consequences</strong>: Preventing losses due to breaches or downtime.</li><li><strong>Reputation Management</strong>: Protecting our and our clients' reputations.</li><li><strong>Operational Efficiency</strong>: Maintaining smooth operations without interruptions.</li><li><strong>Value Delivery</strong>: Ensuring our efforts provide tangible benefits.</li></ul></li><li><strong>Risk Management and Business Continuity</strong><ul><li><strong>Exposure Assessment</strong>: Evaluating critical assets for vulnerabilities and exploitation potential.</li><li><strong>Visibility Gaps</strong>: Identifying areas where monitoring is insufficient.</li><li><strong>Business Continuity</strong>: Ensuring operations can continue uninterrupted in the face of threats.</li></ul></li><li><strong>Proactive Measures</strong><ul><li><strong>Addressing Exposures</strong>: Identifying and mitigating exposed services or sensitive information.</li><li><strong>Policy and Configuration Review</strong>: Ensuring security policies and configurations are effective.</li><li><strong>Preventative Action</strong>: Acting before threats materialize.</li></ul></li><li><strong>Threat Intelligence</strong><ul><li><strong>Identifying New TTPs</strong>: Discovering new tactics, techniques, and procedures used by threat actors.</li><li><strong>Emerging Threats</strong>: Staying ahead of new threats and campaigns.</li><li><strong>Critical CVEs</strong>: Monitoring critical vulnerabilities that could be exploited.</li><li><strong>Specific Targets or Campaigns</strong>: Focusing on threats relevant to our clients or industry sectors.</li></ul></li><li><strong>Resource Optimization</strong><ul><li><strong>Personnel Availability</strong>: Considering the skills and availability of our team members.</li><li><strong>Tool Utilization</strong>: Leveraging tools at our disposal effectively.</li><li><strong>Time Management</strong>: Prioritizing activities that offer the greatest benefit.</li></ul></li><li><strong>Continuous Improvement and Efficiency</strong><ul><li><strong>Lessons Learned</strong>: Applying insights from past activities.</li><li><strong>New Detections and Tools</strong>: Implementing new technologies and detection methods.</li><li><strong>Process Maturation</strong>: Refining our methodologies for better outcomes.</li></ul></li></ol>
+<hr>
+<h2 id="other-industry-reasons-less-central-to-core-focus"><strong>Other Industry Reasons (Less Central to Core Focus)</strong></h2>
+<ul><li><strong>Compliance Requirements</strong></li><li><strong>Third-Party Risk Management</strong></li><li><strong>Incident Response Preparation</strong></li><li><strong>Intellectual Property Protection</strong></li><li><strong>Cyber Training and Awareness</strong></li><li><strong>Supply Chain Security/Purple Teaming</strong></li></ul>
+<hr>
+<h2 id="triggers-for-initiating-a-threat-hunt"><strong>Triggers for Initiating a Threat Hunt</strong></h2>
+<ul><li><strong>Advisories or Alerts</strong>: Receiving notifications about new threats.</li><li><strong>Specific Requests</strong>: Client or stakeholder inquiries.</li><li><strong>Identification of TTPs</strong>: Noticing new or evolving attacker behaviors.</li><li><strong>Strategic Focus Areas</strong>: Deciding to concentrate on critical assets or high-risk areas.</li><li><strong>Matching Exposure to Threats</strong>: Aligning known vulnerabilities with emerging threats.</li><li><strong>Observed Activity</strong>: Detecting unusual patterns or indicators in logs.</li><li><strong>New Internal Research:</strong> Uncovering novel techniques and previously unknown behaviors.</li></ul>
+<hr>
 <p>By understanding <strong>what prompts us to choose specific threat hunts</strong>, we can better prioritize our efforts, focus on the most significant risks, and utilize our resources efficiently. This strategic approach ensures we remain proactive in our security measures, even with the external perspective of an MSSP.</p>
   </article>
-  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
 </div>
-<script src="/assets/nav.js" defer></script>
+<script src="../../assets/nav.js" defer></script>
 <script>
 document.getElementById('menu-toggle').addEventListener('click',function(){
   document.getElementById('sidebar').classList.toggle('open');

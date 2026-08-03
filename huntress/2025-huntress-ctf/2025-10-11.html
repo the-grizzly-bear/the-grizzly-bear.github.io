@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>2025-10-11 · the-grizzly-bear</title>
+<meta name="description" content="2025-10-11 — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2025-huntress-ctf/2025-10-11.html" data-root="../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">Huntress CTF</a> &rsaquo; <a href="index.html">2025-Huntress-CTF</a></div>
+<h1 id="title">2025-10-11</h1>
+
+<h1 id="trashcan"><strong>🔍 Trashcan</strong></h1>
+<p class="figure"><a class="img-link" href="2025-10-11/image.png"><img src="2025-10-11/image.png" alt="image.png" loading="lazy"></a></p>
+<pre><code class="language-python">the flag is the first charcter </code></pre>
+<p class="figure"><a class="img-link" href="2025-10-11/image-1.png"><img src="2025-10-11/image-1.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2025-10-11/image-2.png"><img src="2025-10-11/image-2.png" alt="image.png" loading="lazy"></a></p>
+<pre><code class="language-python">We extracted them in chronological order based on the deletion timestamp stored within each metadata file</code></pre>
+<pre><code class="language-python">import os
+import struct
+
+def find_flag_from_metadata(trash_dir='trashcan'):
+    """
+    Extracts flag characters hidden in the 'Record Size' field of Recycle Bin
+    metadata files and orders them by their deletion timestamp.
+    """
+    flag_pieces = []
+    
+    print("🔎 Extracting flag characters and timestamps...")
+
+    # Iterate over all files in the trashcan directory
+    for filename in os.listdir(trash_dir):
+        if not filename.startswith('$I'):
+            continue
+
+        meta_filepath = os.path.join(trash_dir, filename)
+
+        try:
+            with open(meta_filepath, 'rb') as f:
+                # Read the first 24 bytes which contain the needed fields
+                data = f.read(24)
+                if len(data) &lt; 24:
+                    continue
+
+                # Unpack the fields we care about:
+                # - The 2nd field (offset 8) is the Record Size, which holds our character.
+                # - The 3rd field (offset 16) is the Deletion Timestamp for sorting.
+                _header, flag_char_int, timestamp = struct.unpack('&lt;QQQ', data)
+
+                # The character is the first byte of this 8-byte integer
+                flag_char = chr(flag_char_int &amp; 0xFF)
+                
+                # Store the timestamp and character together
+                flag_pieces.append((timestamp, flag_char))
+
+        except Exception as e:
+            print(f"⚠️  Could not process {filename}: {e}")
+
+    # Sort the pieces chronologically based on the timestamp
+    flag_pieces.sort(key=lambda x: x[0])
+    
+    # Join the characters to form the flag
+    final_flag = "".join([piece[1] for piece in flag_pieces])
+    
+    print("\n" + "="*40)
+    print("🎉 Flag Found!")
+    print(final_flag)
+    print("="*40)
+
+if __name__ == '__main__':
+    # Make sure you are running this from the same directory as the 'trashcan' folder
+    if os.path.isdir('trashcan'):
+        find_flag_from_metadata()
+    else:
+        print("❌ Error: 'trashcan' directory not found. Please run this script in F:\\CTF\\2025-Huntress-CTF\\11\\")</code></pre>
+<p class="figure"><a class="img-link" href="2025-10-11/image-3.png"><img src="2025-10-11/image-3.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2025-10-11/image-4.png"><img src="2025-10-11/image-4.png" alt="image.png" loading="lazy"></a></p>
+<pre><code class="language-python">#!/usr/bin/env python3
+import os
+import glob
+import struct
+
+# List to store (timestamp, character, filename)
+flag_data = []
+
+# Read all $I files (metadata files)
+for filepath in sorted(glob.glob('$I*.txt')):
+    with open(filepath, 'rb') as f:
+        data = f.read()
+        # Byte at offset 0x08 contains our flag character
+        if len(data) &gt;= 16:
+            flag_byte = data[8]
+            # Timestamp is at offset 0x10 (8 bytes, Windows FILETIME format)
+            timestamp = struct.unpack('&lt;Q', data[16:24])[0]
+            file_id = filepath[2:-4]  # Remove "$I" prefix and ".txt" suffix
+            flag_data.append((timestamp, chr(flag_byte), file_id))
+
+# Sort by timestamp
+flag_data.sort(key=lambda x: x[0])
+
+print("Extracted characters in chronological order:")
+for timestamp, char, file_id in flag_data:
+    print(f"{file_id}: {repr(char)} (ASCII {ord(char)}) - Timestamp: {timestamp}")
+
+print("\n" + "="*50)
+print("FLAG:", ''.join(char for _, char, _ in flag_data))</code></pre>
+<p class="figure"><a class="img-link" href="2025-10-11/image-5.png"><img src="2025-10-11/image-5.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2025-10-11/image-6.png"><img src="2025-10-11/image-6.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2025-10-11/image-7.png"><img src="2025-10-11/image-7.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2025-10-11/image-8.png"><img src="2025-10-11/image-8.png" alt="image.png" loading="lazy"></a></p>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

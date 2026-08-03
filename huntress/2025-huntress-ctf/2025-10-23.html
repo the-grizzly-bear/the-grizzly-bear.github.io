@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>2025-10-23 · the-grizzly-bear</title>
+<meta name="description" content="2025-10-23 — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2025-huntress-ctf/2025-10-23.html" data-root="../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">Huntress CTF</a> &rsaquo; <a href="index.html">2025-Huntress-CTF</a></div>
+<h1 id="title">2025-10-23</h1>
+
+<h1 id="rust-tickler"><strong>⚙️ Rust Tickler</strong></h1>
+<p class="figure"><a class="img-link" href="2025-10-23/image.png"><img src="2025-10-23/image.png" alt="image.png" loading="lazy"></a></p>
+<p><a href="2025-10-23/rust-tickler.txt">rust_tickler</a></p>
+<p class="figure"><a class="img-link" href="2025-10-23/image-1.png"><img src="2025-10-23/image-1.png" alt="image.png" loading="lazy"></a></p>
+<pre><code>Main XOR Function: FUN_140001940 (Address: 0x140001940)
+This is the core encryption/decryption function that:
+Takes an input buffer, key buffer, and their sizes
+Performs byte-by-byte XOR operations
+Uses a cyclic key pattern: output[i] = input[i] ^ key[i % key_length]
+
+Encrypted Flag String
+Location: 0x14000a000
+Content: "7=06*gagg30d03gf2f5g5dba3c0hhcd2c4b,"
+
+Key Value 51 (0x33)
+
+Key storage: 0x14000a0e0
+The value 51 likely represents the key length or size parameter
+It's used in modulo calculations to cycle through the key bytes</code></pre>
+<pre><code>main function</code></pre>
+<pre><code>
+ulonglong *
+FUN_140001940(ulonglong *param_1,void *param_2,ulonglong param_3,longlong param_4,ulonglong param_5)
+
+{
+  byte *pbVar1;
+  void *_Dst;
+  ulonglong uVar2;
+  ulonglong uVar3;
+  
+  if (-1 &lt; (longlong)param_3) {
+    if (param_3 == 0) {
+      *param_1 = 0;
+      param_1[1] = 1;
+      param_1[2] = 0;
+      return param_1;
+    }
+    _Dst = (void *)thunk_FUN_140002390(param_3,1);
+    if (_Dst != (void *)0x0) {
+      memcpy(_Dst,param_2,param_3);
+      *param_1 = param_3;
+      param_1[1] = (ulonglong)_Dst;
+      param_1[2] = param_3;
+      if (param_5 != 0) {
+        if (param_3 == 1) {
+          uVar2 = 0;
+        }
+        else {
+          uVar2 = 0;
+          do {
+            if ((uVar2 | param_5) &gt;&gt; 0x20 == 0) {
+              uVar3 = (uVar2 &amp; 0xffffffff) % (param_5 &amp; 0xffffffff);
+            }
+            else {
+              uVar3 = uVar2 % param_5;
+            }
+            *(byte *)((longlong)_Dst + uVar2) =
+                 *(byte *)((longlong)_Dst + uVar2) ^ *(byte *)(param_4 + uVar3);
+            uVar3 = uVar2 + 1;
+            if ((uVar3 | param_5) &gt;&gt; 0x20 == 0) {
+              uVar3 = (uVar3 &amp; 0xffffffff) % (param_5 &amp; 0xffffffff);
+            }
+            else {
+              uVar3 = uVar3 % param_5;
+            }
+            pbVar1 = (byte *)((longlong)_Dst + uVar2 + 1);
+            *pbVar1 = *pbVar1 ^ *(byte *)(param_4 + uVar3);
+            uVar2 = uVar2 + 2;
+          } while ((param_3 &amp; 0x7ffffffffffffffe) != uVar2);
+        }
+        if ((param_3 &amp; 1) == 0) {
+          return param_1;
+        }
+        if ((uVar2 | param_5) &gt;&gt; 0x20 == 0) {
+          uVar3 = (uVar2 &amp; 0xffffffff) % (param_5 &amp; 0xffffffff);
+        }
+        else {
+          uVar3 = uVar2 % param_5;
+        }
+        *(byte *)((longlong)_Dst + uVar2) =
+             *(byte *)((longlong)_Dst + uVar2) ^ *(byte *)(param_4 + uVar3);
+        return param_1;
+      }
+      goto LAB_140001aa9;
+    }
+  }
+  FUN_140006700();
+LAB_140001aa9:
+  do {
+    invalidInstructionException();
+  } while( true );
+}
+</code></pre>
+<pre><code>flag string</code></pre>
+<pre><code>       1400095ff 00              ??         00h
+                             //
+                             // .data 
+                             // ram:14000a000-ram:14000a1ff
+                             //
+                             s_2`f5g5dba3c0hhcd2c`4b,_14000a010              XREF[4,8]:   140000254(*), 14000161e(R), 
+                             s_cd2c`4b,_14000a01e                                         140001747(R), 140001751(W), 
+                             s_2c`4b,_14000a020                                           140001606(R), 140001612(R), 
+                             s_b,_14000a024                                               140001758(R), 14000175f(W), 
+                             s_,_14000a025                                                140001766(R), 140001774(W), 
+                             s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000                 14000177c(RW), 140001783(RW)  
+       14000a000 37 3d 30        ds         "7=06*gagg30d03gf2`f5g5dba3c0hhcd2c`4b,"
+                 36 2a 67 
+                 61 67 67 
+</code></pre>
+<pre><code>XOR key 0x51, or 'Q', loaded in here at DAT_140007330
+7=06*gagg30d03gf2f5g5dba3c0hhcd2c4b,</code></pre>
+<pre><code>
+undefined8 UndefinedFunction_140001740(void)
+
+{
+  uint uVar1;
+  uint uVar2;
+  uint uVar3;
+  uint uVar4;
+  
+  uVar1 = s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000._0_4_ ^ 0x51515151;
+  uVar2 = s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000._4_4_ ^ 0x51515151;
+  uVar3 = s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000._8_4_ ^ 0x51515151;
+  uVar4 = s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000._12_4_ ^ 0x51515151;
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[0] = (char)uVar1;
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[1] = (char)(uVar1 &gt;&gt; 8);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[2] = (char)(uVar1 &gt;&gt; 0x10);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[3] = (char)(uVar1 &gt;&gt; 0x18);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[4] = (char)uVar2;
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[5] = (char)(uVar2 &gt;&gt; 8);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[6] = (char)(uVar2 &gt;&gt; 0x10);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[7] = (char)(uVar2 &gt;&gt; 0x18);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[8] = (char)uVar3;
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[9] = (char)(uVar3 &gt;&gt; 8);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[10] = (char)(uVar3 &gt;&gt; 0x10);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[11] = (char)(uVar3 &gt;&gt; 0x18);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[12] = (char)uVar4;
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[13] = (char)(uVar4 &gt;&gt; 8);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[14] = (char)(uVar4 &gt;&gt; 0x10);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[15] = (char)(uVar4 &gt;&gt; 0x18);
+  uVar1 = s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000._16_4_ ^ 0x51515151;
+  uVar2 = s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000._20_4_ ^ 0x51515151;
+  uVar3 = s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000._24_4_ ^ 0x51515151;
+  uVar4 = s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000._28_4_ ^ 0x51515151;
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[16] = (char)uVar1;
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[17] = (char)(uVar1 &gt;&gt; 8);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[18] = (char)(uVar1 &gt;&gt; 0x10);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[19] = (char)(uVar1 &gt;&gt; 0x18);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[20] = (char)uVar2;
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[21] = (char)(uVar2 &gt;&gt; 8);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[22] = (char)(uVar2 &gt;&gt; 0x10);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[23] = (char)(uVar2 &gt;&gt; 0x18);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[24] = (char)uVar3;
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[25] = (char)(uVar3 &gt;&gt; 8);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[26] = (char)(uVar3 &gt;&gt; 0x10);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[27] = (char)(uVar3 &gt;&gt; 0x18);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[28] = (char)uVar4;
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[29] = (char)(uVar4 &gt;&gt; 8);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[30] = (char)(uVar4 &gt;&gt; 0x10);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[31] = (char)(uVar4 &gt;&gt; 0x18);
+  uVar1 = s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000._32_4_ ^ 0x51515151;
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[32] = (char)uVar1;
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[33] = (char)(uVar1 &gt;&gt; 8);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[34] = (char)(uVar1 &gt;&gt; 0x10);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[35] = (char)(uVar1 &gt;&gt; 0x18);
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[36] =
+       s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[36] ^ 0x51;
+  s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[37] =
+       s_7=06*gagg30d03gf2`f5g5dba3c0hhcd_14000a000[37] ^ 0x51;
+  return 0;
+}
+</code></pre>
+<p class="figure"><a class="img-link" href="2025-10-23/image-2.png"><img src="2025-10-23/image-2.png" alt="image.png" loading="lazy"></a></p>
+<pre><code>flag{6066ba5ab67c17d6d530b2a9925c21e3}</code></pre>
+<h1 id="netsupport"><strong>🐞 NetSupport</strong></h1>
+<p class="figure"><a class="img-link" href="2025-10-23/image-3.png"><img src="2025-10-23/image-3.png" alt="image.png" loading="lazy"></a></p>
+<p><a href="2025-10-23/netsupport.zip">netsupport.zip</a></p>
+<pre><code>1. The netsupport file contained a PowerShell script with an embedded byte array starting with [Byte[]]$xϞzzghϞ = @(80,75,3,4,...)
+2. The bytes 80,75,3,4 are ZIP magic bytes ("PK\x03\x04")
+3. Extracted the byte array and converted it to extracted.zip (3.1 MB)
+4. The ZIP contained NetSupport Manager remote administration tool files
+5. Found the flag in download/CLIENT32.ini as a Base64-encoded string
+</code></pre>
+<p class="figure"><a class="img-link" href="2025-10-23/image-4.png"><img src="2025-10-23/image-4.png" alt="image.png" loading="lazy"></a></p>
+<pre><code>extract the bytes</code></pre>
+<pre><code class="language-python">
+cat extract_zip.py 
+#!/usr/bin/env python3
+import re
+
+# Read the netsupport file
+with open('netsupport', 'r', encoding='utf-8-sig') as f:
+    content = f.read()
+
+# Find the byte array
+match = re.search(r'\[Byte\[\]\]\$\w+\s*=\s*@\(([\d,\s]+)\)', content)
+
+if match:
+    # Extract the bytes
+    byte_str = match.group(1)
+    bytes_list = [int(x.strip()) for x in byte_str.split(',') if x.strip()]
+
+    # Convert to bytes and write to file
+    byte_data = bytes(bytes_list)
+
+    with open('extracted.zip', 'wb') as f:
+        f.write(byte_data)
+
+    print(f"Extracted {len(byte_data)} bytes to extracted.zip")
+    print(f"First bytes: {byte_data[:20].hex()}")
+else:
+    print("No byte array found")
+                                             </code></pre>
+<pre><code>Extract and unzip</code></pre>
+<p class="figure"><a class="img-link" href="2025-10-23/image-5.png"><img src="2025-10-23/image-5.png" alt="image.png" loading="lazy"></a></p>
+<pre><code>Files from the zip</code></pre>
+<p class="figure"><a class="img-link" href="2025-10-23/image-6.png"><img src="2025-10-23/image-6.png" alt="image.png" loading="lazy"></a></p>
+<pre><code>Look through and find the flag in the client32.ini file</code></pre>
+<p class="figure"><a class="img-link" href="2025-10-23/image-7.png"><img src="2025-10-23/image-7.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2025-10-23/image-8.png"><img src="2025-10-23/image-8.png" alt="image.png" loading="lazy"></a></p>
+<pre><code>flag{b6e54d0a0a5f2292589c3852f1930891}</code></pre>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

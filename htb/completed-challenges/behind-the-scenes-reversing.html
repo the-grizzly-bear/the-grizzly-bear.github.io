@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Behind the Scenes(Reversing) · the-grizzly-bear</title>
+<meta name="description" content="Behind the Scenes(Reversing) — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/completed-challenges/behind-the-scenes-reversing.html" data-root="../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">HackTheBox</a> &rsaquo; <a href="index.html">Completed Challenges</a></div>
+<h1 id="title">Behind the Scenes(Reversing)</h1>
+
+<p class="figure"><a class="img-link" href="behind-the-scenes-reversing/untitled.png"><img src="behind-the-scenes-reversing/untitled.png" alt="Untitled" loading="lazy"></a></p>
+<pre><code class="language-bash">#include "out.h"
+
+int _init(EVP_PKEY_CTX *ctx)
+
+int iVar1;
+
+Var1 = **gmon_start**();
+return iVar1;
+}
+
+void FUN_00101020(void)
+
+{
+// WARNING: Treating indirect jump as call
+(*(code *)(undefined *)0x0)();
+return;
+}
+
+oid __cxa_finalize(void)
+
+{
+__cxa_finalize();
+return;
+}
+
+// WARNING: Unknown calling convention -- yet parameter storage is locked
+
+int strncmp(char *__s1,char *__s2,size_t __n)
+
+{
+int iVar1;
+
+iVar1 = strncmp(__s1,__s2,__n);
+return iVar1;
+}
+
+// WARNING: Unknown calling convention -- yet parameter storage is locked
+
+int sigaction(int __sig,sigaction *__act,sigaction *__oact)
+
+{
+int iVar1;
+
+iVar1 = sigaction(__sig,__act,__oact);
+return iVar1;
+}
+
+// WARNING: Unknown calling convention -- yet parameter storage is locked
+
+void * memset(void *__s,int __c,size_t __n)
+
+{
+void *pvVar1;
+
+pvVar1 = memset(__s,__c,__n);
+return pvVar1;
+}
+
+// WARNING: Unknown calling convention -- yet parameter storage is locked
+
+nt sigemptyset(sigset_t *__set)
+
+{
+int iVar1;
+
+iVar1 = sigemptyset(__set);
+return iVar1;
+}
+
+void _start(undefined8 param_1,undefined8 param_2,undefined8 param_3)
+
+{
+undefined8 unaff_retaddr;
+undefined auStack_8 [8];
+
+__libc_start_main(main,unaff_retaddr,&amp;stack0x00000008,__libc_csu_init,__libc_csu_fini,param_3,
+auStack_8);
+do {
+// WARNING: Do nothing block with infinite loop
+} while( true );
+}
+
+// WARNING: Removing unreachable block (ram,0x00101183)
+// WARNING: Removing unreachable block (ram,0x0010118f)
+
+void deregister_tm_clones(void)
+{
+return;
+}
+// WARNING: Removing unreachable block (ram,0x001011c4)
+// WARNING: Removing unreachable block (ram,0x001011d0)
+void register_tm_clones(void)
+{
+return;
+}
+void __do_global_dtors_aux(void)
+
+if (completed_8060 != '\0') {
+return;
+}
+__cxa_finalize(&amp;__dso_handle);
+deregister_tm_clones();
+completed_8060 = 1;
+return;
+}
+
+void frame_dummy(void)
+{
+register_tm_clones();
+return;
+}
+void segill_sigaction(undefined8 param_1,undefined8 param_2,long param_3)
+
+{
+*(long *)(param_3 + 0xa8) = *(long *)(param_3 + 0xa8) + 2;
+return;
+}
+
+void main(void)
+
+{
+long in_FS_OFFSET;
+sigaction local_a8;
+undefined8 local_10;
+
+local_10 = *(undefined8 *)(in_FS_OFFSET + 0x28);
+memset(&amp;local_a8,0,0x98);
+sigemptyset(&amp;local_a8.sa_mask);
+local_a8.__sigaction_handler.sa_handler = segill_sigaction;
+local_a8.sa_flags = 4;
+sigaction(4,&amp;local_a8,(sigaction *)0x0);
+do {
+invalidInstructionException();
+} while( true );
+}
+
+void __libc_csu_init(EVP_PKEY_CTX *param_1,undefined8 param_2,undefined8 param_3)
+
+{
+long lVar1;
+
+_init(param_1);
+lVar1 = 0;
+do {
+(*(code *)(&amp;__frame_dummy_init_array_entry)[lVar1])((ulong)param_1 &amp; 0xffffffff,param_2,param_3)
+;
+lVar1 = lVar1 + 1;
+} while (lVar1 != 1);
+return;
+}
+
+void __libc_csu_fini(void)
+
+{
+return;
+}
+
+void _fini(void)
+
+{
+return;
+}</code></pre>
+<p><a href="https://osandamalith.com/2019/02/11/linux-reverse-engineering-ctfs-for-beginners/" target="_blank" rel="noopener">https://osandamalith.com/2019/02/11/linux-reverse-engineering-ctfs-for-beginners/</a></p>
+<p class="figure"><a class="img-link" href="behind-the-scenes-reversing/untitled-1.png"><img src="behind-the-scenes-reversing/untitled-1.png" alt="Untitled" loading="lazy"></a></p>
+<p>...../challenge<br>
+&lt;password&gt;.Itz._<br>
+0n.Ly_.UD2.&gt; HTB<br>
+{%s}..</p>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

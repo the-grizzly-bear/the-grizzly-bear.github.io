@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>2024-10-11 GoCrackMe3 (Reverse Engineering) · the-grizzly-bear</title>
+<meta name="description" content="2024-10-11 GoCrackMe3 (Reverse Engineering) — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2024-huntress-ctf/2024-10-11-gocrackme3-reverse-engineering.html" data-root="../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">Huntress CTF</a> &rsaquo; <a href="index.html">2024-Huntress-CTF</a></div>
+<h1 id="title">2024-10-11 GoCrackMe3 (Reverse Engineering)</h1>
+
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image.png" alt="image.png" loading="lazy"></a></p>
+<p>Well I was on the right path, just didn’t step through enough to get the final flag piece to print out, I did jump through enough to start it.</p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-1.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-1.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-2.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-2.png" alt="image.png" loading="lazy"></a></p>
+<p>\x09\x01\x08\x12\x1a\x1c\x16\x01\x1d\x25\x18\x08\x02\x00\x17\x2d\x18\x1b\x1d\x18\x21\x17\x2f\x27\x28\x2c\x03\x2b\x11\x2a\x08\x25\x19\x14\x0a\x0b\x2c\x24\x00\x1a\x2c\x2e\x07\x02\x18\x15\x0e\x28\x18\x08\x14\x84\xef\x8b\x61\x6c\x6c\xb1\xb6\xd3\x69\x92\x64\x6f\x38\x27\x74\x81\x1b\x65\xaa\x8b\xb2\x52\xe7\xa4\xd2\x20\xcf\xe2\x69\x6e\x74\x8e\x6e\x67\xb0\x20\x68\x7c\xb0\x66\x35\x9f\xd6\xaf\xa9\xb3</p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-3.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-3.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-4.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-4.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-5.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-5.png" alt="image.png" loading="lazy"></a></p>
+<p><a href="https://github.com/mandiant/GoReSym/blob/master/GhidraPython/goresym_rename.py" target="_blank" rel="noopener">https://github.com/mandiant/GoReSym/blob/master/GhidraPython/goresym_rename.py</a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-6.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-6.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-7.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-7.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-8.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-8.png" alt="image.png" loading="lazy"></a></p>
+<p>trying output registers</p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-9.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-9.png" alt="image.png" loading="lazy"></a></p>
+<p>extracting rax</p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-10.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-10.png" alt="image.png" loading="lazy"></a></p>
+<p>decoding rax</p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-11.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-11.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-12.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-12.png" alt="image.png" loading="lazy"></a></p>
+<pre><code class="language-powershell">[0x004f7a00]&gt; px 64 @ rax
+- offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
+0x004f7a00  4c8d a424 00fd ffff 4d3b 6610 0f86 a307  L..$....M;f.....                                               
+0x004f7a10  0000 5548 89e5 4881 ec78 0300 000f 1f00  ..UH..H..x......
+0x004f7a20  e85b 29fe ff48 0fba e03f 731a 4889 c148  .[)..H...?s.H..H
+0x004f7a30  d1e0 48c1 e81f 48ba 807f b1d7 0d00 0000  ..H...H.........
+[0x004f7a00]&gt; ph 64 @ rax
+[0x004f7a00]&gt; ps 64 @ rax
+L\x8d\xa4$\x00\xfd\xff\xffM;f\x10\x0f\x86\xa3\x07\x00\x00UH\x89\xe5H\x81\xecx\x03\x00\x00\x0f\x1f\x00\xe8[)\xfe\xffH\x0f\xba\xe0?s\x1aH\x89\xc1H\xd1\xe0H\xc1\xe8\x1fH\xba\x80\x7f\xb1\xd7\x0d\x00\x00\x00
+[0x004f7a00]&gt; psu 64 @ rax
+L\u008d\u00a4$\u0000\u00fd\u00ff\u00ffM;f\u0010\u000f\u0086\u00a3\u0007\u0000\u0000UH\u0089\u00e5H\u0081\u00ecx\u0003\u0000\u0000\u000f\u001f\u0000\u00e8[)\u00fe\u00ffH\u000f\u00ba\u00e0?s\u001aH\u0089\u00c1H\u00d1\u00e0H\u00c1\u00e8\u001fH\u00ba\u0080\u007f\u00b1\u00d7\u000d\u0000\u0000\u0000
+</code></pre>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-13.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-13.png" alt="image.png" loading="lazy"></a></p>
+<pre><code class="language-python">db 0x004F7A00
+#db 0x004f7a2c
+db 0x004f7a74
+dr rax=0x00000001 or dr al=0x01
+db 0x004f7a7c
+db 0x004f7cbc
+wa jmp 0x004f7cbe
+#db 0x004f7cc5
+#db 0x004f7cd3
+db 0x004f7d08</code></pre>
+<pre><code class="language-python">db 0x4f7d15 #ret</code></pre>
+<pre><code class="language-python">db 0x004F7A00
+db 0x004f8008
+db 0x004f7a2f
+db 0x004f7a32</code></pre>
+<pre><code class="language-python">0x004f7a2c      4889c1         mov rcx, rax
+0x004f7a2f      48d1e0         shl rax, 1
+0x004f7a32      48c1e81f       shr rax, 0x1f</code></pre>
+<pre><code class="language-python">db 0x004F7A7C</code></pre>
+<pre><code class="language-python">db 0x004F7A00
+#db 0x004f7a2c
+db 0x004f7a74
+dr rax=0x00000001 or dr al=0x01
+db 0x004f7a7c
+db 0x004f7cbc
+wa jmp 0x004f7cbe
+#db 0x004f7cc5
+#db 0x004f7cd3
+db 0x004f7d08</code></pre>
+<pre><code class="language-python">db 0x4f7d15 #ret</code></pre>
+<pre><code class="language-python">db 0x004e5344</code></pre>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-14.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-14.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-15.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-15.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-16.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-16.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-17.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-17.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-18.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-18.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-19.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-19.png" alt="image.png" loading="lazy"></a></p>
+<pre><code class="language-python">db 0x004F7A00
+db 0x004f8008
+db 0x004f7a2f
+db 0x004f7a32</code></pre>
+<pre><code class="language-python">0x004f7a2c      4889c1         mov rcx, rax
+0x004f7a2f      48d1e0         shl rax, 1
+0x004f7a32      48c1e81f       shr rax, 0x1f</code></pre>
+<pre><code class="language-python">db 0x004F7A7C</code></pre>
+<pre><code class="language-python">db 0x004F7A00
+#db 0x004f7a2c
+db 0x004f7a74
+dr rax=0x00000001 or dr al=0x01
+db 0x004f7a7c
+db 0x004f7cbc
+wa jmp 0x004f7cbe
+#db 0x004f7cc5
+#db 0x004f7cd3
+db 0x004f7d08</code></pre>
+<pre><code class="language-python">db 0x4f7d15 #ret</code></pre>
+<pre><code class="language-python">db 0x004e5344</code></pre>
+<pre><code class="language-python">break *0x004f7a74</code></pre>
+<pre><code class="language-python">set {unsigned char}0x4f7a76 = 0x90
+gef➤  set {unsigned char}0x4f7a77 = 0x90
+gef➤  set {unsigned char}0x4f7a78 = 0x90
+gef➤  set {unsigned char}0x4f7a79 = 0x90
+gef➤  set {unsigned char}0x4f7a7a = 0x90</code></pre>
+<pre><code class="language-python">gef➤  set {unsigned char[5]}0x4f7a76 = "\x90\x90\x90\x90\x90"</code></pre>
+<pre><code class="language-python">gef➤  x/5xb 0x4f7a76
+0x4f7a76:       0x90    0x90    0x90    0x90    0x90</code></pre>
+<pre><code class="language-python">" !\"#$%%&amp;&amp;\'\'((()))*++,,,,,------....//////0001123333333333444444444455666677777888888888889999999999::::::;;;;;;;;;;;;;;;;&lt;&lt;&lt;&lt;&lt;&lt;&lt;"</code></pre>
+<pre><code class="language-python">set {unsigned char[6]}0x4f7a76 = "\x90\x90\x90\x90\x90\x90”</code></pre>
+<pre><code class="language-python">set {unsigned char[6]}0x4f7a76 = "\x90\x90\x90\x90\x90\x90”</code></pre>
+<pre><code class="language-python">b *0x4F7D3A</code></pre>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-20.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-20.png" alt="image.png" loading="lazy"></a></p>
+<pre><code class="language-python">HackersGonnaHackHuntressGonnaHunt</code></pre>
+<pre><code class="language-python">info b</code></pre>
+<pre><code class="language-python">Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x00000000004f7a74
+breakpoint already hit 1 time
+2       breakpoint     keep y   0x00000000004f7d3a
+3       breakpoint     keep y   0x00000000004f7d3a
+4       breakpoint     keep n   0x00000000004f939b
+5       breakpoint     keep n   0x00000000004f9423
+6       breakpoint     keep n   0x00000000004f9324
+7       breakpoint     keep n   0x00000000004f939b
+8       breakpoint     keep n   0x00000000004f9244
+9       breakpoint     keep n   0x000000000040aeb7
+10      breakpoint     keep n   0x0000000000444835</code></pre>
+<pre><code class="language-python">221fccaa8</code></pre>
+<pre><code class="language-python">0x4f7f1b </code></pre>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-21.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-21.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-22.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-22.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-23.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-23.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-24.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-24.png" alt="image.png" loading="lazy"></a></p>
+<p>flag{32b2}32b2}</p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-25.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-25.png" alt="image.png" loading="lazy"></a></p>
+<p>42024a30b</p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-26.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-26.png" alt="image.png" loading="lazy"></a></p>
+<p>Other notes</p>
+<p>1st jbe after flag{</p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-27.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-27.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-28.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-28.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-29.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-29.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-30.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-30.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-31.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-31.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-32.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-32.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-33.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-33.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-34.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-34.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-35.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-35.png" alt="image.png" loading="lazy"></a></p>
+<p>next lets try to take this 0x4f9244</p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-36.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-36.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-37.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-37.png" alt="image.png" loading="lazy"></a></p>
+<p>"flag{42024a30b</p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-38.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-38.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-11-gocrackme3-reverse-engineering/image-39.png"><img src="2024-10-11-gocrackme3-reverse-engineering/image-39.png" alt="image.png" loading="lazy"></a></p>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

@@ -1,3 +1,8 @@
 __pycache__/
 *.pyc
-_src/manifests/
+
+# Notion export archives — the site is generated from these, they aren't published
+*ExportBlock-*.zip
+
+# Extra redaction patterns — kept out of the repo since they name what to hide
+_src/redactions.txt

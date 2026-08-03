@@ -1,3 +1,0 @@
-# Forensic Downgrade
-
-*[image unavailable]*

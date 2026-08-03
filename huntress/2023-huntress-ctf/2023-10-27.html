@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>2023-10-27 · the-grizzly-bear</title>
+<meta name="description" content="2023-10-27 — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2023-huntress-ctf/2023-10-27.html" data-root="../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">Huntress CTF</a> &rsaquo; <a href="index.html">2023-Huntress-CTF</a></div>
+<h1 id="title">2023-10-27</h1>
+
+<p><a href="https://www.virustotal.com/gui/file/2948e822ce3a670c6c0a7441886966bfacf5543dec4348a616f5774b47a23d4d/behavior" target="_blank" rel="noopener">https://www.virustotal.com/gui/file/2948e822ce3a670c6c0a7441886966bfacf5543dec4348a616f5774b47a23d4d/behavior</a></p>
+<p><a href="https://securityscorecard.com/research/deep-dive-into-alphv-blackcat-ransomware/" target="_blank" rel="noopener">https://securityscorecard.com/research/deep-dive-into-alphv-blackcat-ransomware/</a></p>
+<p><a href="https://www.netskope.com/blog/blackcat-ransomware-tactics-and-techniques-from-a-targeted-attack" target="_blank" rel="noopener">https://www.netskope.com/blog/blackcat-ransomware-tactics-and-techniques-from-a-targeted-attack</a></p>
+<p class="figure"><a class="img-link" href="2023-10-27/image.png"><img src="2023-10-27/image.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2023-10-27/image-1.png"><img src="2023-10-27/image-1.png" alt="image.png" loading="lazy"></a></p>
+<pre><code>import binascii
+
+# Function to perform XOR operation on two bytes-like objects
+def xor_bytes(b1, b2):
+    return bytes(x ^ y for x, y in zip(b1, b2))
+
+# Read the encrypted and decrypted files
+with open('Bliss_Windows_XP.png.encry', 'rb') as encrypted_file, \
+     open('bliss.png', 'rb') as decrypted_file:
+    
+    encrypted_data = encrypted_file.read()
+    decrypted_data = decrypted_file.read()
+
+# Assuming decrypted_data is the known plaintext version of the file
+# XOR the encrypted data with the known plaintext to obtain the key
+key = xor_bytes(encrypted_data, decrypted_data)
+
+# Specify the number of bytes you want in your shorter key
+short_key_length = 16  # Change this to your desired length
+
+# Get the shorter key by slicing the original key
+short_key = key[:short_key_length]
+
+# Convert the short key to hexadecimal
+short_key_hex = short_key.hex()
+
+# Convert the hexadecimal short key back to ASCII
+short_key_ascii = binascii.unhexlify(short_key_hex)
+
+# Now you can use the ASCII short key for decryption
+# Print the ASCII short key
+print(f"Decryption Key (ASCII): {short_key_ascii.decode('utf-8')}")</code></pre>
+<p class="figure"><a class="img-link" href="2023-10-27/image-2.png"><img src="2023-10-27/image-2.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2023-10-27/image-3.png"><img src="2023-10-27/image-3.png" alt="image.png" loading="lazy"></a></p>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

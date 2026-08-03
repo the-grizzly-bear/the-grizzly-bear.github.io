@@ -3,85 +3,84 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>APPLICATION RESTRICTIONS · Will Seligman</title>
-<link rel="stylesheet" href="/assets/style.css">
+<meta name="color-scheme" content="dark">
+<title>APPLICATION RESTRICTIONS · the-grizzly-bear</title>
+<meta name="description" content="APPLICATION RESTRICTIONS — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
 <div class="layout">
 <aside class="sidebar" id="sidebar">
-  <a class="brand" href="/index.html">
+  <a class="brand" href="../../../../index.html">
     <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
   </a>
-  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/2-protect-defend/windows/application-restrictions.html"></nav>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/2-protect-defend/windows/application-restrictions.html" data-root="../../../.."></nav>
 </aside>
 <main class="content">
   <article class="doc">
-  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/blue-team-field-manual.html">Blue Team Field Manual</a> &rsaquo; <a href="/other/blue-team-field-manual/2-protect-defend.html">2 PROTECT (Defend)</a> &rsaquo; <a href="/other/blue-team-field-manual/2-protect-defend/windows.html">WINDOWS</a></div>
-  <h1 id="application-restrictions">APPLICATION RESTRICTIONS</h1>
-<p>Applocker - Server 2008 R2 or Windows 7 or higher:<br>Using GUI Wizard configure:</p>
-<p>-Executable Rules (.exe, .com)<br>-DLL Rules (.dll, .ocx)<br>-Script Rules (.psl, .bat, .cmd, .vbs, .js)<br>-Windows Install Rules (.msi, .msp, .mst)<br>Steps to employ Applocker (GUI is needed for digital<br>signed app restrictions):</p>
-<p>Step 1: Create a new GPO.<br />
-Step 2: Right-click on it to edit, and then navigate through Computer Configuration, Policies, Windows Settings, Security Settings, Application Control Policies and Applocker. Click Configure Rule Enforcement.<br />
-Step 3: Under Executable Rules, check the Configured box and then make sure Enforce Rules is selected from the drop-down box. Click OK.<br />
-Step 4: In the left pane, click Executable Rules.<br />
-Step 5: Right-click in the right pane and select Create New Rule.<br />
-Step 6: On the Before You Begin screen, click Next.<br />
-Step 7: On the Permissions screen, click Next.<br />
-Step 8: On the Conditions screen, select the Publisher condition and click Next.<br />
-Step 9: Click the Browse button and browse to any executable file on your system. It doesn't matter which.<br />
-Step 10: Drag the slider up to Any Publisher and then click Next.<br />
-Step 11: Click Next on the Exceptions screen.<br />
-Step 12: Name policy, Example uonly run executables that are signed" and click Create.<br />
-Step 13: If this is your first time creating an Applocker policy, Windows will prompt you to create default rule, click Yes.<br />
-Step 14: Ensure Application Identity Service is Running.</p>
+  <div class="breadcrumb"><a href="../../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../../index.html">Other</a> &rsaquo; <a href="../../index.html">Blue Team Field Manual</a> &rsaquo; <a href="../index.html">2 PROTECT (Defend)</a> &rsaquo; <a href="index.html">WINDOWS</a></div>
+<h1 id="title">APPLICATION RESTRICTIONS</h1>
+
+<p>Applocker - Server 2008 R2 or Windows 7 or higher:<br>
+Using GUI Wizard configure:</p>
+<p>-Executable Rules (.exe, .com)<br>
+-DLL Rules (.dll, .ocx)<br>
+-Script Rules (.psl, .bat, .cmd, .vbs, .js)<br>
+-Windows Install Rules (.msi, .msp, .mst)<br>
+Steps to employ Applocker (GUI is needed for digital<br>
+signed app restrictions):</p>
+<p>Step 1: Create a new GPO.</p>
+<p>Step 2: Right-click on it to edit, and then navigate through Computer Configuration, Policies, Windows Settings, Security Settings, Application Control Policies and Applocker. Click Configure Rule Enforcement.</p>
+<p>Step 3: Under Executable Rules, check the Configured box and then make sure Enforce Rules is selected from the drop-down box. Click OK.</p>
+<p>Step 4: In the left pane, click Executable Rules.</p>
+<p>Step 5: Right-click in the right pane and select Create New Rule.</p>
+<p>Step 6: On the Before You Begin screen, click Next.</p>
+<p>Step 7: On the Permissions screen, click Next.</p>
+<p>Step 8: On the Conditions screen, select the Publisher condition and click Next.</p>
+<p>Step 9: Click the Browse button and browse to any executable file on your system. It doesn't matter which.</p>
+<p>Step 10: Drag the slider up to Any Publisher and then click Next.</p>
+<p>Step 11: Click Next on the Exceptions screen.</p>
+<p>Step 12: Name policy, Example uonly run executables that are signed" and click Create.</p>
+<p>Step 13: If this is your first time creating an Applocker policy, Windows will prompt you to create default rule, click Yes.</p>
+<p>Step 14: Ensure Application Identity Service is Running.</p>
 <pre><code class="language-bash">C:\&gt; net start AppIDSvc
-C:\&gt; REG add &quot;HKLM\SYSTEM\CurrentControlSet\services\AppIDSvc&quot; /v Start /t REG_DWORD /d 2 /f
-</code></pre>
+C:\&gt; REG add "HKLM\SYSTEM\CurrentControlSet\services\AppIDSvc" /v Start /t REG_DWORD /d 2 /f</code></pre>
 <p>Step 15: Changes require reboot.</p>
 <pre><code class="language-bash">C:\ shutdown.exe /r
-C:\ shutdown.exe /r /m \\&lt;IP ADDRESS OR COMPUTER NAME&gt; /f
-</code></pre>
+C:\ shutdown.exe /r /m \\&lt;IP ADDRESS OR COMPUTER NAME&gt; /f</code></pre>
 <p>Add the Applocker cmdlets into PowerShell:</p>
-<pre><code class="language-bash">PS C:\&gt; import-module Applocker
-</code></pre>
-<p>Gets the file information for all of the executable<br>files and scripts in the directory C:\Windows\System32:</p>
-<pre><code class="language-bash">PS C:\&gt; Get-ApplockerFileinformation -Directory C:\Windows\System32\ -Recurse -FileType Exe, Script
-</code></pre>
+<pre><code class="language-bash">PS C:\&gt; import-module Applocker</code></pre>
+<p>Gets the file information for all of the executable<br>
+files and scripts in the directory C:\Windows\System32:</p>
+<pre><code class="language-bash">PS C:\&gt; Get-ApplockerFileinformation -Directory C:\Windows\System32\ -Recurse -FileType Exe, Script</code></pre>
 <p>Create a Applocker Policy that allow rules for all of the executable files in C:\Windows\System32:</p>
-<pre><code class="language-bash">PS C:\&gt; Get-Childitem C:\Windows\System32\*,exe | Get-ApplockerFileinformation | New-ApplockerPolicy RuleType Publisher, Hash -User Everyone - RuleNamePrefix System32
-</code></pre>
+<pre><code class="language-bash">PS C:\&gt; Get-Childitem C:\Windows\System32\*,exe | Get-ApplockerFileinformation | New-ApplockerPolicy RuleType Publisher, Hash -User Everyone - RuleNamePrefix System32</code></pre>
 <p>Sets the local Applocker policy to the policy specified in C:\Policy.xml:</p>
-<pre><code class="language-bash">PS C:\&gt; Set-AppLockerPolicy -XMLPolicy C:\Policy.xml
-</code></pre>
+<pre><code class="language-bash">PS C:\&gt; Set-AppLockerPolicy -XMLPolicy C:\Policy.xml</code></pre>
 <p>Uses the Applocker policy in C:\Policy.xml to test whether calc.exe and notepad.exe are allowed to run for users who are members of the Everyone group. If you do not specify a group, the Everyone group is used by default:</p>
 <pre><code class="language-bash">PS C:\&gt; Test-AppLockerPolicy -XMLPolicy
 C:\Policy.xml -Path C:\Windows\System32\calc.exe,
-C:\Windows\System32\notepad.exe -User Everyone
-</code></pre>
+C:\Windows\System32\notepad.exe -User Everyone</code></pre>
 <p>Review how many times a file would have been blocked from running if rules were enforced:</p>
-<pre><code class="language-bash">PS C:\&gt; Get-ApplockerFileinformation -Eventlog -Logname &quot;Microsoft-Windows-Applocker\EXE and DLL&quot; EventType Audited -Statistics
-</code></pre>
-<p>Creates a new Applocker policy from the audited events in the local Microsoft-Windows-Applocker/EXE and DLL event log, applied to \&lt;GROUP&gt; and current Applocker policy will be overwritten:</p>
-<pre><code class="language-bash">PS C:\&gt; Get-ApplockerFileinformation -Eventlog -LogPath &quot;Microsoft-Windows-AppLocker/EXE and DLL&quot; EventType Audited | New-ApplockerPolicy -RuleType
-Publisher,Hash -User domain\&lt;GROUP&gt; -IgnoreMissingFileinformation | Set-ApplockerPolicy -LDAP &quot;LDAP://&lt;DC&gt;,&lt;DOMAIN&gt;.com/CN={31B2F340-016D11D2-945F00C04FB984F9},CN=Policies,CN=System,DC=&lt;DOMAIN&gt;,DC=com&quot;
-</code></pre>
+<pre><code class="language-bash">PS C:\&gt; Get-ApplockerFileinformation -Eventlog -Logname "Microsoft-Windows-Applocker\EXE and DLL" EventType Audited -Statistics</code></pre>
+<p>Creates a new Applocker policy from the audited events in the local Microsoft-Windows-Applocker/EXE and DLL event log, applied to &lt;GROUP&gt; and current Applocker policy will be overwritten:</p>
+<pre><code class="language-bash">PS C:\&gt; Get-ApplockerFileinformation -Eventlog -LogPath "Microsoft-Windows-AppLocker/EXE and DLL" EventType Audited | New-ApplockerPolicy -RuleType
+Publisher,Hash -User domain\&lt;GROUP&gt; -IgnoreMissingFileinformation | Set-ApplockerPolicy -LDAP "LDAP://&lt;DC&gt;,&lt;DOMAIN&gt;.com/CN={31B2F340-016D11D2-945F00C04FB984F9},CN=Policies,CN=System,DC=&lt;DOMAIN&gt;,DC=com"</code></pre>
 <p>Export the local Applocker policy, comparing User's explicitly denied access to run, and output text file:</p>
 <pre><code class="language-bash">PS C:\&gt; Get-AppLockerPolicy -Local | Test­AppLockerPolicy -Path C:\Windows\System32\*,exe User domain\&lt;USER NAME&gt; -Filter Denied | Format-List
--Property Path &gt; C:\DeniedFiles.txt
-</code></pre>
+-Property Path &gt; C:\DeniedFiles.txt</code></pre>
 <p>Export the results of the test to a file for analysis:</p>
-<pre><code class="language-bash">PS C:\&gt; Get-Childitem &lt;DirectoryPathtoReview&gt; Filter &lt;FileExtensionFilter&gt; -Recurse I Convert-Path | Test-ApplockerPolicy -XMLPolicy &lt;PathToExportedPolicyFile&gt; -User &lt;domain\username&gt; Filter &lt;TypeofRuletoFilterFor&gt; | Export-CSV &lt;PathToExportResultsTo.CSV&gt;
-</code></pre>
+<pre><code class="language-bash">PS C:\&gt; Get-Childitem &lt;DirectoryPathtoReview&gt; Filter &lt;FileExtensionFilter&gt; -Recurse I Convert-Path | Test-ApplockerPolicy -XMLPolicy &lt;PathToExportedPolicyFile&gt; -User &lt;domain\username&gt; Filter &lt;TypeofRuletoFilterFor&gt; | Export-CSV &lt;PathToExportResultsTo.CSV&gt;</code></pre>
 <p>GridView list of any local rules applicable:</p>
-<pre><code class="language-bash">PS C:\&gt; Get-AppLockerPolicy -Local -Xml I Out­GridView
-</code></pre>
+<pre><code class="language-bash">PS C:\&gt; Get-AppLockerPolicy -Local -Xml I Out­GridView</code></pre>
   </article>
-  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
 </div>
-<script src="/assets/nav.js" defer></script>
+<script src="../../../../assets/nav.js" defer></script>
 <script>
 document.getElementById('menu-toggle').addEventListener('click',function(){
   document.getElementById('sidebar').classList.toggle('open');

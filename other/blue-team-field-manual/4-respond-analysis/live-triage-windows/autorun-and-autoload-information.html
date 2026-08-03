@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>AUTORUN AND AUTOLOAD INFORMATION · the-grizzly-bear</title>
+<meta name="description" content="AUTORUN AND AUTOLOAD INFORMATION — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/4-respond-analysis/live-triage-windows/autorun-and-autoload-information.html" data-root="../../../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../../index.html">Other</a> &rsaquo; <a href="../../index.html">Blue Team Field Manual</a> &rsaquo; <a href="../index.html">4 RESPOND (Analysis)</a> &rsaquo; <a href="index.html">LIVE TRIAGE - WINDOWS</a></div>
+<h1 id="title">AUTORUN AND AUTOLOAD INFORMATION</h1>
+
+<p>Startup information:</p>
+<pre><code class="language-bash">C:\&gt; wmic startup list full
+C:\&gt; wmic ntdomain list brief</code></pre>
+<p>View directory contents of startup folder:</p>
+<pre><code class="language-bash">C:\&gt; dir "%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup"
+C:\&gt; dir "%SystemDrive%\Documents and Settings\All Users\Start Menu\Programs\Startup"
+C:\&gt; dir %userprofile%\Start Menu\Programs\Startup
+C:\&gt; %ProgramFiles%\Startup\
+C:\&gt; dir C:\Windows\Start Menu\Programs\startup
+C:\&gt; dir
+"C:\Users\%username%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+C:\&gt; dir "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup"
+C:\&gt; dir "%APPDATA%\Microsoft\Windows\Start Menu\Prog rams\Startup"
+C:\&gt; dir "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Startup"
+C:\&gt; dir "%ALLUSERSPROFILE%\Start Menu\Programs\Startup"
+C:\&gt; type C:\Windows\winstart.bat
+C:\&gt; type %windir%\wininit.ini
+C:\&gt; type %windir%\win.ini</code></pre>
+<p>View autoruns, hide Microsoft files:</p>
+<p>Ref. <a href="https://technet.microsoft.com/en%C2%ADus/sysinternals/bb963902.aspx" target="_blank" rel="noopener">https://technet.microsoft.com/en­us/sysinternals/bb963902.aspx</a></p>
+<pre><code class="language-bash">C:\&gt; autorunsc -accepteula -m
+C:\&gt; type C:\Autoexec.bat"</code></pre>
+<p>Show all autorun files, export to csv and check with VirusTotal:</p>
+<pre><code class="language-bash">C:\&gt; autorunsc.exe -accepteula -a -c -i -e -f -l -m -v</code></pre>
+<p>HKEY_CLASSES_ROOT:</p>
+<pre><code class="language-bash">C:\&gt; reg query HKCR\Comfile\Shell\Open\Command
+C:\&gt; reg query HKCR\Batfile\Shell\Open\Command
+C:\&gt; reg query HKCR\htafile\Shell\Open\Command
+C:\&gt; reg query HKCR\Exefile\Shell\Open\Command
+C:\&gt; reg query HKCR\Exefiles\Shell\Open\Command
+C:\&gt; reg query HKCR\piffile\shell\open\command</code></pre>
+<p>HKEY_CURRENT_USERS:</p>
+<pre><code class="language-bash">C:\&gt; reg query "HKCU\Control Panel\Desktop"
+C:\&gt; reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run
+C:\&gt; reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+C:\&gt; reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Runonce
+C:\&gt; reg query HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnceEx
+C:\&gt; reg query HKCU\Software\Microsoft\Windows\CurrentVersion\RunServices
+C:\&gt; reg query HKCU\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce
+C:\&gt; reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Windows\Run
+C:\&gt; reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Windows\Load
+C:\&gt; reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Windows\Scripts
+C:\&gt; reg query "HKCU\Software\Microsoft\WindowsNT\CurrentVersion\Windows" /f run
+C:\&gt; reg query "HKCU\Software\Microsoft\WindowsNT\CurrentVersion\Windows" /f load
+C:\&gt; reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run
+C:\&gt; reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs
+C:\&gt; reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedMRU
+C:\&gt; reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ComD1g32\0pen5aveMRU
+C:\&gt; reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedPidlMRU
+C:\&gt; reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ComD1g32\0pen5avePidlMRU /s
+C:\&gt; reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+C:\&gt; reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders"
+C:\&gt; reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders"
+C:\&gt; reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Applets\RegEdit /v LastKey
+C:\&gt; reg query "HKCU\Software\Microsoft\InternetExplorer\TypedURLs"
+C:\&gt; reg query "HKCU\Software\Policies\Microsoft\Windows\ControlPanel\Desktop"</code></pre>
+<p>HKEY_LOCAL_MACHINE:</p>
+<pre><code class="language-bash">C:\&gt; reg query "HKLM\SOFTWARE\Mic rosoft\ActiveSetup\Installed Components" /s
+C:\&gt; reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\explorer\User Shell Folders"
+C:\&gt; reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\explorer\Shell Folders"
+C:\&gt; reg query HKLM\Software\Microsoft\Windows\CurrentVersion\explorer\ShellExecuteHooks
+C:\&gt; reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Browser Helper Objects" /s
+C:\&gt; reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run
+C:\&gt; reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+C:\&gt; reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Runonce
+C:\&gt; reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnceEx
+C:\&gt; reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunServices
+C:\&gt; reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunServicesOnce
+C:\&gt; reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Winlogon\Userinit
+C:\&gt; reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\shellServiceObjectDelayLoad
+C:\&gt; reg query "HKLM\SOFTWARE\Microsoft\WindowsNT\CurrentVersion\Schedule\TaskCache\Tasks" /s
+C:\&gt; reg query "HKLM\SOFTWARE\Microsoft\WindowsNT\CurrentVersion\Windows"
+C:\&gt; reg query "HKLM\SOFTWARE\Microsoft\WindowsNT\CurrentVersion\Windows" /f Appinit_DLLs
+C:\&gt; reg query "HKLM\SOFTWARE\Microsoft\WindowsNT\CurrentVersion\Winlogon" /f Shell
+C:\&gt; reg query "HKLM\SOFTWARE\Microsoft\WindowsNT\CurrentVersion\Winlogon" /f Userinit
+C:\&gt; reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Systern\Scripts
+C:\&gt; reg query HKLM\SOFTWARE\Classes\batfile\shell\open\cornrnand
+C:\&gt; reg query HKLM\SOFTWARE\Classes\cornfile\shell\open\cornrnand
+C:\&gt; reg query HKLM\SOFTWARE\Classes\exefile\shell\open\command
+C:\&gt; reg query HKLM\SOFTWARE\Classes\htafile\Shell\Open\Command
+C:\&gt; reg query HKLM\SOFTWARE\Classes\piffile\shell\open\command
+C:\&gt; reg query "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\Current\Version\Explorer\Browser Helper Objects" /s
+C:\&gt; reg query "HKLM\SYSTEM\CurrentControlSet\Control\SessionManager"
+C:\&gt; reg query"HKLM\SYSTEM\CurrentControlSet\Control\SessionManager\KnownDLLs"
+C:\&gt; reg query"HKLM\SYSTEM\ControlSet001\Control\SessionManager\KnownDLLs"</code></pre>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

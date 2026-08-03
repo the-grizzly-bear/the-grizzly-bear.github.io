@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>FILES, DRIVES AND SHARES INFORMATION · the-grizzly-bear</title>
+<meta name="description" content="FILES, DRIVES AND SHARES INFORMATION — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/4-respond-analysis/live-triage-linux/files-drives-and-shares-information.html" data-root="../../../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../../index.html">Other</a> &rsaquo; <a href="../../index.html">Blue Team Field Manual</a> &rsaquo; <a href="../index.html">4 RESPOND (Analysis)</a> &rsaquo; <a href="index.html">LIVE TRIAGE - LINUX</a></div>
+<h1 id="title">FILES, DRIVES AND SHARES INFORMATION</h1>
+
+<p>View disk space:</p>
+<pre><code class="language-bash">df -ah</code></pre>
+<p>View directory listing for /etc/init.d:</p>
+<pre><code class="language-bash">ls -la /etc/init.d</code></pre>
+<p>Get more info for a file:</p>
+<pre><code class="language-bash">stat -x &lt;FILE NAME&gt;</code></pre>
+<p>Identify file type:</p>
+<pre><code class="language-bash">file &lt;FILE NAME&gt;</code></pre>
+<p>Look for immutable files:</p>
+<pre><code class="language-bash">lsattr -R / | grep \-i-"</code></pre>
+<p>View directory listing for /root:</p>
+<pre><code class="language-bash">ls -la /root</code></pre>
+<p>Look for files recently modified in current directory:</p>
+<pre><code class="language-bash">ls -alt | head</code></pre>
+<p>Look for world writable files:</p>
+<pre><code class="language-bash">find / -xdev -type d\( -perm -0002 -a ! -perm -1000 \) -print</code></pre>
+<p>Look for recent created files, in this case newer than Jan 02, 2017:</p>
+<pre><code class="language-bash">find/ -n newermt 2017-01-02q</code></pre>
+<p>List all files and attributes:</p>
+<pre><code class="language-bash">find/ -printf
+%m;%Ax;%AT;%Tx;%TT;%Cx;%CT;%U;%G;%s;%p\n"</code></pre>
+<p>Look at files in directory by most recent timestamp:(Could be tampered)</p>
+<pre><code class="language-bash">ls -alt /&lt;DIRECTORY&gt;| head</code></pre>
+<p>Get full file information:</p>
+<pre><code class="language-bash">stat /&lt;FILE PATH&gt;/&lt;SUSPICIOUS FILE NAME&gt;</code></pre>
+<p>Review file type:</p>
+<pre><code class="language-bash">file /&lt;FILE PATH&gt;/&lt;SUSPICIOUS FILE NAME&gt;</code></pre>
+<p>Check for rootkits or signs of compromise:</p>
+<p>Run unix-privsec-check tool:</p>
+<pre><code class="language-bash">wget [https://raw.githubusercontent.com/pentestmonkey/unix-privesc-check/l_x/unix-privesc-check](https://raw.githubusercontent.com/pentestmonkey/unix-privesc-check/l_x/unix-privesc-check)
+
+./unix-privesc-check &gt; output.txt</code></pre>
+<p>Run chkrootkit:</p>
+<pre><code class="language-bash">apt-get install chkrootkit
+chkrootkit</code></pre>
+<p>Run rkhunter:</p>
+<pre><code class="language-bash">apt-get install rkhunter
+rkhunter --update
+rkhunter -check</code></pre>
+<p>Run tiger:</p>
+<pre><code class="language-bash">apt-get install tiger
+tiger
+less /var/log/tiger/security.report.*</code></pre>
+<p>Run lynis:</p>
+<pre><code class="language-bash">apt-get install lynis
+lynis audit system
+more /var/logs/lynis.log</code></pre>
+<p>Run Linux Malware Detect (LMD):</p>
+<pre><code class="language-bash">wget [http://www.rfxn.com/downloads/maldetect­current.tar.gz](http://www.rfxn.com/downloads/maldetect%C2%ADcurrent.tar.gz)
+tar xfz maldetect-current.tar.gz
+cd maldetect-*
+./install.sh</code></pre>
+<p>Get LMD updates:</p>
+<pre><code class="language-bash">maldet -u</code></pre>
+<p>Run LMD scan on directory:</p>
+<pre><code class="language-bash">maldet -a /&lt;DIRECTORY&gt;</code></pre>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

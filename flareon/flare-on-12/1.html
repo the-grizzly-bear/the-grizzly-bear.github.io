@@ -3,26 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>1 · Will Seligman</title>
-<link rel="stylesheet" href="/assets/style.css">
+<meta name="color-scheme" content="dark">
+<title>1 · the-grizzly-bear</title>
+<meta name="description" content="1 — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
 <div class="layout">
 <aside class="sidebar" id="sidebar">
-  <a class="brand" href="/index.html">
+  <a class="brand" href="../../index.html">
     <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
   </a>
-  <nav class="nav" id="nav-root" data-current="flareon/flare-on-12/1.html"></nav>
+  <nav class="nav" id="nav-root" data-current="flareon/flare-on-12/1.html" data-root="../.."></nav>
 </aside>
 <main class="content">
   <article class="doc">
-  <div class="breadcrumb"><a href="/flareon/index.html">Flare-on Challenges</a> &rsaquo; <a href="/flareon/flare-on-12.html">Flare-on-12</a></div>
-  <h1 id="1">1</h1>
-<p><span class="img-missing">image unavailable</span></p>
-<p><span class="img-missing">image unavailable</span></p>
-<pre><code class="language-text">The encoded string in the code is XOR-encrypted using a key derived from the game's &quot;bear_sum&quot; value, which you accumulate by playing through all levels and finding bears.
+  <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">Flare-on Challenges</a> &rsaquo; <a href="index.html">Flare-on-12</a></div>
+<h1 id="title">1</h1>
+
+<p class="figure"><a class="img-link" href="1/image.png"><img src="1/image.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="1/image-1.png"><img src="1/image-1.png" alt="image.png" loading="lazy"></a></p>
+<pre><code>The encoded string in the code is XOR-encrypted using a key derived from the game's "bear_sum" value, which you accumulate by playing through all levels and finding bears.
 Step 1: Determine the Bear Positions (x-coordinates)
 
 The game has 5 levels with names: 'California' (len=10), 'Ohio' (len=4), 'Death Valley' (len=12), 'Mexico' (len=6), 'The Grand Canyon' (len=16).
@@ -47,7 +51,7 @@ key = bear_sum &gt;&gt; 8 (right-shift by 8 bits, equivalent to integer division
 
 Step 4: Decode the Encoded String
 
-The encoded string is: &quot;\xd0\xc7\xdf\xdb\xd4\xd0\xd4\xdc\xe3\xdb\xd1\xcd\x9f\xb5\xa7\xa7\xa0\xac\xa3\xb4\x88\xaf\xa6\xaa\xbe\xa8\xe3\xa0\xbe\xff\xb1\xbc\xb9&quot; (33 bytes).
+The encoded string is: "\xd0\xc7\xdf\xdb\xd4\xd0\xd4\xdc\xe3\xdb\xd1\xcd\x9f\xb5\xa7\xa7\xa0\xac\xa3\xb4\x88\xaf\xa6\xaa\xbe\xa8\xe3\xa0\xbe\xff\xb1\xbc\xb9" (33 bytes).
 For each byte at position i (0 to 32):
 New byte = original byte XOR (key + i) = original XOR (180 + i).
 Convert each result to a character and join them.
@@ -61,10 +65,9 @@ Byte 2: 0xdf (223) XOR (180 + 2) = 223 XOR 182 = 0x69 ('i')
 Byte 30: 0xb1 (177) XOR (180 + 30) = 177 XOR 210 = 0x6f ('o')
 Byte 31: 0xbc (188) XOR (180 + 31) = 188 XOR 211 = 0x6d ('m')
 Byte 32: 0xb9 (185) XOR (180 + 32) = 185 XOR 212 = 0x2e ('.')
-Full decoded result: &quot;drilling_for_teddies@flare-on.com&quot;
+Full decoded result: "drilling_for_teddies@flare-on.com"
 
-This is the flag printed when you win the game. If you run the Python code yourself (or simulate the game), you'll get the same output from GenerateFlagText(bear_sum).
-</code></pre>
+This is the flag printed when you win the game. If you run the Python code yourself (or simulate the game), you'll get the same output from GenerateFlagText(bear_sum).</code></pre>
 <pre><code class="language-python">import pygame
 import random
 
@@ -84,28 +87,28 @@ pygame.key.set_repeat(500, 100)
 pygame.display.set_caption('Drill Baby Drill!')
 dt = 0
 
-bearimage = pygame.image.load(&quot;img/bear.png&quot;)
-boulderimage = pygame.image.load(&quot;img/boulder.png&quot;)
-dirtimage = pygame.image.load(&quot;img/dirt.png&quot;)
-drillbabyimage = pygame.image.load(&quot;img/drillbaby.png&quot;)
-drillbitimage = pygame.image.load(&quot;img/drillbit.png&quot;)
-drillshaftimage = pygame.image.load(&quot;img/drillshaft.png&quot;)
-emptyholebottomimage = pygame.image.load(&quot;img/emptyholebottom.png&quot;)
-shaftimage = pygame.image.load(&quot;img/shaft.png&quot;)
-skyimage = pygame.image.load(&quot;img/sky.png&quot;)
-surfaceimage = pygame.image.load(&quot;img/surface.png&quot;)
-surfaceholeimage = pygame.image.load(&quot;img/surfacehole.png&quot;)
-victoryimage = pygame.image.load(&quot;img/victory.png&quot;)
+bearimage = pygame.image.load("img/bear.png")
+boulderimage = pygame.image.load("img/boulder.png")
+dirtimage = pygame.image.load("img/dirt.png")
+drillbabyimage = pygame.image.load("img/drillbaby.png")
+drillbitimage = pygame.image.load("img/drillbit.png")
+drillshaftimage = pygame.image.load("img/drillshaft.png")
+emptyholebottomimage = pygame.image.load("img/emptyholebottom.png")
+shaftimage = pygame.image.load("img/shaft.png")
+skyimage = pygame.image.load("img/sky.png")
+surfaceimage = pygame.image.load("img/surface.png")
+surfaceholeimage = pygame.image.load("img/surfacehole.png")
+victoryimage = pygame.image.load("img/victory.png")
 
-gamefont = pygame.font.Font(&quot;fonts/VT323-Regular.ttf&quot;, 24)
-text_surface1 = gamefont.render(&quot;instruct: Use right/left to move baby and up/down to raise or lower your drill.&quot;,
+gamefont = pygame.font.Font("fonts/VT323-Regular.ttf", 24)
+text_surface1 = gamefont.render("instruct: Use right/left to move baby and up/down to raise or lower your drill.",
                                False, pygame.Color('yellow'))
-text_surface2 = gamefont.render(&quot;          find all the lost bears. don't drill into a rock. Win game.&quot;,
+text_surface2 = gamefont.render("          find all the lost bears. don't drill into a rock. Win game.",
                                False, pygame.Color('yellow'))
-flagfont = pygame.font.Font(&quot;fonts/VT323-Regular.ttf&quot;, 32)
-flag_text_surface = flagfont.render(&quot;nope@nope.nope&quot;, False, pygame.Color('black'))
-flag_message_text_surface1 = flagfont.render(&quot;You win! Drill Baby is reunited with&quot;, False, pygame.Color('yellow'))
-flag_message_text_surface2 = flagfont.render(&quot;all its bears. Welcome to Flare-On 12.&quot;, False, pygame.Color('yellow'))
+flagfont = pygame.font.Font("fonts/VT323-Regular.ttf", 32)
+flag_text_surface = flagfont.render("nope@nope.nope", False, pygame.Color('black'))
+flag_message_text_surface1 = flagfont.render("You win! Drill Baby is reunited with", False, pygame.Color('yellow'))
+flag_message_text_surface2 = flagfont.render("all its bears. Welcome to Flare-On 12.", False, pygame.Color('yellow'))
 
 TileImages = {
     'dirt':dirtimage,
@@ -142,7 +145,6 @@ class BackgroundTile(pygame.sprite.Sprite):
     def draw(self, surface):
         surface.blit(self.image, self.rect)
 
-
 class Drill:
     def __init__(self, max_levels):
         self.drill_level = 0
@@ -151,17 +153,17 @@ class Drill:
     def retract(self):
         if self.drill_level &gt; 0:
             self.drill_level -= 1
-
+    
     def drill(self):
         if self.drill_level &lt; self.max_levels:
             self.drill_level += 1
 
     def drillEngaged(self):
         return self.drill_level != 0
-
+    
     def draw(self, x, y, surface):
         remaining_tiles = self.drill_level
-
+        
         while remaining_tiles &gt; 0:
             drilly = y + remaining_tiles
             if remaining_tiles == self.drill_level:
@@ -173,7 +175,6 @@ class Drill:
             newrect.left = x * tile_size
             surface.blit(drill_image, newrect)
             remaining_tiles -= 1
-
 
 class DrillBaby(pygame.sprite.Sprite):
     def __init__(self, x, y, max_levels):
@@ -198,13 +199,12 @@ class DrillBaby(pygame.sprite.Sprite):
         global boulder_layout
         boulder_level = boulder_layout[self.x]
         return boulder_level == self.drill.drill_level
-
+    
     def hitBear(self):
         return self.drill.drill_level == max_drill_level
 
 background_tiles = []
 boulder_layout = []
-
 
 def AttemptPlayerMove(dx, dy):
     newx = player.x + dx
@@ -226,7 +226,6 @@ def AttemptPlayerMove(dx, dy):
     player.move(dx)
     return True
 
-
 def DrillTile():
     global player
     player.drill.drill()
@@ -241,21 +240,19 @@ def DrillTile():
             background_tile.setType('emptyholebottom')
 
         tile_above = background_tiles[player.y + player.drill.drill_level - 1][player.x]
-
+        
         if player.drill.drill_level == 1:
             tile_above.setType('surfacehole')
         if player.drill.drill_level &gt; 1:
             tile_above.setType('shaft')
 
-
 def GenerateFlagText(sum):
     key = sum &gt;&gt; 8
-    encoded = &quot;\xd0\xc7\xdf\xdb\xd4\xd0\xd4\xdc\xe3\xdb\xd1\xcd\x9f\xb5\xa7\xa7\xa0\xac\xa3\xb4\x88\xaf\xa6\xaa\xbe\xa8\xe3\xa0\xbe\xff\xb1\xbc\xb9&quot;
+    encoded = "\xd0\xc7\xdf\xdb\xd4\xd0\xd4\xdc\xe3\xdb\xd1\xcd\x9f\xb5\xa7\xa7\xa0\xac\xa3\xb4\x88\xaf\xa6\xaa\xbe\xa8\xe3\xa0\xbe\xff\xb1\xbc\xb9"
     plaintext = []
     for i in range(0, len(encoded)):
         plaintext.append(chr(ord(encoded[i]) ^ (key+i)))
     return ''.join(plaintext)
-
 
 def main():
     global background_tiles  
@@ -314,23 +311,23 @@ def main():
 
             # display status message
             if boulder_mode:
-                statustext = &quot;You Hit a Boulder, please reload try again when you are better at video games&quot;
+                statustext = "You Hit a Boulder, please reload try again when you are better at video games"
                 statussurface = gamefont.render(statustext, False, pygame.Color('red'))
                 screen.blit(statussurface, (0, 48))
             else:
                 if bear_mode:
-                    statustext = &quot;You found a bear, press any key to drill for another!&quot;
+                    statustext = "You found a bear, press any key to drill for another!"
                     statussurface = gamefont.render(statustext, False, pygame.Color('green'))
                     screen.blit(statussurface, (0, 48))
-
+                
                 # display stage name
                 leveltext = 'Level: ' + LevelNames[current_level]
                 levelnamesurface = gamefont.render(leveltext, False, pygame.Color('green'))
                 screen.blit(levelnamesurface, (screen_width - 12*len(leveltext), 48))
 
             # display location info
-            locationtext = &quot;Loc: %d&quot; % player.x
-            depthtext = &quot;Depth: %d&quot; % player.drill.drill_level
+            locationtext = "Loc: %d" % player.x
+            depthtext = "Depth: %d" % player.drill.drill_level
             locationtextsurface = gamefont.render(locationtext, False, pygame.Color('cyan'))
             depthtextsurface = gamefont.render(depthtext, False, pygame.Color('cyan'))
             screen.blit(locationtextsurface, (700, 72))
@@ -352,7 +349,7 @@ def main():
                 if current_level == len(LevelNames) - 1 and not victory_mode:
                     victory_mode = True
                     flag_text = GenerateFlagText(bear_sum)
-                    print(&quot;Your Flag: &quot; + flag_text)
+                    print("Your Flag: " + flag_text)
 
             if victory_mode:
                 flag_text_surface = flagfont.render(flag_text, False, pygame.Color('black'))
@@ -368,7 +365,7 @@ def main():
             # dt is delta time in seconds since last frame, used for framerate-
             # independent physics.
             dt = clock.tick(60) / 1000
-
+        
         next_level_mode = False
         current_level += 1
 
@@ -387,20 +384,19 @@ def BuildBackground():
                 type = 'surface'
             else:
                 type = 'dirt'
-
+            
             row.append(BackgroundTile(x, y, type))
         tileset.append(row)
 
     return tileset
 
 if __name__ == '__main__':
-    main()
-</code></pre>
+    main()</code></pre>
   </article>
-  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
 </div>
-<script src="/assets/nav.js" defer></script>
+<script src="../../assets/nav.js" defer></script>
 <script>
 document.getElementById('menu-toggle').addEventListener('click',function(){
   document.getElementById('sidebar').classList.toggle('open');

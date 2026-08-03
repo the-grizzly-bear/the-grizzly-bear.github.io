@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>2024-10-24 Ancient Fossil (Forensics) · the-grizzly-bear</title>
+<meta name="description" content="2024-10-24 Ancient Fossil (Forensics) — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2024-huntress-ctf/2024-10-24-ancient-fossil-forensics.html" data-root="../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">Huntress CTF</a> &rsaquo; <a href="index.html">2024-Huntress-CTF</a></div>
+<h1 id="title">2024-10-24 Ancient Fossil (Forensics)</h1>
+
+<p class="figure"><a class="img-link" href="2024-10-24-ancient-fossil-forensics/image.png"><img src="2024-10-24-ancient-fossil-forensics/image.png" alt="image.png" loading="lazy"></a></p>
+<p><a href="2024-10-24-ancient-fossil-forensics/ancient.fossil">ancient.fossil</a></p>
+<p>SQL data base stuff.</p>
+<p class="figure"><a class="img-link" href="2024-10-24-ancient-fossil-forensics/image-1.png"><img src="2024-10-24-ancient-fossil-forensics/image-1.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-24-ancient-fossil-forensics/image-2.png"><img src="2024-10-24-ancient-fossil-forensics/image-2.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-24-ancient-fossil-forensics/image-3.png"><img src="2024-10-24-ancient-fossil-forensics/image-3.png" alt="image.png" loading="lazy"></a></p>
+<p>Figure out the fossil ui, and start browsing around.</p>
+<p class="figure"><a class="img-link" href="2024-10-24-ancient-fossil-forensics/image-4.png"><img src="2024-10-24-ancient-fossil-forensics/image-4.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-24-ancient-fossil-forensics/image-5.png"><img src="2024-10-24-ancient-fossil-forensics/image-5.png" alt="image.png" loading="lazy"></a></p>
+<p>Check all the commits, figured out we need each file content for each commit,</p>
+<p class="figure"><a class="img-link" href="2024-10-24-ancient-fossil-forensics/image-6.png"><img src="2024-10-24-ancient-fossil-forensics/image-6.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-24-ancient-fossil-forensics/image-7.png"><img src="2024-10-24-ancient-fossil-forensics/image-7.png" alt="image.png" loading="lazy"></a></p>
+<p>Make a script for it</p>
+<pre><code class="language-python">#Imports
+import os
+import subprocess
+import re
+
+# Path to your fossil repository
+repo_path = "./ancient.fossil"
+
+# Function to download file content from a specific commit
+def download_file(repo, commit_hash, filename):
+    # Create a directory for each commit hash
+    os.makedirs(f"thefiles/{commit_hash}", exist_ok=True)
+
+    # Command to download the file using fossil cat
+    file_path = f"files/{commit_hash}/{filename}"
+    with open(file_path, "w") as f:
+        result = subprocess.run(["fossil", "cat", filename, "-r", commit_hash, "-R", repo], stdout=f)
+        if result.returncode == 0:
+            print(f"Downloaded: {file_path}")
+        else:
+            print(f"Failed to download: {filename} from commit {commit_hash}")
+
+# Function to parse the fossil timeline output
+def parse_timeline(timeline_output):
+    commits = []
+    commit_hash = None
+    added_files = []
+
+    for line in timeline_output.splitlines():
+        # Find commit hashes
+        if line.startswith("Commit:"):
+            if commit_hash and added_files:
+                commits.append({"commit": commit_hash, "files": added_files})
+            commit_hash = line.split()[1]
+            added_files = []
+
+        # Find added files (filenames)
+        if "ADDED" in line:
+            match = re.search(r"ADDED\s+([A-Za-z0-9+/=]+)", line)
+            if match:
+                added_files.append(match.group(1))
+
+    # Add the last commit if it contains added files
+    if commit_hash and added_files:
+        commits.append({"commit": commit_hash, "files": added_files})
+
+    return commits
+
+# Run fossil timeline command and capture the output
+result = subprocess.run(["fossil", "timeline", "-R", repo_path, "-v", "--full", "-n", "500"], capture_output=True, text=True)
+
+if result.returncode != 0:
+    print(f"Error running fossil timeline: {result.stderr}")
+    exit(1)
+
+# Parse the timeline output to extract commits and added files
+commits = parse_timeline(result.stdout)
+
+# Download all files from each commit
+for commit in commits:
+    for file in commit['files']:
+        download_file(repo_path, commit['commit'], file)
+</code></pre>
+<p>Download each file for each commit</p>
+<p class="figure"><a class="img-link" href="2024-10-24-ancient-fossil-forensics/image-8.png"><img src="2024-10-24-ancient-fossil-forensics/image-8.png" alt="image.png" loading="lazy"></a></p>
+<p>Script to get the contents for each file</p>
+<p class="figure"><a class="img-link" href="2024-10-24-ancient-fossil-forensics/image-9.png"><img src="2024-10-24-ancient-fossil-forensics/image-9.png" alt="image.png" loading="lazy"></a></p>
+<p>Cat that file and see the flag.txt</p>
+<p class="figure"><a class="img-link" href="2024-10-24-ancient-fossil-forensics/image-10.png"><img src="2024-10-24-ancient-fossil-forensics/image-10.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2024-10-24-ancient-fossil-forensics/image-11.png"><img src="2024-10-24-ancient-fossil-forensics/image-11.png" alt="image.png" loading="lazy"></a></p>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

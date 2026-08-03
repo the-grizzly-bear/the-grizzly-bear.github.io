@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>LINUX · the-grizzly-bear</title>
+<meta name="description" content="LINUX — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/4-respond-analysis/hard-drive-and-memory-acquisition/linux.html" data-root="../../../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../../index.html">Other</a> &rsaquo; <a href="../../index.html">Blue Team Field Manual</a> &rsaquo; <a href="../index.html">4 RESPOND (Analysis)</a> &rsaquo; <a href="index.html">HARD DRIVE AND MEMORY ACQUISITION</a></div>
+<h1 id="title">LINUX</h1>
+
+<p>Create memory dump:</p>
+<pre><code class="language-bash">dd if=/dev/fmem of=/tmp/&lt;MEMORY FILE NAME&gt;.dd</code></pre>
+<p>Create memory dump using LiME:</p>
+<p>Ref. <a href="https://github.com/504ensicslabs/lime" target="_blank" rel="noopener">https://github.com/504ensicslabs/lime</a></p>
+<pre><code class="language-bash">wget [https://github.com/504ensicslabs/LiME/archive/master.zip](https://github.com/504ensicslabs/LiME/archive/master.zip)
+
+unzip master.zip
+
+cd LiME-master/src
+
+make
+
+cp lime-*,ko /media/=/media/ExternalUSBDriveName/
+
+insmod lime-3.13.0-79-generic.ko
+"path=/media/ExternalUSBDriveName/&lt;MEMORY DUMP&gt;, lime format=raw"</code></pre>
+<p>Make copy of suspicious process using process ID:</p>
+<pre><code class="language-bash">cp /proc/&lt;SUSPICIOUS PROCESS ID&gt;/exe /&lt;NEW SAVED LOCATION&gt;</code></pre>
+<p>Grab memory core dump of suspicious process:</p>
+<pre><code class="language-bash">gcore &lt;PIO&gt;</code></pre>
+<p>Strings on gcore file:</p>
+<pre><code class="language-bash">strings gcore.*</code></pre>
+<p>Create a hard drive/partition copy with tog and hash options:</p>
+<pre><code class="language-bash">dd if=&lt;INPUT DEVICE&gt; of=&lt;IMAGE FILE NAME&gt;
+dc3dd if=/dev/&lt;TARGET DRIVE EXAMPLE SDA OR SDAl&gt;
+of=/dev/&lt;MOUNTED LOCATION&gt;\&lt;FILE NAME&gt;.img hash=md5
+log=/&lt;MOUNTED LOCATION&gt;/&lt;LOG NAME&gt;.log</code></pre>
+<p>Create a remote hard drive/partition over SSH:</p>
+<pre><code class="language-bash">dd if=/dev/&lt;INPUT DEVICE&gt; | ssh &lt;USER NAME&gt;@&lt;DESTINATION IP ADDRESS&gt; "dd of=&lt;DESTINATION PATH&gt;"</code></pre>
+<p>Send hard drive image zipped over netcat:<br>
+Sending host:</p>
+<pre><code class="language-bash">bzip2 -c /dev/&lt;INPUT DEVICE&gt; | nc &lt;DESTINATION IP ADDRESS&gt; &lt;PICK A PORT&gt;</code></pre>
+<p>Receiving host:</p>
+<pre><code class="language-bash">nc -p &lt;PICK SAME PORT&gt; -l |bzip2 -d | dd of=/dev/sdb</code></pre>
+<p>Send hard drive image over netcat:<br>
+Sending host:</p>
+<pre><code class="language-bash">dd if=/dev/&lt;INPUT DEVICE&gt; bs=16M | nc &lt;PORT&gt;</code></pre>
+<p>Receiving host with Pipe Viewer meter:</p>
+<pre><code class="language-bash">nc -p &lt;SAME PORT&gt; -l -vv | pv -r | dd
+of=/dev/&lt;INPUT DEVICE&gt; bs=16M</code></pre>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

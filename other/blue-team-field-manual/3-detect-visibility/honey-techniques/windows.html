@@ -3,68 +3,67 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WINDOWS · Will Seligman</title>
-<link rel="stylesheet" href="/assets/style.css">
+<meta name="color-scheme" content="dark">
+<title>WINDOWS · the-grizzly-bear</title>
+<meta name="description" content="WINDOWS — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
 <div class="layout">
 <aside class="sidebar" id="sidebar">
-  <a class="brand" href="/index.html">
+  <a class="brand" href="../../../../index.html">
     <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
   </a>
-  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/3-detect-visibility/honey-techniques/windows.html"></nav>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/3-detect-visibility/honey-techniques/windows.html" data-root="../../../.."></nav>
 </aside>
 <main class="content">
   <article class="doc">
-  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/blue-team-field-manual.html">Blue Team Field Manual</a> &rsaquo; <a href="/other/blue-team-field-manual/3-detect-visibility.html">3 DETECT (Visibility)</a> &rsaquo; <a href="/other/blue-team-field-manual/3-detect-visibility/honey-techniques.html">HONEY TECHNIQUES</a></div>
-  <h1 id="windows">WINDOWS</h1>
-<p>Honey Ports Windows:<br />
-Ref. <a href="http://securityweekly.com/wp%C2%AD">http://securityweekly.com/wp­</a><br>content/uploads/2013/06/howtogetabetterpentest.pdf<br />
-Step 1: Create new TCP Firewall Block rule on<br>anything connecting on port 3333:</p>
+  <div class="breadcrumb"><a href="../../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../../index.html">Other</a> &rsaquo; <a href="../../index.html">Blue Team Field Manual</a> &rsaquo; <a href="../index.html">3 DETECT (Visibility)</a> &rsaquo; <a href="index.html">HONEY TECHNIQUES</a></div>
+<h1 id="title">WINDOWS</h1>
+
+<p>Honey Ports Windows:</p>
+<p>Ref. <a href="http://securityweekly.com/wp%C2%AD" target="_blank" rel="noopener">http://securityweekly.com/wp­</a><br>
+content/uploads/2013/06/howtogetabetterpentest.pdf</p>
+<p>Step 1: Create new TCP Firewall Block rule on<br>
+anything connecting on port 3333:</p>
 <pre><code class="language-bash">C:\&gt; echo @echo off for /L %%i in (1,1,1) do @for /f
-&quot;tokens=3&quot; %%j in ('netstat -nao A l find &quot;'&quot;:3333A &quot;')
-do@for /f &quot;tokens=l delims=:&quot; %%k in (&quot;%%j&quot;) do
-netsh advfirewall firewall add rulename=&quot;HONEY TOKEN
-RULE&quot; dir=in remoteip=%%k localport=any protocol=TCP
-action=block &gt;&gt; &lt;BATCH FILE NAME&gt;.bat
-</code></pre>
+"tokens=3" %%j in ('netstat -nao A l find "'":3333A "')
+do@for /f "tokens=l delims=:" %%k in ("%%j") do
+netsh advfirewall firewall add rulename="HONEY TOKEN
+RULE" dir=in remoteip=%%k localport=any protocol=TCP
+action=block &gt;&gt; &lt;BATCH FILE NAME&gt;.bat</code></pre>
 <p>Step 2: Run Batch Script</p>
-<pre><code class="language-bash">C:\&gt; &lt;BATCH FILE NAME&gt;,bat
-</code></pre>
-<p>Windows Honey Ports PowerShell Script:<br>Ref. <a href="https://github.com/Pwdrkeg/honeyport/blob/master/honeyport.psl">https://github.com/Pwdrkeg/honeyport/blob/master/honeyport.psl</a><br />
-Step 1: Download PowerShell Script</p>
-<pre><code class="language-bash">C:\&gt; &quot;%ProgramFiles%\Internet Explorer\iexplore.exe&quot;
-</code></pre>
-<p><a href="https://github.com/Pwdrkeg/honeyport/blob/master/honeyport.psl">https://github.com/Pwdrkeg/honeyport/blob/master/honeyport.psl</a><br />
-Step 2: Run PowerShell Script</p>
-<pre><code class="language-bash">C:\&gt; honeyport.psl
-</code></pre>
-<p>Honey Hashes for Windows (Also for DetectingMimikatz Use) : Ref. <a href="https://isc.sans.edu/forums/diary/Detecting+Mimikatz+Use+On+Your+Network/19311/">https://isc.sans.edu/forums/diary/Detecting+Mimikatz+Use+On+Your+Network/19311/</a><br />
-Step 1: Create Fake Honey Hash. Note enter a fake password and keep command prompts open to keep password in memory</p>
+<pre><code class="language-bash">C:\&gt; &lt;BATCH FILE NAME&gt;,bat</code></pre>
+<p>Windows Honey Ports PowerShell Script:<br>
+Ref. <a href="https://github.com/Pwdrkeg/honeyport/blob/master/honeyport.psl" target="_blank" rel="noopener">https://github.com/Pwdrkeg/honeyport/blob/master/honeyport.psl</a></p>
+<p>Step 1: Download PowerShell Script</p>
+<pre><code class="language-bash">C:\&gt; "%ProgramFiles%\Internet Explorer\iexplore.exe"</code></pre>
+<p><a href="https://github.com/Pwdrkeg/honeyport/blob/master/honeyport.psl" target="_blank" rel="noopener">https://github.com/Pwdrkeg/honeyport/blob/master/honeyport.psl</a></p>
+<p>Step 2: Run PowerShell Script</p>
+<pre><code class="language-bash">C:\&gt; honeyport.psl</code></pre>
+<p>Honey Hashes for Windows (Also for DetectingMimikatz Use) : Ref. <a href="https://isc.sans.edu/forums/diary/Detecting+Mimikatz+Use+On+Your+Network/19311/" target="_blank" rel="noopener">https://isc.sans.edu/forums/diary/Detecting+Mimikatz+Use+On+Your+Network/19311/</a></p>
+<p>Step 1: Create Fake Honey Hash. Note enter a fake password and keep command prompts open to keep password in memory</p>
 <pre><code class="language-bash">C:\&gt; runas
 /user:yourdomain.com\fakeadministratoraccount
-/netonly cmd.exe
-</code></pre>
+/netonly cmd.exe</code></pre>
 <p>Step 2: Query for Remote Access Attempts</p>
-<pre><code class="language-bash">C:\&gt; wevtutil qe System /q:&quot;*[System
-[(EventID=20274)]]&quot; /f:text /rd:true /c:1
-/r:remotecomputername
-</code></pre>
+<pre><code class="language-bash">C:\&gt; wevtutil qe System /q:"*[System
+[(EventID=20274)]]" /f:text /rd:true /c:1
+/r:remotecomputername</code></pre>
 <p>Step 3: Query for Failed Login Attempts</p>
-<pre><code class="language-bash">C:\&gt; wevtutil qe Security /q:&quot;*[System[(EventID=4624
-or EventID=4625)]]&quot; /f:text /rd:true /c:5
-/r:remotecomputername
-</code></pre>
+<pre><code class="language-bash">C:\&gt; wevtutil qe Security /q:"*[System[(EventID=4624
+or EventID=4625)]]" /f:text /rd:true /c:5
+/r:remotecomputername</code></pre>
 <p>Step 4: (Optional) Run queries in infinite loop with 30s pause</p>
-<pre><code class="language-bash">C:\&gt; for /L %i in (1,0,2) do (Insert Step 2) &amp; (Insert Step 3) &amp; timeout 30
-</code></pre>
+<pre><code class="language-bash">C:\&gt; for /L %i in (1,0,2) do (Insert Step 2) &amp; (Insert Step 3) &amp; timeout 30</code></pre>
   </article>
-  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
 </div>
-<script src="/assets/nav.js" defer></script>
+<script src="../../../../assets/nav.js" defer></script>
 <script>
 document.getElementById('menu-toggle').addEventListener('click',function(){
   document.getElementById('sidebar').classList.toggle('open');

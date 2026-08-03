@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>WINDOWS · the-grizzly-bear</title>
+<meta name="description" content="WINDOWS — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/6-tactics-tips-tricks/os-cheats/windows.html" data-root="../../../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../../index.html">Other</a> &rsaquo; <a href="../../index.html">Blue Team Field Manual</a> &rsaquo; <a href="../index.html">6 TACTICS (TIPS &amp; TRICKS)</a> &rsaquo; <a href="index.html">OS CHEATS</a></div>
+<h1 id="title">WINDOWS</h1>
+
+<p>Pipe output to clipboard:</p>
+<pre><code class="language-bash">C:\&gt; some_command.exe | clip</code></pre>
+<p>Output clip to file: (Requires PowerShell 5)</p>
+<pre><code class="language-bash">PS C:\&gt; Get-Clipboard&gt; clip.txt</code></pre>
+<p>Add time stamps into log file:</p>
+<pre><code class="language-bash">C:\&gt; echo %DATE% %TIME%&gt;&gt; &lt;TXT LOG&gt;,txt</code></pre>
+<p>Add/Modify registry value remotely:</p>
+<pre><code class="language-bash">C:\&gt; reg add \\&lt;REMOTE COMPUTER NAME&gt;\HKLM\Software\&lt;REG KEY INFO&gt;</code></pre>
+<p>Get registry value remotely:</p>
+<pre><code class="language-bash">C:\&gt; reg query \\&lt;REMOTE COMPUTER NAME&gt;\HKLM\Software\&lt;REG KEY INFO&gt;</code></pre>
+<p>Test to see if Registry Path exists:</p>
+<pre><code class="language-bash">PS C:\&gt; Test-Path "HKCU:\Software\Microsoft\&lt;HIVE&gt;"</code></pre>
+<p>Copy files remotely:</p>
+<pre><code class="language-bash">C:\&gt; robocopy C:\&lt;SOURCE SHARED FOLDER&gt;
+\\&lt;DESTINATION COMPUTER&gt;\&lt;DESTINATION FOLDER&gt; /E</code></pre>
+<p>Check to see if certain file extensions are in a directory:</p>
+<pre><code class="language-bash">PS C:\&gt; Test-Path C:\Scripts\Archive\* -include *·PSl, *,VbS</code></pre>
+<p>Show contents of a file:</p>
+<pre><code class="language-bash">C:\&gt; type &lt;FILE NAME&gt;</code></pre>
+<p>Combine contents of multiple files:</p>
+<pre><code class="language-bash">C:\&gt; type &lt;FILE NAME 1&gt; &lt;FILE NAME 2&gt; &lt;FILE NAME 3&gt; &gt; &lt;NEW FILE NAME&gt;</code></pre>
+<p>Desktops, allows multiple Desktop Screens:</p>
+<p>Ref. <a href="https://technet.microsoft.com/en%C2%ADus/sysinternals/cc817881" target="_blank" rel="noopener">https://technet.microsoft.com/en­us/sysinternals/cc817881</a><br>
+Run live option:</p>
+<pre><code class="language-bash">C:\&gt; "%ProgramFiles%\Internet Explorer\iexplore.exe"[https://live.sysinternals.com/desktops.exe](https://live.sysinternals.com/desktops.exe)</code></pre>
+<p>Remote mounting, Read and Read/Write:</p>
+<pre><code class="language-bash">C:\&gt; net share MyShare_R=c:\&lt;READ ONLY FOLDER&gt; /GRANT:EVERYONE,READ
+C:\&gt; net share MyShare_RW=c:\&lt;READ/WRITE FOLDER&gt; /GRANT:EVERYONE,FULL</code></pre>
+<p>Remote task execution using PSEXEC:<br>
+Ref. <a href="https://technet.microsoft.com/en%C2%ADus/sysinternals/psexec.aspx" target="_blank" rel="noopener">https://technet.microsoft.com/en­us/sysinternals/psexec.aspx</a></p>
+<pre><code class="language-bash">C:\&gt; psexec.exe \\&lt;TARGET IP ADDRESS&gt; -u &lt;USER NAME&gt; -p &lt;PASSWORD&gt; /C C:\&lt;PROGRAM&gt;.exe
+C:\&gt; psexec @(:\&lt;TARGET FILE LIST&gt;.txt -u &lt;ADMIN LEVEL USER NAME&gt; -p &lt;PASSWORD&gt; C:\&lt;PROGRAM&gt;.exe &gt;&gt;
+C:\&lt;OUTPUT FILE NAME&gt;.txt
+C:\&gt; psexec.exe @(:\&lt;TARGET FILE LIST&gt;.csv -u &lt;DOMAIN NAME&gt;\&lt;USER NAME&gt; -p &lt;PASSWORD&gt; /c
+C:\&lt;PROGRAM&gt;.exe</code></pre>
+<p>Remote task execution and send output to share:</p>
+<pre><code class="language-bash">C:\&gt; wmic /node:ComputerName process call create ucmd.exe /c netstat -an &gt; \\&lt;REMOTE SHARE&gt;\&lt;OUTPUT FILE NAME&gt;,txt n</code></pre>
+<p>Compare two files for changes:</p>
+<pre><code class="language-bash">PS C:\&gt; Compare-Object (Get-Content .&lt;LOG FILE NAME l&gt;.log) -DifferenceObject (Get-Content .&lt;LOG FILE NAME 2&gt;.log)</code></pre>
+<p>Remote task execution using PowerShell:</p>
+<pre><code class="language-powershell">PS C:\&gt; Invoke-Command -&lt;COMPUTER NAME&gt; {&lt;PS COMMAND&gt;}</code></pre>
+<p>PowerShell Command Help:</p>
+<pre><code class="language-powershell">PS C:\&gt; Get-Help &lt;PS COMMAND&gt; -full</code></pre>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>

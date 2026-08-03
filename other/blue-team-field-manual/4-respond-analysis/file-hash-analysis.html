@@ -3,47 +3,49 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FILE HASH ANALYSIS · Will Seligman</title>
-<link rel="stylesheet" href="/assets/style.css">
+<meta name="color-scheme" content="dark">
+<title>FILE HASH ANALYSIS · the-grizzly-bear</title>
+<meta name="description" content="FILE HASH ANALYSIS — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle navigation">&#9776; Menu</button>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
 <div class="layout">
 <aside class="sidebar" id="sidebar">
-  <a class="brand" href="/index.html">
+  <a class="brand" href="../../../index.html">
     <span class="brand-flag">&#127988;</span>
-    <span class="brand-text"><strong>Will Seligman</strong><small>Cybersecurity Notes & CTF Writeups</small></span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
   </a>
-  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/4-respond-analysis/file-hash-analysis.html"></nav>
+  <nav class="nav" id="nav-root" data-current="other/blue-team-field-manual/4-respond-analysis/file-hash-analysis.html" data-root="../../.."></nav>
 </aside>
 <main class="content">
   <article class="doc">
-  <div class="breadcrumb"><a href="/other/index.html">Other</a> &rsaquo; <a href="/other/blue-team-field-manual.html">Blue Team Field Manual</a> &rsaquo; <a href="/other/blue-team-field-manual/4-respond-analysis.html">4 RESPOND (Analysis)</a></div>
-  <h1 id="file-hash-analysis">FILE HASH ANALYSIS</h1>
+  <div class="breadcrumb"><a href="../../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../../index.html">Other</a> &rsaquo; <a href="../index.html">Blue Team Field Manual</a> &rsaquo; <a href="index.html">4 RESPOND (Analysis)</a></div>
+<h1 id="title">FILE HASH ANALYSIS</h1>
+
 <h2 id="hash-query">HASH QUERY</h2>
-<p>VirusTotal online API query:<br />
-Ref. <a href="https://www.virustotal.com/en/documentation/public-api/">https://www.virustotal.com/en/documentation/public-api/</a> (Prerequisite: Need a VT API Key)<br />
+<p>VirusTotal online API query:<br>
+Ref. <a href="https://www.virustotal.com/en/documentation/public%C2%ADapi/" target="_blank" rel="noopener">https://www.virustotal.com/en/documentation/public­api/</a> (Prerequisite: Need a VT API Key)<br>
 Send a suspicious hash to VirtusTotal using cURL:</p>
-<pre><code class="language-shell">curl -v --request POST --url
-'https://www.virustotal.com/vtapi/v2/file/report' -d
+<pre><code class="language-bash">curl -v --request POST --url
+'[https://www.virustotal.com/vtapi/v2/file/report](https://www.virustotal.com/vtapi/v2/file/report)' -d
 apikey=&lt;VT API KEY&gt; -d 'resource=&lt;SUSPICIOUS FILE
-HASH&gt;'
-</code></pre>
+HASH&gt;'</code></pre>
 <p>Send a suspicious file to VirusTotal using cURL:</p>
-<pre><code class="language-shell">curl -v -F 'file=/&lt;PATH TO FILE&gt;/&lt;SUSPICIOUS FILE
+<pre><code class="language-bash">curl -v -F 'file=/&lt;PATH TO FILE&gt;/&lt;SUSPICIOUS FILE
 NAME&gt;' -F apikey=&lt;VT API KEY&gt;
-https://www.virustotal.com/vtapi/v2/file/scan
-</code></pre>
-<p>Team Cymru API:<br />
-Ref. <a href="https://hash.cymru.com/">https://hash.cymru.com</a>, <a href="http://totalhash.com/">http://totalhash.com</a><br />
-Team Cymru malware hash lookup using whois: (Note: Output is timestamp of last seen and detection rate)</p>
-<pre><code class="language-shell">whois -h hash,cymru.com &lt;SUSPICIOUS FILE HASH&gt;
-</code></pre>
+[https://www.virustotal.com/vtapi/v2/file/scan](https://www.virustotal.com/vtapi/v2/file/scan)</code></pre>
+<p>Team Cymru API:<br>
+Ref. <a href="https://hash.cymru.com/" target="_blank" rel="noopener">https://hash.cymru.com</a>, <a href="http://totalhash.com/" target="_blank" rel="noopener">http://totalhash.com</a></p>
+<p>Team Cymru malware hash lookup using whois: (Note:<br>
+Output is timestamp of last seen and detection rate)</p>
+<pre><code class="language-bash">whois -h hash,[cymru.com](http://cymru.com/) &lt;SUSPICIOUS FILE HASH&gt;</code></pre>
   </article>
-  <footer class="foot">Notes by Will Seligman · built from Notion</footer>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
 </main>
 </div>
-<script src="/assets/nav.js" defer></script>
+<script src="../../../assets/nav.js" defer></script>
 <script>
 document.getElementById('menu-toggle').addEventListener('click',function(){
   document.getElementById('sidebar').classList.toggle('open');

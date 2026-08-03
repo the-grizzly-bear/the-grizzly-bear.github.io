@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>RSAisEasy(Forensic Challenge) · the-grizzly-bear</title>
+<meta name="description" content="RSAisEasy(Forensic Challenge) — Cybersecurity Notes &amp; CTF Writeups">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#127988;</text></svg>">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="../../index.html">
+    <span class="brand-flag">&#127988;</span>
+    <span class="brand-text"><strong>the-grizzly-bear</strong><small>Cybersecurity Notes &amp; CTF Writeups</small></span>
+  </a>
+  <nav class="nav" id="nav-root" data-current="htb/completed-challenges/rsaiseasy-forensic-challenge.html" data-root="../.."></nav>
+</aside>
+<main class="content">
+  <article class="doc">
+  <div class="breadcrumb"><a href="../../index.html">the-grizzly-bear</a> &rsaquo; <a href="../index.html">HackTheBox</a> &rsaquo; <a href="index.html">Completed Challenges</a></div>
+<h1 id="title">RSAisEasy(Forensic Challenge)</h1>
+
+<p class="figure"><a class="img-link" href="rsaiseasy-forensic-challenge/untitled.png"><img src="rsaiseasy-forensic-challenge/untitled.png" alt="Untitled" loading="lazy"></a></p>
+<p><a href="http://factordb.com/index.php?query=101302608234750530215072272904674037076286246679691423280860345380727387460347553585319149306846617895151397345134725469568034944362725840889803514170441153452816738520513986621545456486260186057658467757935510362350710672577390455772286945685838373154626020209228183673388592030449624410459900543470481715269" target="_blank" rel="noopener">factordb.com</a></p>
+<p class="figure"><a class="img-link" href="rsaiseasy-forensic-challenge/untitled-1.png"><img src="rsaiseasy-forensic-challenge/untitled-1.png" alt="Untitled" loading="lazy"></a></p>
+<pre><code class="language-bash">from factordb.factordb import FactorDB
+n1_factor = FactorDB(n1)
+if (n1_factor.connect().status_code == 200):
+n1_factor = n1_factor.get_factor_list()
+p, q = n1_factor[0], n1_factor[1]
+p, q, p * q == n1
+</code></pre>
+<pre><code class="language-bash">from Crypto.Util.number import inverse, long_to_bytes
+import codecs
+def rsa_decrypt(n, p, q, e, c):
+phi = (p - 1) * (q - 1)
+d = inverse(e, phi)
+m = pow(c, d, n)
+print("m :", m)
+m_decode = long_to_bytes(m)
+return m_decode
+e = 0x10001
+flag1 = rsa_decrypt(n1, p, q, e, c1)
+print(flag1)</code></pre>
+<p class="figure"><a class="img-link" href="rsaiseasy-forensic-challenge/untitled-2.png"><img src="rsaiseasy-forensic-challenge/untitled-2.png" alt="Untitled" loading="lazy"></a></p>
+<pre><code class="language-bash">b'HTB{1_m1ght_h4v3_m3ss3d’</code></pre>
+<pre><code class="language-python">cat [r.py](http://r.py/)
+n1 = 101302608234750530215072272904674037076286246679691423280860345380727387460347553585319149306846617895151397345134725469568034944362725840889803514170441153452816738520513986621545456486260186057658467757935510362350710672577390455772286945685838373154626020209228183673388592030449624410459900543470481715269
+c1 = 92506893588979548794790672542461288412902813248116064711808481112865246689691740816363092933206841082369015763989265012104504500670878633324061404374817814507356553697459987468562146726510492528932139036063681327547916073034377647100888763559498314765496171327071015998871821569774481702484239056959316014064
+c2 = 46096854429474193473315622000700040188659289972305530955007054362815555622172000229584906225161285873027049199121215251038480738839915061587734141659589689176363962259066462128434796823277974789556411556028716349578708536050061871052948425521408788256153194537438422533790942307426802114531079426322801866673
+x = 601613204734044874510382122719388369424704454445440856955212747733856646787417730534645761871794607755794569926160226856377491672497901427125762773794612714954548970049734347216746397532291215057264241745928752782099454036635249993278807842576939476615587990343335792606509594080976599605315657632227121700808996847129758656266941422227113386647519604149159248887809688029519252391934671647670787874483702292498358573950359909165677642135389614863992438265717898239252246163</code></pre>
+<pre><code class="language-bash">from factordb.factordb import FactorDB
+n1_factor = FactorDB(n1)
+if (n1_factor.connect().status_code == 200):
+n1_factor = n1_factor.get_factor_list()
+p, q = n1_factor[0], n1_factor[1]
+p, q, p * q == n1
+
+from Crypto.Util.number import inverse, long_to_bytes
+import codecs
+def rsa_decrypt(n, p, q, e, c):
+phi = (p - 1) * (q - 1)
+d = inverse(e, phi)
+m = pow(c, d, n)
+print("m :", m)
+m_decode = long_to_bytes(m)
+return m_decode
+e = 0x10001
+flag1 = rsa_decrypt(n1, p, q, e, c1)
+print(flag1)
+
+n2 = x % n1
+print(n2)
+y = n2 // p
+flag2 = rsa_decrypt(n2, p, y, e, c2)
+print(flag2)
+
+flag = flag1 + flag2
+print(flag)</code></pre>
+<pre><code class="language-bash">python3 [r.py](http://r.py/)
+
+m : 6927755227520641588229085684836623901969480804170150756
+b'HTB{1_m1ght_h4v3_m3ss3d'
+
+100136903041423020991425823526737746365573197640035952973693624809721624428963253203282593974533722584391447008912397042291986993273828302711324440847902763039627790146764630023926517236880457533976468679976683705170312329736955922713306570804595070537102421450884645497775455984735279182873866159334387494837
+m : 9143084635788955941405366124572245421572627941723225981
+
+b'_uP_jU$t_4_l1ttle_b1t?}'
+
+b'HTB{1_m1ght_h4v3_m3ss3d_uP_jU$t_4_l1ttle_b1t?}'</code></pre>
+  </article>
+  <footer class="foot">Built from a Notion export · <a href="https://github.com/the-grizzly-bear">github.com/the-grizzly-bear</a></footer>
+</main>
+</div>
+<script src="../../assets/nav.js" defer></script>
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>
